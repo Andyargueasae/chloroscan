@@ -1,0 +1,8 @@
+# This is a default configuration file for the MMA organelle metagenomics workflow. 
+assembly_path:
+  # PATH/to/ASSEMBLY_FASTA
+alignment files:
+  # PATH/TO/ALIGNMENT_BAMS
+threads:
+  # 16
+
