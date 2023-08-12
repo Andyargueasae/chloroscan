@@ -11,3 +11,11 @@ configfile:
     srcdir("config/config.default.yaml")
 
 # some parameters.
+rule corgi_prediction:
+    input: 
+    output:
+    shell:
+
+rule all:
+    input:
+    output:

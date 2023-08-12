@@ -1,8 +1,33 @@
+Inputs:
 # This is a default configuration file for the MMA organelle metagenomics workflow. 
-assembly_path:
+  assembly_path: ""
   # PATH/to/ASSEMBLY_FASTA
-alignment files:
+  alignment files: ""
   # PATH/TO/ALIGNMENT_BAMS
+
+Sample: "Test Sample 1"
+# Give a name for your sample(s).
+outputdir: "output"
+# output folder where files are going to be moved into.
+
+binny_settings:
+# How do we link our own settings to binny's settings? Maybe: specifying one config file.
+
+corgi_settings:
+# corgi has settings for minimum length, pthreshold settings yes or no.
+  minlen: 
+  pthreshold: 
+  # Hit it by having an exact value or "False".
+
+prodigal_settings:
+  output_type: "gbk"
+
+
+
+
+
+
 threads:
   # 16
+
 
