@@ -1,0 +1,35 @@
+Building DAG of jobs...
+Using shell: /usr/bin/bash
+Provided cores: 16
+Rules claiming more threads will be scaled down.
+Conda environments: ignored
+Job stats:
+job                 count
+----------------  -------
+all                     1
+corgi_prediction        1
+total                   2
+
+Select jobs to execute...
+
+[Tue Aug 22 11:19:02 2023]
+Job 1: Using the machine learning algorithm 'CORGI' to predict contig identity. Don't rise batch size too high.
+Reason: Missing output files: output/working/corgi/plastid.fasta
+
+Write-protecting output file output/working/corgi/plastid.fasta.
+[Tue Aug 22 16:08:02 2023]
+Finished job 1.
+1 of 2 steps (50%) done
+Select jobs to execute...
+
+[Tue Aug 22 16:08:02 2023]
+localrule all:
+    input: output/working/corgi/plastid.fasta
+    jobid: 0
+    reason: Input files updated by another job: output/working/corgi/plastid.fasta
+    resources: tmpdir=/tmp
+
+[Tue Aug 22 16:08:02 2023]
+Finished job 0.
+2 of 2 steps (100%) done
+Complete log: .snakemake/log/2023-08-22T111902.233848.snakemake.log

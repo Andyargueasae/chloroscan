@@ -1,0 +1,23 @@
+The flag 'directory' used in rule all is only valid for outputs, not inputs.
+The flag 'directory' used in rule documenting_binny_results is only valid for outputs, not inputs.
+The flag 'directory' used in rule CAT_taxonomy_identification_plus_annotation is only valid for outputs, not inputs.
+Building DAG of jobs...
+Using shell: /usr/bin/bash
+Provided cores: 16
+Rules claiming more threads will be scaled down.
+Conda environments: ignored
+Job stats:
+job                          count
+-------------------------  -------
+all                              1
+binny_workflow                   1
+corgi_prediction                 1
+documenting_binny_results        1
+total                            4
+
+Select jobs to execute...
+ProtectedOutputException in rule corgi_prediction in file /data/MMA_organelle_metagenomics/Snakefile, line 63:
+Write-protected output files for rule corgi_prediction:
+    output: output2/working/corgi, output2/working/corgi/plastid.fasta
+    affected files:
+        output2/working/corgi/plastid.fasta

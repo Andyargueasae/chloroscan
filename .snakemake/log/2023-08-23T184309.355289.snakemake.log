@@ -1,0 +1,14 @@
+KeyboardInterruptin line 10 of /home/student.unimelb.edu.au/yuhtong/andy/data/MMA_organelle_metagenomics/binny/Snakefile.
+  File "/home/student.unimelb.edu.au/yuhtong/andy/data/MMA_organelle_metagenomics/binny/Snakefile", line 10, in <module>
+  File "/home/student.unimelb.edu.au/yuhtong/andy/data/MMA_organelle_metagenomics/binny/conda/snakemake_env/lib/python3.9/site-packages/pandas/__init__.py", line 48, in <module>
+  File "/home/student.unimelb.edu.au/yuhtong/andy/data/MMA_organelle_metagenomics/binny/conda/snakemake_env/lib/python3.9/site-packages/pandas/core/api.py", line 47, in <module>
+  File "/home/student.unimelb.edu.au/yuhtong/andy/data/MMA_organelle_metagenomics/binny/conda/snakemake_env/lib/python3.9/site-packages/pandas/core/groupby/__init__.py", line 1, in <module>
+  File "/home/student.unimelb.edu.au/yuhtong/andy/data/MMA_organelle_metagenomics/binny/conda/snakemake_env/lib/python3.9/site-packages/pandas/core/groupby/generic.py", line 77, in <module>
+  File "/home/student.unimelb.edu.au/yuhtong/andy/data/MMA_organelle_metagenomics/binny/conda/snakemake_env/lib/python3.9/site-packages/pandas/core/frame.py", line 182, in <module>
+  File "/home/student.unimelb.edu.au/yuhtong/andy/data/MMA_organelle_metagenomics/binny/conda/snakemake_env/lib/python3.9/site-packages/pandas/core/generic.py", line 138, in <module>
+  File "/home/student.unimelb.edu.au/yuhtong/andy/data/MMA_organelle_metagenomics/binny/conda/snakemake_env/lib/python3.9/site-packages/pandas/core/indexing.py", line 77, in <module>
+  File "/home/student.unimelb.edu.au/yuhtong/andy/data/MMA_organelle_metagenomics/binny/conda/snakemake_env/lib/python3.9/site-packages/pandas/core/indexes/api.py", line 27, in <module>
+  File "/home/student.unimelb.edu.au/yuhtong/andy/data/MMA_organelle_metagenomics/binny/conda/snakemake_env/lib/python3.9/site-packages/pandas/core/indexes/interval.py", line 89, in <module>
+  File "<frozen importlib._bootstrap>", line 1007, in _find_and_load
+  File "<frozen importlib._bootstrap>", line 986, in _find_and_load_unlocked
+  File "<frozen importlib._bootstrap>", line 680, in _load_unlocked

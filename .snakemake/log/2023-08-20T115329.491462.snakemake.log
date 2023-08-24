@@ -1,0 +1,7 @@
+Building DAG of jobs...
+MissingInputException in rule binny_workflow in file /data/MMA_organelle_metagenomics/Snakefile, line 74:
+Missing input files for rule binny_workflow:
+    output: outputworking/binny/binny_output, output/working/binny/binny_output/binny.done
+    wildcards: BINNY_OUTPUT_DIR=binny_output
+    affected files:
+        /working/corgi/plastid.fasta

@@ -1,0 +1,6 @@
+The flag 'directory' used in rule all is only valid for outputs, not inputs.
+Building DAG of jobs...
+MissingInputException in rule all in file /data/MMA_organelle_metagenomics/Snakefile, line 55:
+Missing input files for rule all:
+    affected files:
+        output/working/binny

@@ -1,0 +1,41 @@
+The flag 'directory' used in rule all is only valid for outputs, not inputs.
+The flag 'directory' used in rule documenting_binny_results is only valid for outputs, not inputs.
+The flag 'directory' used in rule CAT_taxonomy_identification_plus_annotation is only valid for outputs, not inputs.
+Building DAG of jobs...
+Using shell: /usr/bin/bash
+Provided cores: 16
+Rules claiming more threads will be scaled down.
+Conda environments: ignored
+Job stats:
+job                 count
+----------------  -------
+all                     1
+binny_workflow          1
+corgi_prediction        1
+total                   3
+
+Select jobs to execute...
+
+[Wed Aug 23 16:29:21 2023]
+Job 2: Using the machine learning algorithm 'CORGI' to predict contig identity. Don't rise batch size too high.
+Reason: Missing output files: output2/working/corgi/plastid.fasta; Params have changed since last execution
+
+Write-protecting output file output2/working/corgi/plastid.fasta.
+[Wed Aug 23 18:24:28 2023]
+Finished job 2.
+1 of 3 steps (33%) done
+Select jobs to execute...
+
+[Wed Aug 23 18:24:28 2023]
+Job 1: Use the binning algorithm binny to find all high-coverage bins with completeness>=65% and purity>=90%
+Reason: Missing output files: output2/working/binny; Input files updated by another job: output2/working/corgi/plastid.fasta
+
+Waiting at most 5 seconds for missing files.
+MissingOutputException in rule binny_workflow in file /data/MMA_organelle_metagenomics/Snakefile, line 89:
+Job 1  completed successfully, but some output files are missing. Missing files after 5 seconds. This might be due to filesystem latency. If that is the case, consider to increase the wait time with --latency-wait:
+output2/working/binny/bins
+Removing output files of failed job binny_workflow since they might be corrupted:
+output2/working/binny
+Shutting down, this might take some time.
+Exiting because a job execution failed. Look above for error message
+Complete log: .snakemake/log/2023-08-23T162913.304811.snakemake.log

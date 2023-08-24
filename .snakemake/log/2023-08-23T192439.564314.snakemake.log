@@ -1,0 +1,36 @@
+The flag 'directory' used in rule all is only valid for outputs, not inputs.
+The flag 'directory' used in rule documenting_binny_results is only valid for outputs, not inputs.
+The flag 'directory' used in rule CAT_taxonomy_identification_plus_annotation is only valid for outputs, not inputs.
+Building DAG of jobs...
+Using shell: /usr/bin/bash
+Provided cores: 16
+Rules claiming more threads will be scaled down.
+Conda environments: ignored
+Job stats:
+job                          count
+-------------------------  -------
+all                              1
+documenting_binny_results        1
+total                            2
+
+Select jobs to execute...
+
+[Wed Aug 23 19:24:40 2023]
+Job 1: Run python script summarize_binny_results.py to record each bin's contig information.
+Reason: Missing output files: output2/working/binny/cross_ref.xlsx
+
+[Wed Aug 23 19:24:40 2023]
+Error in rule documenting_binny_results:
+    jobid: 1
+    input: output2/working/binny/bins
+    output: output2/working/binny/cross_ref.xlsx
+    conda-env: summary
+
+RuleException:
+CalledProcessError in file /data/MMA_organelle_metagenomics/Snakefile, line 153:
+Command 'set -euo pipefail;  /home/student.unimelb.edu.au/yuhtong/mambaforge/bin/python3.10 /data/MMA_organelle_metagenomics/.snakemake/scripts/tmpf7b7zw6s.summarize_binny_results.py' returned non-zero exit status 1.
+  File "/data/MMA_organelle_metagenomics/Snakefile", line 153, in __rule_documenting_binny_results
+  File "/home/student.unimelb.edu.au/yuhtong/mambaforge/lib/python3.10/concurrent/futures/thread.py", line 58, in run
+Shutting down, this might take some time.
+Exiting because a job execution failed. Look above for error message
+Complete log: .snakemake/log/2023-08-23T192439.564314.snakemake.log

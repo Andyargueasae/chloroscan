@@ -1,0 +1,25 @@
+Building DAG of jobs...
+Using shell: /usr/bin/bash
+Provided cores: 12
+Rules claiming more threads will be scaled down.
+Conda environments: ignored
+Job stats:
+job                 count
+----------------  -------
+corgi_prediction        1
+total                   1
+
+Select jobs to execute...
+
+[Sun Aug 20 11:30:49 2023]
+rule corgi_prediction:
+    input: ../contigs.fasta
+    output: output/working/corgi/plastid.fasta
+    log: output/logging_info/corgi.log
+    jobid: 0
+    reason: Code has changed since last execution; Params have changed since last execution
+    threads: 12
+    resources: tmpdir=/tmp
+
+Terminating processes on user request, this might take some time.
+Cancelling snakemake on user request.

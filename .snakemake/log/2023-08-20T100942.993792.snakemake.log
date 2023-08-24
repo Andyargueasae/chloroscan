@@ -1,0 +1,27 @@
+Building DAG of jobs...
+Using shell: /usr/bin/bash
+Provided cores: 12
+Rules claiming more threads will be scaled down.
+Conda environments: ignored
+Job stats:
+job                 count
+----------------  -------
+corgi_prediction        1
+total                   1
+
+Select jobs to execute...
+
+[Sun Aug 20 10:09:59 2023]
+rule corgi_prediction:
+    input: ../contigs.fasta
+    output: output/working/corgi/plastid.fasta
+    log: output/logging_info/corgi.log
+    jobid: 0
+    reason: Missing output files: output/working/corgi/plastid.fasta
+    threads: 12
+    resources: tmpdir=/tmp
+
+[Sun Aug 20 11:26:53 2023]
+Finished job 0.
+1 of 1 steps (100%) done
+Complete log: .snakemake/log/2023-08-20T100942.993792.snakemake.log

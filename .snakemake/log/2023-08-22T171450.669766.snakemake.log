@@ -1,0 +1,44 @@
+Building DAG of jobs...
+Using shell: /usr/bin/bash
+Provided cores: 16
+Rules claiming more threads will be scaled down.
+Conda environments: ignored
+Job stats:
+job                     count
+--------------------  -------
+all                         1
+binny_workflow              1
+move_output_of_binny        1
+total                       3
+
+Select jobs to execute...
+
+[Tue Aug 22 17:14:59 2023]
+Job 2: Use the binning algorithm binny to find all high-coverage bins with completeness>=65% and purity>=90%
+Reason: Missing output files: binny/binny_output
+
+[Tue Aug 22 17:14:59 2023]
+Error in rule binny_workflow:
+    jobid: 2
+    input: output/working/corgi/plastid.fasta, ../sorted.origout.bam
+    output: binny/binny_output, binny/binny_output/binny.done
+    shell:
+        
+        bash ./scripts/create_yaml.sh -a output/working/corgi/plastid.fasta -l ../sorted.origout.bam -o binny_output           -e 0.250,0.000 -m 1,2,4,6,8 -c 65           -s 92.5 -p 90 -u 1000
+        
+        ls scripts | grep config.default.yaml
+        
+        # Now the problem could only be here.
+        ./binny/binny -l -n "MMA_plastids" -t 16 -r ./config.default.yaml
+
+        # must remove the config.yaml created at the end, so we need it to be changed with name.
+        rm ./scripts/config.default.yaml # finally you have to remove it, you don't want to cause confusion.
+        echo "The binny workflow is done, bins are within the binny folder, that may need to move out."
+        
+        (one of the commands exited with non-zero exit code; note that snakemake uses bash strict mode!)
+
+Removing output files of failed job binny_workflow since they might be corrupted:
+binny/binny_output
+Shutting down, this might take some time.
+Exiting because a job execution failed. Look above for error message
+Complete log: .snakemake/log/2023-08-22T171450.669766.snakemake.log

@@ -1,0 +1,4 @@
+The flag 'directory' used in rule all is only valid for outputs, not inputs.
+The flag 'directory' used in rule documenting_binny_results is only valid for outputs, not inputs.
+The flag 'directory' used in rule CAT_taxonomy_identification_plus_annotation is only valid for outputs, not inputs.
+Unlocking working directory.

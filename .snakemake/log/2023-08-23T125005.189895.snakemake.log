@@ -1,0 +1,101 @@
+Config file /home/student.unimelb.edu.au/yuhtong/andy/data/MMA_organelle_metagenomics/binny/config/config.default.yaml is extended by additional config specified via the command line.
+Building DAG of jobs...
+Using shell: /usr/bin/bash
+Provided cores: 16
+Rules claiming more threads will be scaled down.
+Job stats:
+job                          count    min threads    max threads
+-------------------------  -------  -------------  -------------
+ALL                              1              1              1
+annotate                         1             16             16
+binny                            1             16             16
+call_contig_depth                1              1              1
+format_assembly                  1              1              1
+mantis_checkm_marker_sets        1             16             16
+merge_contig_depths              1              1              1
+prepare_input_data               1              1              1
+total                            8              1             16
+
+Select jobs to execute...
+
+[Wed Aug 23 12:50:07 2023]
+Job 5: Preparing input.
+Reason: Missing output files: /data/MMA_organelle_metagenomics/binny_output/intermediary/assembly.fa, /data/MMA_organelle_metagenomics/binny_output/intermediary/reads_sample_000001_sorted.bam
+
+[Wed Aug 23 12:50:09 2023]
+Finished job 5.
+1 of 8 steps (12%) done
+Select jobs to execute...
+
+[Wed Aug 23 12:50:09 2023]
+Job 4: Preparing assembly.
+Reason: Missing output files: /data/MMA_organelle_metagenomics/binny_output/intermediary/assembly.formatted.fa; Input files updated by another job: /data/MMA_organelle_metagenomics/binny_output/intermediary/assembly.fa
+
+Activating conda environment: ../../../home/student.unimelb.edu.au/yuhtong/andy/data/MMA_organelle_metagenomics/binny/conda/456737a4a59aae879f89e475a126b59c_
+[Wed Aug 23 12:50:10 2023]
+Finished job 4.
+2 of 8 steps (25%) done
+Select jobs to execute...
+
+[Wed Aug 23 12:50:10 2023]
+Job 6: annotate: Running prokkaP.
+Reason: Missing output files: /data/MMA_organelle_metagenomics/binny_output/intermediary/prokka.faa, /data/MMA_organelle_metagenomics/binny_output/intermediary/annotation.filt.gff; Input files updated by another job: /data/MMA_organelle_metagenomics/binny_output/intermediary/assembly.formatted.fa
+
+Activating conda environment: ../../../home/student.unimelb.edu.au/yuhtong/andy/data/MMA_organelle_metagenomics/binny/conda/c4bfcfb48c3bf73b7c4923abbc88c1af_
+[Wed Aug 23 12:50:14 2023]
+Finished job 6.
+3 of 8 steps (38%) done
+Select jobs to execute...
+
+[Wed Aug 23 12:50:14 2023]
+Job 7: MANTIS: Running MANTIS with CheckM marker sets.
+Reason: Missing output files: /data/MMA_organelle_metagenomics/binny_output/intermediary/mantis_out/consensus_annotation.tsv; Input files updated by another job: /data/MMA_organelle_metagenomics/binny_output/intermediary/prokka.faa
+
+Activating conda environment: ../../../home/student.unimelb.edu.au/yuhtong/andy/data/MMA_organelle_metagenomics/binny/conda/bfacb96a95d64de49bbe1bc9d7e40abd_
+[Wed Aug 23 12:50:17 2023]
+Finished job 7.
+4 of 8 steps (50%) done
+Select jobs to execute...
+
+[Wed Aug 23 12:50:17 2023]
+Job 3: /data/MMA_organelle_metagenomics/binny_output/call_contig_depth: Getting data on assembly coverage with mg reads.
+Reason: Missing output files: /data/MMA_organelle_metagenomics/binny_output/intermediary/assembly_contig_depth_sorted.origout.txt; Input files updated by another job: /data/MMA_organelle_metagenomics/binny_output/intermediary/assembly.formatted.fa, /data/MMA_organelle_metagenomics/binny_output/intermediary/reads_sample_000001_sorted.bam
+
+Activating conda environment: ../../../home/student.unimelb.edu.au/yuhtong/andy/data/MMA_organelle_metagenomics/binny/conda/3f3b4b34a2fec09e70e138ac4f360772_
+[Wed Aug 23 12:53:10 2023]
+Finished job 3.
+5 of 8 steps (62%) done
+Select jobs to execute...
+
+[Wed Aug 23 12:53:10 2023]
+Job 2: Merging depth files.
+Reason: Missing output files: /data/MMA_organelle_metagenomics/binny_output/intermediary/assembly.contig_depth.txt; Input files updated by another job: /data/MMA_organelle_metagenomics/binny_output/intermediary/assembly_contig_depth_sorted.origout.txt
+
+Activating conda environment: ../../../home/student.unimelb.edu.au/yuhtong/andy/data/MMA_organelle_metagenomics/binny/conda/3f3b4b34a2fec09e70e138ac4f360772_
+[Wed Aug 23 12:53:10 2023]
+Finished job 2.
+6 of 8 steps (75%) done
+Select jobs to execute...
+
+[Wed Aug 23 12:53:10 2023]
+Job 1: binny: Running Python Binny.
+Reason: Missing output files: /data/MMA_organelle_metagenomics/binny_output/binny.done; Input files updated by another job: /data/MMA_organelle_metagenomics/binny_output/intermediary/assembly.formatted.fa, /data/MMA_organelle_metagenomics/binny_output/intermediary/annotation.filt.gff, /data/MMA_organelle_metagenomics/binny_output/intermediary/mantis_out/consensus_annotation.tsv, /data/MMA_organelle_metagenomics/binny_output/intermediary/assembly.contig_depth.txt
+
+Activating conda environment: ../../../home/student.unimelb.edu.au/yuhtong/andy/data/MMA_organelle_metagenomics/binny/conda/b5d23bd9a5eb56c305ef9b82f00685e0_
+Activating conda environment: ../../../home/student.unimelb.edu.au/yuhtong/andy/data/MMA_organelle_metagenomics/binny/conda/b5d23bd9a5eb56c305ef9b82f00685e0_
+[Wed Aug 23 12:56:17 2023]
+Finished job 1.
+7 of 8 steps (88%) done
+Select jobs to execute...
+
+[Wed Aug 23 12:56:17 2023]
+localrule ALL:
+    input: /data/MMA_organelle_metagenomics/binny_output/binny.done
+    jobid: 0
+    reason: Input files updated by another job: /data/MMA_organelle_metagenomics/binny_output/binny.done
+    resources: tmpdir=/tmp
+
+[Wed Aug 23 12:56:17 2023]
+Finished job 0.
+8 of 8 steps (100%) done
+Complete log: ../.snakemake/log/2023-08-23T125005.189895.snakemake.log

@@ -1,0 +1,28 @@
+Building DAG of jobs...
+Using shell: /usr/bin/bash
+Provided cores: 16
+Rules claiming more threads will be scaled down.
+Conda environments: ignored
+Job stats:
+job                     count
+--------------------  -------
+all                         1
+binny_workflow              1
+move_output_of_binny        1
+total                       3
+
+Select jobs to execute...
+
+[Tue Aug 22 17:21:15 2023]
+Job 2: Use the binning algorithm binny to find all high-coverage bins with completeness>=65% and purity>=90%
+Reason: Missing output files: binny/binny_output
+
+Waiting at most 5 seconds for missing files.
+MissingOutputException in rule binny_workflow in file /data/MMA_organelle_metagenomics/Snakefile, line 85:
+Job 2  completed successfully, but some output files are missing. Missing files after 5 seconds. This might be due to filesystem latency. If that is the case, consider to increase the wait time with --latency-wait:
+binny/binny_output/binny.done
+Removing output files of failed job binny_workflow since they might be corrupted:
+binny/binny_output
+Shutting down, this might take some time.
+Exiting because a job execution failed. Look above for error message
+Complete log: .snakemake/log/2023-08-22T172107.063825.snakemake.log

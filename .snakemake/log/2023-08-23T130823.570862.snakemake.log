@@ -1,0 +1,22 @@
+The flag 'directory' used in rule all is only valid for outputs, not inputs.
+The flag 'directory' used in rule documenting_binny_results is only valid for outputs, not inputs.
+The flag 'directory' used in rule CAT_taxonomy_identification_plus_annotation is only valid for outputs, not inputs.
+Building DAG of jobs...
+Using shell: /usr/bin/bash
+Provided cores: 16
+Rules claiming more threads will be scaled down.
+Conda environments: ignored
+Job stats:
+job                 count
+----------------  -------
+all                     1
+binny_workflow          1
+corgi_prediction        1
+total                   3
+
+Select jobs to execute...
+
+[Wed Aug 23 13:08:31 2023]
+Job 2: Using the machine learning algorithm 'CORGI' to predict contig identity. Don't rise batch size too high.
+Reason: Missing output files: output2/working/corgi/plastid.fasta; Params have changed since last execution
+

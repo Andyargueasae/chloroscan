@@ -1,7 +1,0 @@
-name: corgi
-channels:
-  - condaforge
-  - bioconda
-  - defaults
-dependencies:
-  # To be filled.

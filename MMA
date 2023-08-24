@@ -1,0 +1,9 @@
+#!/bin/bash
+
+# This script initiates the whole workflow of the MMA, and assigns key names to config file.
+# How can we initiate the environments in order to let the things run?
+
+# How can we divide each folder output by names?
+
+# How can we design it to let the packages run in a sequence? Meanwhile, how do we know if some jobs are not meant to run?
+snakemake -c --latency-wait 10

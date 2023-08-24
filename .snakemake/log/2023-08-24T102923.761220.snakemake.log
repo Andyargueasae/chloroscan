@@ -1,0 +1,46 @@
+The flag 'directory' used in rule all is only valid for outputs, not inputs.
+The flag 'directory' used in rule CAT_taxonomy_identification_plus_annotation is only valid for outputs, not inputs.
+Building DAG of jobs...
+Using shell: /usr/bin/bash
+Provided cores: 16
+Rules claiming more threads will be scaled down.
+Conda environments: ignored
+Job stats:
+job                                            count
+-------------------------------------------  -------
+CAT_taxonomy_identification_plus_annotation        1
+all                                                1
+total                                              2
+
+Select jobs to execute...
+
+[Thu Aug 24 10:29:24 2023]
+rule CAT_taxonomy_identification_plus_annotation:
+    input: output2/working/binny/bins
+    output: output2/working/CAT, output2/working/CAT/{params.prefix}.bin2classification.txt
+    log: output2/logging_info/CAT.log
+    jobid: 1
+    benchmark: output2/logging_info/CAT_benchmark.tsv
+    reason: Missing output files: output2/working/CAT
+    threads: 7
+    resources: tmpdir=/tmp, mem_mb=15000, mem_mib=14306
+
+[Thu Aug 24 10:29:24 2023]
+Error in rule CAT_taxonomy_identification_plus_annotation:
+    jobid: 1
+    input: output2/working/binny/bins
+    output: output2/working/CAT, output2/working/CAT/{params.prefix}.bin2classification.txt
+    log: output2/logging_info/CAT.log (check log file(s) for error details)
+    conda-env: cat-taxonomy
+    shell:
+        
+        CAT bins --bin_folder output2/working/binny/bins -d databases/CAT_prepare_20210107/2021-01-07_CAT_database -t databases/CAT_prepare_20210107/2021-01-07_taxonomy -s fasta -o TEST00001 
+        mv TEST00001.* output2/working/CAT
+        
+        (one of the commands exited with non-zero exit code; note that snakemake uses bash strict mode!)
+
+Removing output files of failed job CAT_taxonomy_identification_plus_annotation since they might be corrupted:
+output2/working/CAT
+Shutting down, this might take some time.
+Exiting because a job execution failed. Look above for error message
+Complete log: .snakemake/log/2023-08-24T102923.761220.snakemake.log

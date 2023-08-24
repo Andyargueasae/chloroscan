@@ -1,0 +1,4 @@
+The flag 'directory' used in rule all is only valid for outputs, not inputs.
+WorkflowError in file /data/MMA_organelle_metagenomics/Snakefile, line 93:
+Rule corgi_prediction is not defined in this workflow. Available rules: all
+  File "/data/MMA_organelle_metagenomics/Snakefile", line 93, in <module>
