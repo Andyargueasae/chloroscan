@@ -1,0 +1,25 @@
+The flag 'directory' used in rule all is only valid for outputs, not inputs.
+The flag 'directory' used in rule documenting_binny_results is only valid for outputs, not inputs.
+The flag 'directory' used in rule CAT_taxonomy_identification_plus_annotation is only valid for outputs, not inputs.
+The flag 'directory' used in rule predict_genes_using_FragGeneScanRs is only valid for outputs, not inputs.
+Building DAG of jobs...
+Using shell: /usr/bin/bash
+Provided cores: 1 (use --cores to define parallelism)
+Rules claiming more threads will be scaled down.
+Conda environments: ignored
+Job stats:
+job                          count
+-------------------------  -------
+documenting_binny_results        1
+total                            1
+
+Select jobs to execute...
+
+[Fri Aug 25 16:21:46 2023]
+Job 0: Run python script summarize_binny_results.py to record each bin's contig information.
+Reason: Missing output files: output2/working/binny/cross_ref.csv
+
+[Fri Aug 25 16:21:47 2023]
+Finished job 0.
+1 of 1 steps (100%) done
+Complete log: .snakemake/log/2023-08-25T162146.452817.snakemake.log

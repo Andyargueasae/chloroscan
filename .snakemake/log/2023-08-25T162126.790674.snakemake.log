@@ -1,0 +1,7 @@
+The flag 'directory' used in rule all is only valid for outputs, not inputs.
+The flag 'directory' used in rule documenting_binny_results is only valid for outputs, not inputs.
+The flag 'directory' used in rule CAT_taxonomy_identification_plus_annotation is only valid for outputs, not inputs.
+The flag 'directory' used in rule predict_genes_using_FragGeneScanRs is only valid for outputs, not inputs.
+Building DAG of jobs...
+Nothing to be done (all requested files are present and up to date).
+Complete log: .snakemake/log/2023-08-25T162126.790674.snakemake.log

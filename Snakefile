@@ -71,7 +71,7 @@ rule corgi_prediction:
         batch_size = config['corgi_settings']['batch_size'],
         min_length = config['corgi_settings']['minlen']
     conda:
-        "corgi-env"
+        "envs/corgi-env.yml"
     output:
         corgi_out = directory(OUTPUT_DIR/"working/corgi"),
         plastid_contigs = protected(OUTPUT_DIR/"working/corgi/plastid.fasta")
@@ -125,28 +125,29 @@ rule binny_workflow:
         # rm {params.binny_dir}/config/{GLOBAL_CONFIG} # finally you have to remove it, you don't want to cause confusion.
         echo 'The binny workflow is done, bins are within the binny folder, that may need to move out.'
         mv {BINNY_OUTPUT_DIR} {output.dir_binny}
+        chmod u+w {output.dir_binny}
         echo 'The binny's output has been moved to the default output directory.'
         """
 
-# rule documenting_binny_results:
-#     input: 
-#         directory(OUTPUT_DIR/"working/binny/bins")
-#     params: 
-#         assembly_files = OUTPUT_DIR/"working/binny/intermediary/assembly.formatted.fa",
-#         assembly_depth = OUTPUT_DIR/"working/binny/intermediary/assembly.contig_depth.txt",
-#         marker_gene_gff = OUTPUT_DIR/"working/binny/intermediary/annotation_CDS_RNA_hmms_checkm.gff"
-#     output:
-#         OUTPUT_DIR/"working/binny/cross_ref.xlsx"
-#     benchmark:
-#         OUTPUT_DIR/"logging_info/summarize_binny.tsv"
-#     threads:
-#         5
-#     conda:
-#         "base"
-#     message:
-#         "Run python script summarize_binny_results.py to record each bin's contig information."
-#     script:
-#         "./scripts/summarize_binny_results.py"
+rule documenting_binny_results:
+    input: 
+        directory(OUTPUT_DIR/"working/binny/bins")
+    params: 
+        assembly_files = OUTPUT_DIR/"working/binny/intermediary/assembly.formatted.fa",
+        assembly_depth = OUTPUT_DIR/"working/binny/intermediary/assembly.contig_depth.txt",
+        marker_gene_gff = OUTPUT_DIR/"working/binny/intermediary/annotation_CDS_RNA_hmms_checkm.gff"
+    output:
+        OUTPUT_DIR/"working/binny/cross_ref.csv"
+    benchmark:
+        OUTPUT_DIR/"logging_info/summarize_binny.tsv"
+    threads:
+        5
+    conda:
+        "envs/documenting_binny.yml"
+    message:
+        "Run python script summarize_binny_results.py to record each bin's contig information."
+    script:
+        "./scripts/summarize_binny_results.py"
 
 
 rule CAT_taxonomy_identification_plus_annotation:
