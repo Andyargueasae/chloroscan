@@ -4,6 +4,9 @@ import numpy as np
 import sys
 import logging
 from Bio import SeqIO 
+import urllib.request
+import os
+
 
 # set up global variables that could work as input files.
 # You may also work out the visualization of the individual dataset info here. 
@@ -17,17 +20,15 @@ CONTIG_DEP = "contig depth"
 CONTIG_LEN = "contig length"
 CONTIG_GC = "GC contents"
 CONTIG_BIN = "Contig2Bin"
+CONTIG_TAXON = "Taxon per Contig"
 CONTIG_marker = "markers on the contig"
-#Assign global variables from snakemake.
-# @click.command()
-# @click.argument("bins_directory", type = click.Path(exists=True))
-# @click.option("--assemblyfasta", type = click.Path(exists=True))
-# @click.option("--assemblydepth", type = click.Path(exists=True))
-# @click.option("--assemblygff", type = click.Path(exists=True))
 assemblyfasta = snakemake.params['assembly_files']
 assemblydepth = snakemake.params['assembly_depth']
 assembly_annot = snakemake.params['marker_gene_gff']
-assembly_bin_dir = snakemake.input[0]
+assembly_bin_dir = snakemake.params['bins']
+taxonomy_names = snakemake.params['names_dump']
+MMA_SUMMARY=snakemake.params['MMA_summary']
+contig_level_annotation = os.path.join(snakemake.input['contig_level_annotation'], snakemake.params['ANNOT_FILE'])
 
 
 def GC_content(sequence):
@@ -42,12 +43,12 @@ def form_bin_array(bin_dir, collected_bins, bin_array, contig_id_list):
     # contig_id_list: the list of contigs with their id.
     
     for i in collected_bins:
-        bin_path = bin_dir + "/" + i 
+        bin_path = str(bin_dir) + "/" + i 
         individual_bin = list(SeqIO.parse(bin_path, "fasta"))
         for elem in individual_bin:
             index_in_list = contig_id_list.index(elem.id)
             bin_name = i.replace(".fasta","")
-            print(bin_name)
+            # print(bin_name)
             bin_array[index_in_list] = bin_name
     return 
 
@@ -64,7 +65,7 @@ def form_marker_array(empty_marker_array, annot_file, contig_id):
         
         key = i_th_ORF[0]
         ORF = i_th_ORF[-1]
-        print(key)
+        # print(key)
     #     print(ORF)
         ORF_split = ORF.replace("\n","").split(";")
         # print(ORF_split[-1])
@@ -95,7 +96,7 @@ def form_depth_array(empty_depth_array, contig_id, depth_file):
         depth_lines = df.readlines()
     
     for i in range(len(depth_lines)):
-        contig, depth = depth_lines[i].split("\t")[0], depth_lines[i].split("\t")[1]
+        contig, depth = depth_lines[i].replace("\n", "").split("\t",1)[0], depth_lines[i].replace("\n","").split("\t",1)[1]
         empty_depth_array[i] = depth
     return empty_depth_array
 
@@ -106,6 +107,58 @@ def store_basic_info(contig_id_array, contig_seq_array, contig_len_array, contig
         contig_seq_array.append(i.seq)
         contig_len_array.append(len(i.seq))
         contig_gc_array.append(GC_content(str(i.seq)))
+
+    return
+def find_finest_taxon(id_hierarchy, all_organisms):
+    i = 0
+    length_id_hierarchy = len(id_hierarchy)
+    while i < length_id_hierarchy:
+        try:
+            that_organism = all_organisms[id_hierarchy[i]]
+            i+=1
+        except KeyError:
+            break
+    return all_organisms[id_hierarchy[i-1]]
+
+def all_organisms_dict(names_dump):
+    all_organisms = dict()
+    with open(names_dump, "r") as nd:
+        org_lines = nd.readlines()
+    
+    for i in org_lines:
+        i = i.replace("\n", "").replace("\t", "")
+        org_line = i.split("|")
+        if "scientific name" in org_line:
+            all_organisms[org_line[0]] = org_line[1]
+    return all_organisms
+
+def form_contig_taxa_array(empty_taxon_array, contig_id, names_dump, contig_annotation):
+    # follow the same order as the contig_id.
+    with open(contig_annotation, "r") as contig_f:
+        contig_taxonomy_lines = contig_f.readlines()
+
+    info_contig_taxonomy = contig_taxonomy_lines[1:]
+    contig2taxid=dict()
+    for i in info_contig_taxonomy:
+        line_info = i.split("\t")
+        if line_info[1] == "no taxid assigned":
+            contig2taxid[line_info[0]] = "0"
+        else:
+            contig2taxid[line_info[0]] = line_info[-2]
+    
+    all_organisms = all_organisms_dict(names_dump)
+
+    for i in contig2taxid.keys():
+        index_contig = contig_id.index(i)
+        if "*" in contig2taxid[i]:
+            taxon_i = contig2taxid[i].replace("*","")
+        taxon_i = contig2taxid[i]
+        if taxon_i == "0":
+            empty_taxon_array[index_contig] = "not classified"
+        else:
+            taxon_hierarchy = taxon_i.split(";")
+            finest_classification = find_finest_taxon(taxon_hierarchy, all_organisms)
+            empty_taxon_array[index_contig] = finest_classification
 
     return
 
@@ -122,6 +175,7 @@ num_contigs = len(contig_id)
 bin_array = list(np.repeat("", num_contigs))
 bin_depth = list(np.repeat(0, num_contigs))
 marker_per_contig = list(np.repeat("", num_contigs))
+taxon_array = list(np.repeat("", num_contigs))
 
 bin_files = listdir(assembly_bin_dir)
 
@@ -129,14 +183,49 @@ form_bin_array(assembly_bin_dir, bin_files, bin_array, contig_id)
 form_marker_array(marker_per_contig, assembly_annot, contig_id)
 form_depth_array(bin_depth, contig_id, assemblydepth)
 
+form_contig_taxa_array(taxon_array, contig_id, taxonomy_names, contig_level_annotation)
 
 dataset_bin_df[CONTIG_ID] = contig_id
 dataset_bin_df[CONTIG_GC] = contig_gc
 dataset_bin_df[CONTIG_DEP] = bin_depth
 dataset_bin_df[CONTIG_LEN] = contig_length
+dataset_bin_df[CONTIG_TAXON] = taxon_array
 dataset_bin_df[CONTIG_marker] = marker_per_contig
 dataset_bin_df[CONTIG_BIN] = bin_array
 dataset_bin_df[CONTIG_SEQ] = contig_seq
 
 
-dataset_bin_df.to_excel(snakemake.output[0])
+dataset_bin_df.to_csv(snakemake.output[0], sep="\t")
+
+# Here we want to add some summary to MAGs.
+bin_set=set(bin_array)
+medium_bins=0
+high_bins=0
+total_bins=len(bin_set)-1
+for i in bin_set:
+    if i != "":
+        file_name=i.replace(".fasta","")
+        essential_info=file_name.split('_')
+        breakpoint()
+        # Make sure you include both possibilities.
+        if ("C" in essential_info[-3]) and ("P" in essential_info[-2]):            
+            completeness=int(essential_info[-3].replace("C", ""))
+            purity=int(essential_info[-2].replace("P", ""))
+        #else, they are in fourth and third position.
+        else:
+            completeness=int(essential_info[-6].replace("C", ""))
+            purity=int(essential_info[-5].replace("P", ""))
+
+        if (completeness > 70) and (completeness < 90):
+            medium_bins+=1
+        else:
+            high_bins+=1
+    else:
+        continue
+
+with open(MMA_SUMMARY, "a") as MS:
+    MS.write("Total number of MAGs: {}\n".format(total_bins))
+    MS.write("Total number of medium-quality (completeness: 70% to 90%): {}\n".format(medium_bins))
+    MS.write("Total number of high-quality (completeness: > 90%): {}\n".format(high_bins))
+    
+

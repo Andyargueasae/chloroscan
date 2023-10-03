@@ -1,5 +1,5 @@
 
-default_binny_config_path="../binny/config/config.default.yaml"
+default_binny_config_path="binny/config/config.default.yaml"
 
 pwd
 # make sure there are no empty spaces when assigning variables.
@@ -62,12 +62,16 @@ sed -i "s@metagenomics_alignment: \"\"@metagenomics_alignment: \"$alignment\"@g"
 sed -i "s@outputdir: \"output\"@outputdir: \"$outputdir\"@g" $curr_config
 
 sed -i "s@min_cont_length_cutoff: 2250@min_cont_length_cutoff: $lengthcutoff@g" $curr_config
+awk '/min_cont_length_cutoff/' $curr_config
 
 sed -i "s@max_cont_length_cutoff: 2250@max_cont_length_cutoff: $lengthcutoff@g" $curr_config
+awk '/max_cont_length_cutoff/' $curr_config
 
-sed -i "s@min_cont_length_cutoff_marker: 2250@min_cont_length_cutoff: $lengthcutoff@g" $curr_config
+sed -i "s@min_cont_length_cutoff_marker: 2250@min_cont_length_cutoff_marker: $lengthcutoff@g" $curr_config
+awk '/min_cont_length_cutoff_marker/' $curr_config
 
-sed -i "s@max_cont_length_cutoff_marker: 2250@max_cont_length_cutoff: $lengthcutoff@g" $curr_config
+sed -i "s@max_cont_length_cutoff_marker: 2250@max_cont_length_cutoff_marker: $lengthcutoff@g" $curr_config
+awk '/max_cont_length_cutoff_marker/' $curr_config
 
 sed -i "s@hdbscan_epsilon_range: '0.250,0.000'@hdbscan_epsilon_range: '$hdb_epsilon'@g" $curr_config
 
@@ -78,6 +82,10 @@ sed -i "s@min_completeness: 72.5@min_completeness: $min_completeness@g" $curr_co
 sed -i "s@start_completeness: 92.5@start_completeness: $start_completeness@g" $curr_config
 
 sed -i "s@purity: 95@purity: $purity@g" $curr_config
+
+sed -i "s@include_depth_initial: 'False'@include_depth_initial: 'True'@g" $curr_config
+
+sed -i "s@include_depth_main: 'False'@include_depth_main: 'True'@g" $curr_config
 # by applying \ before any characters, could help to identify them with efficiency.
 
 # Work done. Now the yaml file is ready to be put into binny. 
