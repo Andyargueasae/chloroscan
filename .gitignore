@@ -1,1 +1,9 @@
 .snakemake
+databases
+binny
+MGYS*
+SRP*
+tmp/
+chloroscan_outputs/
+DRP*
+CLS_MGYS00003517_0_outputs/

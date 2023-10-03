@@ -191,6 +191,28 @@ rule binny_workflow:
         echo "The binny's output has been moved to the default output directory."
         """
 
+
+rule documenting_binny_results:
+    input: 
+        directory(OUTPUT_DIR/"working/binny/bins")
+    params: 
+        assembly_files = OUTPUT_DIR/"working/binny/intermediary/assembly.formatted.fa",
+        assembly_depth = OUTPUT_DIR/"working/binny/intermediary/assembly.contig_depth.txt",
+        marker_gene_gff = OUTPUT_DIR/"working/binny/intermediary/annotation_CDS_RNA_hmms_checkm.gff"
+    output:
+        OUTPUT_DIR/"working/binny/cross_ref.csv"
+    benchmark:
+        OUTPUT_DIR/"logging_info/summarize_binny.tsv"
+    threads:
+        5
+    conda:
+        "envs/documenting_binny.yml"
+    message:
+        "Run python script summarize_binny_results.py to record each bin's contig information."
+    script:
+        "./scripts/summarize_binny_results.py"
+
+
 rule CAT_taxonomy_identification_plus_annotation:
     input: 
         binny_output=OUTPUT_DIR/"working/binny"

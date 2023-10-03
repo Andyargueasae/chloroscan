@@ -194,6 +194,7 @@ dataset_bin_df[CONTIG_marker] = marker_per_contig
 dataset_bin_df[CONTIG_BIN] = bin_array
 dataset_bin_df[CONTIG_SEQ] = contig_seq
 
+dataset_bin_df.to_csv(snakemake.output[0])
 
 dataset_bin_df.to_csv(snakemake.output[0], sep="\t")
 
@@ -229,3 +230,4 @@ with open(MMA_SUMMARY, "a") as MS:
     MS.write("Total number of high-quality (completeness: > 90%): {}\n".format(high_bins))
     
 
+# dataset_bin_df.to_excel(snakemake.output[0])
