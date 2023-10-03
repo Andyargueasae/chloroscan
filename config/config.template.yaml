@@ -1,0 +1,51 @@
+Inputs:
+# This is a default configuration file for the MMA organelle metagenomics workflow. 
+  batch_name: "TEST00001"
+  assembly_path: "../DRP004690/merged.megahit.contigs.fa"
+  # PATH/to/ASSEMBLY_FASTA
+  alignment_files: "../DRP004690/alignment/*.bam"
+  # PATH/TO/ALIGNMENT_BAMS
+  csv_prediction_corgi:
+
+
+Sample: "DRP0004690"
+# Give a name for your sample(s). Should we name this for each batch?
+outputdir: "output_DRP" # use output2 as the output directory, then adjust corgi's performances.
+# output folder where files are going to be moved into. But wait? We need to separate it by batches!
+tmpdir: "tmp"
+
+binny_settings:
+  universal_length_cutoff: 1000
+  outputdir_binny: "binny_output" # May require wildcards for those things, should we in other words name this after batch? 
+  clustering:
+  # majorly adjust the hdbscan values.
+    epsilon_range: '0.250,0.000'
+    hdbscan_min_samples_range: '1,2,4,6,8'
+  bin_quality:
+    min_completeness: 65
+    start_completeness: 92.5
+    purity: 90
+  # by default it writes the contig data to the bin folder.
+# How do we link our own settings to binny's settings? Or simply we fix it? Maybe not.
+
+corgi_settings:
+# corgi has settings for minimum length, pthreshold settings yes or no.
+  minlen: 320 # set it up for saving computational resources.
+  pthreshold: "False"
+  # Hit it by having an exact value or "False".
+  save_filter: "True"
+  # If true: we automatically send the fasta file into the folder.
+  batch_size: 4 #64  
+   
+# this is the default place where a CAT database lies. 
+CAT_database: "CAT_prepare_20210107"
+taxonomy_names: ""
+
+prodigal_settings:
+  output_type: "gbk"
+
+threads: 16
+
+condasource: ""
+
+

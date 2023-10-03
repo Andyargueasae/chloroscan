@@ -3,6 +3,9 @@ channels:
   - defaults
   - conda-forge
 dependencies:
-  - CAT
-  - prodigal
+  - CAT=5.2.3
+  - prodigal=2.6.3
   - diamond
+  - python=3.11
+
+# need collaboration.

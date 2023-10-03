@@ -9,7 +9,6 @@ Before you run this snakemake workflow, please ensure that:
 '''
 
 import os
-import pandas
 import sys
 import yaml
 import urllib.request
@@ -24,19 +23,24 @@ shell.executable("bash")
 configfile: "config/config.default.yaml"
 # do we also have to use some string extractions to get the name for batch? 
 assembly_path = config['Inputs']['assembly_path']
-alignment_files = config['Inputs']['alignment_files']
+ALIGNMENT_FILES = config['Inputs']['alignment_files']
 OUTPUT_DIR = Path(config['outputdir'])
 BATCH_NAME = config['Inputs']['batch_name']
 
 BINNY_OUTPUT_DIR = config['binny_settings']['outputdir_binny']    
 # For binny: some global names.
 GLOBAL_CONFIG = "config.MMA.yaml"
-# A functional binny directory is set-up within MMA.
-BINNY_DIR = Path("./binny")
-SCR_DIR = Path("./script")
-# For CAT taxonomy, some global name.
-CAT_DB_DIR = Path(config['CAT_database'])
+THREAD=config['threads']
 
+# A functional binny directory is set-up within MMA.
+BINNY_DIR = Path("binny")
+SCR_DIR = Path("scripts")
+DB_DIR = Path("databases")
+# For CAT taxonomy, some global name.
+CAT_DB_DIR = Path(DB_DIR/config['CAT_database'])
+TAXON_DB_DIR = Path(DB_DIR/config['taxonomy_names'])
+GLOBAL_PREFIX="OUT"
+GLOBAL_PREFIX_contigs="out.CAT"
 # create the output directory.
 OUTPUT_DIR.mkdir(parents=True, exist_ok=True)
 
@@ -47,56 +51,108 @@ if not os.path.isabs(TMP_DIR):
 
 TMP_DIR.mkdir(parents=True, exist_ok=True) # what if we do want to prepare data and put it here?
 
-# some parameters.
+# Krona environment name.
+KRONA_ENV=config['Krona_env']
 
 # some functions.
 
 # Now rules are introduced. They are placed into the single snakefile in order to increase efficiency for debugging.
-# localrules: ALL 
+# Major output: MMA.done, branching summary results: cross_ref.xlsx and CAT_taxonomy_annotation.tsv. 
 rule all:
     input:
-        # directory(OUTPUT_DIR/"working/binny"),
-        # can adjust the input of rule all to choose which rules can be executed. 
-        # OUTPUT_DIR/"working/corgi/plastid.fasta"
-        # directory(OUTPUT_DIR/"working/binny/cross_ref.xlsx")
-        # directory(OUTPUT_DIR/"working/CAT")
-        # directory(OUTPUT_DIR/"working/FragGeneScanRs")
-        directory(OUTPUT_DIR/"working/gffread")
+        Path(OUTPUT_DIR/"working/binny"),
+        OUTPUT_DIR/"working/summary/cross_ref.tsv",
+        OUTPUT_DIR/"working/visualizations",
+        OUTPUT_DIR/"Krona.html",
+        OUTPUT_DIR/"MMA.done"
+
 
 # The most important two rules are: corgi and binny.
+# How to add the shortcut here? We shall add one config in config file: csv file predicted from corgi.
+
+
 rule corgi_prediction:
     input: 
         seqs = assembly_path 
     params:
         batch_size = config['corgi_settings']['batch_size'],
-        min_length = config['corgi_settings']['minlen']
+        min_length = config['corgi_settings']['minlen'],
+        p_threshold = config['corgi_settings']['pthreshold'],
+        bash_plastid_accession_script = Path(SCR_DIR/"corgi-gather_accession.sh"),
+        python_fasta_writer = Path(SCR_DIR/"corgi-fasta_filter.py"),
+        plastid_contigs_identifier = Path(TMP_DIR/"plastid_accession.txt"),
+        output_dir=OUTPUT_DIR
     conda:
-        "corgi-env"
+        "envs/corgi_env.yml"
     output:
-        corgi_out = directory(OUTPUT_DIR/"working/corgi"),
+        corgi_out = protected(OUTPUT_DIR/"working/corgi/corgi-prediction.csv"),
         plastid_contigs = protected(OUTPUT_DIR/"working/corgi/plastid.fasta")
         # here may change the output to a directory for file writing!
     message:
         "Using the machine learning algorithm 'CORGI' to predict contig identity. Don't rise batch size too high."
     resources:
-        mem_mb=10000
+        mem_mb=20000
     threads:
-        12
+        15
     log:
         OUTPUT_DIR/"logging_info/corgi.log"
     benchmark:
         OUTPUT_DIR/"logging_info/corgi_benchmarking.tsv"
     shell:
-        "corgi --file {input.seqs} --output-dir {output.corgi_out} --batch-size {params.batch_size} --min-length {params.min_length} 2> {log}"
+        """
+        pwd
+        echo CORGI output going to here: {output.corgi_out}
+        touch {output.plastid_contigs}
+        echo "corgi --file {input.seqs} --csv {output.corgi_out} --batch-size {params.batch_size} --min-length {params.min_length} --no-save-filtered"
+        corgi --file {input.seqs} --csv {output.corgi_out} --batch-size {params.batch_size} --min-length {params.min_length} --no-save-filtered &> {log}
+        ls -lh {output.corgi_out}
         
+        header=1
+        raw_plastid_contig_count=$(grep -o "plastid" {output.corgi_out} | wc -l)
+        plastid_contig_count=$((raw_plastid_contig_count-header))
+
+        zero=0
+        if [ $plastid_contig_count -eq $zero ]; then
+            # do something to store the csv file only, and stop any other things.
+            echo "No plastid contigs found, rule exit."
+            exit 0
+
+        elif [ $plastid_contig_count -le 100 ]; then
+            echo "bash {params.bash_plastid_accession_script} -c {output.corgi_out} -o {params.plastid_contigs_identifier}"
+            bash {params.bash_plastid_accession_script} -c {output.corgi_out} -o {params.plastid_contigs_identifier}
+            python {params.python_fasta_writer} --assembly {input.seqs} --accession {params.plastid_contigs_identifier} --fasta_file_name {output.plastid_contigs}
+            # Do some calculations here.
+            prediction_lines=$(wc -l <{output.corgi_out})
+            contig_total=$((prediction_lines-header))
+            
+            plastid_match=$(grep -o ">" {output.plastid_contigs} | wc -l)
+
+            echo "total classified contigs containing all 5 domains: $contig_total"> {params.output_dir}/corgi.summary.txt
+            echo "total number of plastid contigs: $plastid_match">>{params.output_dir}/corgi.summary.txt
+        else
+            echo "bash {params.bash_plastid_accession_script} -c {output.corgi_out} -o {params.plastid_contigs_identifier} -p {params.p_threshold}"
+            bash {params.bash_plastid_accession_script} -c {output.corgi_out} -o {params.plastid_contigs_identifier} -p {params.p_threshold}
+            python {params.python_fasta_writer} --assembly {input.seqs} --accession {params.plastid_contigs_identifier} --fasta_file_name {output.plastid_contigs}
+            # Do some calculations here.
+            prediction_lines=$(wc -l <{output.corgi_out})
+            contig_total=$((prediction_lines-header))
+            
+            plastid_match=$(grep -o ">" {output.plastid_contigs} | wc -l)
+
+            echo "total classified contigs containing all 5 domains: $contig_total"> {params.output_dir}/corgi.summary.txt
+            echo "total number of plastid contigs: $plastid_match">>{params.output_dir}/corgi.summary.txt
+        fi
+        
+        """    
+#There must be a trade-off between time and accuracy, via batch-size. 
 
 rule binny_workflow:
     input:
-        plastid_contigs = rules.corgi_prediction.output.plastid_contigs,
-        # commonly alignment is in the same 
-        bamfiles = config['Inputs']['alignment_files']
+        plastid_contigs = rules.corgi_prediction.output.plastid_contigs
+        
     params:
         binny_dir = "./binny",
+        bamfiles = ALIGNMENT_FILES,
         # outputdir is a must-checked one!
         universal_length_cutoff = config['binny_settings']['universal_length_cutoff'],
         hdbscan_epsilon_range = config['binny_settings']['clustering']['epsilon_range'],
@@ -104,104 +160,156 @@ rule binny_workflow:
         quality_min_completeness = config['binny_settings']['bin_quality']['min_completeness'],
         quality_start_completeness = config['binny_settings']['bin_quality']['start_completeness'],
         quality_min_purity = config['binny_settings']['bin_quality']['purity'],
-        outputdir_within_binny = config['binny_settings']['outputdir_binny'], # within binny.
+        outputdir_within_binny = config['binny_settings']['outputdir_binny'] # within binny.
          #this place shall be the output, relating to binny!
     output:
         # os.path.join(outputdir, "/working/binny/{params.outputdir_bins_within_binny}/binny.done")
-        dir_binny = protected(directory(OUTPUT_DIR/"working/binny")),
-        # dir_output = directory(OUTPUT_DIR/"working/binny/bins")
+        dir_binny = directory(OUTPUT_DIR/"working/binny")
+        # binny_pure_out = directory(config['binny_settings']['outputdir_binny'])
+        # binny_bins = directory(OUTPUT_DIR/"working/binny"/BINNY_OUTPUT_DIR/"bins")
+        # formatted_fasta=Path(OUTPUT_DIR/"working/binny"/BINNY_OUTPUT_DIR/"intermediary/assembly.formatted.fa")
     message:
         "Use the binning algorithm binny to find all high-coverage bins with completeness>=65% and purity>=90%"
     shell:
         """
-        bash ./scripts/create_yaml.sh -a {input.plastid_contigs} -l {input.bamfiles} -o {params.outputdir_within_binny}\
-           -e {params.hdbscan_epsilon_range} -m {params.hdbscan_min_samples_range} -c {params.quality_min_completeness}\
+        bash ./scripts/create_yaml.sh -a "{input.plastid_contigs}" -l "{params.bamfiles}" -o "{params.outputdir_within_binny}"\
+           -e '{params.hdbscan_epsilon_range}' -m '{params.hdbscan_min_samples_range}' -c {params.quality_min_completeness}\
            -s {params.quality_start_completeness} -p {params.quality_min_purity} -u {params.universal_length_cutoff}
         
         # Now the problem could only be here.
-        {params.binny_dir}/binny -l -n "MMA_plastids" -t 16 -r {params.binny_dir}/config/{GLOBAL_CONFIG}
+        {params.binny_dir}/binny -l -n "MMA_plastids" -t 24 -r {params.binny_dir}/config/{GLOBAL_CONFIG}
 
         # must remove the config.yaml created at the end, so we need it to be changed with name.
-        # rm {params.binny_dir}/config/{GLOBAL_CONFIG} # finally you have to remove it, you don't want to cause confusion.
+        rm {params.binny_dir}/config/{GLOBAL_CONFIG} # finally you have to remove it, you don't want to cause confusion.
         echo 'The binny workflow is done, bins are within the binny folder, that may need to move out.'
+        # chmod u+w {output.dir_binny}
         mv {BINNY_OUTPUT_DIR} {output.dir_binny}
-        echo 'The binny's output has been moved to the default output directory.'
+        chmod u+w {output.dir_binny}
+        
+        # make sure to remove the bam files within the intermediary folder.
+        rm -rf {output.dir_binny}/intermediary/*.bam
+        echo "The binny's output has been moved to the default output directory."
         """
-
-# rule documenting_binny_results:
-#     input: 
-#         directory(OUTPUT_DIR/"working/binny/bins")
-#     params: 
-#         assembly_files = OUTPUT_DIR/"working/binny/intermediary/assembly.formatted.fa",
-#         assembly_depth = OUTPUT_DIR/"working/binny/intermediary/assembly.contig_depth.txt",
-#         marker_gene_gff = OUTPUT_DIR/"working/binny/intermediary/annotation_CDS_RNA_hmms_checkm.gff"
-#     output:
-#         OUTPUT_DIR/"working/binny/cross_ref.xlsx"
-#     benchmark:
-#         OUTPUT_DIR/"logging_info/summarize_binny.tsv"
-#     threads:
-#         5
-#     conda:
-#         "base"
-#     message:
-#         "Run python script summarize_binny_results.py to record each bin's contig information."
-#     script:
-#         "./scripts/summarize_binny_results.py"
-
 
 rule CAT_taxonomy_identification_plus_annotation:
     input: 
-        bins = directory(OUTPUT_DIR/"working/binny/bins")
+        binny_output=OUTPUT_DIR/"working/binny"
     params:
-        prefix = config['Inputs']['batch_name']
+        prefix=GLOBAL_PREFIX_contigs,
+        path_to_contigs="intermediary/assembly.formatted.fa"
     output:
-        directory(OUTPUT_DIR/"working/CAT"),
+        CAT_output=directory(OUTPUT_DIR/"working/CAT")
+        # contig_classification=OUTPUT_DIR/"working/CAT/out.CAT.contig2classification.txt"
     log:
         OUTPUT_DIR/"logging_info/CAT.log"
     benchmark:
         OUTPUT_DIR/"logging_info/CAT_benchmark.tsv"
     threads:
-        7
+        8
     resources:
-        mem_mb=15000
+        mem_mb=24000
+    conda:
+        "envs/CAT_env.yml"
     shell:
         """
-        CAT bins --bin_folder {input.bins} -d {CAT_DB_DIR}/2021-01-07_CAT_database -t {CAT_DB_DIR}/2021-01-07_taxonomy -s fasta -o {params.prefix} 
+        CAT contigs -c {input.binny_output}/{params.path_to_contigs} -d {CAT_DB_DIR}/2021-01-07_CAT_database -t {CAT_DB_DIR}/2021-01-07_taxonomy --force --top 11 --I_know_what_Im_doing
+        # CAT add_names -i {params.prefix}.contig2classification.txt -o {params.prefix}.contig2classification.named.txt -t {CAT_DB_DIR}/2021-01-07_taxonomy --only_official
         mkdir -p {output}
-        mv ./{params.prefix}.* {output}
+        mv ./{params.prefix}.* {output.CAT_output}
         """
 
+rule documenting_binny_results:
+    input: 
+        # bins = Path(OUTPUT_DIR/"working/binny"/BINNY_OUTPUT_DIR/"bins"),
+        contig_level_annotation = rules.CAT_taxonomy_identification_plus_annotation.output.CAT_output
+    params: 
+        bins = Path(OUTPUT_DIR/"working/binny/bins"),
+        assembly_files = OUTPUT_DIR/"working/binny/intermediary/assembly.formatted.fa",
+        assembly_depth = OUTPUT_DIR/"working/binny/intermediary/assembly.contig_depth.txt",
+        marker_gene_gff = OUTPUT_DIR/"working/binny/intermediary/annotation_CDS_RNA_hmms_checkm.gff",
+        names_dump=TAXON_DB_DIR,
+        MMA_summary=OUTPUT_DIR/"MMA.summary.txt",
+        ANNOT_FILE="out.CAT.contig2classification.txt"
+    output:
+        OUTPUT_DIR/"working/summary/cross_ref.tsv"
+    benchmark:
+        OUTPUT_DIR/"logging_info/summarize_binny.tsv"
+    threads:
+        5
+    conda:
+        "envs/documenting_binny.yml"
+    message:
+        "Run python script summarize_binny_results.py to record each bin's contig information."
+    script:
+        "./scripts/summarize_binny_results.py"
 
-rule predict_genes_using_FragGeneScanRs:
+rule refine_bins:
     input:
-        bins = directory(OUTPUT_DIR/"working/binny/bins")
+      cross_ref = OUTPUT_DIR/"working/summary/cross_ref.tsv",
+      original_bins = Path(OUTPUT_DIR/"working/binny/bins"),
+      CAT_prediction = OUTPUT_DIR/"working/CAT/out.CAT.contig2classification.txt",
+    params:
+      BACTERIA_ID = "2"
+    output:
+      directory(OUTPUT_DIR/"working/refined_bins")
+    conda:
+      "envs/refinement.yml"
+    script:
+      "scripts/refine_bins.py"
+
+rule visualize_results:
+    input:
+        OUTPUT_DIR/"working/summary/cross_ref.tsv"
     params:
         BATCH_NAME
     output:
-        # we finally stores all bin's ORF prediction gff files here.
-        directory(OUTPUT_DIR/"working/FragGeneScanRs")
-    message:
-        "Use the fast ORF-predictor FragGeneScan Rust to predict gene contents of the MAGs."
+        directory(OUTPUT_DIR/"working/visualizations")
+    conda:
+        "envs/visualization.yml"
     script:
-        "scripts/FragGeneScanRs.sh"
+        "scripts/visualization.py"
 
-
-rule gffread_extract_CDS:
+rule cds_extraction:
     input:
-        # we may only want those gff files.
-        rules.predict_genes_using_FragGeneScanRs.output
+        binny_dir = Path(OUTPUT_DIR/"working/refined_bins")
+    params:
+        batch_name=BATCH_NAME,
+        gff_file_flag="GFFs",
+        path_fraggenescanrs = OUTPUT_DIR/"working/FragGeneScanRs",
     output:
-        directory(OUTPUT_DIR/"working/gffread")
-    log:
-        OUTPUT_DIR/"logging_info/gffread_CDS.log"
-    threads:
-        1
+        CDS_EXTRACTION=directory(OUTPUT_DIR/"working/cds-extraction"),
+        END_FLAG=OUTPUT_DIR/"MMA.done"
+    conda:
+        "envs/gffread.yml"
     message:
-        "Use the gff utility gffread to identify and extract those coding sequences and write the cds file, these will be the input of orthoflow."
+        "Use the fast ORF-predictor FragGeneScan Rust to predict gene contents of the MAGs, then extract the cds via gffread."
+    threads:
+        4
     script:
-        "scripts/gffread.sh"
+        "scripts/cds-extraction.sh"
+
+rule krona_taxonomy_plot:
+    input: 
+        CAT_pred_whole_data=rules.CAT_taxonomy_identification_plus_annotation.output.CAT_output
+    params:
+        file_to_remodel="out.CAT.contig2classification.txt",
+        file_after_remodel="out.CAT.krona.intake.tsv",
+        intake_krona="out.CAT.krona.intake2.tsv",
+        batch_name=BATCH_NAME
+    conda:
+        KRONA_ENV
+    output:
+        OUTPUT_DIR/"Krona.html"
+    message:
+        "essure that in your env there must have pandas, click and of course, Kronatools."
+    shell:
+        """
+        python scripts/create_taxonomy_profile.py --cat_prediction_txt {input}/{params.file_to_remodel} --output {input}/{params.file_after_remodel}
+        sed 1d {input}/{params.file_after_remodel} > {input}/{params.intake_krona}
+        ktImportTaxonomy -m 1 -o {output} {input}/{params.intake_krona}
+        """
+
+
 
 # Jobs testing for each of the rule is over, congradulations, now what you should do:
-# 1. Set up one complete workflow on a separate virtual machine in order to test its reproducibility.
-# 2. test different datasets, especially those larger ones.
-# 3. pull those essential files and scripts to github repositories.
+# 1. pull those essential files and scripts to github repositories.

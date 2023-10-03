@@ -1,48 +1,47 @@
-Inputs:
-# This is a default configuration file for the MMA organelle metagenomics workflow. 
-  batch_name: "TEST00001"
-  assembly_path: "../contigs.fasta"
-  # PATH/to/ASSEMBLY_FASTA
-  alignment_files: "../sorted.origout.bam"
-  # PATH/TO/ALIGNMENT_BAMS
+# This yaml file is the proto-type of your configuration, store it carefully! It will work as the ultimate template,
+# for your default config file to be put into the workflow.
 
-Sample: "Test Sample 1"
+Inputs:
+# This is a default configuration file for the MMA organelle metagenomics workflow.  
+  batch_name: 
+  assembly_path: 
+  # PATH/to/ASSEMBLY_FASTA
+  alignment_files: 
+  # PATH/TO/ALIGNMENT_BAMS
+  csv_prediction_corgi: 
+
 # Give a name for your sample(s). Should we name this for each batch?
-outputdir: "output2" # use output2 as the output directory, then adjust corgi's performances.
+outputdir: "chloroscan_outputs"
 # output folder where files are going to be moved into. But wait? We need to separate it by batches!
 tmpdir: "tmp"
 
 binny_settings:
-  universal_length_cutoff: 1000
+  universal_length_cutoff: 1500
   outputdir_binny: "binny_output" # May require wildcards for those things, should we in other words name this after batch? 
-  clustering:
-  # majorly adjust the hdbscan values.
+  clustering: 
+  # majorly adjust the hdbscan values. Recommended to be fixed. Or can be changed via here.
     epsilon_range: '0.250,0.000'
-    hdbscan_min_samples_range: '1,2,4,6,8'
+    hdbscan_min_samples_range: '1,4,7,10'
   bin_quality:
-    min_completeness: 65
+    min_completeness: 72.5
     start_completeness: 92.5
-    purity: 90
+    purity: 95
   # by default it writes the contig data to the bin folder.
 # How do we link our own settings to binny's settings? Or simply we fix it? Maybe not.
 
 corgi_settings:
 # corgi has settings for minimum length, pthreshold settings yes or no.
-  minlen: 320 # set it up for saving computational resources.
-  pthreshold: "False"
+  minlen: 
+  # set it up for saving computational resources.
+  pthreshold: 
   # Hit it by having an exact value or "False".
   save_filter: "True"
   # If true: we automatically send the fasta file into the folder.
-  batch_size: 4 #64  
-   
+  batch_size: 
+  #leave for changing.
 # this is the default place where a CAT database lies. 
-CAT_database: "./databases/CAT_prepare_20210107"
-
-prodigal_settings:
-  output_type: "gbk"
-
-threads: 16
-
-condasource: ""
-
-
+# Shall we adjust this?
+CAT_database: 
+taxonomy_names: 
+Krona_env: "kronatools"
+threads: 

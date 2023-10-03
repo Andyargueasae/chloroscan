@@ -1,8 +1,8 @@
 channels:
-  - bioconda
   - conda-forge
-  - defaults
 dependencies:
+  - coreutils
+  - python=3.9
+  - numpy
   - pandas
   - biopython
-  - numpy

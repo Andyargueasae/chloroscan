@@ -1,9 +1,11 @@
 channels:
+  - defaults
   - conda-forge
 dependencies:
-  - coreutils
   - python=3.9
   - pip
+  - coreutils
   - pip:
-    - bio-corgi>=0.4.0
-  - click
+    - biopython
+    - pandas
+    - numpy
