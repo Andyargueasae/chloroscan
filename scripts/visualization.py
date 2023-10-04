@@ -2,6 +2,7 @@ import pandas as pd
 import numpy as np
 import matplotlib.pyplot as plt
 from matplotlib.collections import PathCollection
+import matplotlib
 import math
 import os
 import statistics
@@ -12,6 +13,11 @@ figure_output_dir = snakemake.output[0]
 batch_name = snakemake.params[0]
 
 os.mkdir(figure_output_dir)
+# Safety check if there were nothing.
+if (os.stat(cross_reference_tsv).st_size == 0):
+    print("Empty cross reference tsv, then nothing will be output.")
+    sys.exit(0)
+
 # Visualization rule will take the spreadsheet created from the last rule, and plot the statistical 
 # graphics. Three graphics will be demonstrated:
 #   1. contig-length distribution (a boxplot, or a histogram), to show how skewed the distribution is.
@@ -60,16 +66,16 @@ def count_and_prop(individual_bin_df):
     return prop_list, label_list 
 
 def Seaborn_Violin_plot(sample_binned_df):
-    fig, ax1 = plt.subplots(figsize=(32, 18))
-    sns.set(font_scale=3)
+    fig, ax1 = plt.subplots(figsize=(27, 12))
+    matplotlib.rcParams.update({'font.size': 24})
     sample_binned_df['Contig2Bin'] = pd.Categorical(sample_binned_df['Contig2Bin'], [i for i in set(sample_binned_df['Contig2Bin'])])
     groups = sample_binned_df.groupby(['Contig2Bin'])
-    sns.violinplot(x="batch depth per contig",y="Contig2Bin", hue="Contig2Bin", hue_order=sorted(list(set(sample_binned_df['Contig2Bin']))), data=sample_binned_df,ax=ax1)
+    sns.violinplot(x="batch depth per contig",y="Contig2Bin", native_scale=True, inner="point", hue="Contig2Bin", hue_order=sorted(list(set(sample_binned_df['Contig2Bin']))), data=sample_binned_df,ax=ax1)
     for artist in ax1.lines:
         artist.set_zorder(10)
     for artist in ax1.findobj(PathCollection):
         artist.set_zorder(11)
-    sns.stripplot(x="batch depth per contig",y = "Contig2Bin", data=sample_binned_df, orient="h", jitter=True, size=6, color="purple", ax=ax1)
+    # sns.stripplot(x="batch depth per contig",y = "Contig2Bin", data=sample_binned_df, orient="h", jitter=True, size=6, color="purple", ax=ax1)
     # sns.move_legend(ax1, "upper left", bbox_to_anchor=(1, 1))
     plt.legend(loc="best")
     plt.savefig("{}/{}_Contig_Depth_Violin_Plot.png".format(figure_output_dir, batch_name), dpi="figure")
@@ -107,7 +113,7 @@ def compute_batch_depth(depth_Array):
             batch_depth.append(depth_batch)
     return batch_depth
 
-fig, axsc = plt.subplots(figsize=(32,18))
+fig, axsc = plt.subplots(figsize=(27,12))
 sns.set(font_scale=3)
 # store count of marker genes.
 markers_per_contig = binned_contigs_per_batch['markers on the contig']
@@ -117,12 +123,13 @@ binned_contigs_per_batch['marker count per contig'] = marker_count
 #store log10 contig depth.
 log10_depth = np.log10(np.array(binned_contigs_per_batch['batch depth per contig']))
 binned_contigs_per_batch['log10 depth per contig'] = log10_depth
-
-sns.scatterplot(data=binned_contigs_per_batch, x="GC contents", y="log10 depth per contig", hue="Contig2Bin", hue_order=sorted(list(set(binned_contigs_per_batch['Contig2Bin']))), alpha=0.7, s=(np.array(5*5*binned_contigs_per_batch['marker count per contig'])+80), marker="o")
-plt.legend(loc="best")
-# sns.move_legend(axsc, "upper left", bbox_to_anchor=(1, 1))
+sns.scatterplot(data=binned_contigs_per_batch, x="GC contents", y="log10 depth per contig", alpha=0.7, s=(np.array(5*5*binned_contigs_per_batch['marker count per contig'])+80), marker="o")
+breakpoint()
+plt.legend(loc="best", labels = [i.replace("_", " ") for i in np.array(binned_contigs_per_batch['Contig2Bin'])])
+sns.move_legend(axsc, "upper left", bbox_to_anchor=(1, 1))
 plt.title("GC vs. sequence depth, dot size scaled by marker count")
-
+plt.xlabel("GC contents", fontsize=24)
+plt.ylabel("Sequence Depth (log10)", fontsize=24)
 plt.savefig("{}/{}_binned_contigs_scatter.png".format(figure_output_dir, batch_name), dpi="figure")
 
 #3. taxonomy pie chart.

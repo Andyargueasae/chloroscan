@@ -1,4 +1,5 @@
 #!/usr/bin/env bash
+
 # Now it is time to think about some global variables.
 BINNY_DIR=${snakemake_input[binny_dir]}
 

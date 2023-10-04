@@ -6,6 +6,7 @@ import logging
 from Bio import SeqIO 
 import urllib.request
 import os
+from pathlib import Path
 
 
 # set up global variables that could work as input files.
@@ -28,7 +29,22 @@ assembly_annot = snakemake.params['marker_gene_gff']
 assembly_bin_dir = snakemake.params['bins']
 taxonomy_names = snakemake.params['names_dump']
 MMA_SUMMARY=snakemake.params['MMA_summary']
+# this is working/CAT/out.CAT.contig2classification.txt.
 contig_level_annotation = os.path.join(snakemake.input['contig_level_annotation'], snakemake.params['ANNOT_FILE'])
+
+# Here we want to know if the results from binny are empty.
+if ((not Path(contig_level_annotation).exists() or os.stat(contig_level_annotation).st_size == 0) 
+    and (not Path(assemblyfasta).exists()) 
+    and (not Path(assemblydepth).exists()) 
+    and (not Path(assembly_annot).exists())) :
+    Path(contig_level_annotation).write_text("")
+    print("No files supporting this rule to run were found, exit.\n")
+    # You wrote it empty. Then test it to be empty.
+    # Meanwhile, the cross-ref.tsv should also be written.
+    Path(snakemake.output[0]).write_text("")
+    sys.exit(0)
+
+# Meanwhile, if all those files are not there, we should simply go out.
 
 
 def GC_content(sequence):
@@ -163,6 +179,7 @@ def form_contig_taxa_array(empty_taxon_array, contig_id, names_dump, contig_anno
     return
 
 dataset_bin_df = pd.DataFrame()
+# breakpoint()
 assembly_fasta_contigs = list(SeqIO.parse(assemblyfasta, "fasta"))
 contig_id = []
 contig_seq = []
@@ -194,7 +211,7 @@ dataset_bin_df[CONTIG_marker] = marker_per_contig
 dataset_bin_df[CONTIG_BIN] = bin_array
 dataset_bin_df[CONTIG_SEQ] = contig_seq
 
-dataset_bin_df.to_csv(snakemake.output[0])
+# dataset_bin_df.to_csv(snakemake.output[0])
 
 dataset_bin_df.to_csv(snakemake.output[0], sep="\t")
 
@@ -207,7 +224,7 @@ for i in bin_set:
     if i != "":
         file_name=i.replace(".fasta","")
         essential_info=file_name.split('_')
-        breakpoint()
+        # breakpoint()
         # Make sure you include both possibilities.
         if ("C" in essential_info[-3]) and ("P" in essential_info[-2]):            
             completeness=int(essential_info[-3].replace("C", ""))

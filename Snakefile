@@ -54,22 +54,18 @@ TMP_DIR.mkdir(parents=True, exist_ok=True) # what if we do want to prepare data 
 # Krona environment name.
 KRONA_ENV=config['Krona_env']
 
-# some functions.
-
 # Now rules are introduced. They are placed into the single snakefile in order to increase efficiency for debugging.
 # Major output: MMA.done, branching summary results: cross_ref.xlsx and CAT_taxonomy_annotation.tsv. 
 rule all:
     input:
-        Path(OUTPUT_DIR/"working/binny"),
+        OUTPUT_DIR/"working/binny",
         OUTPUT_DIR/"working/summary/cross_ref.tsv",
         OUTPUT_DIR/"working/visualizations",
         OUTPUT_DIR/"Krona.html",
-        OUTPUT_DIR/"MMA.done"
+        OUTPUT_DIR/"ChloroScan.done"
 
 
 # The most important two rules are: corgi and binny.
-# How to add the shortcut here? We shall add one config in config file: csv file predicted from corgi.
-
 
 rule corgi_prediction:
     input: 
@@ -144,7 +140,8 @@ rule corgi_prediction:
         fi
         
         """    
-#There must be a trade-off between time and accuracy, via batch-size. 
+
+# Add one checkpoint here, I want to end the workflow if there are no plastid contigs.
 
 rule binny_workflow:
     input:
@@ -172,46 +169,33 @@ rule binny_workflow:
         "Use the binning algorithm binny to find all high-coverage bins with completeness>=65% and purity>=90%"
     shell:
         """
-        bash ./scripts/create_yaml.sh -a "{input.plastid_contigs}" -l "{params.bamfiles}" -o "{params.outputdir_within_binny}"\
-           -e '{params.hdbscan_epsilon_range}' -m '{params.hdbscan_min_samples_range}' -c {params.quality_min_completeness}\
-           -s {params.quality_start_completeness} -p {params.quality_min_purity} -u {params.universal_length_cutoff}
-        
-        # Now the problem could only be here.
-        {params.binny_dir}/binny -l -n "MMA_plastids" -t 24 -r {params.binny_dir}/config/{GLOBAL_CONFIG}
+        # Check if plastids are present.
+        # If so, then run binny workflow
+        if [ -s {input.plastid_contigs} ]; then
+            bash ./scripts/create_yaml.sh -a "{input.plastid_contigs}" -l "{params.bamfiles}" -o "{params.outputdir_within_binny}"\
+            -e '{params.hdbscan_epsilon_range}' -m '{params.hdbscan_min_samples_range}' -c {params.quality_min_completeness}\
+            -s {params.quality_start_completeness} -p {params.quality_min_purity} -u {params.universal_length_cutoff}
+            
+            # Now the problem could only be here.
+            {params.binny_dir}/binny -l -n "MMA_plastids" -t 24 -r {params.binny_dir}/config/{GLOBAL_CONFIG}
 
-        # must remove the config.yaml created at the end, so we need it to be changed with name.
-        rm {params.binny_dir}/config/{GLOBAL_CONFIG} # finally you have to remove it, you don't want to cause confusion.
-        echo 'The binny workflow is done, bins are within the binny folder, that may need to move out.'
-        # chmod u+w {output.dir_binny}
-        mv {BINNY_OUTPUT_DIR} {output.dir_binny}
-        chmod u+w {output.dir_binny}
-        
-        # make sure to remove the bam files within the intermediary folder.
-        rm -rf {output.dir_binny}/intermediary/*.bam
-        echo "The binny's output has been moved to the default output directory."
+            # must remove the config.yaml created at the end, so we need it to be changed with name.
+            rm {params.binny_dir}/config/{GLOBAL_CONFIG} # finally you have to remove it, you don't want to cause confusion.
+            echo 'The binny workflow is done, bins are within the binny folder, that may need to move out.'
+            # chmod u+w {output.dir_binny}
+            mv {BINNY_OUTPUT_DIR} {output.dir_binny}
+            chmod u+w {output.dir_binny}
+            
+            # make sure to remove the bam files within the intermediary folder.
+            rm -rf {output.dir_binny}/intermediary/*.bam
+            echo "The binny's output has been moved to the default output directory."
+        else
+            echo "No plastids present. Create an empty directory for output."
+            mkdir -p {output.dir_binny}
+        fi
         """
 
-
-rule documenting_binny_results:
-    input: 
-        directory(OUTPUT_DIR/"working/binny/bins")
-    params: 
-        assembly_files = OUTPUT_DIR/"working/binny/intermediary/assembly.formatted.fa",
-        assembly_depth = OUTPUT_DIR/"working/binny/intermediary/assembly.contig_depth.txt",
-        marker_gene_gff = OUTPUT_DIR/"working/binny/intermediary/annotation_CDS_RNA_hmms_checkm.gff"
-    output:
-        OUTPUT_DIR/"working/binny/cross_ref.csv"
-    benchmark:
-        OUTPUT_DIR/"logging_info/summarize_binny.tsv"
-    threads:
-        5
-    conda:
-        "envs/documenting_binny.yml"
-    message:
-        "Run python script summarize_binny_results.py to record each bin's contig information."
-    script:
-        "./scripts/summarize_binny_results.py"
-
+# Add another checkpoint here, I want to cease the workflow if there are no bins made of plastid contigs.
 
 rule CAT_taxonomy_identification_plus_annotation:
     input: 
@@ -234,15 +218,22 @@ rule CAT_taxonomy_identification_plus_annotation:
         "envs/CAT_env.yml"
     shell:
         """
-        CAT contigs -c {input.binny_output}/{params.path_to_contigs} -d {CAT_DB_DIR}/2021-01-07_CAT_database -t {CAT_DB_DIR}/2021-01-07_taxonomy --force --top 11 --I_know_what_Im_doing
-        # CAT add_names -i {params.prefix}.contig2classification.txt -o {params.prefix}.contig2classification.named.txt -t {CAT_DB_DIR}/2021-01-07_taxonomy --only_official
         mkdir -p {output}
-        mv ./{params.prefix}.* {output.CAT_output}
+
+        # Check to see if the binny directory is empty or not
+        find {input.binny_output} -mindepth 1 -maxdepth 1
+        if [ -f "{input.binny_output}/{params.path_to_contigs}" ] ; then
+            CAT contigs -c {input.binny_output}/{params.path_to_contigs} -d {CAT_DB_DIR}/2021-01-07_CAT_database -t {CAT_DB_DIR}/2021-01-07_taxonomy --force --top 11 --I_know_what_Im_doing
+            # CAT add_names -i {params.prefix}.contig2classification.txt -o {params.prefix}.contig2classification.named.txt -t {CAT_DB_DIR}/2021-01-07_taxonomy --only_official
+            
+            mv ./{params.prefix}.* {output.CAT_output}
+        fi
         """
 
+# this is the correct one.
 rule documenting_binny_results:
     input: 
-        # bins = Path(OUTPUT_DIR/"working/binny"/BINNY_OUTPUT_DIR/"bins"),
+        # bins = OUTPUT_DIR/"working/binny"/BINNY_OUTPUT_DIR/"bins",
         contig_level_annotation = rules.CAT_taxonomy_identification_plus_annotation.output.CAT_output
     params: 
         bins = Path(OUTPUT_DIR/"working/binny/bins"),
@@ -268,8 +259,8 @@ rule documenting_binny_results:
 rule refine_bins:
     input:
       cross_ref = OUTPUT_DIR/"working/summary/cross_ref.tsv",
-      original_bins = Path(OUTPUT_DIR/"working/binny/bins"),
-      CAT_prediction = OUTPUT_DIR/"working/CAT/out.CAT.contig2classification.txt",
+      original_bins = Path(OUTPUT_DIR/"working/binny"),
+      CAT_prediction = Path(OUTPUT_DIR/"working/CAT"),
     params:
       BACTERIA_ID = "2"
     output:
@@ -300,7 +291,7 @@ rule cds_extraction:
         path_fraggenescanrs = OUTPUT_DIR/"working/FragGeneScanRs",
     output:
         CDS_EXTRACTION=directory(OUTPUT_DIR/"working/cds-extraction"),
-        END_FLAG=OUTPUT_DIR/"MMA.done"
+        END_FLAG=OUTPUT_DIR/"ChloroScan.done"
     conda:
         "envs/gffread.yml"
     message:
@@ -326,6 +317,13 @@ rule krona_taxonomy_plot:
         "essure that in your env there must have pandas, click and of course, Kronatools."
     shell:
         """
+        # add if statement: if there are empty out.CAT file, we exit with touched files: Krona.html.
+        if [ ! -s {input}/{params.file_to_remodel} ]; then
+            echo "No contig predictions because previous rules did not find any plastid contigs."
+            touch {output}
+            exit 0
+        fi 
+
         python scripts/create_taxonomy_profile.py --cat_prediction_txt {input}/{params.file_to_remodel} --output {input}/{params.file_after_remodel}
         sed 1d {input}/{params.file_after_remodel} > {input}/{params.intake_krona}
         ktImportTaxonomy -m 1 -o {output} {input}/{params.intake_krona}

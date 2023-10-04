@@ -2,6 +2,8 @@
 # This file writes a new configuration yaml file for each batch, and send them into the snakemake workflow.
 # Can be customized to write any parameters you want.
 
+set -e
+
 # NOTE: every path should be in relative path.
 
 # A reminder: MUST add quotation for assembly, alignment and batch_name, they may interact with the opts. 
@@ -67,7 +69,10 @@ awk "/threads/" $input_config
 
 # We only need to initiate the snakemake workflow by default.
 
-snakemake -c --latency-wait 15 --use-conda --configfile $input_config
+snakemake -c --latency-wait 15 --use-conda --configfile $input_config \
+    --snakefile /data/MMA_organelle_metagenomics/Snakefile \
+    --conda-prefix /data/MMA_organelle_metagenomics/conda \
+    --conda-frontend mamba
 
 output_dir=$batch_name
 cp $input_config $output_dir
