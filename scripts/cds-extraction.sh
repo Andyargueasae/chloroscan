@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
 
-# Now it is time to think about some global variables.
+# The binny directory.
 BINNY_DIR=${snakemake_input[binny_dir]}
 
 # assign variables.
@@ -41,6 +41,6 @@ do
 done
 
 # So basically, every script uses a for loop to do batch jobs for each of the files.
-# As this rule is the last rule of the workflow, touch one final file within output.
+## As this rule is the last rule of the workflow, touch one final file within output.
 # We can't just let the flag file come out, we must need to test whether there are files in cds here!
 touch $END_FLAG

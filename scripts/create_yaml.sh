@@ -18,10 +18,11 @@ usage() {
     echo "       -u universival cutoff" 1>&2
 }
 
-while getopts a:l:o:e:m:c:s:p:u: flag
+while getopts a:d:l:o:e:m:c:s:p:u: flag
 do
     case "${flag}" in
         a) assembly=${OPTARG};;
+        d) default_config=${OPTARG};;
         l) alignment=${OPTARG};;
         o) outputdir=${OPTARG};;
         e) hdb_epsilon=${OPTARG};;
@@ -44,10 +45,16 @@ echo "purity chosen: $purity";
 echo "Universal Length cutoff: $lengthcutoff"
 
 # Now edit the file one by one.
-# copy that default file and change the copy to be the one.
-cp $default_binny_config_path ./scripts
-
-curr_config="./scripts/config.default.yaml"
+## copy that default file and change the copy to be the one.
+curr_config="config.ChloroScan.yaml"
+# error comes from here first.
+echo
+echo
+echo -------------------------------------------
+pwd
+echo $default_config
+cp $default_config $curr_config
+#curr_config=$default_config
 # change assembly.
 # echo "assembly: \"\""
 # create a variable representing "".
@@ -92,8 +99,6 @@ sed -i "s@include_depth_main: 'False'@include_depth_main: 'True'@g" $curr_config
 # Note: must specify everything in rule in terms of params and input.
 
 # We have to move it back to binny's config folder in order to let it run.
-UNIVERSAL_CONFIG_FOR_MMA="config.MMA.yaml"
-mv $curr_config $UNIVERSAL_CONFIG_FOR_MMA
-WORKABLE_BINNY_CONFIG_DIR="./binny/config/"
-mv $UNIVERSAL_CONFIG_FOR_MMA $WORKABLE_BINNY_CONFIG_DIR
+#mv $curr_config $UNIVERSAL_CONFIG_FOR_MMA
+
 # Now you should see it in your binny workflow config directory.

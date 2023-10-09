@@ -29,7 +29,6 @@ assembly_annot = snakemake.params['marker_gene_gff']
 assembly_bin_dir = snakemake.params['bins']
 taxonomy_names = snakemake.params['names_dump']
 MMA_SUMMARY=snakemake.params['MMA_summary']
-# this is working/CAT/out.CAT.contig2classification.txt.
 contig_level_annotation = os.path.join(snakemake.input['contig_level_annotation'], snakemake.params['ANNOT_FILE'])
 
 # Here we want to know if the results from binny are empty.
@@ -247,4 +246,3 @@ with open(MMA_SUMMARY, "a") as MS:
     MS.write("Total number of high-quality (completeness: > 90%): {}\n".format(high_bins))
     
 
-# dataset_bin_df.to_excel(snakemake.output[0])

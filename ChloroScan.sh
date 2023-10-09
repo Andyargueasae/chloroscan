@@ -22,6 +22,7 @@ done
 
 # batch_name is used to name the output directory.
 mkdir -p config/
+# Here the config file is a representative, you have to get the absolute path!
 cp /data/MMA_organelle_metagenomics/config/config.zero.yaml config/config.default.yaml
 
 input_config="config/config.default.yaml"
@@ -69,10 +70,15 @@ awk "/threads/" $input_config
 
 # We only need to initiate the snakemake workflow by default.
 
+CHLOROSCAN_WD="."
+echo $CHLOROSCAN_WD > cwd.txt
+echo $(pwd) >> cwd.txt
+# At here, the cwd directory has changed to within tmp.
+
 snakemake -c --latency-wait 15 --use-conda --configfile $input_config \
     --snakefile /data/MMA_organelle_metagenomics/Snakefile \
     --conda-prefix /data/MMA_organelle_metagenomics/conda \
-    --conda-frontend mamba
+    --conda-frontend mamba --directory=$CHLOROSCAN_WD
 
 output_dir=$batch_name
 cp $input_config $output_dir

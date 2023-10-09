@@ -7,10 +7,6 @@ import click
 @click.option("--accession", type=click.Path(exists=True))
 @click.option("--fasta_file_name", type=click.STRING)
 
-# sample_assembly = "mediaflux_BATCHES/MGYS00002105_baltic_ocean_surface/assembly/merged.megahit.contigs.fa"
-# sample_plastid_accession = "MGYS00002105-plastid_acc.txt"
-# fasta_file_name = "mediaflux_BATCHES/MGYS00002105_baltic_ocean_surface/plastid.fasta"
-
 def main(assembly, accession, fasta_file_name):
     plastid_accession_id = []
     with open(accession, "r") as plastida:

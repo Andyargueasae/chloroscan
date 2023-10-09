@@ -32,7 +32,7 @@ def main(cat_prediction_txt, output):
     krona_intake['count'] = counts
     krona_intake['taxon id'] = taxon_id
     krona_intake.to_csv(output, sep="\t", index=False)
-    #firstly, filter those without a ORF hit, retain those having it.
+    ##firstly, filter those without a ORF hit, retain those having it.
     return
 
 if __name__ == "__main__":

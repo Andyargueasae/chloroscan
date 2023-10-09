@@ -4,6 +4,8 @@ import os
 from os import listdir
 import pandas as pd
 import numpy as np
+from pathlib import Path
+import sys
 
 # Some global variable inputs.
 output_dir_for_refined_bins = snakemake.output[0]
@@ -17,10 +19,19 @@ BACTERIA_ID = snakemake.params['BACTERIA_ID']
 #read in some files.
 os.mkdir(output_dir_for_refined_bins)
 
-# breakpoint()
+## breakpoint()
 if (os.stat(cross_reference_table).st_size == 0):
     print("Empty cross reference table, exit.\n")
     sys.exit(0)
+
+# If corgi has the outputs while binny doesn't, we stop the refinement.
+# if os.path.exists(original_bins):
+#     binny_check = listdir(original_bins)
+#     if len(binny_check) == 0:
+#         print("No bins produced, system shut down.")
+#         sys.exit(0)
+#     else:
+#         print("Ok, your bins are good to go.")
 
 
 cross_ref_refine_df = pd.read_csv(cross_reference_table,sep="\t", index_col=0)

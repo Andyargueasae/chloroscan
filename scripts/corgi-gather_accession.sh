@@ -9,7 +9,7 @@
 plastid_key="plastid"
 bacteria_control=0.10
 
-# prediction="plastid"
+# #prediction="plastid"
 while getopts c:o:p: flag
 do
     case "${flag}" in

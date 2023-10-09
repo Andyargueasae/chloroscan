@@ -6,6 +6,7 @@ Before you run this snakemake workflow, please ensure that:
 3. Set up the CAT database.
 4. figure out what is gonna be your file's name, put a list into it! [either from snakemake itself or by bash script controlling.]
 5. Add CAT's conda environment bin to your path, with intact functionality.
+6. Envrionment name "Kronatools".
 '''
 
 import os
@@ -29,16 +30,30 @@ BATCH_NAME = config['Inputs']['batch_name']
 
 BINNY_OUTPUT_DIR = config['binny_settings']['outputdir_binny']    
 # For binny: some global names.
-GLOBAL_CONFIG = "config.MMA.yaml"
+GLOBAL_CONFIG = "config.ChloroScan.yaml"
 THREAD=config['threads']
 
 # A functional binny directory is set-up within MMA.
-BINNY_DIR = Path("binny")
-SCR_DIR = Path("scripts")
-DB_DIR = Path("databases")
+
+# This is where we got most of the problems: 
+# Current cwd: tmp/plastid-binning--BATCH_ID,
+# But before I thought that the cwd is always:
+# /data/MMA_organelle_metagenomics.
+# So when crunch change the cwd, the working directory doesn't contain key folders such as:
+# binny/, scripts/. 
+
+# BINNY_DIR = Path(__name__).parent.absolute()/"binny"
+WORKFLOW_DIR = Path(workflow.basedir)
+BINNY_DIR = WORKFLOW_DIR/"binny"
+
+SCR_DIR = WORKFLOW_DIR/"scripts"
+
+DB_DIR = WORKFLOW_DIR/"databases"
 # For CAT taxonomy, some global name.
-CAT_DB_DIR = Path(DB_DIR/config['CAT_database'])
-TAXON_DB_DIR = Path(DB_DIR/config['taxonomy_names'])
+CAT_DB_DIR = DB_DIR/config['CAT_database']
+TAXON_DB_DIR = DB_DIR/config['taxonomy_names']
+
+
 GLOBAL_PREFIX="OUT"
 GLOBAL_PREFIX_contigs="out.CAT"
 # create the output directory.
@@ -66,7 +81,7 @@ rule all:
 
 
 # The most important two rules are: corgi and binny.
-
+# SCRDIR, needs an absolute path?
 rule corgi_prediction:
     input: 
         seqs = assembly_path 
@@ -148,8 +163,10 @@ rule binny_workflow:
         plastid_contigs = rules.corgi_prediction.output.plastid_contigs
         
     params:
-        binny_dir = "./binny",
+        binny_dir = BINNY_DIR,
         bamfiles = ALIGNMENT_FILES,
+        default_config = BINNY_DIR/"config/config.default.yaml",
+        bash_create_yaml = Path(SCR_DIR/"create_yaml.sh"),
         # outputdir is a must-checked one!
         universal_length_cutoff = config['binny_settings']['universal_length_cutoff'],
         hdbscan_epsilon_range = config['binny_settings']['clustering']['epsilon_range'],
@@ -172,15 +189,15 @@ rule binny_workflow:
         # Check if plastids are present.
         # If so, then run binny workflow
         if [ -s {input.plastid_contigs} ]; then
-            bash ./scripts/create_yaml.sh -a "{input.plastid_contigs}" -l "{params.bamfiles}" -o "{params.outputdir_within_binny}"\
+            bash {params.bash_create_yaml} -a "{input.plastid_contigs}" -d {params.default_config} -l "{params.bamfiles}" -o "{params.outputdir_within_binny}"\
             -e '{params.hdbscan_epsilon_range}' -m '{params.hdbscan_min_samples_range}' -c {params.quality_min_completeness}\
             -s {params.quality_start_completeness} -p {params.quality_min_purity} -u {params.universal_length_cutoff}
             
             # Now the problem could only be here.
-            {params.binny_dir}/binny -l -n "MMA_plastids" -t 24 -r {params.binny_dir}/config/{GLOBAL_CONFIG}
+            {params.binny_dir}/binny -l -n "MMA_plastids" -t 24 -r {GLOBAL_CONFIG}
 
             # must remove the config.yaml created at the end, so we need it to be changed with name.
-            rm {params.binny_dir}/config/{GLOBAL_CONFIG} # finally you have to remove it, you don't want to cause confusion.
+            rm {GLOBAL_CONFIG} # finally you have to remove it, you don't want to cause confusion.
             echo 'The binny workflow is done, bins are within the binny folder, that may need to move out.'
             # chmod u+w {output.dir_binny}
             mv {BINNY_OUTPUT_DIR} {output.dir_binny}
@@ -242,7 +259,8 @@ rule documenting_binny_results:
         marker_gene_gff = OUTPUT_DIR/"working/binny/intermediary/annotation_CDS_RNA_hmms_checkm.gff",
         names_dump=TAXON_DB_DIR,
         MMA_summary=OUTPUT_DIR/"MMA.summary.txt",
-        ANNOT_FILE="out.CAT.contig2classification.txt"
+        ANNOT_FILE="out.CAT.contig2classification.txt",
+        script_dir = SCR_DIR
     output:
         OUTPUT_DIR/"working/summary/cross_ref.tsv"
     benchmark:
@@ -254,7 +272,7 @@ rule documenting_binny_results:
     message:
         "Run python script summarize_binny_results.py to record each bin's contig information."
     script:
-        "./scripts/summarize_binny_results.py"
+        "{params.script_dir}/summarize_binny_results.py"
 
 rule refine_bins:
     input:
@@ -262,25 +280,28 @@ rule refine_bins:
       original_bins = Path(OUTPUT_DIR/"working/binny"),
       CAT_prediction = Path(OUTPUT_DIR/"working/CAT"),
     params:
-      BACTERIA_ID = "2"
+      BACTERIA_ID = "2",
+      script_dir = SCR_DIR
     output:
       directory(OUTPUT_DIR/"working/refined_bins")
     conda:
       "envs/refinement.yml"
     script:
-      "scripts/refine_bins.py"
+      "{params.script_dir}/refine_bins.py"
 
 rule visualize_results:
     input:
         OUTPUT_DIR/"working/summary/cross_ref.tsv"
     params:
-        BATCH_NAME
+        BATCH_NAME,
+        script_dir = SCR_DIR,
+        refine_bins_dir=OUTPUT_DIR/"working/refined_bins",
     output:
         directory(OUTPUT_DIR/"working/visualizations")
     conda:
         "envs/visualization.yml"
     script:
-        "scripts/visualization.py"
+        "{params.script_dir}/visualization.py"
 
 rule cds_extraction:
     input:
@@ -288,6 +309,7 @@ rule cds_extraction:
     params:
         batch_name=BATCH_NAME,
         gff_file_flag="GFFs",
+        script_dir = SCR_DIR,
         path_fraggenescanrs = OUTPUT_DIR/"working/FragGeneScanRs",
     output:
         CDS_EXTRACTION=directory(OUTPUT_DIR/"working/cds-extraction"),
@@ -299,7 +321,7 @@ rule cds_extraction:
     threads:
         4
     script:
-        "scripts/cds-extraction.sh"
+        "{params.script_dir}/cds-extraction.sh"
 
 rule krona_taxonomy_plot:
     input: 
@@ -308,6 +330,7 @@ rule krona_taxonomy_plot:
         file_to_remodel="out.CAT.contig2classification.txt",
         file_after_remodel="out.CAT.krona.intake.tsv",
         intake_krona="out.CAT.krona.intake2.tsv",
+        script_dir = SCR_DIR,
         batch_name=BATCH_NAME
     conda:
         KRONA_ENV
@@ -324,7 +347,7 @@ rule krona_taxonomy_plot:
             exit 0
         fi 
 
-        python scripts/create_taxonomy_profile.py --cat_prediction_txt {input}/{params.file_to_remodel} --output {input}/{params.file_after_remodel}
+        python {params.script_dir}/create_taxonomy_profile.py --cat_prediction_txt {input}/{params.file_to_remodel} --output {input}/{params.file_after_remodel}
         sed 1d {input}/{params.file_after_remodel} > {input}/{params.intake_krona}
         ktImportTaxonomy -m 1 -o {output} {input}/{params.intake_krona}
         """

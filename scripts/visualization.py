@@ -5,17 +5,31 @@ from matplotlib.collections import PathCollection
 import matplotlib
 import math
 import os
+from os import listdir
 import statistics
 import seaborn as sns
+from pathlib import Path
 
 cross_reference_tsv = snakemake.input[0]
-figure_output_dir = snakemake.output[0]
+figure_output_dir = Path(snakemake.output[0])
 batch_name = snakemake.params[0]
+refine_bins_dir = snakemake.params['refine_bins_dir']
 
-os.mkdir(figure_output_dir)
+# In order to avoid confusions, split batch name by "/".
+# Because we want to have a valid single dirname.
+batch_name = batch_name.split("/")[-1]
+
+figure_output_dir.mkdir(parents=True, exist_ok=True)
+
+time_stamp_file = ".snakemake_timestamp"
+
+refine_bins_list = [i for i in listdir(refine_bins_dir) if i != time_stamp_file]
 # Safety check if there were nothing.
 if (os.stat(cross_reference_tsv).st_size == 0):
     print("Empty cross reference tsv, then nothing will be output.")
+    sys.exit(0)
+elif (len(refine_bins_list)==0):
+    print("Empty bins directory after binning, process shut down.")
     sys.exit(0)
 
 # Visualization rule will take the spreadsheet created from the last rule, and plot the statistical 
@@ -32,7 +46,6 @@ assembly_depth_array = np.array(summary_dataframe['contig depth'])
 assembly_bin_array = list(summary_dataframe['Contig2Bin'])
 contig_taxon = summary_dataframe['Taxon per Contig']
 contig_2_bin = summary_dataframe['Contig2Bin']
-
 
 colors = ['black', 'red', 'green', 'blue', 'brown','cyan','grey','goldenrod','lime','violet','indigo','coral','olive','azure', 'light pink', 'dark blue']
 color_iter = iter(colors)
@@ -66,26 +79,33 @@ def count_and_prop(individual_bin_df):
     return prop_list, label_list 
 
 def Seaborn_Violin_plot(sample_binned_df):
-    fig, ax1 = plt.subplots(figsize=(27, 12))
-    matplotlib.rcParams.update({'font.size': 24})
+    fig, ax1 = plt.subplots(figsize=(35, 12))
+    matplotlib.rcParams.update({'font.size': 48})
+    colors = ['yellow', 'red', 'green', 'blue', 'brown','cyan','grey','goldenrod','lime','violet','indigo','coral','olive','azure', 'light pink', 'dark blue']
+    color_iter = iter(colors)
     sample_binned_df['Contig2Bin'] = pd.Categorical(sample_binned_df['Contig2Bin'], [i for i in set(sample_binned_df['Contig2Bin'])])
-    groups = sample_binned_df.groupby(['Contig2Bin'])
-    sns.violinplot(x="batch depth per contig",y="Contig2Bin", native_scale=True, inner="point", hue="Contig2Bin", hue_order=sorted(list(set(sample_binned_df['Contig2Bin']))), data=sample_binned_df,ax=ax1)
-    for artist in ax1.lines:
-        artist.set_zorder(10)
-    for artist in ax1.findobj(PathCollection):
-        artist.set_zorder(11)
-    # sns.stripplot(x="batch depth per contig",y = "Contig2Bin", data=sample_binned_df, orient="h", jitter=True, size=6, color="purple", ax=ax1)
-    # sns.move_legend(ax1, "upper left", bbox_to_anchor=(1, 1))
-    plt.legend(loc="best")
-    plt.savefig("{}/{}_Contig_Depth_Violin_Plot.png".format(figure_output_dir, batch_name), dpi="figure")
-    return
     
+    groups = sample_binned_df.groupby("Contig2Bin")
+    index = 0
+    for group_name, group in groups:
+        sns.violinplot(x="batch depth per contig",y="Contig2Bin", data=group, orient="h", ax=ax1, color = colors[index])
+        sns.stripplot(x="batch depth per contig", y="Contig2Bin", data=group, orient="h", jitter=True, zorder=1, size=6, color="purple")
+        index += 1
+    plt.yticks(fontsize=14)
+    plt.xticks(fontsize=18)
+    plt.xlabel("batch depth per contig", fontsize=20)
+    plt.title("Violin Plot of batch depth for each bin")
+    violin_plot_path = figure_output_dir/f"{batch_name}_Contig_Depth_Violin_Plot.png"
+    plt.savefig(str(violin_plot_path), dpi="figure")
+    return    
 # output the violin plot.
 summary_dataframe['batch depth per contig']=compute_batch_depth(assembly_depth_array)
 # depth_violin_plot(summary_dataframe, assembly_bin_array)
 binned_contigs_per_batch=summary_dataframe.loc[summary_dataframe["Contig2Bin"].notna()]
 Seaborn_Violin_plot(binned_contigs_per_batch)
+
+
+
 
 #2. sequence depth, gc contents and marker gene.
 def marker_counter(marker_array):
@@ -113,7 +133,13 @@ def compute_batch_depth(depth_Array):
             batch_depth.append(depth_batch)
     return batch_depth
 
-fig, axsc = plt.subplots(figsize=(27,12))
+
+
+plt.rcParams["figure.autolayout"] = True
+plt.rcParams["figure.figsize"] = [25, 36]
+plt.rcParams.update({'font.size': 24})
+
+fig1, axsc = plt.subplots(nrows=2, ncols=1)
 sns.set(font_scale=3)
 # store count of marker genes.
 markers_per_contig = binned_contigs_per_batch['markers on the contig']
@@ -123,14 +149,60 @@ binned_contigs_per_batch['marker count per contig'] = marker_count
 #store log10 contig depth.
 log10_depth = np.log10(np.array(binned_contigs_per_batch['batch depth per contig']))
 binned_contigs_per_batch['log10 depth per contig'] = log10_depth
-sns.scatterplot(data=binned_contigs_per_batch, x="GC contents", y="log10 depth per contig", alpha=0.7, s=(np.array(5*5*binned_contigs_per_batch['marker count per contig'])+80), marker="o")
-breakpoint()
-plt.legend(loc="best", labels = [i.replace("_", " ") for i in np.array(binned_contigs_per_batch['Contig2Bin'])])
-sns.move_legend(axsc, "upper left", bbox_to_anchor=(1, 1))
-plt.title("GC vs. sequence depth, dot size scaled by marker count")
-plt.xlabel("GC contents", fontsize=24)
-plt.ylabel("Sequence Depth (log10)", fontsize=24)
+groups = binned_contigs_per_batch.groupby("Contig2Bin")
+for bin_name, bin_group in groups:
+    group_label = bin_name.replace("_", " ")
+    print(group_label)
+    sns.scatterplot(data=bin_group, x="GC contents", y="log10 depth per contig", alpha=0.7, s=(np.array(5*5*bin_group['marker count per contig'])+120), marker="o", ax = axsc[0], label = group_label )
+plt.legend(bbox_to_anchor=(1.02, 1), loc='lower left', borderaxespad=0)
+axsc[0].set_title("GC vs. sequence depth, dot size scaled by marker count")
+axsc[0].set_xlabel("GC contents", fontsize=25)
+axsc[0].set_ylabel("Sequence Depth (log10)", fontsize=25)
+
+# The second plot is the bar chart of the completeness and purity.
+bins = [i for i in list(set(binned_contigs_per_batch['Contig2Bin']))]
+# works at the x-label.
+bins_quality_dict = dict()
+# works as the legend.
+bins_quality_dict['Bin Completeness'] = []
+bins_quality_dict['Bin Purity'] = []
+bin_xticks = []
+for i in bins:
+    bin_base_names = i.split("_")
+    prefix = "bin"
+    for j in range(len(bin_base_names)):
+        if "C" in bin_base_names[j]:
+            individual_comp = int(bin_base_names[j].replace("C", ""))
+            bins_quality_dict['Bin Completeness'].append(individual_comp)
+            identifier = bin_base_names[j-1]
+        if "P" in bin_base_names[j]:
+            individual_pur = int(bin_base_names[j].replace("P", ""))
+            bins_quality_dict['Bin Purity'].append(individual_pur)
+        else:
+            continue
+    bin_name = prefix + "." + f"{identifier}_C{individual_comp}_P{individual_pur}"
+    # breakpoint()
+    bin_xticks.append(bin_name)
+
+width = 0.2
+x=np.arange(len(bins))
+multiplier=0
+
+for attribute, measurement in bins_quality_dict.items():
+    offset = width * multiplier
+    bin_record = axsc[1].bar(x+offset, measurement, width, label=attribute)
+    axsc[1].bar_label(bin_record, padding=3)
+    multiplier += 1
+
+axsc[1].set_ylabel("percentage")
+axsc[1].set_xlabel("bin name")
+axsc[1].set_xticks(x + width, bin_xticks, rotation=30)
+axsc[1].legend(loc='lower left', ncols=len(bins))
+axsc[1].set_ylim(50, 100)
+
 plt.savefig("{}/{}_binned_contigs_scatter.png".format(figure_output_dir, batch_name), dpi="figure")
+
+
 
 #3. taxonomy pie chart.
 bin_set = set(contig_2_bin)
