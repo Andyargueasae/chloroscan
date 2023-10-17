@@ -283,7 +283,7 @@ rule refine_bins:
       BACTERIA_ID = "2",
       script_dir = SCR_DIR
     output:
-      directory(OUTPUT_DIR/"working/refined_bins")
+      refine_dir = directory(OUTPUT_DIR/"working/refined_bins")
     conda:
       "envs/refinement.yml"
     script:
@@ -291,7 +291,8 @@ rule refine_bins:
 
 rule visualize_results:
     input:
-        OUTPUT_DIR/"working/summary/cross_ref.tsv"
+        OUTPUT_DIR/"working/summary/cross_ref.tsv",
+        rules.refine_bins.output.refine_dir,
     params:
         BATCH_NAME,
         script_dir = SCR_DIR,

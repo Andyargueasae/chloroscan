@@ -55,19 +55,21 @@ for i in list_of_seqrec.keys():
     print("contig composition before refinement:\n", contig_ids)
     print("length equals to {}".format(len(contig_ids)))
     for elem in contig_comp:
-#         print(elem.id)
         elem_id = elem.id
         elem_in_crossref = cross_ref_refine_df.loc[cross_ref_refine_df['contig id'] == elem_id]
-#         print(elem_in_crossref)
         elem_row = orig_CAT_df.loc[orig_CAT_df["# contig"] == elem.id]
         elem_lineage = np.array(elem_row['lineage'])[0]
-#         print(elem_in_crossref)
         bacteria_taxonomy_id = BACTERIA_ID
         if not pd.isna(elem_lineage):
             elem_lineage_hierarchy = elem_lineage.split(";")
             print(elem_lineage_hierarchy)
             print(np.array(elem_in_crossref['markers on the contig'])[0])
             if (bacteria_taxonomy_id in elem_lineage_hierarchy) and (pd.isna(np.array(elem_in_crossref['markers on the contig'])[0])):
+                print("This is a bacterial contamination.")
+                contig_ids.remove(elem_id)
+                to_be_modified_id.append(elem_id)
+            # If you are not even identified as bacteria and you did not have any markers, we remove you.
+            elif (pd.isna(np.array(elem_in_crossref['markers on the contig'])[0])):
                 print("This is a bacterial contamination.")
                 contig_ids.remove(elem_id)
                 to_be_modified_id.append(elem_id)
@@ -94,10 +96,27 @@ for id_change in to_be_modified_id:
     row_index = row.index[0]
     cross_ref_refine_df.at[row_index, "Contig2Bin"] = ""
 
-# refined_contigs_dict
+def refine_bins_renaming(seqs, cross_ref_df):
+    taxonomy_dict = dict()
+    # breakpoint()
+    seq_ids = [i.id for i in seqs]
+    print(seq_ids)
+    for seq_id in seq_ids:
+        the_row = cross_ref_df.loc[cross_ref_df['contig id'] == seq_id]
+        the_taxon = the_row['Taxon per Contig'].item()
+        the_length = the_row['contig length'].item()
+        if the_taxon not in taxonomy_dict.keys():
+            taxonomy_dict[the_taxon] = 0
+        taxonomy_dict[the_taxon] += the_length
+    
+    print(taxonomy_dict)
+    sorted_dict_items = sorted(taxonomy_dict.items(), key = lambda x:x[1])
+    print(sorted_dict_items)
+    taxon_with_longest_length = sorted_dict_items[-1][0]
+    return taxon_with_longest_length
+    
 for i in refined_contigs_dict.items():
-    filename = output_dir_for_refined_bins + "/" + "refined_" + i[0].split("/")[-1]
-    print(filename)
+    filename = output_dir_for_refined_bins + "/" + "refined_" + i[0].split("/")[-1]    
     with open(filename, "w") as refined:
         for j in i[-1]:
             print(j.id)

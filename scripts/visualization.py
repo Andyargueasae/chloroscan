@@ -84,16 +84,17 @@ def Seaborn_Violin_plot(sample_binned_df):
     colors = ['yellow', 'red', 'green', 'blue', 'brown','cyan','grey','goldenrod','lime','violet','indigo','coral','olive','azure', 'light pink', 'dark blue']
     color_iter = iter(colors)
     sample_binned_df['Contig2Bin'] = pd.Categorical(sample_binned_df['Contig2Bin'], [i for i in set(sample_binned_df['Contig2Bin'])])
-    
+    log10_depth_sample = np.log10(np.array(sample_binned_df['batch depth per contig']))
+    sample_binned_df['log10 depth per contig'] = log10_depth_sample
     groups = sample_binned_df.groupby("Contig2Bin")
     index = 0
     for group_name, group in groups:
-        sns.violinplot(x="batch depth per contig",y="Contig2Bin", data=group, orient="h", ax=ax1, color = colors[index])
-        sns.stripplot(x="batch depth per contig", y="Contig2Bin", data=group, orient="h", jitter=True, zorder=1, size=6, color="purple")
+        sns.violinplot(x="log10 depth per contig",y="Contig2Bin", data=group, orient="h", ax=ax1, color = colors[index])
+        sns.stripplot(x="log10 depth per contig", y="Contig2Bin", data=group, orient="h", jitter=True, zorder=1, size=6, color="purple")
         index += 1
     plt.yticks(fontsize=14)
     plt.xticks(fontsize=18)
-    plt.xlabel("batch depth per contig", fontsize=20)
+    plt.xlabel("log10 depth per contig", fontsize=20)
     plt.title("Violin Plot of batch depth for each bin")
     violin_plot_path = figure_output_dir/f"{batch_name}_Contig_Depth_Violin_Plot.png"
     plt.savefig(str(violin_plot_path), dpi="figure")
@@ -103,9 +104,6 @@ summary_dataframe['batch depth per contig']=compute_batch_depth(assembly_depth_a
 # depth_violin_plot(summary_dataframe, assembly_bin_array)
 binned_contigs_per_batch=summary_dataframe.loc[summary_dataframe["Contig2Bin"].notna()]
 Seaborn_Violin_plot(binned_contigs_per_batch)
-
-
-
 
 #2. sequence depth, gc contents and marker gene.
 def marker_counter(marker_array):
@@ -155,9 +153,9 @@ for bin_name, bin_group in groups:
     print(group_label)
     sns.scatterplot(data=bin_group, x="GC contents", y="log10 depth per contig", alpha=0.7, s=(np.array(5*5*bin_group['marker count per contig'])+120), marker="o", ax = axsc[0], label = group_label )
 plt.legend(bbox_to_anchor=(1.02, 1), loc='lower left', borderaxespad=0)
-axsc[0].set_title("GC vs. sequence depth, dot size scaled by marker count")
-axsc[0].set_xlabel("GC contents", fontsize=25)
-axsc[0].set_ylabel("Sequence Depth (log10)", fontsize=25)
+axsc[0].set_title("GC vs. sequence depth, dot size scaled by marker count", fontsize=40)
+axsc[0].set_xlabel("GC content", fontsize=45)
+axsc[0].set_ylabel(r"$Sequence Depth (log_{10})$", fontsize=45)
 
 # The second plot is the bar chart of the completeness and purity.
 bins = [i for i in list(set(binned_contigs_per_batch['Contig2Bin']))]
@@ -222,9 +220,12 @@ for i in bin_set:
         colors = plt.get_cmap('jet')(np.linspace(0.2, 0.7, len(set(contig_composition_taxon_prop_bylength))+10))
         MAGax.pie(contig_composition_taxon_prop_bylength, startangle=90, colors=colors, radius=2, wedgeprops={"linewidth": 1, "edgecolor": "white"}, center=(4,4), frame=True, autopct='%1.2f%%')
         plt.axis('equal')
-        plt.legend(taxon_labels, loc="best")
-        plt.title("{} bin {} taxon composition".format(batch_name, i))
+        plt.legend(taxon_labels, loc="best", fontsize="29")
+        plt.title("{} bin {} taxon composition".format(batch_name, i), fontsize=30)
         plt.show()
+        # Hide xticks and yticks.
+        plt.xticks([])
+        plt.yticks([])
         plt.savefig("{}/{}_{}_taxonomy_composition.png".format(figure_output_dir, batch_name, i), dpi="figure")
     else:
         continue
