@@ -1,4 +1,6 @@
-# MMA_organelle_metagenomics
+# ChloroScan: A metagenomic workflow to recover chloroplast genomes.
+## Author: Yuhao Tong (The University of Melbourne)
+
 The collection of snakemake workflow for MMA metagenomics for recovering chloroplast genomes.
 
 Project implementation commence date: August 8th, 2023
@@ -20,4 +22,8 @@ Main dependencies of the workflow:
 7. gffread;
 8. numpy;
 9. pandas;
-10. prodigal;
+10. prodigal
+
+Once the workflow gets finished, the recovered MAGs will be passed to the snakemake workflow Orthoflow (https://rbturnbull.github.io/orthoflow/main/installation.html), to conduct the phylogenetic analysis and see if there any new insights brought by these MAGs.
+
+# The results of Orthoflow: stored in this repository as supermatrix.cds.fa.treefile, with bootstrap support.
