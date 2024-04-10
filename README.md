@@ -1,5 +1,10 @@
+===================
 # ChloroScan: A metagenomic workflow to recover chloroplast genomes.
+===================
 ## Author: Yuhao Tong (The University of Melbourne)
+
+![example workflow](https://github.com/Andyargueasae/chloroscan/actions/workflows![image](https://github.com/Andyargueasae/chloroscan/assets/88032525/e9a84b49-6b9a-4279-b31f-5f221a6ca52f)
+/badge.svg)
 
 The collection of snakemake workflow for MMA metagenomics for recovering chloroplast genomes.
 
