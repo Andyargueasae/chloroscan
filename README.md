@@ -20,7 +20,7 @@ Main dependencies of the workflow:
 1. bio-corgi;
 2. binny;
 3. biopython;
-4. CAT/BAT;
+4. CAT/BAT (20231101 version requires installation from GitHub, meanwhile the nr database has been updated);
 5. diamond;
 6. FragGeneScanRs (via cargo and rustc);
 7. gffread;
