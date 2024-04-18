@@ -1,5 +1,9 @@
+===================
 # ChloroScan: A metagenomic workflow to recover chloroplast genomes.
+===================
 ## Author: Yuhao Tong (The University of Melbourne)
+
+![example workflow](https://github.com/Andyargueasae/chloroscan/badge.svg)
 
 The collection of snakemake workflow for MMA metagenomics for recovering chloroplast genomes.
 
@@ -16,7 +20,7 @@ Main dependencies of the workflow:
 1. bio-corgi;
 2. binny;
 3. biopython;
-4. CAT/BAT;
+4. CAT/BAT (20231101 version requires installation from GitHub, meanwhile the nr database has been updated);
 5. diamond;
 6. FragGeneScanRs (via cargo and rustc);
 7. gffread;
