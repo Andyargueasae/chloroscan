@@ -41,7 +41,7 @@ corgi_settings:
   batch_size: 
   #leave for changing.
 # this is the default place where a CAT database lies. 
-# By default, CAT database uses the latest version of nrDB.
+# Shall we adjust this?
 CAT_database: ""
 taxonomy_names: "names.dmp"
 Krona_env: "kronatools"

@@ -1,6 +1,3 @@
-# This yaml file is the proto-type of your configuration, store it carefully! It will work as the ultimate template,
-# for your default config file to be put into the workflow.
-
 Inputs:
 # This is a default configuration file for the MMA organelle metagenomics workflow.  
   batch_name: "test"
@@ -32,13 +29,13 @@ binny_settings:
 
 corgi_settings:
 # corgi has settings for minimum length, pthreshold settings yes or no.
-  minlen: 
+  minlen: 500
   # set it up for saving computational resources.
-  pthreshold: 
+  pthreshold: 0.90
   # Hit it by having an exact value or "False".
   save_filter: "True"
   # If true: we automatically send the fasta file into the folder.
-  batch_size: 
+  batch_size: 1 
   #leave for changing.
 # this is the default place where a CAT database lies. 
 # Shall we adjust this?
