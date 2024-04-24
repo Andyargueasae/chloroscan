@@ -13,7 +13,19 @@ author = 'Yuhao Tong'
 # -- General configuration ---------------------------------------------------
 # https://www.sphinx-doc.org/en/master/usage/configuration.html#general-configuration
 
-extensions = []
+extensions = ["sphinx_rtd_theme",
+    "nbsphinx",
+    "myst_parser",
+    "sphinx.ext.mathjax",
+    "sphinx.ext.githubpages",
+    "sphinx.ext.autodoc",
+    "sphinx.ext.coverage",
+    "sphinx.ext.napoleon",
+    "sphinx_copybutton",
+    "sphinx.ext.graphviz",
+    'sphinxcontrib.bibtex',
+    'snakedoc'
+]
 
 templates_path = ['_templates']
 exclude_patterns = []
