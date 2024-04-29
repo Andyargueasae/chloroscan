@@ -1,0 +1,7 @@
+channels:
+  - conda-forge
+  - bioconda
+dependencies:
+  - krona=2.8.1
+  - numpy
+  - pandas
