@@ -3,10 +3,10 @@
 
 Inputs:
 # This is a default configuration file for the MMA organelle metagenomics workflow.  
-  batch_name: 
-  assembly_path: 
+  batch_name: "" 
+  assembly_path: ""
   # PATH/to/ASSEMBLY_FASTA
-  alignment_files: 
+  alignment_files: "" 
   # PATH/TO/ALIGNMENT_BAMS
   depth_text: ""
 
@@ -42,7 +42,7 @@ corgi_settings:
   #leave for changing.
 # this is the default place where a CAT database lies. 
 # Shall we adjust this?
-CAT_database: 
-taxonomy_names: 
+CAT_database: ""
+taxonomy_names: "" 
 Krona_env: "kronatools"
 threads: 

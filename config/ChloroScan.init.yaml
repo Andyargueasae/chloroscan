@@ -15,13 +15,13 @@ tmpdir: "tmp"
 
 binny_settings:
   universal_length_cutoff: 1500
-  outputdir_binny: "binny_output" # May require wildcards for those things, should we in other words name this after batch? 
+  outputdir_binny: "binny_output" 
   clustering: 
   # majorly adjust the hdbscan values. Recommended to be fixed. Or can be changed via here.
     epsilon_range: '0.250,0.000'
     hdbscan_min_samples_range: '1,4,7,10'
   bin_quality:
-    min_completeness: 75
+    min_completeness: 72.5
     start_completeness: 92.5
     purity: 95
   # by default it writes the contig data to the bin folder.
@@ -42,3 +42,4 @@ corgi_settings:
 CAT_database: "20231120_CAT_nr"
 taxonomy_names: "names.dmp"
 Krona_env: "kronatools"
+threads: 11
