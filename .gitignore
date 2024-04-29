@@ -166,10 +166,12 @@ wandb/
 results
 
 databases
-binny
+binny_Chloroscan
 MGYS*
 SRP*
 tmp/
 chloroscan_outputs/
 DRP*
 CLS_MGYS00003517_0_outputs/
+cwd.txt
+=*
