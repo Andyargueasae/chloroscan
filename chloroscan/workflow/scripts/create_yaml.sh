@@ -1,5 +1,5 @@
 
-default_binny_config_path="binny/config/config.default.yaml"
+default_binny_config_path="binny_ChloroScan/config/config.default.yaml"
 
 pwd
 # make sure there are no empty spaces when assigning variables.
@@ -18,11 +18,12 @@ usage() {
     echo "       -u universival cutoff" 1>&2
 }
 
-while getopts a:d:l:o:e:m:c:s:p:u: flag
+while getopts a:d:t:l:o:e:m:c:s:p:u: flag
 do
     case "${flag}" in
         a) assembly=${OPTARG};;
         d) default_config=${OPTARG};;
+        t) depth_text=${OPTARG};;
         l) alignment=${OPTARG};;
         o) outputdir=${OPTARG};;
         e) hdb_epsilon=${OPTARG};;
@@ -59,6 +60,10 @@ cp $default_config $curr_config
 # echo "assembly: \"\""
 # create a variable representing "".
 double_quotation=\"\"
+
+if [ -z $depth_file ]
+then
+    sed -i "s@contig_depth: \"\"@contig_depth: \"$depth_file\"@g" $curr_config
 
 sed -i "s@assembly: \"\"@assembly: \"$assembly\"@g" $curr_config
 

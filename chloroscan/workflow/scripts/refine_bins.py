@@ -6,6 +6,7 @@ import pandas as pd
 import numpy as np
 from pathlib import Path
 import sys
+# Do we need to apply another constraint: plastid bin lengths?
 
 # Some global variable inputs.
 output_dir_for_refined_bins = snakemake.output[0]
