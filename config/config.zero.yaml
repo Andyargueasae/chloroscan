@@ -8,7 +8,7 @@ Inputs:
   # PATH/to/ASSEMBLY_FASTA
   alignment_files: "" 
   # PATH/TO/ALIGNMENT_BAMS
-  depth_text: ""
+  depth_txt: ""
 
 
 # Give a name for your sample(s). Should we name this for each batch?
