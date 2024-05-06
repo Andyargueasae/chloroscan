@@ -28,5 +28,5 @@ testpaths = [
     "tests",
 ]
 
-[project.scripts]
+[tool.poetry.scripts]
 ChloroScan = "chloroscan.cli:chloroscan"
