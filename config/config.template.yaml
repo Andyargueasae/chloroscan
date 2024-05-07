@@ -43,6 +43,6 @@ corgi_settings:
 # this is the default place where a CAT database lies. 
 # By default, CAT database uses the latest version of nrDB.
 CAT_database: ""
-taxonomy_names: "names.dmp"
+CAT_taxonomy: "names.dmp"
 Krona_env: "kronatools"
 threads: 

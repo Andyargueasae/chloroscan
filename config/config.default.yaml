@@ -43,6 +43,6 @@ corgi_settings:
 # this is the default place where a CAT database lies. 
 # Shall we adjust this?
 CAT_database: ""
-taxonomy_names: "names.dmp"
+CAT_taxonomy: "names.dmp"
 Krona_env: "kronatools"
 threads: 

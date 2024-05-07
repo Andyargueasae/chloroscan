@@ -9,6 +9,8 @@ Inputs:
   alignment_files: "" 
   # PATH/TO/ALIGNMENT_BAMS
   depth_txt: ""
+  # PATH/TO/DEPTH.txt, assume either depth text or alignment files are supplied for once. 
+  # (So if you have depth text, leave alignment files blank.)
 
 
 # Give a name for your sample(s). Should we name this for each batch?
@@ -43,6 +45,6 @@ corgi_settings:
 # this is the default place where a CAT database lies. 
 # Shall we adjust this?
 CAT_database: ""
-taxonomy_names: "" 
+CAT_taxonomy: "" 
 Krona_env: "kronatools"
 threads: 
