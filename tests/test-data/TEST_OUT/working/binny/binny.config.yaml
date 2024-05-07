@@ -1,0 +1,40 @@
+NX_value: 90
+bin_quality:
+  min_completeness: 72.5
+  purity: 95
+  start_completeness: 92.5
+clustering:
+  hdbscan_epsilon_range: 0.250,0.000
+  hdbscan_min_samples_range: 1,4,7,10
+  include_depth_initial: 'True'
+  include_depth_main: 'True'
+coassembly_mode: auto
+conda_source: ''
+db_path: ''
+distance_metric: manhattan
+embedding:
+  max_iterations: 50
+extract_scmags: 'True'
+kmers: 2,3,4
+mantis_env: ''
+mask_disruptive_sequences: 'True'
+max_cont_length_cutoff: 1500
+max_cont_length_cutoff_marker: 1500
+max_marker_lineage_depth_lvl: 2
+max_n_contigs: 5.0e5
+mem:
+  big_mem_avail: 0
+  big_mem_per_core_gb: 26
+  normal_mem_per_core_gb: 2
+min_cont_length_cutoff: 1500
+min_cont_length_cutoff_marker: 1500
+outputdir: binny_output
+prokka_env: ''
+raws:
+  assembly: TEST_OUT/working/corgi/plastid.fasta
+  contig_depth: test_data/contig_depth_test.txt
+  metagenomics_alignment: ''
+sample: test
+snakemake_env: ''
+tmp_dir: tmp
+write_contig_data: 'True'

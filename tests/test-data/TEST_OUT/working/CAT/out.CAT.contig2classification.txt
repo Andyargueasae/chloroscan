@@ -1,0 +1,9 @@
+# contig	classification	reason	lineage	lineage scores
+k127_11926	no taxid assigned	no hits to database
+k127_14538	taxid assigned	based on 71/71 ORFs	1;131567;2759;2608109;2830;2608131;73028;1136790;35140*	1.00;1.00;0.88;0.84;0.84;0.79;0.72;0.72;0.72
+k127_17064	no taxid assigned	no hits to database
+k127_18874	taxid assigned	based on 1/1 ORFs	1;131567;2759;2608109;2830;2608131;73028;1136790;35140;1460289	1.00;1.00;1.00;1.00;1.00;1.00;1.00;1.00;1.00;1.00
+k127_37878	taxid assigned	based on 27/28 ORFs	1;131567;2759;2608109;2830;2608131;73028;1136790;35140*	1.00;1.00;0.90;0.70;0.70;0.51;0.51;0.51;0.51
+k127_41428	no taxid assigned	no hits to database
+k127_42002	no taxid assigned	no ORFs found
+k127_5658	taxid assigned	based on 2/2 ORFs	1;131567	1.00;1.00

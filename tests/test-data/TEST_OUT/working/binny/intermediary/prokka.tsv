@@ -1,0 +1,133 @@
+locus_tag	ftype	length_bp	gene	EC_number	COG	product
+LBFIPJIE_00001	rRNA	2876				23S ribosomal RNA
+LBFIPJIE_00002	CDS	504				unannotated protein
+LBFIPJIE_00003	CDS	387				unannotated protein
+LBFIPJIE_00004	CDS	1482				unannotated protein
+LBFIPJIE_00005	CDS	1461				unannotated protein
+LBFIPJIE_00006	CDS	276				unannotated protein
+LBFIPJIE_00007	tRNA	75				tRNA-Thr(tgt)
+LBFIPJIE_00008	CDS	171				unannotated protein
+LBFIPJIE_00009	CDS	231				unannotated protein
+LBFIPJIE_00010	CDS	942				unannotated protein
+LBFIPJIE_00011	CDS	774				unannotated protein
+LBFIPJIE_00012	CDS	1605				unannotated protein
+LBFIPJIE_00013	tRNA	74				tRNA-Met(cat)
+LBFIPJIE_00014	tRNA	72				tRNA-Lys(ttt)
+LBFIPJIE_00015	CDS	2619				unannotated protein
+LBFIPJIE_00016	CDS	384				unannotated protein
+LBFIPJIE_00017	CDS	114				unannotated protein
+LBFIPJIE_00018	CDS	876				unannotated protein
+LBFIPJIE_00019	tRNA	73				tRNA-Cys(gca)
+LBFIPJIE_00020	tRNA	85				tRNA-Leu(taa)
+LBFIPJIE_00021	CDS	246				unannotated protein
+LBFIPJIE_00022	tRNA	83				tRNA-Leu(tag)
+LBFIPJIE_00023	CDS	198				unannotated protein
+LBFIPJIE_00024	CDS	132				unannotated protein
+LBFIPJIE_00025	CDS	1530				unannotated protein
+LBFIPJIE_00026	tRNA	74				tRNA-Gly(gcc)
+LBFIPJIE_00027	tRNA	74				tRNA-Asn(gtt)
+LBFIPJIE_00028	CDS	189				unannotated protein
+LBFIPJIE_00029	CDS	1428				unannotated protein
+LBFIPJIE_00030	CDS	393				unannotated protein
+LBFIPJIE_00031	CDS	2463				unannotated protein
+LBFIPJIE_00032	tRNA	75				tRNA-Trp(cca)
+LBFIPJIE_00033	tRNA	90				tRNA-Ser(gct)
+LBFIPJIE_00034	CDS	99				unannotated protein
+LBFIPJIE_00035	CDS	156				unannotated protein
+LBFIPJIE_00036	CDS	438				unannotated protein
+LBFIPJIE_00037	CDS	216				unannotated protein
+LBFIPJIE_00038	tRNA	74				tRNA-Pro(tgg)
+LBFIPJIE_00039	CDS	2205				unannotated protein
+LBFIPJIE_00040	CDS	2259				unannotated protein
+LBFIPJIE_00041	CDS	216				unannotated protein
+LBFIPJIE_00042	CDS	681				unannotated protein
+LBFIPJIE_00043	CDS	483				unannotated protein
+LBFIPJIE_00044	tRNA	74				tRNA-Gln(ttg)
+LBFIPJIE_00045	tRNA	74				tRNA-Arg(acg)
+LBFIPJIE_00046	tRNA	86				tRNA-Ser(tga)
+LBFIPJIE_00047	CDS	1380				unannotated protein
+LBFIPJIE_00048	CDS	1056				unannotated protein
+LBFIPJIE_00049	CDS	516				unannotated protein
+LBFIPJIE_00050	CDS	303				unannotated protein
+LBFIPJIE_00051	CDS	138				unannotated protein
+LBFIPJIE_00052	CDS	243				unannotated protein
+LBFIPJIE_00053	tRNA	73				tRNA-Arg(ccg)
+LBFIPJIE_00054	tRNA	85				tRNA-Met(cat)
+LBFIPJIE_00055	tmRNA	323	ssrA			transfer-messenger RNA, SsrA
+LBFIPJIE_00056	CDS	1479				unannotated protein
+LBFIPJIE_00057	tRNA	72				tRNA-Val(tac)
+LBFIPJIE_00058	tRNA	75				tRNA-Arg(tct)
+LBFIPJIE_00059	CDS	1053				unannotated protein
+LBFIPJIE_00060	CDS	807				unannotated protein
+LBFIPJIE_00061	CDS	816				unannotated protein
+LBFIPJIE_00062	CDS	111				unannotated protein
+LBFIPJIE_00063	CDS	951				unannotated protein
+LBFIPJIE_00064	tRNA	75				tRNA-Glu(ttc)
+LBFIPJIE_00065	CDS	255				unannotated protein
+LBFIPJIE_00066	tRNA	71				tRNA-Gly(tcc)
+LBFIPJIE_00067	CDS	1674				unannotated protein
+LBFIPJIE_00068	CDS	327				unannotated protein
+LBFIPJIE_00069	CDS	1083				unannotated protein
+LBFIPJIE_00070	tRNA	76				tRNA-Met(cat)
+LBFIPJIE_00071	CDS	954				unannotated protein
+LBFIPJIE_00072	CDS	273				unannotated protein
+LBFIPJIE_00073	CDS	465				unannotated protein
+LBFIPJIE_00074	CDS	492				unannotated protein
+LBFIPJIE_00075	CDS	426				unannotated protein
+LBFIPJIE_00076	tRNA	82				tRNA-Tyr(gta)
+LBFIPJIE_00077	CDS	948				unannotated protein
+LBFIPJIE_00078	tRNA	74				tRNA-Asp(gtc)
+LBFIPJIE_00079	CDS	321				unannotated protein
+LBFIPJIE_00080	CDS	1227				unannotated protein
+LBFIPJIE_00081	CDS	471				unannotated protein
+LBFIPJIE_00082	CDS	378				unannotated protein
+LBFIPJIE_00083	CDS	279				unannotated protein
+LBFIPJIE_00084	CDS	417				unannotated protein
+LBFIPJIE_00085	CDS	936				unannotated protein
+LBFIPJIE_00086	CDS	393				unannotated protein
+LBFIPJIE_00087	CDS	369				unannotated protein
+LBFIPJIE_00088	CDS	1272				unannotated protein
+LBFIPJIE_00089	CDS	468				unannotated protein
+LBFIPJIE_00090	CDS	543				unannotated protein
+LBFIPJIE_00091	CDS	399				unannotated protein
+LBFIPJIE_00092	CDS	546				unannotated protein
+LBFIPJIE_00093	CDS	366				unannotated protein
+LBFIPJIE_00094	CDS	249				unannotated protein
+LBFIPJIE_00095	CDS	405				unannotated protein
+LBFIPJIE_00096	CDS	651				unannotated protein
+LBFIPJIE_00097	CDS	354				unannotated protein
+LBFIPJIE_00098	CDS	279				unannotated protein
+LBFIPJIE_00099	CDS	825				unannotated protein
+LBFIPJIE_00100	CDS	309				unannotated protein
+LBFIPJIE_00101	CDS	630				unannotated protein
+LBFIPJIE_00102	CDS	1836				unannotated protein
+LBFIPJIE_00103	CDS	1503				unannotated protein
+LBFIPJIE_00104	CDS	546				unannotated protein
+LBFIPJIE_00105	CDS	537				unannotated protein
+LBFIPJIE_00106	CDS	489				unannotated protein
+LBFIPJIE_00107	CDS	249				unannotated protein
+LBFIPJIE_00108	CDS	702				unannotated protein
+LBFIPJIE_00109	CDS	609				unannotated protein
+LBFIPJIE_00110	CDS	690				unannotated protein
+LBFIPJIE_00111	CDS	3810				unannotated protein
+LBFIPJIE_00112	CDS	1848				unannotated protein
+LBFIPJIE_00113	CDS	3336				unannotated protein
+LBFIPJIE_00114	CDS	720				unannotated protein
+LBFIPJIE_00115	tRNA	74				tRNA-His(gtg)
+LBFIPJIE_00116	CDS	558				unannotated protein
+LBFIPJIE_00117	CDS	951				unannotated protein
+LBFIPJIE_00118	CDS	132				unannotated protein
+LBFIPJIE_00119	CDS	555				unannotated protein
+LBFIPJIE_00120	CDS	1308				unannotated protein
+LBFIPJIE_00121	tRNA	73				tRNA-Phe(gaa)
+LBFIPJIE_00122	CDS	1467				unannotated protein
+LBFIPJIE_00123	CDS	420				unannotated protein
+LBFIPJIE_00124	CDS	246				unannotated protein
+LBFIPJIE_00125	CDS	351				unannotated protein
+LBFIPJIE_00126	CDS	351				unannotated protein
+LBFIPJIE_00127	CDS	195				unannotated protein
+LBFIPJIE_00128	CDS	78				unannotated protein
+LBFIPJIE_00129	CDS	462				unannotated protein
+LBFIPJIE_00130	CDS	807				unannotated protein
+LBFIPJIE_00131	CDS	183				unannotated protein
+LBFIPJIE_00132	rRNA	1479				16S ribosomal RNA

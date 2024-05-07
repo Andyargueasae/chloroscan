@@ -1,0 +1,641 @@
+>Feature k127_5658
+3025	150	rRNA
+			locus_tag	LBFIPJIE_00001
+			product	23S ribosomal RNA
+			score	0
+>Feature k127_37878
+1001	498	CDS
+			inference	ab initio prediction:Prodigal_v2.6.3
+			locus_tag	LBFIPJIE_00002
+			partial	00
+			product	unannotated protein
+1438	1052	CDS
+			inference	ab initio prediction:Prodigal_v2.6.3
+			locus_tag	LBFIPJIE_00003
+			partial	00
+			product	unannotated protein
+3028	1547	CDS
+			inference	ab initio prediction:Prodigal_v2.6.3
+			locus_tag	LBFIPJIE_00004
+			partial	00
+			product	unannotated protein
+4544	3084	CDS
+			inference	ab initio prediction:Prodigal_v2.6.3
+			locus_tag	LBFIPJIE_00005
+			partial	00
+			product	unannotated protein
+4950	4675	CDS
+			inference	ab initio prediction:Prodigal_v2.6.3
+			locus_tag	LBFIPJIE_00006
+			partial	00
+			product	unannotated protein
+5105	5031	tRNA
+			inference	COORDINATES:profile:Aragorn:001002
+			locus_tag	LBFIPJIE_00007
+			product	tRNA-Thr(tgt)
+5259	5429	CDS
+			inference	ab initio prediction:Prodigal_v2.6.3
+			locus_tag	LBFIPJIE_00008
+			partial	00
+			product	unannotated protein
+5450	5680	CDS
+			inference	ab initio prediction:Prodigal_v2.6.3
+			locus_tag	LBFIPJIE_00009
+			partial	00
+			product	unannotated protein
+6905	5964	CDS
+			inference	ab initio prediction:Prodigal_v2.6.3
+			locus_tag	LBFIPJIE_00010
+			partial	00
+			product	unannotated protein
+7754	6981	CDS
+			inference	ab initio prediction:Prodigal_v2.6.3
+			locus_tag	LBFIPJIE_00011
+			partial	00
+			product	unannotated protein
+9404	7800	CDS
+			inference	ab initio prediction:Prodigal_v2.6.3
+			locus_tag	LBFIPJIE_00012
+			partial	00
+			product	unannotated protein
+9569	9496	tRNA
+			inference	COORDINATES:profile:Aragorn:001002
+			locus_tag	LBFIPJIE_00013
+			product	tRNA-Met(cat)
+9888	9959	tRNA
+			inference	COORDINATES:profile:Aragorn:001002
+			locus_tag	LBFIPJIE_00014
+			product	tRNA-Lys(ttt)
+10236	12854	CDS
+			inference	ab initio prediction:Prodigal_v2.6.3
+			locus_tag	LBFIPJIE_00015
+			partial	00
+			product	unannotated protein
+13341	12958	CDS
+			inference	ab initio prediction:Prodigal_v2.6.3
+			locus_tag	LBFIPJIE_00016
+			partial	00
+			product	unannotated protein
+13758	13645	CDS
+			inference	ab initio prediction:Prodigal_v2.6.3
+			locus_tag	LBFIPJIE_00017
+			partial	00
+			product	unannotated protein
+14687	13812	CDS
+			inference	ab initio prediction:Prodigal_v2.6.3
+			locus_tag	LBFIPJIE_00018
+			partial	00
+			product	unannotated protein
+14846	14918	tRNA
+			inference	COORDINATES:profile:Aragorn:001002
+			locus_tag	LBFIPJIE_00019
+			product	tRNA-Cys(gca)
+14932	15016	tRNA
+			inference	COORDINATES:profile:Aragorn:001002
+			locus_tag	LBFIPJIE_00020
+			product	tRNA-Leu(taa)
+15127	15372	CDS
+			inference	ab initio prediction:Prodigal_v2.6.3
+			locus_tag	LBFIPJIE_00021
+			partial	00
+			product	unannotated protein
+15723	15641	tRNA
+			inference	COORDINATES:profile:Aragorn:001002
+			locus_tag	LBFIPJIE_00022
+			product	tRNA-Leu(tag)
+16027	15830	CDS
+			inference	ab initio prediction:Prodigal_v2.6.3
+			locus_tag	LBFIPJIE_00023
+			partial	00
+			product	unannotated protein
+16140	16271	CDS
+			inference	ab initio prediction:Prodigal_v2.6.3
+			locus_tag	LBFIPJIE_00024
+			partial	00
+			product	unannotated protein
+18012	16483	CDS
+			inference	ab initio prediction:Prodigal_v2.6.3
+			locus_tag	LBFIPJIE_00025
+			partial	00
+			product	unannotated protein
+18521	18594	tRNA
+			inference	COORDINATES:profile:Aragorn:001002
+			locus_tag	LBFIPJIE_00026
+			product	tRNA-Gly(gcc)
+18741	18814	tRNA
+			inference	COORDINATES:profile:Aragorn:001002
+			locus_tag	LBFIPJIE_00027
+			product	tRNA-Asn(gtt)
+19163	18975	CDS
+			inference	ab initio prediction:Prodigal_v2.6.3
+			locus_tag	LBFIPJIE_00028
+			partial	00
+			product	unannotated protein
+19593	21020	CDS
+			inference	ab initio prediction:Prodigal_v2.6.3
+			locus_tag	LBFIPJIE_00029
+			partial	00
+			product	unannotated protein
+21028	21420	CDS
+			inference	ab initio prediction:Prodigal_v2.6.3
+			locus_tag	LBFIPJIE_00030
+			partial	00
+			product	unannotated protein
+23966	21504	CDS
+			inference	ab initio prediction:Prodigal_v2.6.3
+			locus_tag	LBFIPJIE_00031
+			partial	00
+			product	unannotated protein
+24153	24227	tRNA
+			inference	COORDINATES:profile:Aragorn:001002
+			locus_tag	LBFIPJIE_00032
+			product	tRNA-Trp(cca)
+24285	24374	tRNA
+			inference	COORDINATES:profile:Aragorn:001002
+			locus_tag	LBFIPJIE_00033
+			product	tRNA-Ser(gct)
+24721	24819	CDS
+			inference	ab initio prediction:Prodigal_v2.6.3
+			locus_tag	LBFIPJIE_00034
+			partial	00
+			product	unannotated protein
+25001	24846	CDS
+			inference	ab initio prediction:Prodigal_v2.6.3
+			locus_tag	LBFIPJIE_00035
+			partial	00
+			product	unannotated protein
+25603	25166	CDS
+			inference	ab initio prediction:Prodigal_v2.6.3
+			locus_tag	LBFIPJIE_00036
+			partial	00
+			product	unannotated protein
+25751	25966	CDS
+			inference	ab initio prediction:Prodigal_v2.6.3
+			locus_tag	LBFIPJIE_00037
+			partial	00
+			product	unannotated protein
+26057	25984	tRNA
+			inference	COORDINATES:profile:Aragorn:001002
+			locus_tag	LBFIPJIE_00038
+			product	tRNA-Pro(tgg)
+28437	26233	CDS
+			inference	ab initio prediction:Prodigal_v2.6.3
+			locus_tag	LBFIPJIE_00039
+			partial	00
+			product	unannotated protein
+30717	28459	CDS
+			inference	ab initio prediction:Prodigal_v2.6.3
+			locus_tag	LBFIPJIE_00040
+			partial	00
+			product	unannotated protein
+>Feature k127_17064
+121	336	CDS
+			inference	ab initio prediction:Prodigal_v2.6.3
+			locus_tag	LBFIPJIE_00041
+			partial	00
+			product	unannotated protein
+>Feature k127_14538
+252	932	CDS
+			inference	ab initio prediction:Prodigal_v2.6.3
+			locus_tag	LBFIPJIE_00042
+			partial	00
+			product	unannotated protein
+1011	1493	CDS
+			inference	ab initio prediction:Prodigal_v2.6.3
+			locus_tag	LBFIPJIE_00043
+			partial	00
+			product	unannotated protein
+1643	1716	tRNA
+			inference	COORDINATES:profile:Aragorn:001002
+			locus_tag	LBFIPJIE_00044
+			product	tRNA-Gln(ttg)
+1786	1859	tRNA
+			inference	COORDINATES:profile:Aragorn:001002
+			locus_tag	LBFIPJIE_00045
+			product	tRNA-Arg(acg)
+1941	2026	tRNA
+			inference	COORDINATES:profile:Aragorn:001002
+			locus_tag	LBFIPJIE_00046
+			product	tRNA-Ser(tga)
+3637	2258	CDS
+			inference	ab initio prediction:Prodigal_v2.6.3
+			locus_tag	LBFIPJIE_00047
+			partial	00
+			product	unannotated protein
+4676	3621	CDS
+			inference	ab initio prediction:Prodigal_v2.6.3
+			locus_tag	LBFIPJIE_00048
+			partial	00
+			product	unannotated protein
+5357	4842	CDS
+			inference	ab initio prediction:Prodigal_v2.6.3
+			locus_tag	LBFIPJIE_00049
+			partial	00
+			product	unannotated protein
+5563	5865	CDS
+			inference	ab initio prediction:Prodigal_v2.6.3
+			locus_tag	LBFIPJIE_00050
+			partial	00
+			product	unannotated protein
+5902	6039	CDS
+			inference	ab initio prediction:Prodigal_v2.6.3
+			locus_tag	LBFIPJIE_00051
+			partial	00
+			product	unannotated protein
+6052	6294	CDS
+			inference	ab initio prediction:Prodigal_v2.6.3
+			locus_tag	LBFIPJIE_00052
+			partial	00
+			product	unannotated protein
+6714	6786	tRNA
+			inference	COORDINATES:profile:Aragorn:001002
+			locus_tag	LBFIPJIE_00053
+			product	tRNA-Arg(ccg)
+6913	6829	tRNA
+			inference	COORDINATES:profile:Aragorn:001002
+			locus_tag	LBFIPJIE_00054
+			product	tRNA-Met(cat)
+7241	6919	tmRNA
+			gene	ssrA
+			inference	COORDINATES:profile:Aragorn:001002
+			locus_tag	LBFIPJIE_00055
+			product	transfer-messenger RNA, SsrA
+8790	7312	CDS
+			inference	ab initio prediction:Prodigal_v2.6.3
+			locus_tag	LBFIPJIE_00056
+			partial	00
+			product	unannotated protein
+8874	8945	tRNA
+			inference	COORDINATES:profile:Aragorn:001002
+			locus_tag	LBFIPJIE_00057
+			product	tRNA-Val(tac)
+9012	9086	tRNA
+			inference	COORDINATES:profile:Aragorn:001002
+			locus_tag	LBFIPJIE_00058
+			product	tRNA-Arg(tct)
+10143	9091	CDS
+			inference	ab initio prediction:Prodigal_v2.6.3
+			locus_tag	LBFIPJIE_00059
+			partial	00
+			product	unannotated protein
+11058	10252	CDS
+			inference	ab initio prediction:Prodigal_v2.6.3
+			locus_tag	LBFIPJIE_00060
+			partial	00
+			product	unannotated protein
+11163	11978	CDS
+			inference	ab initio prediction:Prodigal_v2.6.3
+			locus_tag	LBFIPJIE_00061
+			partial	00
+			product	unannotated protein
+12213	12103	CDS
+			inference	ab initio prediction:Prodigal_v2.6.3
+			locus_tag	LBFIPJIE_00062
+			partial	00
+			product	unannotated protein
+12418	13368	CDS
+			inference	ab initio prediction:Prodigal_v2.6.3
+			locus_tag	LBFIPJIE_00063
+			partial	00
+			product	unannotated protein
+13684	13758	tRNA
+			inference	COORDINATES:profile:Aragorn:001002
+			locus_tag	LBFIPJIE_00064
+			product	tRNA-Glu(ttc)
+14657	14403	CDS
+			inference	ab initio prediction:Prodigal_v2.6.3
+			locus_tag	LBFIPJIE_00065
+			partial	00
+			product	unannotated protein
+15218	15148	tRNA
+			inference	COORDINATES:profile:Aragorn:001002
+			locus_tag	LBFIPJIE_00066
+			product	tRNA-Gly(tcc)
+17033	15360	CDS
+			inference	ab initio prediction:Prodigal_v2.6.3
+			locus_tag	LBFIPJIE_00067
+			partial	00
+			product	unannotated protein
+17197	17523	CDS
+			inference	ab initio prediction:Prodigal_v2.6.3
+			locus_tag	LBFIPJIE_00068
+			partial	00
+			product	unannotated protein
+17971	19053	CDS
+			inference	ab initio prediction:Prodigal_v2.6.3
+			locus_tag	LBFIPJIE_00069
+			partial	00
+			product	unannotated protein
+19241	19166	tRNA
+			inference	COORDINATES:profile:Aragorn:001002
+			locus_tag	LBFIPJIE_00070
+			product	tRNA-Met(cat)
+19736	20689	CDS
+			inference	ab initio prediction:Prodigal_v2.6.3
+			locus_tag	LBFIPJIE_00071
+			partial	00
+			product	unannotated protein
+21271	20999	CDS
+			inference	ab initio prediction:Prodigal_v2.6.3
+			locus_tag	LBFIPJIE_00072
+			partial	00
+			product	unannotated protein
+21796	21332	CDS
+			inference	ab initio prediction:Prodigal_v2.6.3
+			locus_tag	LBFIPJIE_00073
+			partial	00
+			product	unannotated protein
+22547	22056	CDS
+			inference	ab initio prediction:Prodigal_v2.6.3
+			locus_tag	LBFIPJIE_00074
+			partial	00
+			product	unannotated protein
+23127	22702	CDS
+			inference	ab initio prediction:Prodigal_v2.6.3
+			locus_tag	LBFIPJIE_00075
+			partial	00
+			product	unannotated protein
+23374	23293	tRNA
+			inference	COORDINATES:profile:Aragorn:001002
+			locus_tag	LBFIPJIE_00076
+			product	tRNA-Tyr(gta)
+23534	24481	CDS
+			inference	ab initio prediction:Prodigal_v2.6.3
+			locus_tag	LBFIPJIE_00077
+			partial	00
+			product	unannotated protein
+24563	24636	tRNA
+			inference	COORDINATES:profile:Aragorn:001002
+			locus_tag	LBFIPJIE_00078
+			product	tRNA-Asp(gtc)
+25081	24761	CDS
+			inference	ab initio prediction:Prodigal_v2.6.3
+			locus_tag	LBFIPJIE_00079
+			partial	00
+			product	unannotated protein
+26323	25097	CDS
+			inference	ab initio prediction:Prodigal_v2.6.3
+			locus_tag	LBFIPJIE_00080
+			partial	00
+			product	unannotated protein
+26865	26395	CDS
+			inference	ab initio prediction:Prodigal_v2.6.3
+			locus_tag	LBFIPJIE_00081
+			partial	00
+			product	unannotated protein
+27275	26898	CDS
+			inference	ab initio prediction:Prodigal_v2.6.3
+			locus_tag	LBFIPJIE_00082
+			partial	00
+			product	unannotated protein
+27565	27287	CDS
+			inference	ab initio prediction:Prodigal_v2.6.3
+			locus_tag	LBFIPJIE_00083
+			partial	00
+			product	unannotated protein
+27935	27519	CDS
+			inference	ab initio prediction:Prodigal_v2.6.3
+			locus_tag	LBFIPJIE_00084
+			partial	00
+			product	unannotated protein
+28995	28060	CDS
+			inference	ab initio prediction:Prodigal_v2.6.3
+			locus_tag	LBFIPJIE_00085
+			partial	00
+			product	unannotated protein
+29454	29062	CDS
+			inference	ab initio prediction:Prodigal_v2.6.3
+			locus_tag	LBFIPJIE_00086
+			partial	00
+			product	unannotated protein
+29854	29486	CDS
+			inference	ab initio prediction:Prodigal_v2.6.3
+			locus_tag	LBFIPJIE_00087
+			partial	00
+			product	unannotated protein
+31408	30137	CDS
+			inference	ab initio prediction:Prodigal_v2.6.3
+			locus_tag	LBFIPJIE_00088
+			partial	00
+			product	unannotated protein
+31891	31424	CDS
+			inference	ab initio prediction:Prodigal_v2.6.3
+			locus_tag	LBFIPJIE_00089
+			partial	00
+			product	unannotated protein
+32471	31929	CDS
+			inference	ab initio prediction:Prodigal_v2.6.3
+			locus_tag	LBFIPJIE_00090
+			partial	00
+			product	unannotated protein
+32884	32486	CDS
+			inference	ab initio prediction:Prodigal_v2.6.3
+			locus_tag	LBFIPJIE_00091
+			partial	00
+			product	unannotated protein
+33460	32915	CDS
+			inference	ab initio prediction:Prodigal_v2.6.3
+			locus_tag	LBFIPJIE_00092
+			partial	00
+			product	unannotated protein
+33868	33503	CDS
+			inference	ab initio prediction:Prodigal_v2.6.3
+			locus_tag	LBFIPJIE_00093
+			partial	00
+			product	unannotated protein
+34121	33873	CDS
+			inference	ab initio prediction:Prodigal_v2.6.3
+			locus_tag	LBFIPJIE_00094
+			partial	00
+			product	unannotated protein
+34545	34141	CDS
+			inference	ab initio prediction:Prodigal_v2.6.3
+			locus_tag	LBFIPJIE_00095
+			partial	00
+			product	unannotated protein
+35231	34581	CDS
+			inference	ab initio prediction:Prodigal_v2.6.3
+			locus_tag	LBFIPJIE_00096
+			partial	00
+			product	unannotated protein
+35617	35264	CDS
+			inference	ab initio prediction:Prodigal_v2.6.3
+			locus_tag	LBFIPJIE_00097
+			partial	00
+			product	unannotated protein
+35906	35628	CDS
+			inference	ab initio prediction:Prodigal_v2.6.3
+			locus_tag	LBFIPJIE_00098
+			partial	00
+			product	unannotated protein
+36774	35950	CDS
+			inference	ab initio prediction:Prodigal_v2.6.3
+			locus_tag	LBFIPJIE_00099
+			partial	00
+			product	unannotated protein
+37140	36832	CDS
+			inference	ab initio prediction:Prodigal_v2.6.3
+			locus_tag	LBFIPJIE_00100
+			partial	00
+			product	unannotated protein
+37792	37163	CDS
+			inference	ab initio prediction:Prodigal_v2.6.3
+			locus_tag	LBFIPJIE_00101
+			partial	00
+			product	unannotated protein
+38106	39941	CDS
+			inference	ab initio prediction:Prodigal_v2.6.3
+			locus_tag	LBFIPJIE_00102
+			partial	00
+			product	unannotated protein
+41590	40088	CDS
+			inference	ab initio prediction:Prodigal_v2.6.3
+			locus_tag	LBFIPJIE_00103
+			partial	00
+			product	unannotated protein
+42228	41683	CDS
+			inference	ab initio prediction:Prodigal_v2.6.3
+			locus_tag	LBFIPJIE_00104
+			partial	00
+			product	unannotated protein
+42771	42235	CDS
+			inference	ab initio prediction:Prodigal_v2.6.3
+			locus_tag	LBFIPJIE_00105
+			partial	00
+			product	unannotated protein
+43292	42804	CDS
+			inference	ab initio prediction:Prodigal_v2.6.3
+			locus_tag	LBFIPJIE_00106
+			partial	00
+			product	unannotated protein
+43640	43392	CDS
+			inference	ab initio prediction:Prodigal_v2.6.3
+			locus_tag	LBFIPJIE_00107
+			partial	00
+			product	unannotated protein
+44458	43757	CDS
+			inference	ab initio prediction:Prodigal_v2.6.3
+			locus_tag	LBFIPJIE_00108
+			partial	00
+			product	unannotated protein
+44801	45409	CDS
+			inference	ab initio prediction:Prodigal_v2.6.3
+			locus_tag	LBFIPJIE_00109
+			partial	00
+			product	unannotated protein
+45495	46184	CDS
+			inference	ab initio prediction:Prodigal_v2.6.3
+			locus_tag	LBFIPJIE_00110
+			partial	00
+			product	unannotated protein
+50124	46315	CDS
+			inference	ab initio prediction:Prodigal_v2.6.3
+			locus_tag	LBFIPJIE_00111
+			partial	00
+			product	unannotated protein
+51994	50147	CDS
+			inference	ab initio prediction:Prodigal_v2.6.3
+			locus_tag	LBFIPJIE_00112
+			partial	00
+			product	unannotated protein
+55392	52057	CDS
+			inference	ab initio prediction:Prodigal_v2.6.3
+			locus_tag	LBFIPJIE_00113
+			partial	00
+			product	unannotated protein
+56244	55525	CDS
+			inference	ab initio prediction:Prodigal_v2.6.3
+			locus_tag	LBFIPJIE_00114
+			partial	00
+			product	unannotated protein
+56388	56461	tRNA
+			inference	COORDINATES:profile:Aragorn:001002
+			locus_tag	LBFIPJIE_00115
+			product	tRNA-His(gtg)
+57074	56517	CDS
+			inference	ab initio prediction:Prodigal_v2.6.3
+			locus_tag	LBFIPJIE_00116
+			partial	00
+			product	unannotated protein
+58443	57493	CDS
+			inference	ab initio prediction:Prodigal_v2.6.3
+			locus_tag	LBFIPJIE_00117
+			partial	00
+			product	unannotated protein
+58690	58559	CDS
+			inference	ab initio prediction:Prodigal_v2.6.3
+			locus_tag	LBFIPJIE_00118
+			partial	00
+			product	unannotated protein
+59278	58724	CDS
+			inference	ab initio prediction:Prodigal_v2.6.3
+			locus_tag	LBFIPJIE_00119
+			partial	00
+			product	unannotated protein
+60698	59391	CDS
+			inference	ab initio prediction:Prodigal_v2.6.3
+			locus_tag	LBFIPJIE_00120
+			partial	00
+			product	unannotated protein
+60769	60841	tRNA
+			inference	COORDINATES:profile:Aragorn:001002
+			locus_tag	LBFIPJIE_00121
+			product	tRNA-Phe(gaa)
+61089	62555	CDS
+			inference	ab initio prediction:Prodigal_v2.6.3
+			locus_tag	LBFIPJIE_00122
+			partial	00
+			product	unannotated protein
+62650	63069	CDS
+			inference	ab initio prediction:Prodigal_v2.6.3
+			locus_tag	LBFIPJIE_00123
+			partial	00
+			product	unannotated protein
+63384	63139	CDS
+			inference	ab initio prediction:Prodigal_v2.6.3
+			locus_tag	LBFIPJIE_00124
+			partial	00
+			product	unannotated protein
+63757	63407	CDS
+			inference	ab initio prediction:Prodigal_v2.6.3
+			locus_tag	LBFIPJIE_00125
+			partial	00
+			product	unannotated protein
+64129	63779	CDS
+			inference	ab initio prediction:Prodigal_v2.6.3
+			locus_tag	LBFIPJIE_00126
+			partial	00
+			product	unannotated protein
+>Feature k127_11926
+196	2	CDS
+			inference	ab initio prediction:Prodigal_v2.6.3
+			locus_tag	LBFIPJIE_00127
+			partial	10
+			product	unannotated protein
+1180	1257	CDS
+			inference	ab initio prediction:Prodigal_v2.6.3
+			locus_tag	LBFIPJIE_00128
+			partial	01
+			product	unannotated protein
+>Feature k127_18874
+2	463	CDS
+			inference	ab initio prediction:Prodigal_v2.6.3
+			locus_tag	LBFIPJIE_00129
+			partial	10
+			product	unannotated protein
+>Feature k127_41428
+808	2	CDS
+			inference	ab initio prediction:Prodigal_v2.6.3
+			locus_tag	LBFIPJIE_00130
+			partial	10
+			product	unannotated protein
+1274	1092	CDS
+			inference	ab initio prediction:Prodigal_v2.6.3
+			locus_tag	LBFIPJIE_00131
+			partial	01
+			product	unannotated protein
+>Feature k127_42002
+19	1497	rRNA
+			locus_tag	LBFIPJIE_00132
+			product	16S ribosomal RNA
+			score	0
