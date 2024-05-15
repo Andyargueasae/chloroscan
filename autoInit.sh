@@ -138,13 +138,23 @@ else
 fi
 
 cd $ABS_CHLOROSCAN_DIR
+
+# Before you go, check if there are envs called "kronatools".
+if [ -n "mamba env list | grep kronatools" ]
+then
+    echo "There is an virtual environment named kronatools."
+else
+    echo "Automatically creating the env for kronatools."
+    mamba create -n kronatools -c bioconda -c conda-forge -y krona=2.8.1 numpy pandas
+fi
+
 # Finally, set up ChloroScan workflow envs.
 if [ -n "ls -A ./.snakemake/conda" ]
 then
     echo "ChloroScan workflow's envs are already set up, you can directly use it."
 else
     echo "Initiate the workflow virtual environments."
-    snakemake -c 11 --use-conda --snakefile ./chloroscan/workflow/Snakefile --configfile config/ChloroScan.init.yaml --conda-create-envs-only --dryrun
+    snakemake -c 11 --use-conda --conda-prefix ./conda --snakefile ./chloroscan/workflow/Snakefile --configfile config/ChloroScan.init.yaml --conda-create-envs-only --dryrun
     echo "Workflow envs initiation done. "
 fi
 # Phew, we have done working out building all envs. Now the ChloroScan workflow is ready to be executed. 

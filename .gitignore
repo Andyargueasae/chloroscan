@@ -164,7 +164,7 @@ wandb/
 
 .snakemake
 results
-
+conda
 databases
 binny_Chloroscan
 MGYS*
