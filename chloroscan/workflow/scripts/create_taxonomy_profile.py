@@ -26,6 +26,8 @@ def main(cat_prediction_txt, output):
             intake_dict[i]=1
     
 
+# Here, only counts of contigs were used as magnitude, but that is arbitrarily trivial
+# So what we need to do is try to get the real abundance of the sequences/taxonomy to work. 
     counts = intake_dict.values()
     taxon_id = intake_dict.keys()
     krona_intake = pd.DataFrame()
@@ -37,3 +39,9 @@ def main(cat_prediction_txt, output):
 
 if __name__ == "__main__":
     main()
+
+    # Tips for changing the output for our krona tools:
+    # 1. Shifting the count of taxonomy to the count of contig magnitudes + the official format of krona tools to work on.
+    # 2. try to get the magnitude for each contig and then go for it. 
+    # 3. Here is the problem: If you only use count of taxa found, it gives you how precise corgi did to classify each contig.
+    #    But, adding the magnitude of contigs by its depth, can adjust the abundance to make it precise. 

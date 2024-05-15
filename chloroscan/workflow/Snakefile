@@ -6,7 +6,7 @@ Before you run this snakemake workflow, please ensure that:
 3. Set up the CAT database.
 4. figure out what is gonna be your file's name, put a list into it! [either from snakemake itself or by bash script controlling.]
 5. Add CAT's conda environment bin to your path, with intact functionality.
-6. Envrionment name "Kronatools".
+6. Envrionment name "Kronatools" or a krona.yml in the envs directory.
 '''
 
 import os
@@ -21,10 +21,13 @@ min_version("6.0")
 shell.executable("bash")
 
 # default configuration file.
-configfile: "config/config.default.yaml"
-# do we also have to use some string extractions to get the name for batch? 
+configfile: "config/config.running.yaml"
+
+# Some major configuration parameters and inputs.
 assembly_path = config['Inputs']['assembly_path']
 ALIGNMENT_FILES = config['Inputs']['alignment_files']
+if config['Inputs']['depth_txt']:
+    DEPTH_TEXT_FILE=config['Inputs']['depth_txt']
 OUTPUT_DIR = Path(config['outputdir'])
 BATCH_NAME = config['Inputs']['batch_name']
 
@@ -42,17 +45,19 @@ THREAD=config['threads']
 # So when crunch change the cwd, the working directory doesn't contain key folders such as:
 # binny/, scripts/. 
 
-# BINNY_DIR = Path(__name__).parent.absolute()/"binny"
+# dummy way to do it. Specify a default path when doing regular runs.
+DEFAULT_BINNY_DIR = Path("/home/student.unimelb.edu.au/yuhtong/andy/MMA_organelle_metagenomics/binny_Chloroscan")
 WORKFLOW_DIR = Path(workflow.basedir)
-BINNY_DIR = WORKFLOW_DIR/"binny"
+BINNY_DIR = Path(__name__).parent.absolute()/"binny_Chloroscan" if (str(Path(__name__).parent.absolute()) == "/home/student.unimelb.edu.au/yuhtong/andy/MMA_organelle_metagenomics") else DEFAULT_BINNY_DIR
 
 SCR_DIR = WORKFLOW_DIR/"scripts"
 
-DB_DIR = WORKFLOW_DIR/"databases"
+DEFAULT_DB_DIR = Path("/home/student.unimelb.edu.au/yuhtong/andy/MMA_organelle_metagenomics/databases")
+DB_DIR = Path(__name__).parent.absolute()/"databases" if (str(Path(__name__).parent.absolute()) == "/home/student.unimelb.edu.au/yuhtong/andy/MMA_organelle_metagenomics") else DEFAULT_DB_DIR
 # For CAT taxonomy, some global name.
 CAT_DB_DIR = DB_DIR/config['CAT_database']
-TAXON_DB_DIR = DB_DIR/config['taxonomy_names']
-
+CAT_TAXON_DIR = DB_DIR/config['CAT_taxonomy']
+TAXA = CAT_TAXON_DIR/"names.dmp"
 
 GLOBAL_PREFIX="OUT"
 GLOBAL_PREFIX_contigs="out.CAT"
@@ -131,11 +136,15 @@ rule corgi_prediction:
         elif [ $plastid_contig_count -le 100 ]; then
             echo "bash {params.bash_plastid_accession_script} -c {output.corgi_out} -o {params.plastid_contigs_identifier}"
             bash {params.bash_plastid_accession_script} -c {output.corgi_out} -o {params.plastid_contigs_identifier}
+            echo "python {params.python_fasta_writer} --assembly {input.seqs} --accession {params.plastid_contigs_identifier} --fasta_file_name {output.plastid_contigs}"
             python {params.python_fasta_writer} --assembly {input.seqs} --accession {params.plastid_contigs_identifier} --fasta_file_name {output.plastid_contigs}
+
             # Do some calculations here.
             prediction_lines=$(wc -l <{output.corgi_out})
             contig_total=$((prediction_lines-header))
+            ls {params.output_dir}/working/corgi
             
+            echo "Is it here?"
             plastid_match=$(grep -o ">" {output.plastid_contigs} | wc -l)
 
             echo "total classified contigs containing all 5 domains: $contig_total"> {params.output_dir}/corgi.summary.txt
@@ -165,7 +174,9 @@ rule binny_workflow:
     params:
         binny_dir = BINNY_DIR,
         bamfiles = ALIGNMENT_FILES,
+        depth_text = DEPTH_TEXT_FILE,
         default_config = BINNY_DIR/"config/config.default.yaml",
+        curr_config = BINNY_DIR/"config/config.ChloroScan.yaml",
         bash_create_yaml = Path(SCR_DIR/"create_yaml.sh"),
         # outputdir is a must-checked one!
         universal_length_cutoff = config['binny_settings']['universal_length_cutoff'],
@@ -174,7 +185,8 @@ rule binny_workflow:
         quality_min_completeness = config['binny_settings']['bin_quality']['min_completeness'],
         quality_start_completeness = config['binny_settings']['bin_quality']['start_completeness'],
         quality_min_purity = config['binny_settings']['bin_quality']['purity'],
-        outputdir_within_binny = config['binny_settings']['outputdir_binny'] # within binny.
+        outputdir_within_binny = config['binny_settings']['outputdir_binny'], # within binny.
+        threads=THREAD
          #this place shall be the output, relating to binny!
     output:
         # os.path.join(outputdir, "/working/binny/{params.outputdir_bins_within_binny}/binny.done")
@@ -183,21 +195,43 @@ rule binny_workflow:
         # binny_bins = directory(OUTPUT_DIR/"working/binny"/BINNY_OUTPUT_DIR/"bins")
         # formatted_fasta=Path(OUTPUT_DIR/"working/binny"/BINNY_OUTPUT_DIR/"intermediary/assembly.formatted.fa")
     message:
-        "Use the binning algorithm binny to find all high-coverage bins with completeness>=65% and purity>=90%"
+        "Use the binning algorithm binny to find all high-coverage bins with completeness>=72.5% and purity>=95%."
+    conda:
+        "envs/binny.yml"
+    # conda:
+    #     "/home/student.unimelb.edu.au/yuhtong/andy/MMA_organelle_metagenomics/binny_Chloroscan/conda/snakemake_env"
     shell:
         """
+        set -e
+        echo "Current mamba environment." 
+        # pip freeze > /home/student.unimelb.edu.au/yuhtong/andy/MMA_organelle_metagenomics/freeze.txt
+        # python -c "import pandas as pd; print(pd.__version__) ;" > /home/student.unimelb.edu.au/yuhtong/andy/MMA_organelle_metagenomics/pd.txt
+# 
+        # # . {params.binny_dir}/conda/snakemake_env/bin/activate
+
+        # # # TEST IF PANDAS IS INSIDE THE WORKING DIRECTORY.
+        # # mamba list | grep pandas
+
         # Check if plastids are present.
-        # If so, then run binny workflow
+        # If so, then run binny workflow.
         if [ -s {input.plastid_contigs} ]; then
-            bash {params.bash_create_yaml} -a "{input.plastid_contigs}" -d {params.default_config} -l "{params.bamfiles}" -o "{params.outputdir_within_binny}"\
-            -e '{params.hdbscan_epsilon_range}' -m '{params.hdbscan_min_samples_range}' -c {params.quality_min_completeness}\
-            -s {params.quality_start_completeness} -p {params.quality_min_purity} -u {params.universal_length_cutoff}
-            
-            # Now the problem could only be here.
-            {params.binny_dir}/binny -l -n "MMA_plastids" -t 24 -r {GLOBAL_CONFIG}
+            if [ -z {params.depth_text} ]
+            then 
+                bash {params.bash_create_yaml} -a "{input.plastid_contigs}" -d "{params.default_config}" -l "{params.bamfiles}" -o "{params.outputdir_within_binny}"\
+                -e '{params.hdbscan_epsilon_range}' -m '{params.hdbscan_min_samples_range}' -c {params.quality_min_completeness}\
+                -s {params.quality_start_completeness} -p {params.quality_min_purity} -u {params.universal_length_cutoff}\
+                -y "{params.curr_config}"
+            else
+                bash {params.bash_create_yaml} -a "{input.plastid_contigs}" -d "{params.default_config}" -t "{params.depth_text}" -o "{params.outputdir_within_binny}"\
+                -e '{params.hdbscan_epsilon_range}' -m '{params.hdbscan_min_samples_range}' -c {params.quality_min_completeness}\
+                -s {params.quality_start_completeness} -p {params.quality_min_purity} -u {params.universal_length_cutoff}\
+                -y "{params.curr_config}"
+            fi
+
+            {params.binny_dir}/binny -l -n "MMA_plastids" -t {params.threads} -r {params.curr_config}
 
             # must remove the config.yaml created at the end, so we need it to be changed with name.
-            rm {GLOBAL_CONFIG} # finally you have to remove it, you don't want to cause confusion.
+            rm {params.curr_config} # finally you have to remove it, you don't want to cause confusion.
             echo 'The binny workflow is done, bins are within the binny folder, that may need to move out.'
             # chmod u+w {output.dir_binny}
             mv {BINNY_OUTPUT_DIR} {output.dir_binny}
@@ -240,7 +274,8 @@ rule CAT_taxonomy_identification_plus_annotation:
         # Check to see if the binny directory is empty or not
         find {input.binny_output} -mindepth 1 -maxdepth 1
         if [ -f "{input.binny_output}/{params.path_to_contigs}" ] ; then
-            CAT contigs -c {input.binny_output}/{params.path_to_contigs} -d {CAT_DB_DIR}/2021-01-07_CAT_database -t {CAT_DB_DIR}/2021-01-07_taxonomy --force --top 11 --I_know_what_Im_doing
+        # CAT running is totally different, we shall make this changed.
+            CAT contigs -c {input.binny_output}/{params.path_to_contigs} -d {CAT_DB_DIR} -t {CAT_TAXON_DIR} --force --top 11 --I_know_what_Im_doing
             # CAT add_names -i {params.prefix}.contig2classification.txt -o {params.prefix}.contig2classification.named.txt -t {CAT_DB_DIR}/2021-01-07_taxonomy --only_official
             
             mv ./{params.prefix}.* {output.CAT_output}
@@ -257,7 +292,7 @@ rule documenting_binny_results:
         assembly_files = OUTPUT_DIR/"working/binny/intermediary/assembly.formatted.fa",
         assembly_depth = OUTPUT_DIR/"working/binny/intermediary/assembly.contig_depth.txt",
         marker_gene_gff = OUTPUT_DIR/"working/binny/intermediary/annotation_CDS_RNA_hmms_checkm.gff",
-        names_dump=TAXON_DB_DIR,
+        names_dump=TAXA,
         MMA_summary=OUTPUT_DIR/"MMA.summary.txt",
         ANNOT_FILE="out.CAT.contig2classification.txt",
         script_dir = SCR_DIR
@@ -334,7 +369,7 @@ rule krona_taxonomy_plot:
         script_dir = SCR_DIR,
         batch_name=BATCH_NAME
     conda:
-        KRONA_ENV
+        KRONA_ENV if KRONA_ENV else "envs/krona.yml"
     output:
         OUTPUT_DIR/"Krona.html"
     message:

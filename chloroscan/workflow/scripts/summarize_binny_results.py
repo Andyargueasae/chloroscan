@@ -109,10 +109,11 @@ def form_marker_array(empty_marker_array, annot_file, contig_id):
 def form_depth_array(empty_depth_array, contig_id, depth_file):
     with open(depth_file) as df:
         depth_lines = df.readlines()
-    
+    # Here we missed the point that last year I only took 500 as length cutoff, if I test using other length cutoffs < 500, problems arise.
     for i in range(len(depth_lines)):
         contig, depth = depth_lines[i].replace("\n", "").split("\t",1)[0], depth_lines[i].replace("\n","").split("\t",1)[1]
-        empty_depth_array[i] = depth
+        if contig in contig_id:
+            empty_depth_array[contig_id.index(contig)] = depth
     return empty_depth_array
 
 def store_basic_info(contig_id_array, contig_seq_array, contig_len_array, contig_gc_array, assembly_contigs):

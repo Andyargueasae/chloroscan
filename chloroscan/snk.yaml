@@ -1,0 +1,26 @@
+logo: "ChloroScan"
+font: "cybermedium"
+tagline: "A state-of-art metagenomic workflow extracting chloroplast genomes from metagenomes."
+conda: True
+skip_missing: True
+resources:
+  - "../test_data/test_plastid.fasta"
+  - "../test_data/contig_depth_test.txt"
+symlink_resources: False
+additional_snakemake_args:
+  - "--config"
+cli:
+  assembly:
+      type: Path
+      help: "Path to fasta format assembly of contigs from all sorts of organisms."
+      required: True
+      short: i
+  depth:
+      type: Path
+      help: "Path to either a range of bam files or a tab-separated text storing abundance of each contig in the sample."
+      required: True
+      short: d
+  outputdir:
+      type: Path
+      help: "Path to the output directory of the workflow."
+      required: True

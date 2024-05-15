@@ -26,7 +26,7 @@ time_stamp_file = ".snakemake_timestamp"
 refine_bins_list = [i for i in listdir(refine_bins_dir) if i != time_stamp_file]
 # Safety check if there were nothing.
 if (os.stat(cross_reference_tsv).st_size == 0):
-    print("Empty cross reference tsv, then nothing will be output.")
+    print("Empty cross reference tsv, then nothing will be visualized.")
     sys.exit(0)
 elif (len(refine_bins_list)==0):
     print("Empty bins directory after binning, process shut down.")

@@ -8,7 +8,7 @@ from pathlib import Path
 import sys
 # Do we need to apply another constraint: plastid bin lengths?
 
-# Some global variable inputs.
+# Some global variable inputs. This script needs to be better ellaborated.
 output_dir_for_refined_bins = snakemake.output[0]
 
 # Inputs and params.
