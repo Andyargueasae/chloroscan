@@ -43,7 +43,6 @@ jobs:
           poetry install
       - name: Docs
         run: |
-          poetry run sphinx-build -b html docs gh-pages
           cd docs && poetry run sphinx-build -b html -E source ../gh-pages
       - name: Setup Pages
         uses: actions/configure-pages@v3
