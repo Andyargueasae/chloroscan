@@ -8,7 +8,9 @@ Data Input and configuration
 OK, now you have installed all required packages and databases, the workflow is ready to go. Before getting into your jobs, let's familiarize ourselves with the input of data and how to configure other parameters.
 
 The input of ChloroScan workflow is in yaml format, it is generally splitted in several chunks:
-.. code_block:: yaml
+
+.. code-block:: yaml
+
     Inputs:
         # This is a default configuration file for the MMA organelle metagenomics workflow.  
         batch_name: "BATCH_NAME"
@@ -22,7 +24,9 @@ The input of ChloroScan workflow is in yaml format, it is generally splitted in 
 The first chunk specifies the input assembly in fasta format, and abundance info in either tab-separated txt or bam format.
 
 Now, binning is the core process in this workflow, and its configuration may directly affect the performance. In order to adjust some key parameters, ChloroScan adopted several hyperparameter adjustments from config files of binny:
-.. code_block:: yaml
+
+.. code-block:: yaml
+
     binny_settings:
     universal_length_cutoff: 1500
     outputdir_binny: "binny_output" # May require wildcards for those things, should we in other words name this after batch? 
@@ -39,7 +43,9 @@ By adjusting the contig length cutoff, clustering parameters such as epsilon ran
 
 Another Major component is the classification of contigs using CORGI, a neural network based on autoencoder, so hyperparameters also affects its performance:
 
-.. code_block:: yaml
+
+.. code-block:: yaml
+
     corgi_settings:
     # corgi has settings for minimum length, pthreshold settings yes or no.
     minlen: DIGIT
@@ -55,13 +61,17 @@ Minlen (i.e: minimum length cutoff for contigs to be classified) may affect the 
 Batch_size is recommended to be set to 1, when users' virtual machine has gpu, the speed might be good enough that batch size may not help accelerating the process. 
 
 Besides, there are some individual configurations that specifies directory of use.
-.. code_block:: yaml
+
+.. code-block:: yaml
+
 
 Running ChloroScan
 ==================
 
 ChloroScan is easily to run, by running the ChloroScan.sh the snakemake workflow is activated. Here is a sample code. (Note: Always remember to add double quotation marks for non-digit arguments)
-..code_block:: bash
+
+.. code-block:: bash
+
     cd chloroscan
     ./ChloroScan.sh -a "path/to/assembly.fasta" -b "BATCH_NAME" -e "CONDA_ENV" -m "BAM_FILE" -n MIN_LENGTH_CUTOFF_CORGI -k CORGI_BATCH_SIZE -p PROBABILITY_THRESHOLD -t THREAD
 
