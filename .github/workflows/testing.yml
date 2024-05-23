@@ -41,4 +41,5 @@ jobs:
     - name: Testing
       run: |
         export CHLOROSCAN_CONDA_PREFIX=/home/runner/mamba-cache/chloroscan
+        mamba --version
         poetry run pytest -v
