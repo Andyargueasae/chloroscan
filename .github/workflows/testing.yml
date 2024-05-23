@@ -29,6 +29,8 @@ jobs:
           fi
           source "/home/runner/mamba-cache/mamba/etc/profile.d/conda.sh"
           mamba --version
+          which mamba
+          echo $PATH
     - name: Install dependencies for Python ${{ matrix.python-version }}
       uses: actions/setup-python@v3
       with:
@@ -41,5 +43,7 @@ jobs:
     - name: Testing
       run: |
         export CHLOROSCAN_CONDA_PREFIX=/home/runner/mamba-cache/chloroscan
+        which mamba
+        echo $PATH
         mamba --version
         poetry run pytest -v
