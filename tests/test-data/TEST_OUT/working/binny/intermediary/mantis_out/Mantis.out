@@ -7,7 +7,7 @@ The current sample: /home/student.unimelb.edu.au/yuhtong/andy/MMA_organelle_meta
 /home/student.unimelb.edu.au/yuhtong/andy/MMA_organelle_metagenomics/binny_output/intermediary/mantis_out/fasta_chunks/
 Running homology search command:
 hmmsearch -o /dev/null --domtblout /home/student.unimelb.edu.au/yuhtong/andy/MMA_organelle_metagenomics/binny_output/intermediary/mantis_out/fasta_chunks/p2_c0/searchout/checkm_filtered_pf_chunk_0.domtblout --cpu 1 --domE 0.01 --notextw /home/student.unimelb.edu.au/yuhtong/andy/MMA_organelle_metagenomics/binny_Chloroscan/database/hmms/checkm_pf/chunks/checkm_filtered_pf_chunk_0.hmm /home/student.unimelb.edu.au/yuhtong/andy/MMA_organelle_metagenomics/binny_output/intermediary/mantis_out/fasta_chunks/p2_c0/p2_c0.faa
-Finished running homology search (1.302 seconds):
+Finished running homology search (1.015 seconds):
 hmmsearch -o /dev/null --domtblout /home/student.unimelb.edu.au/yuhtong/andy/MMA_organelle_metagenomics/binny_output/intermediary/mantis_out/fasta_chunks/p2_c0/searchout/checkm_filtered_pf_chunk_0.domtblout --cpu 1 --domE 0.01 --notextw /home/student.unimelb.edu.au/yuhtong/andy/MMA_organelle_metagenomics/binny_Chloroscan/database/hmms/checkm_pf/chunks/checkm_filtered_pf_chunk_0.hmm /home/student.unimelb.edu.au/yuhtong/andy/MMA_organelle_metagenomics/binny_output/intermediary/mantis_out/fasta_chunks/p2_c0/p2_c0.faa
 ------------------------------------------
 Processing hits for:
@@ -21,6 +21,12 @@ Finished processing hits for:
 ------------------------------------------
 Processing hits for:
 /home/student.unimelb.edu.au/yuhtong/andy/MMA_organelle_metagenomics/binny_output/intermediary/mantis_out/fasta_chunks/p2_c0/searchout/checkm_filtered_pf.domtblout_chunk_5
+Found 4 hits in:
+/home/student.unimelb.edu.au/yuhtong/andy/MMA_organelle_metagenomics/binny_output/intermediary/mantis_out/fasta_chunks/p2_c0/searchout/checkm_filtered_pf.domtblout_chunk_5
+Will now get best hits!
+Finished processing hits for:
+/home/student.unimelb.edu.au/yuhtong/andy/MMA_organelle_metagenomics/binny_output/intermediary/mantis_out/fasta_chunks/p2_c0/searchout/checkm_filtered_pf.domtblout_chunk_5
+------------------------------------------
 ------------------------------------------
 Processing hits for:
 /home/student.unimelb.edu.au/yuhtong/andy/MMA_organelle_metagenomics/binny_output/intermediary/mantis_out/fasta_chunks/p2_c0/searchout/checkm_filtered_pf.domtblout_chunk_4
@@ -29,12 +35,6 @@ Found 4 hits in:
 Will now get best hits!
 Finished processing hits for:
 /home/student.unimelb.edu.au/yuhtong/andy/MMA_organelle_metagenomics/binny_output/intermediary/mantis_out/fasta_chunks/p2_c0/searchout/checkm_filtered_pf.domtblout_chunk_4
-Found 4 hits in:
-/home/student.unimelb.edu.au/yuhtong/andy/MMA_organelle_metagenomics/binny_output/intermediary/mantis_out/fasta_chunks/p2_c0/searchout/checkm_filtered_pf.domtblout_chunk_5
-Will now get best hits!
-------------------------------------------
-Finished processing hits for:
-/home/student.unimelb.edu.au/yuhtong/andy/MMA_organelle_metagenomics/binny_output/intermediary/mantis_out/fasta_chunks/p2_c0/searchout/checkm_filtered_pf.domtblout_chunk_5
 ------------------------------------------
 ------------------------------------------
 Processing hits for:
@@ -42,53 +42,53 @@ Processing hits for:
 Found 5 hits in:
 /home/student.unimelb.edu.au/yuhtong/andy/MMA_organelle_metagenomics/binny_output/intermediary/mantis_out/fasta_chunks/p2_c0/searchout/checkm_filtered_pf.domtblout_chunk_0
 Will now get best hits!
-------------------------------------------
-Processing hits for:
-/home/student.unimelb.edu.au/yuhtong/andy/MMA_organelle_metagenomics/binny_output/intermediary/mantis_out/fasta_chunks/p2_c0/searchout/checkm_filtered_pf.domtblout_chunk_9
-------------------------------------------
 Finished processing hits for:
 /home/student.unimelb.edu.au/yuhtong/andy/MMA_organelle_metagenomics/binny_output/intermediary/mantis_out/fasta_chunks/p2_c0/searchout/checkm_filtered_pf.domtblout_chunk_0
 ------------------------------------------
+------------------------------------------
 Processing hits for:
 /home/student.unimelb.edu.au/yuhtong/andy/MMA_organelle_metagenomics/binny_output/intermediary/mantis_out/fasta_chunks/p2_c0/searchout/checkm_filtered_pf.domtblout_chunk_1
-Found 4 hits in:
-/home/student.unimelb.edu.au/yuhtong/andy/MMA_organelle_metagenomics/binny_output/intermediary/mantis_out/fasta_chunks/p2_c0/searchout/checkm_filtered_pf.domtblout_chunk_9
-Will now get best hits!
-Finished processing hits for:
-/home/student.unimelb.edu.au/yuhtong/andy/MMA_organelle_metagenomics/binny_output/intermediary/mantis_out/fasta_chunks/p2_c0/searchout/checkm_filtered_pf.domtblout_chunk_9
-------------------------------------------
-------------------------------------------
-Processing hits for:
-/home/student.unimelb.edu.au/yuhtong/andy/MMA_organelle_metagenomics/binny_output/intermediary/mantis_out/fasta_chunks/p2_c0/searchout/checkm_filtered_pf.domtblout_chunk_10
-Found 4 hits in:
-/home/student.unimelb.edu.au/yuhtong/andy/MMA_organelle_metagenomics/binny_output/intermediary/mantis_out/fasta_chunks/p2_c0/searchout/checkm_filtered_pf.domtblout_chunk_10
-Will now get best hits!
-Finished processing hits for:
-/home/student.unimelb.edu.au/yuhtong/andy/MMA_organelle_metagenomics/binny_output/intermediary/mantis_out/fasta_chunks/p2_c0/searchout/checkm_filtered_pf.domtblout_chunk_10
-------------------------------------------
 Found 5 hits in:
 /home/student.unimelb.edu.au/yuhtong/andy/MMA_organelle_metagenomics/binny_output/intermediary/mantis_out/fasta_chunks/p2_c0/searchout/checkm_filtered_pf.domtblout_chunk_1
 Will now get best hits!
-------------------------------------------
-Processing hits for:
-/home/student.unimelb.edu.au/yuhtong/andy/MMA_organelle_metagenomics/binny_output/intermediary/mantis_out/fasta_chunks/p2_c0/searchout/checkm_filtered_pf.domtblout_chunk_3
-Found 4 hits in:
-/home/student.unimelb.edu.au/yuhtong/andy/MMA_organelle_metagenomics/binny_output/intermediary/mantis_out/fasta_chunks/p2_c0/searchout/checkm_filtered_pf.domtblout_chunk_3
-Will now get best hits!
-------------------------------------------
-Processing hits for:
-/home/student.unimelb.edu.au/yuhtong/andy/MMA_organelle_metagenomics/binny_output/intermediary/mantis_out/fasta_chunks/p2_c0/searchout/checkm_filtered_pf.domtblout_chunk_7
 Finished processing hits for:
 /home/student.unimelb.edu.au/yuhtong/andy/MMA_organelle_metagenomics/binny_output/intermediary/mantis_out/fasta_chunks/p2_c0/searchout/checkm_filtered_pf.domtblout_chunk_1
 ------------------------------------------
+------------------------------------------
+Processing hits for:
+/home/student.unimelb.edu.au/yuhtong/andy/MMA_organelle_metagenomics/binny_output/intermediary/mantis_out/fasta_chunks/p2_c0/searchout/checkm_filtered_pf.domtblout_chunk_9
+Found 4 hits in:
+/home/student.unimelb.edu.au/yuhtong/andy/MMA_organelle_metagenomics/binny_output/intermediary/mantis_out/fasta_chunks/p2_c0/searchout/checkm_filtered_pf.domtblout_chunk_9
+Will now get best hits!
+Finished processing hits for:
+/home/student.unimelb.edu.au/yuhtong/andy/MMA_organelle_metagenomics/binny_output/intermediary/mantis_out/fasta_chunks/p2_c0/searchout/checkm_filtered_pf.domtblout_chunk_9
+------------------------------------------
+------------------------------------------
+Processing hits for:
+/home/student.unimelb.edu.au/yuhtong/andy/MMA_organelle_metagenomics/binny_output/intermediary/mantis_out/fasta_chunks/p2_c0/searchout/checkm_filtered_pf.domtblout_chunk_10
+Found 4 hits in:
+/home/student.unimelb.edu.au/yuhtong/andy/MMA_organelle_metagenomics/binny_output/intermediary/mantis_out/fasta_chunks/p2_c0/searchout/checkm_filtered_pf.domtblout_chunk_10
+Will now get best hits!
+Finished processing hits for:
+/home/student.unimelb.edu.au/yuhtong/andy/MMA_organelle_metagenomics/binny_output/intermediary/mantis_out/fasta_chunks/p2_c0/searchout/checkm_filtered_pf.domtblout_chunk_10
+------------------------------------------
+------------------------------------------
+Processing hits for:
+/home/student.unimelb.edu.au/yuhtong/andy/MMA_organelle_metagenomics/binny_output/intermediary/mantis_out/fasta_chunks/p2_c0/searchout/checkm_filtered_pf.domtblout_chunk_3
+Found 4 hits in:
+/home/student.unimelb.edu.au/yuhtong/andy/MMA_organelle_metagenomics/binny_output/intermediary/mantis_out/fasta_chunks/p2_c0/searchout/checkm_filtered_pf.domtblout_chunk_3
+Will now get best hits!
+Finished processing hits for:
+/home/student.unimelb.edu.au/yuhtong/andy/MMA_organelle_metagenomics/binny_output/intermediary/mantis_out/fasta_chunks/p2_c0/searchout/checkm_filtered_pf.domtblout_chunk_3
+------------------------------------------
+------------------------------------------
+Processing hits for:
+/home/student.unimelb.edu.au/yuhtong/andy/MMA_organelle_metagenomics/binny_output/intermediary/mantis_out/fasta_chunks/p2_c0/searchout/checkm_filtered_pf.domtblout_chunk_7
 Found 4 hits in:
 /home/student.unimelb.edu.au/yuhtong/andy/MMA_organelle_metagenomics/binny_output/intermediary/mantis_out/fasta_chunks/p2_c0/searchout/checkm_filtered_pf.domtblout_chunk_7
 Will now get best hits!
 Finished processing hits for:
 /home/student.unimelb.edu.au/yuhtong/andy/MMA_organelle_metagenomics/binny_output/intermediary/mantis_out/fasta_chunks/p2_c0/searchout/checkm_filtered_pf.domtblout_chunk_7
-Finished processing hits for:
-/home/student.unimelb.edu.au/yuhtong/andy/MMA_organelle_metagenomics/binny_output/intermediary/mantis_out/fasta_chunks/p2_c0/searchout/checkm_filtered_pf.domtblout_chunk_3
-------------------------------------------
 ------------------------------------------
 ------------------------------------------
 Processing hits for:
@@ -96,12 +96,12 @@ Processing hits for:
 Found 4 hits in:
 /home/student.unimelb.edu.au/yuhtong/andy/MMA_organelle_metagenomics/binny_output/intermediary/mantis_out/fasta_chunks/p2_c0/searchout/checkm_filtered_pf.domtblout_chunk_6
 Will now get best hits!
+Finished processing hits for:
+/home/student.unimelb.edu.au/yuhtong/andy/MMA_organelle_metagenomics/binny_output/intermediary/mantis_out/fasta_chunks/p2_c0/searchout/checkm_filtered_pf.domtblout_chunk_6
+------------------------------------------
 ------------------------------------------
 Processing hits for:
 /home/student.unimelb.edu.au/yuhtong/andy/MMA_organelle_metagenomics/binny_output/intermediary/mantis_out/fasta_chunks/p2_c0/searchout/checkm_filtered_pf.domtblout_chunk_2
-Finished processing hits for:
-/home/student.unimelb.edu.au/yuhtong/andy/MMA_organelle_metagenomics/binny_output/intermediary/mantis_out/fasta_chunks/p2_c0/searchout/checkm_filtered_pf.domtblout_chunk_6
-------------------------------------------
 Found 5 hits in:
 /home/student.unimelb.edu.au/yuhtong/andy/MMA_organelle_metagenomics/binny_output/intermediary/mantis_out/fasta_chunks/p2_c0/searchout/checkm_filtered_pf.domtblout_chunk_2
 Will now get best hits!

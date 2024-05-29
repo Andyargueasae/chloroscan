@@ -9,18 +9,24 @@ resources:
 symlink_resources: False
 additional_snakemake_args:
   - "--config"
+# This is just the sample, we need more to do, because our code was based totally on config file. 
 cli:
+  configpath:
+      type: Path
+      help: Path to config file in yaml format, storing all resources and parameters for underlying rules. 
+      required: False
+      short: f
   assembly:
       type: Path
       help: "Path to fasta format assembly of contigs from all sorts of organisms."
-      required: True
+      required: False
       short: i
   depth:
       type: Path
       help: "Path to either a range of bam files or a tab-separated text storing abundance of each contig in the sample."
-      required: True
+      required: False
       short: d
   outputdir:
       type: Path
       help: "Path to the output directory of the workflow."
-      required: True
+      required: False

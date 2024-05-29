@@ -31,8 +31,8 @@ min_cont_length_cutoff_marker: 1500
 outputdir: binny_output
 prokka_env: ''
 raws:
-  assembly: TEST_OUT/working/corgi/plastid.fasta
-  contig_depth: test_data/contig_depth_test.txt
+  assembly: /home/student.unimelb.edu.au/yuhtong/andy/MMA_organelle_metagenomics/test_data/test_plastid.fasta
+  contig_depth: /home/student.unimelb.edu.au/yuhtong/andy/MMA_organelle_metagenomics/test_data/contig_depth_test.txt
   metagenomics_alignment: ''
 sample: test
 snakemake_env: ''
