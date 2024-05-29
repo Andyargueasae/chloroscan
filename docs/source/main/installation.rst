@@ -8,25 +8,34 @@ GitHub installation
 ===================
 
 To install with github, try following:
-.. code_block:: bash
+
+.. code-block:: bash
+
     git clone https://github.com/Andyargueasae/chloroscan.git
+
 
 pip installation
 ================
 
 Pypi installation of chloroscan is simpler:
-.. code_block:: bash
+
+.. code-block:: bash
+
     pip install chloroscan
 
 conda installation
 ==================
 
 Conda installation:
-.. code_block:: bash
+
+.. code-block:: bash
+
     conda install chloroscan
 
 or using mamba with faster speed:
-.. code_block:: bash
+
+.. code-block:: bash
+
     mamba install chloroscan
 
 Other Key Components' installation
@@ -38,7 +47,8 @@ But before running it, downloading the non-redundant protein database in prior t
 If not, this script can handle it as well.
 (shall change this to argument-assigning.)
 
-.. code_block:: bash
+.. code-block:: bash
+
     bash autoInit.sh -a "ABSOLUTE/PATH/TO/YOUR/CHLOROSCAN/DIRECTORY" -b "PATH/TO/YOUR/HMM/PF/DB/FOR/BINNY" -c "PATH/TO/YOUR/TAXON/MARKER/SET/TSV/FOR/BINNY" -d "PATH/TO/YOUR/DIRECTORY/WHERE/DATABASES/ARE"
 
 Now you are good to go.
