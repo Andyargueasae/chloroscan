@@ -203,12 +203,14 @@ rule binny_workflow:
         if [ -s {input.plastid_contigs} ]; then
             if [ -z {params.depth_text} ]
             then
-                [ -n {params.default_config} ] && echo "default config file for binny found." 
+                [ -n {params.default_config} ] && echo "default config file for binny found."
+                [ -z {params.binny_dir} ] && echo "default binny diir not found." 
                 bash {params.bash_create_yaml} -a "{input.plastid_contigs}" -d "{params.default_config}" -l "{params.bamfiles}" -o "{params.outputdir_within_binny}"\
                 -e '{params.hdbscan_epsilon_range}' -m '{params.hdbscan_min_samples_range}' -c {params.quality_min_completeness}\
                 -s {params.quality_start_completeness} -p {params.quality_min_purity} -u {params.universal_length_cutoff}\
                 -y "{params.curr_config}"
             else
+                [ -n {params.default_config} ] && echo "default config file for binny found."
                 bash {params.bash_create_yaml} -a "{input.plastid_contigs}" -d "{params.default_config}" -t "{params.depth_text}" -o "{params.outputdir_within_binny}"\
                 -e '{params.hdbscan_epsilon_range}' -m '{params.hdbscan_min_samples_range}' -c {params.quality_min_completeness}\
                 -s {params.quality_start_completeness} -p {params.quality_min_purity} -u {params.universal_length_cutoff}\
