@@ -48,7 +48,6 @@ THREAD=config['threads']
 # dummy way to do it. Specify a default path when doing regular runs. Now we need a change: relative ones.
 DEFAULT_BINNY_DIR = Path("/home/student.unimelb.edu.au/yuhtong/andy/MMA_organelle_metagenomics/binny_Chloroscan")
 WORKFLOW_DIR = Path(workflow.basedir)
-breakpoint()
 BINNY_DIR = WORKFLOW_DIR.parent.parent/"binny_Chloroscan" 
 
 SCR_DIR = WORKFLOW_DIR/"scripts"
