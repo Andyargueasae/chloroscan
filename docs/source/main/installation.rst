@@ -52,3 +52,16 @@ If not, this script can handle it as well.
     bash autoInit.sh -a "ABSOLUTE/PATH/TO/YOUR/CHLOROSCAN/DIRECTORY" -b "PATH/TO/YOUR/HMM/PF/DB/FOR/BINNY" -c "PATH/TO/YOUR/TAXON/MARKER/SET/TSV/FOR/BINNY" -d "PATH/TO/YOUR/DIRECTORY/WHERE/DATABASES/ARE"
 
 Now you are good to go.
+
+ChloroScan is able to be run via snk-cli, but firstly it requires poetry to be present. Just type the code below:
+
+.. code-block:: bash
+
+    cd PATH/TO/chloroscan
+    poetry install
+    # So that all virtual env packages are ready.
+
+    poetry shell # activate virtualenv.
+
+    chloroscan -h # Test using this command.
+    chloroscan run --config PATH/TO/CONFIGFILE # Run workflow in this way.
