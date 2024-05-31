@@ -202,7 +202,8 @@ rule binny_workflow:
         # If so, then run binny workflow.
         if [ -s {input.plastid_contigs} ]; then
             if [ -z {params.depth_text} ]
-            then 
+            then
+                [ -n {params.default_config} ] && echo "default config file for binny found." 
                 bash {params.bash_create_yaml} -a "{input.plastid_contigs}" -d "{params.default_config}" -l "{params.bamfiles}" -o "{params.outputdir_within_binny}"\
                 -e '{params.hdbscan_epsilon_range}' -m '{params.hdbscan_min_samples_range}' -c {params.quality_min_completeness}\
                 -s {params.quality_start_completeness} -p {params.quality_min_purity} -u {params.universal_length_cutoff}\
