@@ -77,18 +77,7 @@ class WorkflowResult:
                 if expected_string not in text:
                     raise SnakemakePytestException(
                         f"The file '{generated_path}' does not contain the string '{expected_string}':\n{text}"
-                    )
-        
-    # def assert_include(self, strings:Union[str, List[str]], *, expected_files: Optional[TargetsType] = None,): 
-    #     if isinstance(strings, str):
-    #         strings = [strings]
-    #     print(self.work_dir)
-    #     # Now you need to transfer strings into a os path and see if it is here in your directory.
-    #     print(strings)
-    #     # for dir_paths in listdir(self):
-
-    #     assert True
-        
+                    )       
        
     def assert_not_contains(self, strings:Union[str, List[str]], *, expected_files: Optional[TargetsType] = None,):
         if isinstance(strings, str):

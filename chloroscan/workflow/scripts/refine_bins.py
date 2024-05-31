@@ -4,7 +4,6 @@ import os
 from os import listdir
 import pandas as pd
 import numpy as np
-from pathlib import Path
 import sys
 # Do we need to apply another constraint: plastid bin lengths?
 
@@ -69,9 +68,13 @@ for i in list_of_seqrec.keys():
                 print("This is a bacterial contamination.")
                 contig_ids.remove(elem_id)
                 to_be_modified_id.append(elem_id)
-            # If you are not even identified as bacteria and you did not have any markers, we remove you.
+            # If contig is not even identified as bacteria and you did not have any markers, remove.
+            # But the only problem is the off-target: if the contig has some undocumented markers and was not 
+            # classified algal sequence by CAT, it will be removed as well.
+
+            # We will have to go back to the
             elif (pd.isna(np.array(elem_in_crossref['markers on the contig'])[0])):
-                print("This is a bacterial contamination.")
+                print("This is a contamination.")
                 contig_ids.remove(elem_id)
                 to_be_modified_id.append(elem_id)
             else:

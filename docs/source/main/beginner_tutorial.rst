@@ -111,4 +111,5 @@ Finally, in output_dir/working/binny, the bins/ directory stores all bins.
 
 6. Exploration of dataset taxonomic composition via Krona: "kronatools" module will incorporate CAT's results and output a webpage showing a krona-style pie chart.
 
-7. **Final output: CDS extraction**. All bins' coding sequences in fasta format will be generated via FragGeneScanRs and gffread module, to work as ultimate output of ChloroScan that can be fed into downstream analysis, for example: phylogenetic inference. 
+7. **Final output: CDS extraction**. All bins' coding sequences in fasta format will be generated via FragGeneScanRs and gffread module, to work as ultimate output of ChloroScan that can be fed into downstream analysis, for example: phylogenetic inference.
+ 

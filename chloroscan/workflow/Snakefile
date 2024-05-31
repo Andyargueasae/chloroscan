@@ -189,29 +189,15 @@ rule binny_workflow:
         threads=THREAD
          #this place shall be the output, relating to binny!
     output:
-        # os.path.join(outputdir, "/working/binny/{params.outputdir_bins_within_binny}/binny.done")
         dir_binny = directory(OUTPUT_DIR/"working/binny")
-        # binny_pure_out = directory(config['binny_settings']['outputdir_binny'])
-        # binny_bins = directory(OUTPUT_DIR/"working/binny"/BINNY_OUTPUT_DIR/"bins")
-        # formatted_fasta=Path(OUTPUT_DIR/"working/binny"/BINNY_OUTPUT_DIR/"intermediary/assembly.formatted.fa")
     message:
         "Use the binning algorithm binny to find all high-coverage bins with completeness>=72.5% and purity>=95%."
     conda:
         "envs/binny.yml"
-    # conda:
-    #     "/home/student.unimelb.edu.au/yuhtong/andy/MMA_organelle_metagenomics/binny_Chloroscan/conda/snakemake_env"
     shell:
         """
         set -e
         echo "Current mamba environment." 
-        # pip freeze > /home/student.unimelb.edu.au/yuhtong/andy/MMA_organelle_metagenomics/freeze.txt
-        # python -c "import pandas as pd; print(pd.__version__) ;" > /home/student.unimelb.edu.au/yuhtong/andy/MMA_organelle_metagenomics/pd.txt
-# 
-        # # . {params.binny_dir}/conda/snakemake_env/bin/activate
-
-        # # # TEST IF PANDAS IS INSIDE THE WORKING DIRECTORY.
-        # # mamba list | grep pandas
-
         # Check if plastids are present.
         # If so, then run binny workflow.
         if [ -s {input.plastid_contigs} ]; then
@@ -286,7 +272,7 @@ rule CAT_taxonomy_identification_plus_annotation:
 rule documenting_binny_results:
     input: 
         # bins = OUTPUT_DIR/"working/binny"/BINNY_OUTPUT_DIR/"bins",
-        contig_level_annotation = rules.CAT_taxonomy_identification_plus_annotation.output.CAT_output
+        contig_level_annotation = directory(OUTPUT_DIR/"working/CAT")
     params: 
         bins = Path(OUTPUT_DIR/"working/binny/bins"),
         assembly_files = OUTPUT_DIR/"working/binny/intermediary/assembly.formatted.fa",
@@ -387,8 +373,3 @@ rule krona_taxonomy_plot:
         sed 1d {input}/{params.file_after_remodel} > {input}/{params.intake_krona}
         ktImportTaxonomy -m 1 -o {output} {input}/{params.intake_krona}
         """
-
-
-
-# Jobs testing for each of the rule is over, congradulations, now what you should do:
-# 1. pull those essential files and scripts to github repositories.
