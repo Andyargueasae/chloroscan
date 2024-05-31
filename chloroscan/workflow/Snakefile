@@ -45,15 +45,16 @@ THREAD=config['threads']
 # So when crunch change the cwd, the working directory doesn't contain key folders such as:
 # binny/, scripts/. 
 
-# dummy way to do it. Specify a default path when doing regular runs.
+# dummy way to do it. Specify a default path when doing regular runs. Now we need a change: relative ones.
 DEFAULT_BINNY_DIR = Path("/home/student.unimelb.edu.au/yuhtong/andy/MMA_organelle_metagenomics/binny_Chloroscan")
 WORKFLOW_DIR = Path(workflow.basedir)
-BINNY_DIR = Path(__name__).parent.absolute()/"binny_Chloroscan" if (str(Path(__name__).parent.absolute()) == "/home/student.unimelb.edu.au/yuhtong/andy/MMA_organelle_metagenomics") else DEFAULT_BINNY_DIR
+# breakpoint()
+BINNY_DIR = Path(__name__).parent.parent.absolute()/"binny_Chloroscan" 
 
 SCR_DIR = WORKFLOW_DIR/"scripts"
 
 DEFAULT_DB_DIR = Path("/home/student.unimelb.edu.au/yuhtong/andy/MMA_organelle_metagenomics/databases")
-DB_DIR = Path(__name__).parent.absolute()/"databases" if (str(Path(__name__).parent.absolute()) == "/home/student.unimelb.edu.au/yuhtong/andy/MMA_organelle_metagenomics") else DEFAULT_DB_DIR
+DB_DIR = Path(__name__).parent.parent.absolute()/"databases" 
 # For CAT taxonomy, some global name.
 CAT_DB_DIR = DB_DIR/config['CAT_database']
 CAT_TAXON_DIR = DB_DIR/config['CAT_taxonomy']
@@ -73,7 +74,6 @@ TMP_DIR.mkdir(parents=True, exist_ok=True) # what if we do want to prepare data 
 
 # Krona environment name.
 KRONA_ENV=config['Krona_env']
-
 # Now rules are introduced. They are placed into the single snakefile in order to increase efficiency for debugging.
 # Major output: MMA.done, branching summary results: cross_ref.xlsx and CAT_taxonomy_annotation.tsv. 
 rule all:
@@ -204,7 +204,7 @@ rule binny_workflow:
             if [ -z {params.depth_text} ]
             then
                 [ -n {params.default_config} ] && echo "default config file for binny found."
-                [ -z {params.binny_dir} ] && echo "default binny diir not found." 
+                [ -z {params.binny_dir} ] && echo "default binny dir not found." 
                 bash {params.bash_create_yaml} -a "{input.plastid_contigs}" -d "{params.default_config}" -l "{params.bamfiles}" -o "{params.outputdir_within_binny}"\
                 -e '{params.hdbscan_epsilon_range}' -m '{params.hdbscan_min_samples_range}' -c {params.quality_min_completeness}\
                 -s {params.quality_start_completeness} -p {params.quality_min_purity} -u {params.universal_length_cutoff}\

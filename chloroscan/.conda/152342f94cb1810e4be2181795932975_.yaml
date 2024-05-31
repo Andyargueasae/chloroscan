@@ -1,0 +1,10 @@
+channels:
+  - conda-forge
+dependencies:
+  - coreutils
+  - python=3.9
+  - pip
+  - pip:
+    - bio-corgi>=0.4.0
+    - pandas==2.2.2
+    - snakemake==7.32.3

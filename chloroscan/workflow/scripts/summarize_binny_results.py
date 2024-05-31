@@ -12,7 +12,6 @@ from pathlib import Path
 # set up global variables that could work as input files.
 # You may also work out the visualization of the individual dataset info here. 
 # Note: this time, the individual contig identity shall not be put into the process.
-
 NOT_BINNED = ""
 depth_set = 0.0
 CONTIG_ID = "contig id"
