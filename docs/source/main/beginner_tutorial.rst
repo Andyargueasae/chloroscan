@@ -92,3 +92,23 @@ Generally, the workflow will run in the following 3 scenarios:
 
 So for scenario 1, the output would only be corgi results, stored in the individual "corgi" directory.
 While for scenario 2 & 3, all downstream steps would be executed, its just that only scenario 3 provides full-scope results.
+
+Let's dive a bit deeper into these outputs:
+1. CORGI: generally, CORGI takes the unfiltered assembly file in fasta, to classify contigs into 5 categories: archaea, bacteria, eukaryotes, plastid, mitochondria.
+In ChloroScan, we will only focus on the part of plastids, so later the accompanied scripts will extract the accession of contigs classified as plastid and write these contigs to **"plastid.fasta"**.
+
+2. Binny: This is the core of the ChloroScan workflow, by clustering contigs into "bins", also known as "Metagenome-assembled genomes" (MAGs). 
+Binny takes the assembly "plastid.fasta" from corgi's output, along with assembly abundance profile for each contig in sample(s), thus extracting their tetranucleotide frequencies + coverage, and cluster the bins.
+Bins will then be estimated with completeness and purity using the CheckM framework: marker gene datasets. Bins with these metrics exceeding thresholds will be remained.
+Currently, ChloroScan only have a basal small-sized marker gene database for binny to use to ensure fundamental extraction of photosynthetic plastids. While there is a larger and more comprehensive database under development (A2K project), hopefully it will assign more accurate taxa to MAGs, and covers a wide breadth of lineages.
+Finally, in output_dir/working/binny, the bins/ directory stores all bins. 
+
+3. CAT: this package is responsible for the taxonomy assignment to contigs via ORF scanning. In other words, it works as a benchmarking tool for ChloroScan: testing how good that CORGI and binny coops to extract plastid MAGs. Finally it outputs a directory containing several files, with contig2classification tsv file the major output to save results of contigs taxonomic identification.
+
+4. refinement of bins: Based on annotated genes along with CAT-determined taxon, the bins reconstructed will be refined by removing those putative contaminations (criteria: contig is without a reliable taxonomic identification pointing it to protozoa, plus no markers annotated). 
+
+5. summarization: Outputs a spreadsheet that stores all sorts of information for contigs that are inputed to binny (from plastid assembly with a length over 500 bp). 
+
+6. Exploration of dataset taxonomic composition via Krona: "kronatools" module will incorporate CAT's results and output a webpage showing a krona-style pie chart.
+
+7. **Final output: CDS extraction**. All bins' coding sequences in fasta format will be generated via FragGeneScanRs and gffread module, to work as ultimate output of ChloroScan that can be fed into downstream analysis, for example: phylogenetic inference. 
