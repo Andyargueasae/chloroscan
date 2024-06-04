@@ -63,6 +63,25 @@ Batch_size is recommended to be set to 1, when users' virtual machine has gpu, t
 Besides, there are some individual configurations that specifies directory of use.
 
 .. code-block:: yaml
+    # Give a name for your sample(s). Should we name this for each batch?
+    outputdir: "TEST_OUT"
+    # output folder where files are going to be moved into. But wait? We need to separate it by batches!
+    tmpdir: "tmp"
+These two configurations specifies the temporary directory and the output directory path.
+
+.. code-block:: yaml
+    CAT_database: "20231120_CAT_nrDB/db"
+    CAT_taxonomy: "20231120_CAT_nrDB/tax"
+These two configurations provide the path to the non-redundant protein database (db for diamond database, tax for taxonomy directory) within ChloroScan directory. CAT will need these.
+
+.. code-block:: yaml
+    Krona_env: "kronatools"
+
+This configuration allows users to customize a virtual environment with installed Kronatools package, that finally draws a krona plot of the filtered-datset.
+
+.. code-block:: yaml
+    threads: 11
+Specify number of cores to be used by the workflow. 
 
 
 Running ChloroScan
