@@ -74,12 +74,14 @@ We have to change the database it uses and the scoring of the different database
 We need to add these two files to the **database** folder inside binny_ChloroScan:
 
 .. code-block:: bash
+    
     cd binny_ChloroScan/database/hmms/checkm_pf && rm checkm_pf_filtered.hmm
     cp ../../../../binny_algal_database/checkm_pf_filtered.hmm . && hmmpress -f checkm_pf_filtered.hmm
     # Make sure you have hmmer3 installed to your virtual environment.
 
 Then, we shall also change the chunks, and change the taxon_marker_sets_lineage_sorted.tsv file. 
 .. code-block:: bash
+    
     # Clear chunks first.
     rm chunks/* 
     # Copy algal hmm profile to chunks dir, working as the chunk_0.
@@ -118,16 +120,19 @@ In our workflow, the annotator **FragGeneScanRs** could extract cds in fragmente
 Firstly, install rustc and rustup so that cargo -- the tool to install FragGeneScanRs can be loaded:
 
 .. code-block:: bash
+    
     curl --proto '=https' --tlsv1.2 -sSf https://sh.rustup.rs | sh
 
 Then, add cargo's path to $PATH.
 .. code-block:: bash
+    
     . "$HOME/.cargo/env"
     cargo install fraggenescanrs
 
 d. Setting up Krona virtual environment.
 Krona is responsible for creating a krona plot that visualizes the abundance of each taxon inside your metagenome dataset. Empirically, it is recommended to create it yourself.
 .. code-block:: bash
+    
     # Make sure you have conda/mamba installed.
     mamba create -n kronatools -c bioconda -c conda-forge -y krona==2.8.1 pandas numpy
 
@@ -136,6 +141,7 @@ After this, you can specify the conda environment to config file, ChloroScan wil
 e. Set up conda prefix for workflow.
 Finally, after sorting out so much things, we can now ask snakemake to set up the rest of environments for us. Simply run:
 .. code-block:: bash
+
     snakemake -c N_CORES --use-conda --conda-prefix=./conda --snakefile ./chloroscan/workflow/Snakefile --configfile config/ChloroScan.init.yaml --conda-create-envs-only
 
 Hurrah! Now you are good to go. 
