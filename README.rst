@@ -56,5 +56,5 @@ To install ChloroScan from resource:
    poetry install
    poetry shell
 
-
+For more information, please visit the wiki pages for details. 
 
