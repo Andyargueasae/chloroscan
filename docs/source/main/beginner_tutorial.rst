@@ -48,13 +48,13 @@ Another Major component is the classification of contigs using CORGI, a neural n
 
     corgi_settings:
     # corgi has settings for minimum length, pthreshold settings yes or no.
-    minlen: DIGIT
+    minlen: INTEGER
     # set it up for saving computational resources.
     pthreshold: FLOAT
     # Hit it by having an exact value or "False".
     save_filter: "True"
     # If true: we automatically send the fasta file into the folder.
-    batch_size: DIGIT
+    batch_size: INTEGER
     #leave for changing.
 
 Minlen (i.e: minimum length cutoff for contigs to be classified) may affect the precision of classification as generally longer contigs are classified with high accuracy. Pthreshold is the threshold cutoff for each contig to be classified. Generally higher cutoff results in higher certainty for one contig's identity. 
@@ -131,4 +131,13 @@ Finally, in output_dir/working/binny, the bins/ directory stores all bins.
 6. Exploration of dataset taxonomic composition via Krona: "kronatools" module will incorporate CAT's results and output a webpage showing a krona-style pie chart.
 
 7. **Final output: CDS extraction**. All bins' coding sequences in fasta format will be generated via FragGeneScanRs and gffread module, to work as ultimate output of ChloroScan that can be fed into downstream analysis, for example: phylogenetic inference.
- 
+
+Running individual rules
+========================
+
+The snakemake backbone offers users to run the individual jobs, to do just follow the codes below:
+
+.. code-block:: bash
+    chloroscan run --config=PATH/TO/CONFIGFILE --snakefile=PATH/TO/SNAKEFILE --cores=N_CORES --use-conda --conda-prefix=PATH/TO/CONDA/ TARGET_FILE
+
+Target files are the outputs from rules of snakemake workflow which can be found in Snakefile. 
