@@ -46,9 +46,9 @@ THREAD=config['threads']
 # binny/, scripts/. 
 
 # dummy way to do it. Specify a default path when doing regular runs. Now we need a change: relative ones.
-DEFAULT_BINNY_DIR = Path("/home/student.unimelb.edu.au/yuhtong/andy/MMA_organelle_metagenomics/binny_Chloroscan")
+
 WORKFLOW_DIR = Path(workflow.basedir)
-BINNY_DIR = WORKFLOW_DIR.parent.parent/"binny_Chloroscan" 
+# BINNY_DIR = WORKFLOW_DIR.parent.parent/"binny_Chloroscan" 
 
 SCR_DIR = WORKFLOW_DIR/"scripts"
 
@@ -100,8 +100,8 @@ rule corgi_prediction:
     conda:
         "envs/corgi_env.yml"
     output:
-        corgi_out = protected(OUTPUT_DIR/"working/corgi/corgi-prediction.csv"),
-        plastid_contigs = protected(OUTPUT_DIR/"working/corgi/plastid.fasta")
+        corgi_out = OUTPUT_DIR/"working/corgi/corgi-prediction.csv",
+        plastid_contigs = OUTPUT_DIR/"working/corgi/plastid.fasta"
         # here may change the output to a directory for file writing!
     message:
         "Using the machine learning algorithm 'CORGI' to predict contig identity. Don't rise batch size too high."
@@ -171,11 +171,11 @@ rule binny_workflow:
         plastid_contigs = rules.corgi_prediction.output.plastid_contigs
         
     params:
-        binny_dir = BINNY_DIR,
+        # binny_dir = BINNY_DIR,
         bamfiles = ALIGNMENT_FILES,
         depth_text = DEPTH_TEXT_FILE,
-        default_config = BINNY_DIR/"config/config.default.yaml",
-        curr_config = BINNY_DIR/"config/config.ChloroScan.yaml",
+        # defaultxxx_config = BINNY_DIR/"config/config.default.yaml",
+        # currxxx_config = BINNY_DIR/"config/config.ChloroScan.yaml",
         bash_create_yaml = Path(SCR_DIR/"create_yaml.sh"),
         # outputdir is a must-checked one!
         universal_length_cutoff = config['binny_settings']['universal_length_cutoff'],
@@ -202,24 +202,24 @@ rule binny_workflow:
         if [ -s {input.plastid_contigs} ]; then
             if [ -z {params.depth_text} ]
             then
-                [ -n {params.default_config} ] && echo "default config file for binny found."
-                [ -z {params.binny_dir} ] && echo "default binny dir not found." 
-                bash {params.bash_create_yaml} -a "{input.plastid_contigs}" -d "{params.default_config}" -l "{params.bamfiles}" -o "{params.outputdir_within_binny}"\
+                [ -n $BINNY_DIR/config/config.default.yaml ] && echo "default config file for binny found."
+                [ -z $BINNY_DIR ] && echo "default binny dir not found." 
+                bash {params.bash_create_yaml} -a "{input.plastid_contigs}" -d "$BINNY_DIR/config/config.default.yaml" -l "{params.bamfiles}" -o "{params.outputdir_within_binny}"\
                 -e '{params.hdbscan_epsilon_range}' -m '{params.hdbscan_min_samples_range}' -c {params.quality_min_completeness}\
                 -s {params.quality_start_completeness} -p {params.quality_min_purity} -u {params.universal_length_cutoff}\
-                -y "{params.curr_config}"
+                -y "$BINNY_DIR/config/config.ChloroScan.yaml"
             else
-                [ -n {params.default_config} ] && echo "default config file for binny found."
-                bash {params.bash_create_yaml} -a "{input.plastid_contigs}" -d "{params.default_config}" -t "{params.depth_text}" -o "{params.outputdir_within_binny}"\
+                [ -n $BINNY_DIR/config/config.default.yaml ] && echo "default config file for binny found."
+                bash {params.bash_create_yaml} -a "{input.plastid_contigs}" -d "$BINNY_DIR/config/config.default.yaml" -t "{params.depth_text}" -o "{params.outputdir_within_binny}"\
                 -e '{params.hdbscan_epsilon_range}' -m '{params.hdbscan_min_samples_range}' -c {params.quality_min_completeness}\
                 -s {params.quality_start_completeness} -p {params.quality_min_purity} -u {params.universal_length_cutoff}\
-                -y "{params.curr_config}"
+                -y "$BINNY_DIR/config/config.ChloroScan.yaml"
             fi
 
-            {params.binny_dir}/binny -l -n "MMA_plastids" -t {params.threads} -r {params.curr_config}
+            $BINNY_DIR/binny -l -n "MMA_plastids" -t {params.threads} -r $BINNY_DIR/config/config.ChloroScan.yaml
 
             # must remove the config.yaml created at the end, so we need it to be changed with name.
-            rm {params.curr_config} # finally you have to remove it, you don't want to cause confusion.
+            rm $BINNY_DIR/config/config.ChloroScan.yaml # finally you have to remove it, you don't want to cause confusion.
             echo 'The binny workflow is done, bins are within the binny folder, that may need to move out.'
             # chmod u+w {output.dir_binny}
             mv {BINNY_OUTPUT_DIR} {output.dir_binny}
