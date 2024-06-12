@@ -14,7 +14,7 @@ def main(assembly, accession, fasta_file_name):
             plastid_accession = lines.replace("\n","")
             # print(plastid_accession)
             plastid_accession_id.append(plastid_accession)
-    print(len(plastid_accession_id)) 
+    # print(len(plastid_accession_id)) 
 
     with open(assembly, "r") as assemblyf:
         assembly_lines = assemblyf.readlines()
@@ -29,11 +29,11 @@ def main(assembly, accession, fasta_file_name):
 
     while index < len(assembly_lines):
         accession_id = assembly_lines[index].replace(">","").split(" ")[0].replace("\n", "")
-        print(accession_id)
+        # print(accession_id)
         if accession_id in plastid_accession_id:
-            print("sequence classified as plastidial.\n")
+            # print("sequence classified as plastidial.\n")
             sequence = assembly_lines[index+1]
-            print(sequence)
+            # print(sequence)
             with open(fasta_file_name, "a") as fasta:
                 fasta.write(CONTIG_IDENTIFER)
                 fasta.write(accession_id)
@@ -41,7 +41,7 @@ def main(assembly, accession, fasta_file_name):
                 fasta.write(sequence)
         index += 2
     
-    print(os.path.exists(fasta_file_name))
+    # print(os.path.exists(fasta_file_name))
     return
 
 if __name__ == "__main__":
