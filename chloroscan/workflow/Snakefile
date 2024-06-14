@@ -204,13 +204,13 @@ rule binny_workflow:
             then
                 [ -n $BINNY_DIR/config/config.default.yaml ] && echo "default config file for binny found."
                 [ -z $BINNY_DIR ] && echo "default binny dir not found." 
-                bash {params.bash_create_yaml} -a "{input.plastid_contigs}" -d "$BINNY_DIR/config/config.default.yaml" -l "{params.bamfiles}" -o "{params.outputdir_within_binny}"\
+                bash {params.bash_create_yaml} -a "{input.plastid_contigs}" -b "$BINNY_DIR/binny_algal_database" -d "$BINNY_DIR/config/config.default.yaml" -l "{params.bamfiles}" -o "{params.outputdir_within_binny}"\
                 -e '{params.hdbscan_epsilon_range}' -m '{params.hdbscan_min_samples_range}' -c {params.quality_min_completeness}\
                 -s {params.quality_start_completeness} -p {params.quality_min_purity} -u {params.universal_length_cutoff}\
                 -y "$BINNY_DIR/config/config.ChloroScan.yaml"
             else
                 [ -n $BINNY_DIR/config/config.default.yaml ] && echo "default config file for binny found."
-                bash {params.bash_create_yaml} -a "{input.plastid_contigs}" -d "$BINNY_DIR/config/config.default.yaml" -t "{params.depth_text}" -o "{params.outputdir_within_binny}"\
+                bash {params.bash_create_yaml} -a "{input.plastid_contigs}" -b "$BINNY_DIR/binny_algal_database" -d "$BINNY_DIR/config/config.default.yaml" -t "{params.depth_text}" -o "{params.outputdir_within_binny}"\
                 -e '{params.hdbscan_epsilon_range}' -m '{params.hdbscan_min_samples_range}' -c {params.quality_min_completeness}\
                 -s {params.quality_start_completeness} -p {params.quality_min_purity} -u {params.universal_length_cutoff}\
                 -y "$BINNY_DIR/config/config.ChloroScan.yaml"

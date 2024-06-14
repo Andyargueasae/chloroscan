@@ -10,6 +10,7 @@ usage() {
     echo "Usage: $0 -[h|a|d|t|l|o|e|m|c|s|p|u|y] " 1>&2
     echo "       -h Show this help message." 1>&2
     echo "       -a specify assembly from the config file to be put into the binny config" 1>&2
+    echo "       -b specify pre-downloaded binny database to use." 1>&2
     echo "       -d (Absolute) Path to default binny configuration used for template" 1>&2
     echo "       -t Depth profile for assembly" 1>&2
     echo "       -l specify alignment bam files" 1>&2
@@ -23,7 +24,7 @@ usage() {
     echo "       -y (Absolute) Path (and names) of your binny config to be executed." 1>&2
 }
 
-while getopts ":ha:d:t:l:o:e:m:c:s:p:u:y:" option
+while getopts ":ha:b:d:t:l:o:e:m:c:s:p:u:y:" option
 do
     case $option in
         h) 
@@ -31,6 +32,8 @@ do
             exit;; 
         a) 
             assembly=$OPTARG;;
+        b)
+            binny_db=$OPTARG;;
         d) 
             default_config=$OPTARG;;
         t) 
@@ -97,6 +100,9 @@ else
     echo "No alignment bam files or depth profiles were provided, binny cannot proceed."
     exit 0
 fi
+
+# Change the db path.
+sed -i "s@db_path: \"\"@db_path: \"$binny_db\"@g" $curr_config
 
 sed -i "s@assembly: \"\"@assembly: \"$assembly\"@g" $curr_config
 
