@@ -100,27 +100,4 @@ Finally, after sorting out so much things, we can now ask snakemake to set up th
 
 Hurrah! Now you are good to go. 
 
-
-II. Run it.
-===========
-Snakemake command line can execute your jobs, just prepare your **contig assembly in fasta format**, and **contig abundance metrics in bam format**, fill in the config yaml file, and run:
-
-.. code-block:: bash
-
-    snakemake -c N_CORES --configfile PATH/TO/CONFIG.yaml --snakefile chloroscan/workflow/Snakefile --use-conda --conda-prefix YOUR/conda 
-
-
-ChloroScan is also able to run via snk-cli, but firstly it requires poetry to be present. Just type the code below:
-
-.. code-block:: bash
-
-    cd PATH/TO/chloroscan
-    poetry install
-    # So that all virtual env packages are ready.
-
-    poetry shell # activate virtualenv.
-
-    chloroscan -h # Test using this command.
-    chloroscan run --config=PATH/TO/CONFIGFILE --use-conda --conda-prefix="PATH/TO/CONDA" --cores=N_CORES # Run workflow in this way.
-
 For more advanced information, visit the "beginner's tutorial". 

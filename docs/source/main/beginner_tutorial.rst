@@ -100,6 +100,28 @@ ChloroScan is easily to run, by running the ChloroScan.sh the snakemake workflow
     cd chloroscan
     ./ChloroScan.sh -a "path/to/assembly.fasta" -b "BATCH_NAME" -e "CONDA_ENV" -m "BAM_FILE" -n MIN_LENGTH_CUTOFF_CORGI -k CORGI_BATCH_SIZE -p PROBABILITY_THRESHOLD -t THREAD
 
+Alternatively, two ways are offered to run this workflow.
+
+1. Snakemake command line can execute your jobs, just prepare your **contig assembly in fasta format**, and **contig abundance metrics in bam format**, fill in the config yaml file, and run:
+
+.. code-block:: bash
+
+    snakemake -c N_CORES --configfile PATH/TO/CONFIG.yaml --snakefile chloroscan/workflow/Snakefile --use-conda --conda-prefix YOUR/conda 
+
+
+2. ChloroScan is also able to run via snk-cli, but firstly it requires poetry to be present. Just type the code below:
+
+.. code-block:: bash
+
+    cd PATH/TO/chloroscan
+    poetry install
+    # So that all virtual env packages are ready.
+
+    poetry shell # activate virtualenv.
+
+    chloroscan -h # Test using this command.
+    chloroscan run --config=PATH/TO/CONFIGFILE --use-conda --conda-prefix="PATH/TO/CONDA" --cores=N_CORES # Run workflow in this way.
+
 Process and Output explained in a nutshell
 ==========================================
 ChloroScan workflow is designed to have 8 major steps: First the plastid contigs will be classified by CORGI from the assembly. Second, the sequence depth profile and plastid contigs will be the inputs of binny to get clustered into bins. step 3 is to use CAT/BAT to predict the taxon for each contig. Then step 4 to 8 is a series of customized python script running that pools the clustering information into a spreadsheet and provides visualizations.
