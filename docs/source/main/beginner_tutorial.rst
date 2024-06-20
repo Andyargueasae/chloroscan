@@ -107,7 +107,7 @@ Finally, FragGeneScanRs plus gffread will extract cds information from MAGs and 
 
 Here is a figure for an overview:
 
-.. image:: ../_static/images/MMA-orthoflow workflow.png
+.. image:: ../_static/images/Flow_ChloroScan.drawio.png
 
 
 Generally, the workflow will run in the following 3 scenarios:
@@ -145,7 +145,7 @@ Running individual rules
 The snakemake backbone offers users to run the individual jobs, to do just follow the codes below:
 
 .. code-block:: bash
-    
+
     chloroscan run --config=PATH/TO/CONFIGFILE --snakefile=PATH/TO/SNAKEFILE --cores=N_CORES --use-conda --conda-prefix=PATH/TO/CONDA/ TARGET_FILE
 
 Target files are the outputs from rules of snakemake workflow which can be found in Snakefile. 
