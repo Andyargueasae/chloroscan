@@ -7,7 +7,7 @@ Chloroscan can be accessed via github (source code), pypi or conda.
 GitHub installation
 ===================
 
-To install with github, try following:
+To install with github, try following (**recommended**):
 
 .. code-block:: bash
 
@@ -17,7 +17,7 @@ To install with github, try following:
 pip installation
 ================
 
-Pypi installation of chloroscan is simpler:
+Pypi installation of chloroscan is simpler (Developing, do not try now):
 
 .. code-block:: bash
 
@@ -26,13 +26,13 @@ Pypi installation of chloroscan is simpler:
 conda installation
 ==================
 
-Conda installation:
+Conda installation (Developing, do not try now):
 
 .. code-block:: bash
 
     conda install chloroscan
 
-or using mamba with faster speed:
+or using mamba with faster speed (Developing, do not try now):
 
 .. code-block:: bash
 
@@ -103,7 +103,14 @@ Hurrah! Now you are good to go.
 
 II. Run it.
 ===========
-ChloroScan is able to be run via snk-cli, but firstly it requires poetry to be present. Just type the code below:
+Snakemake command line can execute your jobs, just prepare your **contig assembly in fasta format**, and **contig abundance metrics in bam format**, fill in the config yaml file, and run:
+
+.. code-block:: bash
+
+    snakemake -c N_CORES --configfile PATH/TO/CONFIG.yaml --snakefile chloroscan/workflow/Snakefile --use-conda --conda-prefix YOUR/conda 
+
+
+ChloroScan is also able to run via snk-cli, but firstly it requires poetry to be present. Just type the code below:
 
 .. code-block:: bash
 
