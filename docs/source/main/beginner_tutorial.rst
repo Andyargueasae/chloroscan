@@ -89,6 +89,66 @@ This configuration allows users to customize a virtual environment with installe
     threads: 11
 Specify number of cores to be used by the workflow. 
 
+Data Preparation
+================
+1. assembly
+ChloroScan mainly takes a fasta format contig assembly, assembled using megahit/metaspades. The newly published cobra haven't been tested and will be looked soon. 
+However, if the data has some format issues in e.g.: contig identifier, this will trigger potential errors and make troubleshooting difficult. Thus, the developer recommends that contig identifiers should have no spaces, or joined by underscore. 
+Here is an example from the test data in megahit style:
+
+>k127_40645
+TAAATGTATCTTAAATGTATCTTAAAGAAGGATACATATTCCTAGGTAAGATACATTTCCTATGATGGCCAAAGTGACGATACAAATGTATCTCGATGTATCTCGATGTATCTTGATGTATATGAACGGGACACATCAAGATACATGCGAGATACATGCACGATACATGCGCGATACATGGGATACGTATCCTGATAACAAACCCCCCCCAAACTCGATAACAAACCCCACGTCACCC
+>k127_19657
+AACCCCCCTTTTCCGTAGGGGAAGTTCGGGAGGTTGTGGAAAAACCATCCACCCTGGGGAGGATTTTCCGATGCGTTTCACGGCCCGCCCCCGGATGGGGGGGCGTCGCGCCGTAGGGCGATGGTGCCGTGGTGGTCCTCATCGTGACCGACCCCTTATGGGGAGCCGGCCGCGCCCACCCCCTGAGGGGGAGGGCGGTGACGAGATGGGGTTCTC
+
+2. Abundance format.
+ChloroScan's core binning module: binny, takes two types of abundance profile (i.e.: How abundant a contig is in the samples of metagenomes) to help clustering contigs into bins.
+
+a. BAM files. Generally if you get metagenome datasets, a bam file or multiple bam files will store binarily encoded reads-to-contig mapping information that tells you how many times a nucleotide gets sequenced. You can directly put it into your config file.
+
+b. A tab-separated txt file, with column one showing the contig identifier string, and column two (or more if you have many samples in metagenome) showing the sequence depth in float (**Less recommended**).  
+
+Binny module could turn BAM files into the tab-separated text file, but if you want to circumvent that process and do it prior running ChloroScan, you can try following:
+i. create yourself a conda virtual environment with BEDtools installed, the environmental settings are:
+
+.. code-block:: yaml
+
+    channels:
+        - conda-forge
+        - bioconda
+        - defaults
+    dependencies:
+        - bcftools=1.9
+        - bedtools=2.29.2
+        - samtools=1.9
+        - vcftools=0.1.16
+        - bwa=0.7.17
+
+ii. Process each of your sorted bam files using the following code, that will produce a number of text files storing average coverage.
+
+.. code-block:: bash
+
+    genomeCoverageBed -ibam PATH/TO/YOUR/BAM1.sorted.bam | grep -v "genome" > DEPTH_PATH/DEPTH1.txt
+
+Note: to store the depth texts in a folder, create the folder in prior.
+
+iii. Finally, you can use binny's perl script to merge the depth profile per sample and add the text file to config. You can find the perl file in binny_Chloroscan/workflow/scripts/calcAvgCoverage.pl. 
+
+The way to use it:
+
+.. code-block:: bash
+
+    perl SCRIPT_DIRECTORY/calcAvgCoverage.pl DEPTH_PATH input_assembly.fasta > OUTPUT_depth.txt
+
+The text file in terms of table can be represented as:
+
+========== ============
+k127_40645 70.40746186
+k127_19657 5.25000340
+k127_5658  694.84792028
+...        ...
+========== ============
+Binny's code can be found in binny's webpage (this is a forked repository by developer for ChloroScan): https://github.com/Andyargueasae/binny_Chloroscan. 
 
 Running ChloroScan
 ==================
