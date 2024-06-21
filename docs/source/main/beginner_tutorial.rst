@@ -97,9 +97,9 @@ However, if the data has some format issues in e.g.: contig identifier, this wil
 Here is an example from the test data in megahit style:
 
 >k127_40645
-TAAATGTATCTTAAATGTATCTTAAAGAAGGATACATATTCCTAGGTAAGATACATTTCCTATGATGGCCAAAGTGACGATACAAATGTATCTCGATGTATCTCGATGTATCTTGATGTATATGAACGGGACACATCAAGATACATGCGAGATACATGCACGATACATGCGCGATACATGGGATACGTATCCTGATAACAAACCCCCCCCAAACTCGATAACAAACCCCACGTCACCC
+TAAATGTATCTTAAATGTATCTTAAAGAAGGATACATATT...
 >k127_19657
-AACCCCCCTTTTCCGTAGGGGAAGTTCGGGAGGTTGTGGAAAAACCATCCACCCTGGGGAGGATTTTCCGATGCGTTTCACGGCCCGCCCCCGGATGGGGGGGCGTCGCGCCGTAGGGCGATGGTGCCGTGGTGGTCCTCATCGTGACCGACCCCTTATGGGGAGCCGGCCGCGCCCACCCCCTGAGGGGGAGGGCGGTGACGAGATGGGGTTCTC
+AACCCCCCTTTTCCGTAGGGGAAGTTCGGGAGGTTGTGGA...
 
 2. Abundance format.
 ChloroScan's core binning module: binny, takes two types of abundance profile (i.e.: How abundant a contig is in the samples of metagenomes) to help clustering contigs into bins.
@@ -142,12 +142,17 @@ The way to use it:
 
 The text file in terms of table can be represented as:
 
+
+========== ============
+col1       col2
 ========== ============
 k127_40645 70.40746186
 k127_19657 5.25000340
 k127_5658  694.84792028
 ...        ...
 ========== ============
+
+
 Binny's code can be found in binny's webpage (this is a forked repository by developer for ChloroScan): https://github.com/Andyargueasae/binny_Chloroscan. 
 
 Running ChloroScan
