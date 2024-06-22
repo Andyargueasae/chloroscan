@@ -187,6 +187,14 @@ Alternatively, two ways are offered to run this workflow.
     chloroscan -h # Test using this command.
     chloroscan run --config=PATH/TO/CONFIGFILE --use-conda --conda-prefix="PATH/TO/CONDA" --cores=N_CORES # Run workflow in this way.
 
+Try your job first with the test_data:
+
+.. code-block:: bash
+
+    snakemake -c 15 --configfile config/ChloroScan.init.yaml --snakefile chloroscan/workflow/Snakefile --use-conda --conda-prefix conda
+    # OR
+    chloroscan run --cores=15 --configfile=config/ChloroScan.init.yaml --snakefile=chloroscan/workflow/Snakefile --use-conda --conda-prefix=conda
+
 Process and Output explained in a nutshell
 ==========================================
 ChloroScan workflow is designed to have 8 major steps: First the plastid contigs will be classified by CORGI from the assembly. Second, the sequence depth profile and plastid contigs will be the inputs of binny to get clustered into bins. step 3 is to use CAT/BAT to predict the taxon for each contig. Then step 4 to 8 is a series of customized python script running that pools the clustering information into a spreadsheet and provides visualizations.
