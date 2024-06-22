@@ -193,7 +193,7 @@ Try your job first with the test_data:
 
     snakemake -c 15 --configfile config/ChloroScan.init.yaml --snakefile chloroscan/workflow/Snakefile --use-conda --conda-prefix conda
     # OR
-    chloroscan run --cores=15 --configfile=config/ChloroScan.init.yaml --snakefile=chloroscan/workflow/Snakefile --use-conda --conda-prefix=conda
+    chloroscan run --cores=15 --configfile=config/ChloroScan.snk.yaml --snakefile=chloroscan/workflow/Snakefile --use-conda --conda-prefix=conda
 
 Process and Output explained in a nutshell
 ==========================================
