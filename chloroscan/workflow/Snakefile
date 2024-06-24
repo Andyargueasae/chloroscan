@@ -26,8 +26,11 @@ configfile: "config/config.running.yaml"
 # Some major configuration parameters and inputs.
 assembly_path = config['Inputs']['assembly_path']
 ALIGNMENT_FILES = config['Inputs']['alignment_files']
+
 if config['Inputs']['depth_txt']:
     DEPTH_TEXT_FILE=config['Inputs']['depth_txt']
+else:    
+    DEPTH_TEXT_FILE = ""
 OUTPUT_DIR = Path(config['outputdir'])
 BATCH_NAME = config['Inputs']['batch_name']
 
@@ -35,17 +38,6 @@ BINNY_OUTPUT_DIR = config['binny_settings']['outputdir_binny']
 # For binny: some global names.
 GLOBAL_CONFIG = "config.ChloroScan.yaml"
 THREAD=config['threads']
-
-# A functional binny directory is set-up within MMA.
-
-# This is where we got most of the problems: 
-# Current cwd: tmp/plastid-binning--BATCH_ID,
-# But before I thought that the cwd is always:
-# /data/MMA_organelle_metagenomics.
-# So when crunch change the cwd, the working directory doesn't contain key folders such as:
-# binny/, scripts/. 
-
-# dummy way to do it. Specify a default path when doing regular runs. Now we need a change: relative ones.
 
 WORKFLOW_DIR = Path(workflow.basedir)
 # BINNY_DIR = WORKFLOW_DIR.parent.parent/"binny_Chloroscan" 

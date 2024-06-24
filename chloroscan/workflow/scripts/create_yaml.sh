@@ -83,16 +83,18 @@ double_quotation=\"\"
 
 # Must make sure the config is going to back to its directory. 
 
+echo "$depth_text" # The files are expanded.
+echo "$alignment"
 # The script assumes that either alignment bams or depth text files are supplied.
-if [ -n $depth_text ] && [ -z $alignment ];
+if [ -n "$depth_text" ] && [ -z "$alignment" ];
 then
     echo "The alignment bam file(s) have already been transferred into tab-separated text file, use txt."
     sed -i "s@contig_depth: \"\"@contig_depth: \"$depth_text\"@g" $curr_config
-elif [ -n $alignment ] && [ -z $depth_text ];
+elif [ -n "$alignment" ] && [ -z "$depth_text" ];
 then
     echo "Only alignment bam file(s) have been provided."
     sed -i "s@metagenomics_alignment: \"\"@metagenomics_alignment: \"$alignment\"@g" $curr_config
-elif [ -n $alignment ] && [ -n $depth_text ];
+elif [ -n "$alignment" ] && [ -n "$depth_text" ];
 then 
     echo "Both alignment bam files and depth profile txt are provided, use depth profile for downstream jobs."
     sed -i "s@contig_depth: \"\"@contig_depth: \"$depth_file\"@g" $curr_config
