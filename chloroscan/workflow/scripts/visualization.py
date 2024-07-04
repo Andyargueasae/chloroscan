@@ -9,6 +9,7 @@ from os import listdir
 import statistics
 import seaborn as sns
 from pathlib import Path
+import sys
 
 cross_reference_tsv = snakemake.input[0]
 figure_output_dir = Path(snakemake.output[0])
@@ -25,6 +26,8 @@ time_stamp_file = ".snakemake_timestamp"
 
 refine_bins_list = [i for i in listdir(refine_bins_dir) if i != time_stamp_file]
 # Safety check if there were nothing.
+# For this script, to augment visualization: just make their names shorter and conciser.
+# Try to use plotnine as the second solutions to those plots.
 if (os.stat(cross_reference_tsv).st_size == 0):
     print("Empty cross reference tsv, then nothing will be visualized.")
     sys.exit(0)
@@ -138,7 +141,7 @@ plt.rcParams["figure.figsize"] = [25, 36]
 plt.rcParams.update({'font.size': 24})
 
 fig1, axsc = plt.subplots(nrows=2, ncols=1)
-sns.set(font_scale=3)
+sns.set_theme(font_scale=3)
 # store count of marker genes.
 markers_per_contig = binned_contigs_per_batch['markers on the contig']
 marker_count = marker_counter(markers_per_contig)
@@ -150,7 +153,7 @@ binned_contigs_per_batch['log10 depth per contig'] = log10_depth
 groups = binned_contigs_per_batch.groupby("Contig2Bin")
 for bin_name, bin_group in groups:
     group_label = bin_name.replace("_", " ")
-    print(group_label)
+    print(f"Printing out the taxonomic composition scaled by contig length for Bin: {group_label}")
     sns.scatterplot(data=bin_group, x="GC contents", y="log10 depth per contig", alpha=0.7, s=(np.array(5*5*bin_group['marker count per contig'])+120), marker="o", ax = axsc[0], label = group_label )
 plt.legend(bbox_to_anchor=(1.02, 1), loc='lower left', borderaxespad=0)
 axsc[0].set_title("GC vs. sequence depth, dot size scaled by marker count", fontsize=40)
@@ -214,7 +217,7 @@ for i in bin_set:
         
         # prepare the graph.
         MAGfig, MAGax = plt.subplots(figsize=(18,18))
-        sns.set(font_scale=2)
+        sns.set_theme(font_scale=2)
         plt.style.use('_mpl-gallery-nogrid')
         contig_composition_taxon_prop_bylength, taxon_labels = count_and_prop(contig_composition)[0], count_and_prop(contig_composition)[1]
         colors = plt.get_cmap('jet')(np.linspace(0.2, 0.7, len(set(contig_composition_taxon_prop_bylength))+10))

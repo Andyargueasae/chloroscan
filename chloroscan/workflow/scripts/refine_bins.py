@@ -19,20 +19,28 @@ BACTERIA_ID = snakemake.params['BACTERIA_ID']
 #read in some files.
 os.mkdir(output_dir_for_refined_bins)
 
-## breakpoint()
 if (os.stat(cross_reference_table).st_size == 0):
     print("Empty cross reference table, exit.\n")
     sys.exit(0)
 
-# If corgi has the outputs while binny doesn't, we stop the refinement.
-# if os.path.exists(original_bins):
-#     binny_check = listdir(original_bins)
-#     if len(binny_check) == 0:
-#         print("No bins produced, system shut down.")
-#         sys.exit(0)
-#     else:
-#         print("Ok, your bins are good to go.")
-
+def refine_bins_renaming(seqs, cross_ref_df):
+    taxonomy_dict = dict()
+    # breakpoint()
+    seq_ids = [i.id for i in seqs]
+    # print(seq_ids)
+    for seq_id in seq_ids:
+        the_row = cross_ref_df.loc[cross_ref_df['contig id'] == seq_id]
+        the_taxon = the_row['Taxon per Contig'].item()
+        the_length = the_row['contig length'].item()
+        if the_taxon not in taxonomy_dict.keys():
+            taxonomy_dict[the_taxon] = 0
+        taxonomy_dict[the_taxon] += the_length
+    
+    # print(taxonomy_dict)
+    sorted_dict_items = sorted(taxonomy_dict.items(), key = lambda x:x[1])
+    # print(sorted_dict_items)
+    taxon_with_longest_length = sorted_dict_items[-1][0]
+    return taxon_with_longest_length
 
 cross_ref_refine_df = pd.read_csv(cross_reference_table,sep="\t", index_col=0)
 bin_list = listdir(original_bins)
@@ -53,7 +61,8 @@ for i in list_of_seqrec.keys():
     contig_comp = list_of_seqrec[i]
     contig_ids = [i.id for i in contig_comp]
     print("contig composition before refinement:\n", contig_ids)
-    print("length equals to {}".format(len(contig_ids)))
+    init_len = len(contig_ids)
+    print("The bin has {} contigs".format(len(contig_ids)))
     for elem in contig_comp:
         elem_id = elem.id
         elem_in_crossref = cross_ref_refine_df.loc[cross_ref_refine_df['contig id'] == elem_id]
@@ -71,10 +80,8 @@ for i in list_of_seqrec.keys():
             # If contig is not even identified as bacteria and you did not have any markers, remove.
             # But the only problem is the off-target: if the contig has some undocumented markers and was not 
             # classified algal sequence by CAT, it will be removed as well.
-
-            # We will have to go back to the
             elif (pd.isna(np.array(elem_in_crossref['markers on the contig'])[0])):
-                print("This is a contamination.")
+                print("This is a contamination that with ambiguous taxon and no markers were found.")
                 contig_ids.remove(elem_id)
                 to_be_modified_id.append(elem_id)
             else:
@@ -82,7 +89,8 @@ for i in list_of_seqrec.keys():
         else:
             continue
     print("contig composition after refinement: \n", [j for j in contig_ids])
-    print("length equals to {}".format(len([l for l in contig_ids])))
+    curr_len = len([l for l in contig_ids])
+    print("There are {} contigs remained, deleting {} contigs as contaminations.".format(curr_len, init_len-curr_len))
     refined_contig_ids = contig_ids
     
     # Now store new bag of contigs.
@@ -99,31 +107,12 @@ for id_change in to_be_modified_id:
     #get the index.
     row_index = row.index[0]
     cross_ref_refine_df.at[row_index, "Contig2Bin"] = ""
-
-def refine_bins_renaming(seqs, cross_ref_df):
-    taxonomy_dict = dict()
-    # breakpoint()
-    seq_ids = [i.id for i in seqs]
-    print(seq_ids)
-    for seq_id in seq_ids:
-        the_row = cross_ref_df.loc[cross_ref_df['contig id'] == seq_id]
-        the_taxon = the_row['Taxon per Contig'].item()
-        the_length = the_row['contig length'].item()
-        if the_taxon not in taxonomy_dict.keys():
-            taxonomy_dict[the_taxon] = 0
-        taxonomy_dict[the_taxon] += the_length
-    
-    print(taxonomy_dict)
-    sorted_dict_items = sorted(taxonomy_dict.items(), key = lambda x:x[1])
-    print(sorted_dict_items)
-    taxon_with_longest_length = sorted_dict_items[-1][0]
-    return taxon_with_longest_length
     
 for i in refined_contigs_dict.items():
     filename = output_dir_for_refined_bins + "/" + "refined_" + i[0].split("/")[-1]    
     with open(filename, "w") as refined:
         for j in i[-1]:
-            print(j.id)
+            # print(j.id)
             refined.write(">")
             refined.write(j.id)
             refined.write("\n")

@@ -198,7 +198,6 @@ bin_files = listdir(assembly_bin_dir)
 form_bin_array(assembly_bin_dir, bin_files, bin_array, contig_id)
 form_marker_array(marker_per_contig, assembly_annot, contig_id)
 form_depth_array(bin_depth, contig_id, assemblydepth)
-
 form_contig_taxa_array(taxon_array, contig_id, taxonomy_names, contig_level_annotation)
 
 dataset_bin_df[CONTIG_ID] = contig_id
@@ -245,4 +244,3 @@ with open(MMA_SUMMARY, "a") as MS:
     MS.write("Total number of medium-quality (completeness: 70% to 90%): {}\n".format(medium_bins))
     MS.write("Total number of high-quality (completeness: > 90%): {}\n".format(high_bins))
     
-
