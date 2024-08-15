@@ -1,0 +1,50 @@
+# This yaml file is the proto-type of your configuration, store it carefully! It will work as the ultimate template,
+# for your default config file to be put into the workflow.
+
+Inputs:
+# This is a default configuration file for the MMA organelle metagenomics workflow.  
+  batch_name: "" 
+  assembly_path: ""
+  # PATH/to/ASSEMBLY_FASTA
+  alignment_folder: "" 
+  # PATH/TO/ALIGNMENT_BAMS
+  depth_txt: ""
+  # PATH/TO/DEPTH.txt, assume either depth text or alignment files are supplied for once. 
+  # (So if you have depth text, leave alignment files blank.)
+
+
+# Give a name for your sample(s). Should we name this for each batch?
+outputdir: "chloroscan_outputs"
+# output folder where files are going to be moved into. But wait? We need to separate it by batches!
+tmpdir: "tmp"
+
+binny_settings:
+  universal_length_cutoff: 1500
+  outputdir_binny: "binny_output" # May require wildcards for those things, should we in other words name this after batch? 
+  clustering: 
+  # majorly adjust the hdbscan values. Recommended to be fixed. Or can be changed via here.
+    epsilon_range: '0.250,0.000'
+    hdbscan_min_samples_range: '1,4,7,10'
+  bin_quality:
+    min_completeness: 72.5
+    start_completeness: 92.5
+    purity: 95
+  # by default it writes the contig data to the bin folder.
+# How do we link our own settings to binny's settings? Or simply we fix it? Maybe not.
+
+corgi_settings:
+# corgi has settings for minimum length, pthreshold settings yes or no.
+  minlen: 
+  # set it up for saving computational resources.
+  pthreshold: 
+  # Hit it by having an exact value or "False".
+  save_filter: "True"
+  # If true: we automatically send the fasta file into the folder.
+  batch_size: 
+  #leave for changing.
+# this is the default place where a CAT database lies. 
+# Shall we adjust this?
+CAT_database: ""
+CAT_taxonomy: "" 
+Krona_env: "kronatools"
+threads: 
