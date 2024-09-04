@@ -26,5 +26,7 @@ To install the workflow, use pip3:
 
     pip3 install chloroscan
 
+Detailed workflow instructions can be found at: https://andyargueasae.github.io/chloroscan/index.html
+
 
 

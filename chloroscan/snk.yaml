@@ -112,7 +112,7 @@ cli:
         short: t
         default: "uniref90_algaProt/tax"
   krona_env:
-    type: Path
+    type: string
     help: "Path to the Krona environment."
     required: False
     default: "kronatools"

@@ -8,7 +8,7 @@ Data Input and configuration
 
 The pip version of ChloroScan accepts following arguments:
 
-.. image:: docs/source/_static/images/chloroscan_cli.png
+.. image:: ../_static/images/chloroscan_cli.png
 
 Among these arguments, only assembly path, depth text, alignment folder and output folder are required for inputs.  
 
@@ -16,13 +16,13 @@ An example command for running ChloroScan if depth text file is available:
 
 .. code-block:: bash
 
-   chloroscan run --Inputs-assembly-path assembly.fasta --Inputs-depth-txt depth.txt --inputs-batch-name BATCH_NAME --outputdir OUTPUT_DIR
+   chloroscan run --Inputs-assembly-path assembly.fasta --Inputs-depth-txt depth.txt --Inputs-batch-name BATCH_NAME --outputdir OUTPUT_DIR
 
 An example command for running ChloroScan if depth text file is not available:
 
 .. code-block:: bash
 
-   chloroscan run --Inputs-assembly-path assembly.fasta --inputs-batch-name BATCH_NAME --outputdir OUTPUT_DIR --alignment-folder ALIGNMENT_FOLDER
+   chloroscan run --Inputs-assembly-path assembly.fasta --Inputs-batch-name BATCH_NAME --outputdir OUTPUT_DIR --alignment-folder ALIGNMENT_FOLDER
 
 Explaining the non-required arguments
 =====================================

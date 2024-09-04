@@ -9,7 +9,7 @@ Author: Yuhao Tong (The University of Melbourne)
    :target: https://github.com/Andyargueasae/chloroscan/badge.svg
    :alt: example workflow
 
-.. image:: docs/source/_static/images/Flow_ChloroScan.drawio.png
+.. image:: ../_static/images/Flow_ChloroScan.drawio.png
 
 A snakemake workflow for MMA metagenomics for recovering chloroplast genomes.
 =============================================================================
