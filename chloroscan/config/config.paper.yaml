@@ -1,0 +1,45 @@
+Inputs:
+# This is a default configuration file for the MMA organelle metagenomics workflow.  
+  batch_name: "MGYS00005294_3"
+  assembly_path: "/home/student.unimelb.edu.au/yuhtong/andy/data/MGYS00005294_3/assembly/merged.megahit.contigs.fa"
+  # PATH/to/ASSEMBLY_FASTA
+  alignment_folder: "/home/student.unimelb.edu.au/yuhtong/andy/data/MGYS00005294_3/abundance"
+  # PATH/TO/ALIGNMENT_BAMS
+  depth_txt: "" 
+  # PATH/TO/DEPTH.TXT
+
+# Give a name for your sample(s). Should we name this for each batch?
+outputdir: "MGYS00005294_3"
+# output folder where files are going to be moved into. But wait? We need to separate it by batches!
+tmpdir: "tmp"
+
+binny_settings:
+  universal_length_cutoff: 1500
+  outputdir_binny: "binny_output" 
+  clustering: 
+  # majorly adjust the hdbscan values. Recommended to be fixed. Or can be changed via here.
+    epsilon_range: '0.250,0.000'
+    hdbscan_min_samples_range: '1,4,7,10'
+  bin_quality:
+    min_completeness: 72.5
+    start_completeness: 92.5
+    purity: 95
+  # by default it writes the contig data to the bin folder.
+# How do we link our own settings to binny's settings? Or simply we fix it? Maybe not.
+
+corgi_settings:
+# corgi has settings for minimum length, pthreshold settings yes or no.
+  minlen: 300
+  # set it up for saving computational resources.
+  pthreshold: 0.90
+  # Hit it by having an exact value or "False".
+  save_filter: "True"
+  # If true: we automatically send the fasta file into the folder.
+  batch_size: 1 
+  #leave for changing.
+# this is the default place where a CAT database lies. 
+# Shall we adjust this?
+CAT_database: "20231120_CAT_nrDB/db"
+CAT_taxonomy: "20231120_CAT_nrDB/tax"
+Krona_env: "kronatools"
+threads: 11
