@@ -3,30 +3,117 @@ font: "cybermedium"
 tagline: "A state-of-art metagenomic workflow extracting chloroplast genomes from metagenomes."
 conda: True
 skip_missing: True
-resources:
-  - "../test_data/test_plastid.fasta"
-  - "../test_data/contig_depth_test.txt"
 symlink_resources: False
-additional_snakemake_args:
-  - "--config"
 # This is just the sample, we need more to do, because our code was based totally on config file. 
 cli:
-  configpath:
-      type: Path
-      help: Path to config file in yaml format, storing all resources and parameters for underlying rules. 
-      required: False
-      short: f
-  assembly:
-      type: Path
-      help: "Path to fasta format assembly of contigs from all sorts of organisms."
-      required: False
-      short: i
-  depth:
-      type: Path
-      help: "Path to either a range of bam files or a tab-separated text storing abundance of each contig in the sample."
-      required: False
-      short: d
+  Inputs:
+    assembly:
+        type: Path
+        help: "Path to fasta format assembly of contigs from all sorts of organisms."
+        required: True
+        short: a
+    depth_txt:
+        type: Path
+        help: "Path to a tab-separated text storing abundance of each contig in the sample."
+        required: True
+        short: d
+    alignment:
+        type: Path
+        help: "Path to the folder containing alignment files of the contigs."
+        required: True
+        short: l
+    batch_name:
+        type: String
+        help: "Name of the batch."
+        required: True
+        short: b
   outputdir:
       type: Path
       help: "Path to the output directory of the workflow."
+      required: True
+      short: o
+  tmpdir:
+      type: Path
+      help: "Path to the temporary directory of the workflow."
       required: False
+      short: t
+      default: "tmp"
+  binning:
+    universal_length_cutoff:
+        type: Integer
+        help: "Length cutoff for universal binning."
+        required: False
+        default: 1500
+    outputdir:
+        type: Path
+        help: "Path to the output directory of the binning."
+        required: False
+        short: o
+        default: "binny_output"
+    clustering:
+      epsilon_range:
+          type: string
+          help: "Range of epsilon values for DBSCAN clustering."
+          required: False
+          default: "0.250,0.000"
+      hdbscan_min_sample_range:
+          type: string
+          help: "Range of min_samples values for HDBSCAN clustering, larger value means larger MAGs."
+          required: False
+          default: "1,4,7,10"
+    bin_quality:
+      starting_completeness:
+          type: Integer
+          help: "Starting completeness for bin quality."
+          required: False
+          default: 92.5
+      min_completeness:
+          type: Integer
+          help: "Minimum completeness for bin quality."
+          required: False
+          default: 72.5
+      purity:
+          type: Integer
+          help: "Purity for bin quality."
+          required: False
+          default: 95
+  corgi:
+    min_length:
+        type: Integer
+        help: "Minimum length of contigs to be processed by CORGI."
+        required: False
+        default: 500
+    save_filter:
+        type: Boolean
+        help: "Save the filtered contigs by CORGI (Note: may take long time)."
+        required: False
+        default: False
+    batch_size:
+        type: Integer
+        help: "Batch size for CORGI to process contigs."
+        required: False
+        default: 1
+    pthreshold:
+      type: Float
+      help: "P-value threshold for CORGI to determine if the contigs category is authentically plastidial or something else."
+      required: False
+      default: 0.90
+  cat:
+    database:
+        type: Path
+        help: "Path to the database of chloroplast genomes."
+        required: False
+        short: d
+        default: "uniref90_algaProt/db"
+    taxonomy:
+        type: Path
+        help: "Path to the taxonomy of the database."
+        required: False
+        short: t
+        default: "uniref90_algaProt/tax"
+  krona_env:
+    type: Path
+    help: "Path to the Krona environment."
+    required: False
+    default: "kronatools"
+  
