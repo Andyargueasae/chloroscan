@@ -9,6 +9,11 @@ from os import listdir
 import statistics
 import seaborn as sns
 from pathlib import Path
+import sys
+from visualization_utils import *
+from plotnine import ggplot, geom_point, aes, stat_smooth, facet_wrap, geom_boxplot, geom_bar, coord_flip, geom_violin
+import plotnine as gg
+
 
 cross_reference_tsv = snakemake.input[0]
 figure_output_dir = Path(snakemake.output[0])
@@ -49,96 +54,35 @@ contig_2_bin = summary_dataframe['Contig2Bin']
 
 colors = ['black', 'red', 'green', 'blue', 'brown','cyan','grey','goldenrod','lime','violet','indigo','coral','olive','azure', 'light pink', 'dark blue']
 color_iter = iter(colors)
-def compute_batch_depth(depth_Array):
-    batch_depth = []
-    for i in depth_Array:
-        if "\t" in str(i):
-            depth_list = [float(j) for j in i.split("\t")]
-            batch_depth_per_contig = sum(depth_list)
-            batch_depth.append(batch_depth_per_contig)
-        else:
-            depth_batch = float(i)
-            batch_depth.append(depth_batch)
-    return batch_depth
-
-
-def count_and_prop(individual_bin_df):
-    bin_comp_dict = dict()
-    length_array_per_bin = list(individual_bin_df['contig length'])
-    taxon_array_per_bin = list(individual_bin_df['Taxon per Contig'])
-
-    # print(taxon_set)
-    for i in range(0, len(taxon_array_per_bin)):
-        if taxon_array_per_bin[i] in bin_comp_dict.keys():
-            bin_comp_dict[taxon_array_per_bin[i]] += int(length_array_per_bin[i])
-        else:
-            bin_comp_dict[taxon_array_per_bin[i]] = int(length_array_per_bin[i]) # initialize dict value for new key.
-
-    prop_list = bin_comp_dict.values()
-    label_list = bin_comp_dict.keys()
-    return prop_list, label_list 
-
-def Seaborn_Violin_plot(sample_binned_df):
-    fig, ax1 = plt.subplots(figsize=(35, 12))
-    matplotlib.rcParams.update({'font.size': 48})
-    colors = ['yellow', 'red', 'green', 'blue', 'brown','cyan','grey','goldenrod','lime','violet','indigo','coral','olive','azure', 'light pink', 'dark blue']
-    color_iter = iter(colors)
-    sample_binned_df['Contig2Bin'] = pd.Categorical(sample_binned_df['Contig2Bin'], [i for i in set(sample_binned_df['Contig2Bin'])])
-    log10_depth_sample = np.log10(np.array(sample_binned_df['batch depth per contig']))
-    sample_binned_df['log10 depth per contig'] = log10_depth_sample
-    groups = sample_binned_df.groupby("Contig2Bin")
-    index = 0
-    for group_name, group in groups:
-        sns.violinplot(x="log10 depth per contig",y="Contig2Bin", data=group, orient="h", ax=ax1, color = colors[index])
-        sns.stripplot(x="log10 depth per contig", y="Contig2Bin", data=group, orient="h", jitter=True, zorder=1, size=6, color="purple")
-        index += 1
-    plt.yticks(fontsize=14)
-    plt.xticks(fontsize=18)
-    plt.xlabel("log10 depth per contig", fontsize=20)
-    plt.title("Violin Plot of batch depth for each bin")
-    violin_plot_path = figure_output_dir/f"{batch_name}_Contig_Depth_Violin_Plot.png"
-    plt.savefig(str(violin_plot_path), dpi="figure")
-    return    
 # output the violin plot.
 summary_dataframe['batch depth per contig']=compute_batch_depth(assembly_depth_array)
 # depth_violin_plot(summary_dataframe, assembly_bin_array)
 binned_contigs_per_batch=summary_dataframe.loc[summary_dataframe["Contig2Bin"].notna()]
-Seaborn_Violin_plot(binned_contigs_per_batch)
+simplified_binname = MAG_name_simplify(binned_contigs_per_batch, batch_name)
+binned_contigs_per_batch['Bin name simplified'] = simplified_binname
+violin_plot_by_bin=(
+                # The plot firstly needs ggplot attribute, to select cols.
+                ggplot(binned_contigs_per_batch, aes(x="Bin name simplified", y="log merged depth", color="Bin name simplified"))
+                + geom_violin()
+                + geom_point()
+                + gg.coord_flip()
+                + gg.theme(figure_size=(15, 13), 
+                           axis_title_x=gg.element_text(size=14), 
+                           axis_title_y=gg.element_text(size=14),
+                           axis_text_x=gg.element_text(size=12),
+                           axis_text_y=gg.element_text(size=12)) # Theme is responsible for fontsize, legend, figsize...
+).draw(show=False)
+
+violin_plot_by_bin.savefig(f"{figure_output_dir}/LogDepth_Violin.png", dpi=300)
 
 #2. sequence depth, gc contents and marker gene.
-def marker_counter(marker_array):
-    marker_count_array = []
-    for i in marker_array:
-        # print(i)
-        if pd.isna(i):
-            marker_count_array.append(0)
-        else:
-            marker_list = [genes for genes in i.split(",") if genes != ""]
-            # print(marker_list)
-            marker_count_array.append(len(marker_list))
-    return marker_count_array
-
-def compute_batch_depth(depth_Array):
-    batch_depth = []
-    for i in depth_Array:
-        str_i = str(i)
-        if "\t" in str_i:
-            depth_list = [float(j) for j in i.split("\t")]
-            batch_depth_per_contig = sum(depth_list)
-            batch_depth.append(batch_depth_per_contig)
-        else:
-            depth_batch = i
-            batch_depth.append(depth_batch)
-    return batch_depth
-
-
 
 plt.rcParams["figure.autolayout"] = True
 plt.rcParams["figure.figsize"] = [25, 36]
 plt.rcParams.update({'font.size': 24})
 
 fig1, axsc = plt.subplots(nrows=2, ncols=1)
-sns.set(font_scale=3)
+sns.set_theme(font_scale=3)
 # store count of marker genes.
 markers_per_contig = binned_contigs_per_batch['markers on the contig']
 marker_count = marker_counter(markers_per_contig)
@@ -156,6 +100,18 @@ plt.legend(bbox_to_anchor=(1.02, 1), loc='lower left', borderaxespad=0)
 axsc[0].set_title("GC vs. sequence depth, dot size scaled by marker count", fontsize=40)
 axsc[0].set_xlabel("GC content", fontsize=45)
 axsc[0].set_ylabel(r"$Sequence Depth (log_{10})$", fontsize=45)
+
+Scatter_GC_log_depth=(
+                        ggplot(binned_contigs_per_batch, aes(x="GC contents", y="log10 merged depth", color="Bin name simplified", size = "marker count"))
+                            + geom_point()
+                            + gg.labs(color="Bins", size="marker count")
+                            + gg.theme(legend_title=gg.element_text(size=12, weight='bold'), 
+                                    legend_text=gg.element_text(size=10))
+                            + gg.ggtitle("Demo: dot-scaled scatterplot")
+                    ).draw(show=False) # Add size and colors here.
+                            # Add point scale. 
+
+Scatter_GC_log_depth.savefig(f"{figure_output_dir}/Scatter_GCLogDepth.png", dpi=300)
 
 # The second plot is the bar chart of the completeness and purity.
 bins = [i for i in list(set(binned_contigs_per_batch['Contig2Bin']))]
@@ -214,7 +170,7 @@ for i in bin_set:
         
         # prepare the graph.
         MAGfig, MAGax = plt.subplots(figsize=(18,18))
-        sns.set(font_scale=2)
+        sns.set_theme(font_scale=2)
         plt.style.use('_mpl-gallery-nogrid')
         contig_composition_taxon_prop_bylength, taxon_labels = count_and_prop(contig_composition)[0], count_and_prop(contig_composition)[1]
         colors = plt.get_cmap('jet')(np.linspace(0.2, 0.7, len(set(contig_composition_taxon_prop_bylength))+10))

@@ -16,6 +16,13 @@ def compute_batch_depth(depth_Array):
             batch_depth.append(depth_batch)
     return batch_depth
 
+def MAG_name_simplify(DF, BATCH_NAME):
+    bins = list(DF.loc[:, "Contig2Bin"])
+    bins_simplified = []
+    for bin in bins:
+        bin_feature = "_".join([BATCH_NAME, *bin.split("_")[-3:]])
+        bins_simplified.append(bin_feature)
+    return bins_simplified
 
 def count_and_prop(individual_bin_df):
     bin_comp_dict = dict()
