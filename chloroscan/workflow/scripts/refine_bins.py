@@ -5,12 +5,12 @@ from os import listdir
 import pandas as pd
 import numpy as np
 import sys
-# Do we need to apply another constraint: plastid bin lengths?
 
-# Some global variable inputs. This script needs to be better ellaborated.
 output_dir_for_refined_bins = snakemake.output[0]
 
 # Inputs and params.
+# The overall rationale has to be fine-tuned after using uniref90+algaProt.
+
 cross_reference_table = snakemake.input['cross_ref']
 original_bins = snakemake.input['original_bins']+"/bins"
 CAT_prediction = snakemake.input['CAT_prediction'] + "/out.CAT.contig2classification.txt"
@@ -23,16 +23,6 @@ os.mkdir(output_dir_for_refined_bins)
 if (os.stat(cross_reference_table).st_size == 0):
     print("Empty cross reference table, exit.\n")
     sys.exit(0)
-
-# If corgi has the outputs while binny doesn't, we stop the refinement.
-# if os.path.exists(original_bins):
-#     binny_check = listdir(original_bins)
-#     if len(binny_check) == 0:
-#         print("No bins produced, system shut down.")
-#         sys.exit(0)
-#     else:
-#         print("Ok, your bins are good to go.")
-
 
 cross_ref_refine_df = pd.read_csv(cross_reference_table,sep="\t", index_col=0)
 bin_list = listdir(original_bins)
@@ -72,7 +62,6 @@ for i in list_of_seqrec.keys():
             # But the only problem is the off-target: if the contig has some undocumented markers and was not 
             # classified algal sequence by CAT, it will be removed as well.
 
-            # We will have to go back to the
             elif (pd.isna(np.array(elem_in_crossref['markers on the contig'])[0])):
                 print("This is a contamination.")
                 contig_ids.remove(elem_id)

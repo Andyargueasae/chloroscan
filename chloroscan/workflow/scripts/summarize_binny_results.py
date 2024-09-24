@@ -7,6 +7,7 @@ from Bio import SeqIO
 import urllib.request
 import os
 from pathlib import Path
+from summarization_utils import *
 
 
 # set up global variables that could work as input files.

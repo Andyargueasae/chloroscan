@@ -2,9 +2,6 @@
 set -e
 default_binny_config_path="binny_ChloroScan/config/config.default.yaml"
 
-pwd
-# make sure there are no empty spaces when assigning variables.
-echo "The default config file path: $default_binny_config_path"
 
 usage() {
     echo "Usage: $0 -[h|a|d|t|l|o|e|m|c|s|p|u|y] " 1>&2
@@ -17,6 +14,7 @@ usage() {
     echo "       -o output directory for binny to output those bins" 1>&2
     echo "       -e specify an epsilon range for binny arguments" 1>&2
     echo "       -m specify minimum sample list for each round" 1>&2
+    echo "       -n specify snakemake env for binny to use, so that it won't create it again." 1>&2
     echo "       -c minimum completeness" 1>&2
     echo "       -s start completeness" 1>&2
     echo "       -p purity threshold for bin selection" 1>&2
@@ -136,6 +134,11 @@ sed -i "s@purity: 95@purity: $purity@g" $curr_config
 sed -i "s@include_depth_initial: 'False'@include_depth_initial: 'True'@g" $curr_config
 
 sed -i "s@include_depth_main: 'False'@include_depth_main: 'True'@g" $curr_config
+
+SNAKEMAKE_ENV="snakemake_env" 
+sed -i "s@snakemake_env: \"\"@snakemake_env: \"$SNAKEMAKE_ENV\"@g" $curr_config
+
+# sed -i 's@prokka_env: ""@prokka_env: "/home/student.unimelb.edu.au/yuhtong/mambaforge/envs/prokkaenv"@g' $curr_config
 # by applying \ before any characters, could help to identify them with efficiency.
 
 # Work done. Now the yaml file is ready to be put into binny. 

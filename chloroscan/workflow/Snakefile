@@ -15,29 +15,27 @@ import yaml
 import urllib.request
 from snakemake.utils import min_version
 import logging
+from pathlib import Path
 
 min_version("6.0")
 
 shell.executable("bash")
 
-# default configuration file.
-configfile: "config/config.running.yaml"
-
 # Some major configuration parameters and inputs.
-assembly_path = config['Inputs']['assembly_path']
-ALIGNMENT_FILES = config['Inputs']['alignment_files']
+assembly_path = config['Inputs']['assembly']
+ALIGNMENT_FILES = config['Inputs']['alignment']
+DEPTH_TEXT_FILE=config['Inputs']['depth_txt']
+try:
+    DEPTH_FILE_EXISTS = Path(DEPTH_TEXT_FILE).exists()
+except TypeError:
+    DEPTH_FILE_EXISTS = False
 
-if config['Inputs']['depth_txt']:
-    DEPTH_TEXT_FILE=config['Inputs']['depth_txt']
-else:    
-    DEPTH_TEXT_FILE = ""
 OUTPUT_DIR = Path(config['outputdir'])
 BATCH_NAME = config['Inputs']['batch_name']
 
-BINNY_OUTPUT_DIR = config['binny_settings']['outputdir_binny']    
+BINNY_OUTPUT_DIR = config['binning']['outputdir']    
 # For binny: some global names.
 GLOBAL_CONFIG = "config.ChloroScan.yaml"
-THREAD=config['threads']
 
 WORKFLOW_DIR = Path(workflow.basedir)
 # BINNY_DIR = WORKFLOW_DIR.parent.parent/"binny_Chloroscan" 
@@ -47,8 +45,8 @@ SCR_DIR = WORKFLOW_DIR/"scripts"
 DEFAULT_DB_DIR = Path("/home/student.unimelb.edu.au/yuhtong/andy/MMA_organelle_metagenomics/databases")
 DB_DIR = WORKFLOW_DIR.parent.parent/"databases" 
 # For CAT taxonomy, some global name.
-CAT_DB_DIR = DB_DIR/config['CAT_database']
-CAT_TAXON_DIR = DB_DIR/config['CAT_taxonomy']
+CAT_DB_DIR = DB_DIR/config['cat']['database']
+CAT_TAXON_DIR = DB_DIR/config['cat']['taxonomy']
 TAXA = CAT_TAXON_DIR/"names.dmp"
 
 GLOBAL_PREFIX="OUT"
@@ -64,7 +62,6 @@ if not os.path.isabs(TMP_DIR):
 TMP_DIR.mkdir(parents=True, exist_ok=True) # what if we do want to prepare data and put it here?
 
 # Krona environment name.
-KRONA_ENV=config['Krona_env']
 # Now rules are introduced. They are placed into the single snakefile in order to increase efficiency for debugging.
 # Major output: MMA.done, branching summary results: cross_ref.xlsx and CAT_taxonomy_annotation.tsv. 
 rule all:
@@ -75,16 +72,15 @@ rule all:
         OUTPUT_DIR/"Krona.html",
         OUTPUT_DIR/"ChloroScan.done"
 
-
 # The most important two rules are: corgi and binny.
 # SCRDIR, needs an absolute path?
 rule corgi_prediction:
     input: 
         seqs = assembly_path 
     params:
-        batch_size = config['corgi_settings']['batch_size'],
-        min_length = config['corgi_settings']['minlen'],
-        p_threshold = config['corgi_settings']['pthreshold'],
+        batch_size = config['corgi']['batch_size'],
+        min_length = config['corgi']['min_length'],
+        p_threshold = config['corgi']['pthreshold'],
         bash_plastid_accession_script = Path(SCR_DIR/"corgi-gather_accession.sh"),
         python_fasta_writer = Path(SCR_DIR/"corgi-fasta_filter.py"),
         plastid_contigs_identifier = Path(TMP_DIR/"plastid_accession.txt"),
@@ -99,8 +95,6 @@ rule corgi_prediction:
         "Using the machine learning algorithm 'CORGI' to predict contig identity. Don't rise batch size too high."
     resources:
         mem_mb=20000
-    threads:
-        15
     log:
         OUTPUT_DIR/"logging_info/corgi.log"
     benchmark:
@@ -158,33 +152,63 @@ rule corgi_prediction:
 
 # Add one checkpoint here, I want to end the workflow if there are no plastid contigs.
 
+# Add contig depth calculation here. Check if depth file is empty or not. 
+if not DEPTH_FILE_EXISTS:
+    rule contig_depth_calculation:
+        input:
+            assembly = rules.corgi_prediction.output.plastid_contigs,
+            alignment = ALIGNMENT_FILES
+        output:
+            OUTPUT_DIR/"working/call_contig_depth"
+        params:
+            script_dir = SCR_DIR,
+            tmpdir = TMP_DIR,
+            perl_script = SCR_DIR/"calcAvgCoverage.pl"
+        conda:
+            "envs/DepthCall.yml"
+        message:
+            "Calculate the depth of each contig in the assembly."
+        log:
+            OUTPUT_DIR/"logging_info/call_contig_depth.log"
+        script:
+            "{params.script_dir}/call_contig_depth.sh"
+
+    rule merge_contig_depth:
+        input:
+            depth_files = directory(OUTPUT_DIR/"working/call_contig_depth")
+        output:
+            OUTPUT_DIR/"working/depth_profile.txt"
+        params:
+            script_dir = SCR_DIR
+        conda:
+            "envs/DepthCall.yml"
+        message:
+            "Merge the depth of each contig in the assembly."
+        script:
+            "{params.script_dir}/merge_contig_depth.sh"
+
 rule binny_workflow:
     input:
-        plastid_contigs = rules.corgi_prediction.output.plastid_contigs
+        plastid_contigs = rules.corgi_prediction.output.plastid_contigs,
+        depth_text = lambda wildcards: DEPTH_TEXT_FILE if DEPTH_FILE_EXISTS else rules.merge_contig_depth.output # Binny now only takes the depth text profile as input.
         
     params:
-        # binny_dir = BINNY_DIR,
-        bamfiles = ALIGNMENT_FILES,
-        depth_text = DEPTH_TEXT_FILE,
-        # defaultxxx_config = BINNY_DIR/"config/config.default.yaml",
-        # currxxx_config = BINNY_DIR/"config/config.ChloroScan.yaml",
         bash_create_yaml = Path(SCR_DIR/"create_yaml.sh"),
-        # outputdir is a must-checked one!
-        universal_length_cutoff = config['binny_settings']['universal_length_cutoff'],
-        hdbscan_epsilon_range = config['binny_settings']['clustering']['epsilon_range'],
-        hdbscan_min_samples_range = config['binny_settings']['clustering']['hdbscan_min_samples_range'],
-        quality_min_completeness = config['binny_settings']['bin_quality']['min_completeness'],
-        quality_start_completeness = config['binny_settings']['bin_quality']['start_completeness'],
-        quality_min_purity = config['binny_settings']['bin_quality']['purity'],
-        outputdir_within_binny = config['binny_settings']['outputdir_binny'], # within binny.
-        threads=THREAD
-         #this place shall be the output, relating to binny!
+        universal_length_cutoff = config['binning']['universal_length_cutoff'],
+        hdbscan_epsilon_range = config['binning']['clustering']['epsilon_range'],
+        hdbscan_min_samples_range = config['binning']['clustering']['hdbscan_min_sample_range'],
+        quality_min_completeness = config['binning']['bin_quality']['min_completeness'],
+        quality_start_completeness = config['binning']['bin_quality']['starting_completeness'],
+        quality_min_purity = config['binning']['bin_quality']['purity'],
+        outputdir_within_binny = config['binning']['outputdir'], # within binny.
     output:
         dir_binny = directory(OUTPUT_DIR/"working/binny")
     message:
         "Use the binning algorithm binny to find all high-coverage bins with completeness>=72.5% and purity>=95%."
     conda:
         "envs/binny.yml"
+    threads:
+        workflow.cores
     shell:
         """
         set -e
@@ -192,33 +216,22 @@ rule binny_workflow:
         # Check if plastids are present.
         # If so, then run binny workflow.
         if [ -s {input.plastid_contigs} ]; then
-            if [ -z {params.depth_text} ]
-            then
-                [ -n $BINNY_DIR/config/config.default.yaml ] && echo "default config file for binny found."
-                [ -z $BINNY_DIR ] && echo "default binny dir not found." 
-                bash {params.bash_create_yaml} -a "{input.plastid_contigs}" -b "$BINNY_DIR/binny_algal_database" -d "$BINNY_DIR/config/config.default.yaml" -l "{params.bamfiles}" -o "{params.outputdir_within_binny}"\
+            [ -n $BINNY_DIR/config/config.default.yaml ] && echo "default config file for binny found."
+            bash {params.bash_create_yaml} -a "{input.plastid_contigs}" -b "$BINNY_DIR/A2K_database" -d "$BINNY_DIR/config/config.default.yaml" -t "{input.depth_text}" -o "{params.outputdir_within_binny}"\
                 -e '{params.hdbscan_epsilon_range}' -m '{params.hdbscan_min_samples_range}' -c {params.quality_min_completeness}\
                 -s {params.quality_start_completeness} -p {params.quality_min_purity} -u {params.universal_length_cutoff}\
                 -y "$BINNY_DIR/config/config.ChloroScan.yaml"
-            else
-                [ -n $BINNY_DIR/config/config.default.yaml ] && echo "default config file for binny found."
-                bash {params.bash_create_yaml} -a "{input.plastid_contigs}" -b "$BINNY_DIR/binny_algal_database" -d "$BINNY_DIR/config/config.default.yaml" -t "{params.depth_text}" -o "{params.outputdir_within_binny}"\
-                -e '{params.hdbscan_epsilon_range}' -m '{params.hdbscan_min_samples_range}' -c {params.quality_min_completeness}\
-                -s {params.quality_start_completeness} -p {params.quality_min_purity} -u {params.universal_length_cutoff}\
-                -y "$BINNY_DIR/config/config.ChloroScan.yaml"
-            fi
 
-            $BINNY_DIR/binny -l -n "MMA_plastids" -t {params.threads} -r $BINNY_DIR/config/config.ChloroScan.yaml
+            $BINNY_DIR/binny -l -n "MMA_plastids" -t {threads} -r $BINNY_DIR/config/config.ChloroScan.yaml
 
             # must remove the config.yaml created at the end, so we need it to be changed with name.
             rm $BINNY_DIR/config/config.ChloroScan.yaml # finally you have to remove it, you don't want to cause confusion.
             echo 'The binny workflow is done, bins are within the binny folder, that may need to move out.'
             # chmod u+w {output.dir_binny}
-            mv {BINNY_OUTPUT_DIR} {output.dir_binny}
-            chmod u+w {output.dir_binny}
+            # mv {BINNY_OUTPUT_DIR} {output.dir_binny}
+            chmod u+w {BINNY_OUTPUT_DIR}
             
             # make sure to remove the bam files within the intermediary folder.
-            rm -rf {output.dir_binny}/intermediary/*.bam
             echo "The binny's output has been moved to the default output directory."
         else
             echo "No plastids present. Create an empty directory for output."
@@ -241,10 +254,6 @@ rule CAT_taxonomy_identification_plus_annotation:
         OUTPUT_DIR/"logging_info/CAT.log"
     benchmark:
         OUTPUT_DIR/"logging_info/CAT_benchmark.tsv"
-    threads:
-        8
-    resources:
-        mem_mb=24000
     conda:
         "envs/CAT_env.yml"
     shell:
@@ -256,8 +265,6 @@ rule CAT_taxonomy_identification_plus_annotation:
         if [ -f "{input.binny_output}/{params.path_to_contigs}" ] ; then
         # CAT running is totally different, we shall make this changed.
             CAT contigs -c {input.binny_output}/{params.path_to_contigs} -d {CAT_DB_DIR} -t {CAT_TAXON_DIR} --force --top 11 --I_know_what_Im_doing
-            # CAT add_names -i {params.prefix}.contig2classification.txt -o {params.prefix}.contig2classification.named.txt -t {CAT_DB_DIR}/2021-01-07_taxonomy --only_official
-            
             mv ./{params.prefix}.* {output.CAT_output}
         fi
         """
@@ -280,8 +287,6 @@ rule documenting_binny_results:
         OUTPUT_DIR/"working/summary/cross_ref.tsv"
     benchmark:
         OUTPUT_DIR/"logging_info/summarize_binny.tsv"
-    threads:
-        5
     conda:
         "envs/documenting_binny.yml"
     message:
@@ -334,8 +339,6 @@ rule cds_extraction:
         "envs/gffread.yml"
     message:
         "Use the fast ORF-predictor FragGeneScan Rust to predict gene contents of the MAGs, then extract the cds via gffread."
-    threads:
-        4
     script:
         "{params.script_dir}/cds-extraction.sh"
 
@@ -349,7 +352,7 @@ rule krona_taxonomy_plot:
         script_dir = SCR_DIR,
         batch_name=BATCH_NAME
     conda:
-        KRONA_ENV if KRONA_ENV else "envs/krona.yml"
+        "envs/krona.yml"
     output:
         OUTPUT_DIR/"Krona.html"
     message:

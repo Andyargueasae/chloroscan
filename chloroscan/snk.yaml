@@ -4,33 +4,32 @@ tagline: "A state-of-art metagenomic workflow extracting chloroplast genomes fro
 conda: True
 skip_missing: True
 symlink_resources: False
-# This is just the sample, we need more to do, because our code was based totally on config file. 
 cli:
   Inputs:
     assembly:
         type: Path
         help: "Path to fasta format assembly of contigs from all sorts of organisms."
-        required: True
+        required: False
         short: a
     depth_txt:
         type: Path
         help: "Path to a tab-separated text storing abundance of each contig in the sample."
-        required: True
+        required: False
         short: d
     alignment:
         type: Path
         help: "Path to the folder containing alignment files of the contigs."
-        required: True
+        required: False
         short: l
     batch_name:
         type: String
         help: "Name of the batch."
-        required: True
+        required: False
         short: b
   outputdir:
       type: Path
       help: "Path to the output directory of the workflow."
-      required: True
+      required: False
       short: o
   tmpdir:
       type: Path

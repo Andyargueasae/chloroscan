@@ -1,8 +1,7 @@
 start=`date +%s`
 set -e
-TMPDIR="tmp_calldepth"
+TMPDIR=${snakemake_params[tmpdir]}
 # TMP_DEPTH=$(mktemp --tmpdir={TMPDIR} "depth_file_XXXXXXXXXXXXXXXX.txt")
-[ ! -d $TMPDIR ] && mkdir $TMPDIR
 
 input_assembly=${snakemake_input[assembly]}
 OUTPUT_CONTIGDEPTH=${snakemake_output}

@@ -6,7 +6,7 @@ Inputs:
   batch_name: ""
   assembly_path: ""
   # PATH/to/ASSEMBLY_FASTA
-  alignment_files: ""
+  alignment_folder: ""
   # PATH/TO/ALIGNMENT_BAMS
   depth_txt: ""
   # PATH/TO/DEPTH.TXT

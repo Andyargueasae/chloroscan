@@ -5,7 +5,8 @@ dependencies:
   - coreutils
   - python=3.9
   - hmmer
-  - mantis_pfa=1.5.5
+  - mantis_pfa=1.4.7
+  - cython
   - pip
   - pip:
     # - bio-corgi>=0.4.0

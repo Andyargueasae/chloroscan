@@ -60,3 +60,9 @@ CORGI is responsible for contig filtering to extract chloroplast contigs. The de
 - CAT-database: The database used for taxonomy prediction. Default is nrDB, but now there are other databases available such as Uniref90_algaProt.
 
 - CAT-taxonomy: The taxonomy dump file for CAT to use.
+
+4. Other settings.
+
+- outputdir: The output directory for the workflow's results, usually named after batch name.
+
+- tmpdir: Temporary directory for storing intermediate files. Default is /tmp.
