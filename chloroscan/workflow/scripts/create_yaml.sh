@@ -135,8 +135,8 @@ sed -i "s@include_depth_initial: 'False'@include_depth_initial: 'True'@g" $curr_
 
 sed -i "s@include_depth_main: 'False'@include_depth_main: 'True'@g" $curr_config
 
-SNAKEMAKE_ENV="snakemake_env" 
-sed -i "s@snakemake_env: \"\"@snakemake_env: \"$SNAKEMAKE_ENV\"@g" $curr_config
+# SNAKEMAKE_ENV="snakemake_env" 
+# sed -i "s@snakemake_env: \"\"@snakemake_env: \"$SNAKEMAKE_ENV\"@g" $curr_config
 
 # sed -i 's@prokka_env: ""@prokka_env: "/home/student.unimelb.edu.au/yuhtong/mambaforge/envs/prokkaenv"@g' $curr_config
 # by applying \ before any characters, could help to identify them with efficiency.

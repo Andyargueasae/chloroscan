@@ -18,7 +18,6 @@ for file in $(ls $input); do
         && mv $TMP_DEPTH $output
     fi
 done
-# rm {params.int_dir}/assembly_contig_depth_*.txt
 
 end=`date +%s`
 runtime=$( echo "$end - $start" | bc -l )
