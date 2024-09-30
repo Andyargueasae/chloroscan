@@ -178,3 +178,7 @@ cwd.txt
 gh-pages/
 docs/gh-pages/
 TEST_OUT*
+
+chloroscan/MGYS*
+binny_output/
+conda_envs/
