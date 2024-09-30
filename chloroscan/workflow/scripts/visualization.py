@@ -52,17 +52,23 @@ assembly_bin_array = list(summary_dataframe['Contig2Bin'])
 contig_taxon = summary_dataframe['Taxon per Contig']
 contig_2_bin = summary_dataframe['Contig2Bin']
 
-colors = ['black', 'red', 'green', 'blue', 'brown','cyan','grey','goldenrod','lime','violet','indigo','coral','olive','azure', 'light pink', 'dark blue']
-color_iter = iter(colors)
+# colors = ['black', 'red', 'green', 'blue', 'brown','cyan','grey','goldenrod','lime','violet','indigo','coral','olive','azure', 'light pink', 'dark blue']
+# color_iter = iter(colors)
+
 # output the violin plot.
 summary_dataframe['batch depth per contig']=compute_batch_depth(assembly_depth_array)
+
 # depth_violin_plot(summary_dataframe, assembly_bin_array)
 binned_contigs_per_batch=summary_dataframe.loc[summary_dataframe["Contig2Bin"].notna()]
 simplified_binname = MAG_name_simplify(binned_contigs_per_batch, batch_name)
 binned_contigs_per_batch['Bin name simplified'] = simplified_binname
+
+#store log10 contig depth.
+log10_depth = np.log10(np.array(binned_contigs_per_batch['batch depth per contig']))
+binned_contigs_per_batch['log10 depth per contig'] = log10_depth
 violin_plot_by_bin=(
                 # The plot firstly needs ggplot attribute, to select cols.
-                ggplot(binned_contigs_per_batch, aes(x="Bin name simplified", y="log merged depth", color="Bin name simplified"))
+                ggplot(binned_contigs_per_batch, aes(x="Bin name simplified", y="log10 depth per contig", color="Bin name simplified"))
                 + geom_violin()
                 + geom_point()
                 + gg.coord_flip()
@@ -88,23 +94,20 @@ markers_per_contig = binned_contigs_per_batch['markers on the contig']
 marker_count = marker_counter(markers_per_contig)
 binned_contigs_per_batch['marker count per contig'] = marker_count
 
-#store log10 contig depth.
-log10_depth = np.log10(np.array(binned_contigs_per_batch['batch depth per contig']))
-binned_contigs_per_batch['log10 depth per contig'] = log10_depth
-groups = binned_contigs_per_batch.groupby("Contig2Bin")
-for bin_name, bin_group in groups:
-    group_label = bin_name.replace("_", " ")
-    print(group_label)
-    sns.scatterplot(data=bin_group, x="GC contents", y="log10 depth per contig", alpha=0.7, s=(np.array(5*5*bin_group['marker count per contig'])+120), marker="o", ax = axsc[0], label = group_label )
-plt.legend(bbox_to_anchor=(1.02, 1), loc='lower left', borderaxespad=0)
-axsc[0].set_title("GC vs. sequence depth, dot size scaled by marker count", fontsize=40)
-axsc[0].set_xlabel("GC content", fontsize=45)
-axsc[0].set_ylabel(r"$Sequence Depth (log_{10})$", fontsize=45)
+# groups = binned_contigs_per_batch.groupby("Contig2Bin")
+# for bin_name, bin_group in groups:
+#     group_label = bin_name.replace("_", " ")
+#     print(group_label)
+#     sns.scatterplot(data=bin_group, x="GC contents", y="log10 depth per contig", alpha=0.7, s=(np.array(5*5*bin_group['marker count per contig'])+120), marker="o", ax = axsc[0], label = group_label )
+# plt.legend(bbox_to_anchor=(1.02, 1), loc='lower left', borderaxespad=0)
+# axsc[0].set_title("GC vs. sequence depth, dot size scaled by marker count", fontsize=40)
+# axsc[0].set_xlabel("GC content", fontsize=45)
+# axsc[0].set_ylabel(r"$Sequence Depth (log_{10})$", fontsize=45)
 
 Scatter_GC_log_depth=(
-                        ggplot(binned_contigs_per_batch, aes(x="GC contents", y="log10 merged depth", color="Bin name simplified", size = "marker count"))
+                        ggplot(binned_contigs_per_batch, aes(x="GC contents", y="log10 depth per contig", color="Bin name simplified", size = "marker count per contig"))
                             + geom_point()
-                            + gg.labs(color="Bins", size="marker count")
+                            + gg.labs(color="Bins", size="marker count per contig")
                             + gg.theme(legend_title=gg.element_text(size=12, weight='bold'), 
                                     legend_text=gg.element_text(size=10))
                             + gg.ggtitle("Demo: dot-scaled scatterplot")
@@ -156,8 +159,6 @@ axsc[1].set_ylim(50, 100)
 
 plt.savefig("{}/{}_binned_contigs_scatter.png".format(figure_output_dir, batch_name), dpi="figure")
 
-
-
 #3. taxonomy pie chart.
 bin_set = set(contig_2_bin)
 bin_set
@@ -186,5 +187,4 @@ for i in bin_set:
     else:
         continue
 
-del summary_dataframe
-# Visualization is done, delete dataframe.
+# Visualization is done.

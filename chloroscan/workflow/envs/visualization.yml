@@ -7,7 +7,7 @@ dependencies:
   - coreutils
   - pip:
     - matplotlib
-    - pandas
-    - numpy
+    - pandas>=2.2.2
+    - numpy<2
     - seaborn
     - plotnine

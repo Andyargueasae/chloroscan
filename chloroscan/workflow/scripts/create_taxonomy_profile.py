@@ -14,7 +14,7 @@ def main(cat_prediction_txt, output):
     for i in lineage_hierarchy:
         indi_hierarchy = i.replace("*","").split(";")
         finest_classification = indi_hierarchy[-1]
-        print(finest_classification)
+        # print(finest_classification)
         finest_lineage.append(finest_classification)
     
     copy_df['intake for krona'] = finest_lineage
