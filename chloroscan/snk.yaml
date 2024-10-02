@@ -62,17 +62,17 @@ cli:
           default: "1,4,7,10"
     bin_quality:
       starting_completeness:
-          type: Integer
+          type: Float
           help: "Starting completeness for bin quality."
           required: False
           default: 92.5
       min_completeness:
-          type: Integer
+          type: Float
           help: "Minimum completeness for bin quality."
           required: False
           default: 72.5
       purity:
-          type: Integer
+          type: Float
           help: "Purity for bin quality."
           required: False
           default: 95
@@ -103,13 +103,13 @@ cli:
         help: "Path to the database of chloroplast genomes."
         required: False
         short: d
-        default: "uniref90_algaProt/db"
+        default: "/home/yuhtong/scratch/andy/uniref90_algaProt/db"
     taxonomy:
         type: Path
         help: "Path to the taxonomy of the database."
         required: False
         short: t
-        default: "uniref90_algaProt/tax"
+        default: "/home/yuhtong/scratch/andy/uniref90_algaProt/tax"
   krona_env:
     type: string
     help: "Path to the Krona environment."

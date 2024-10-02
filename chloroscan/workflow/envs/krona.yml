@@ -3,6 +3,6 @@ channels:
   - bioconda
 dependencies:
   - krona=2.8.1
-  - numpy
+  - numpy<2
   - pandas
   - click

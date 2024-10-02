@@ -1,11 +1,11 @@
 Inputs:
 # This is a default configuration file for the MMA organelle metagenomics workflow.  
   batch_name: "test"
-  assembly_path: "test_data/test_plastid.fasta"
+  assembly_path: "test_data_algal/test_plastid.fasta"
   # PATH/to/ASSEMBLY_FASTA
   alignment_folder: ""
   # PATH/TO/ALIGNMENT_BAMS_DIRECTORYs
-  depth_txt: "test_data/contig_depth_test.txt" 
+  depth_txt: "test_data_algal/contig_depth_test.txt" 
   # PATH/TO/DEPTH.TXT
 
 # Give a name for your sample(s). Should we name this for each batch?

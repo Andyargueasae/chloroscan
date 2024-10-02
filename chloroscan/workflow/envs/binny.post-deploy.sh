@@ -27,8 +27,6 @@ sed -i "s|checkm_filtered_tf_weight=0.5||g" $CFG_PATH
 sed -i "s|/mnt/lscratch/users/ohickl/binning/tools/binny_devel/database/hmms/checkm_pf/checkm_filtered_pf.hmm|$BINNY_DIR/$USE_DB_DIR|g" $CFG_PATH
 sed -i '/^$/d' $CFG_PATH 
 # config sorted, now should setup the database. use mantis only.
-mantis setup -mc $CFG_PATH --no_taxonomy 
-mantis check -mc $CFG_PATH --no_taxonomy
 
 mkdir -p "$CONDA_PREFIX/etc/conda/activate.d"
 echo -e "export BINNY_DIR=\"$BINNY_DIR\"" > "$CONDA_PREFIX/etc/conda/activate.d/binny.sh"

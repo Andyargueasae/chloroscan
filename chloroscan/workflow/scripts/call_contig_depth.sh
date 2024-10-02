@@ -6,7 +6,7 @@ TMPDIR=${snakemake_params[tmpdir]}
 input_assembly=${snakemake_input[assembly]}
 OUTPUT_CONTIGDEPTH=${snakemake_output}
 [  ! -d $OUTPUT_CONTIGDEPTH ] && mkdir -p $OUTPUT_CONTIGDEPTH
-for depth in $(ls ${snakemake_input[alignment]}/*.bam)
+for depth in $(ls ${snakemake_input[alignment]} | grep .bam)
 do
     genomeCoverageBed -ibam ${snakemake_input[alignment]}/$depth | grep -v "genome" > $TMPDIR/$(basename $depth .sorted.bam).txt
     echo "Depth calculation got, now perform average contig depth calculation." >> ${snakemake_log}

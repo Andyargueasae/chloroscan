@@ -94,16 +94,6 @@ markers_per_contig = binned_contigs_per_batch['markers on the contig']
 marker_count = marker_counter(markers_per_contig)
 binned_contigs_per_batch['marker count per contig'] = marker_count
 
-# groups = binned_contigs_per_batch.groupby("Contig2Bin")
-# for bin_name, bin_group in groups:
-#     group_label = bin_name.replace("_", " ")
-#     print(group_label)
-#     sns.scatterplot(data=bin_group, x="GC contents", y="log10 depth per contig", alpha=0.7, s=(np.array(5*5*bin_group['marker count per contig'])+120), marker="o", ax = axsc[0], label = group_label )
-# plt.legend(bbox_to_anchor=(1.02, 1), loc='lower left', borderaxespad=0)
-# axsc[0].set_title("GC vs. sequence depth, dot size scaled by marker count", fontsize=40)
-# axsc[0].set_xlabel("GC content", fontsize=45)
-# axsc[0].set_ylabel(r"$Sequence Depth (log_{10})$", fontsize=45)
-
 Scatter_GC_log_depth=(
                         ggplot(binned_contigs_per_batch, aes(x="GC contents", y="log10 depth per contig", color="Bin name simplified", size = "marker count per contig"))
                             + geom_point()
@@ -138,7 +128,6 @@ for i in bins:
         else:
             continue
     bin_name = prefix + "." + f"{identifier}_C{individual_comp}_P{individual_pur}"
-    # breakpoint()
     bin_xticks.append(bin_name)
 
 width = 0.2
@@ -146,10 +135,15 @@ x=np.arange(len(bins))
 multiplier=0
 
 for attribute, measurement in bins_quality_dict.items():
+    # Add scatterplot of completeness against purity.
+
     offset = width * multiplier
     bin_record = axsc[1].bar(x+offset, measurement, width, label=attribute)
     axsc[1].bar_label(bin_record, padding=3)
     multiplier += 1
+axsc[0].scatter(bins_quality_dict["Bin Completeness"], bins_quality_dict["Bin Purity"])
+axsc[0].set_xlabel("Bin Completeness (%)")
+axsc[0].set_ylabel("Bin Purity (%)")
 
 axsc[1].set_ylabel("percentage")
 axsc[1].set_xlabel("bin name")
@@ -157,17 +151,14 @@ axsc[1].set_xticks(x + width, bin_xticks, rotation=30)
 axsc[1].legend(loc='lower left', ncols=len(bins))
 axsc[1].set_ylim(50, 100)
 
-plt.savefig("{}/{}_binned_contigs_scatter.png".format(figure_output_dir, batch_name), dpi="figure")
+plt.savefig("{}/{}_bins_scatter_bar_chart.png".format(figure_output_dir, batch_name), dpi="figure")
 
 #3. taxonomy pie chart.
 bin_set = set(contig_2_bin)
 bin_set
 for i in bin_set:
-#     print(i)
     if not pd.isna(i):
-        # print(i)
         contig_composition = summary_dataframe.loc[summary_dataframe['Contig2Bin'] == i]
-        # print(contig_composition)
         
         # prepare the graph.
         MAGfig, MAGax = plt.subplots(figsize=(18,18))
@@ -186,5 +177,3 @@ for i in bin_set:
         plt.savefig("{}/{}_{}_taxonomy_composition.png".format(figure_output_dir, batch_name, i), dpi="figure")
     else:
         continue
-
-# Visualization is done.

@@ -43,11 +43,11 @@ WORKFLOW_DIR = Path(workflow.basedir)
 SCR_DIR = WORKFLOW_DIR/"scripts"
 
 DEFAULT_DB_DIR = Path("/home/student.unimelb.edu.au/yuhtong/andy/MMA_organelle_metagenomics/databases")
-DB_DIR = WORKFLOW_DIR.parent.parent/"databases" 
-# For CAT taxonomy, some global name.
-CAT_DB_DIR = DB_DIR/config['cat']['database']
-CAT_TAXON_DIR = DB_DIR/config['cat']['taxonomy']
-TAXA = CAT_TAXON_DIR/"names.dmp"
+ 
+# For CAT taxonomy prediction, please provide tax and db directory path.
+CAT_DB_DIR = config['cat']['database']
+CAT_TAXON_DIR = config['cat']['taxonomy']
+TAXA = os.path.join(CAT_TAXON_DIR, "names.dmp")
 
 GLOBAL_PREFIX="OUT"
 GLOBAL_PREFIX_contigs="out.CAT"
@@ -101,8 +101,7 @@ rule corgi_prediction:
         OUTPUT_DIR/"logging_info/corgi_benchmarking.tsv"
     shell:
         """
-        pwd
-        echo CORGI output going to here: {output.corgi_out}
+        set -e
         touch {output.plastid_contigs}
         echo "corgi --file {input.seqs} --csv {output.corgi_out} --batch-size {params.batch_size} --min-length {params.min_length} --no-save-filtered"
         corgi --file {input.seqs} --csv {output.corgi_out} --batch-size {params.batch_size} --min-length {params.min_length} --no-save-filtered &> {log}
@@ -114,7 +113,6 @@ rule corgi_prediction:
 
         zero=0
         if [ $plastid_contig_count -eq $zero ]; then
-            # do something to store the csv file only, and stop any other things.
             echo "No plastid contigs found, rule exit."
             exit 0
 
@@ -129,7 +127,6 @@ rule corgi_prediction:
             contig_total=$((prediction_lines-header))
             ls {params.output_dir}/working/corgi
             
-            echo "Is it here?"
             plastid_match=$(grep -o ">" {output.plastid_contigs} | wc -l)
 
             echo "total classified contigs containing all 5 domains: $contig_total"> {params.output_dir}/corgi.summary.txt
@@ -149,17 +146,14 @@ rule corgi_prediction:
         fi
         
         """    
-
-# Add one checkpoint here, I want to end the workflow if there are no plastid contigs.
-
-# Add contig depth calculation here. Check if depth file is empty or not. 
+ 
 if not DEPTH_FILE_EXISTS:
     rule contig_depth_calculation:
         input:
             assembly = rules.corgi_prediction.output.plastid_contigs,
             alignment = ALIGNMENT_FILES
         output:
-            OUTPUT_DIR/"working/call_contig_depth"
+            directory(OUTPUT_DIR/"working/call_contig_depth")
         params:
             script_dir = SCR_DIR,
             tmpdir = TMP_DIR,
@@ -212,7 +206,7 @@ rule binny_workflow:
     shell:
         """
         set -e
-        echo "Current mamba environment." 
+        echo "Running binny with the output binny_output." 
         # Check if plastids are present.
         # If so, then run binny workflow.
         if [ -s {input.plastid_contigs} ]; then
@@ -222,14 +216,15 @@ rule binny_workflow:
                 -s {params.quality_start_completeness} -p {params.quality_min_purity} -u {params.universal_length_cutoff}\
                 -y "$BINNY_DIR/config/config.ChloroScan.yaml"
 
+            echo "Configuration done, now run binny snakemake workflow."
             $BINNY_DIR/binny -l -n "MMA_plastids" -t {threads} -r $BINNY_DIR/config/config.ChloroScan.yaml
+            # fi
 
             # must remove the config.yaml created at the end, so we need it to be changed with name.
-            rm $BINNY_DIR/config/config.ChloroScan.yaml # finally you have to remove it, you don't want to cause confusion.
+            # rm $BINNY_DIR/config/config.ChloroScan.yaml # finally you have to remove it, you don't want to cause confusion.
             echo 'The binny workflow is done, bins are within the binny folder, that may need to move out.'
-            # chmod u+w {output.dir_binny}
-            # mv {BINNY_OUTPUT_DIR} {output.dir_binny}
-            chmod u+w {BINNY_OUTPUT_DIR}
+            mv {BINNY_OUTPUT_DIR} {output.dir_binny}
+            chmod u+w {output.dir_binny}
             
             # make sure to remove the bam files within the intermediary folder.
             echo "The binny's output has been moved to the default output directory."
@@ -258,13 +253,13 @@ rule CAT_taxonomy_identification_plus_annotation:
         "envs/CAT_env.yml"
     shell:
         """
+        set -e
         mkdir -p {output}
 
         # Check to see if the binny directory is empty or not
-        find {input.binny_output} -mindepth 1 -maxdepth 1
+        find {input.binny_output} -mindepth 1 -maxdepth 1 >> {log}
         if [ -f "{input.binny_output}/{params.path_to_contigs}" ] ; then
-        # CAT running is totally different, we shall make this changed.
-            CAT contigs -c {input.binny_output}/{params.path_to_contigs} -d {CAT_DB_DIR} -t {CAT_TAXON_DIR} --force --top 11 --I_know_what_Im_doing
+            CAT contigs -c {input.binny_output}/{params.path_to_contigs} -d {CAT_DB_DIR} -t {CAT_TAXON_DIR} --force >> {log} 
             mv ./{params.prefix}.* {output.CAT_output}
         fi
         """
@@ -296,18 +291,20 @@ rule documenting_binny_results:
 
 rule refine_bins:
     input:
-      cross_ref = OUTPUT_DIR/"working/summary/cross_ref.tsv",
-      original_bins = Path(OUTPUT_DIR/"working/binny"),
-      CAT_prediction = Path(OUTPUT_DIR/"working/CAT"),
+        cross_ref = OUTPUT_DIR/"working/summary/cross_ref.tsv",
+        original_bins = Path(OUTPUT_DIR/"working/binny"),
+        CAT_prediction = Path(OUTPUT_DIR/"working/CAT"),
     params:
-      BACTERIA_ID = "2",
-      script_dir = SCR_DIR
+        BACTERIA_ID = "2",
+        script_dir = SCR_DIR
     output:
-      refine_dir = directory(OUTPUT_DIR/"working/refined_bins")
+        refine_dir = directory(OUTPUT_DIR/"working/refined_bins")
     conda:
-      "envs/refinement.yml"
+        "envs/refinement.yml"
+    log:
+        OUTPUT_DIR/"logging_info/refinement.log"
     script:
-      "{params.script_dir}/refine_bins.py"
+        "{params.script_dir}/refine_bins.py"
 
 rule visualize_results:
     input:
@@ -321,6 +318,8 @@ rule visualize_results:
         directory(OUTPUT_DIR/"working/visualizations")
     conda:
         "envs/visualization.yml"
+    log:
+        OUTPUT_DIR/"logging_info/visualizations.log"
     script:
         "{params.script_dir}/visualization.py"
 
@@ -359,6 +358,8 @@ rule krona_taxonomy_plot:
         "essure that in your env there must have pandas, click and of course, Kronatools."
     shell:
         """
+        set -e
+
         # add if statement: if there are empty out.CAT file, we exit with touched files: Krona.html.
         if [ ! -s {input}/{params.file_to_remodel} ]; then
             echo "No contig predictions because previous rules did not find any plastid contigs."

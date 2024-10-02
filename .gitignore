@@ -161,8 +161,8 @@ cython_debug/
 #.idea/
 
 wandb/
-
-.snakemake
+chloroscan/.snakemake/
+.snakemake/*
 results
 conda
 databases

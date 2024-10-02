@@ -8,4 +8,4 @@ dependencies:
   - pip:
     - biopython
     - pandas
-    - numpy
+    - numpy<2

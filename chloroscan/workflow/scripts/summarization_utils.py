@@ -27,17 +27,12 @@ def form_marker_array(empty_marker_array, annot_file, contig_id):
         annot_lines = af.readlines()
     marker_dict = {}
     default = "no markers in the database"
-    # len(annot_lines)
     for i in range(len(annot_lines)):
         i_th_ORF = annot_lines[i].split("\t")
-    #     print(i_th_ORF)
         
         key = i_th_ORF[0]
         ORF = i_th_ORF[-1]
-        # print(key)
-    #     print(ORF)
         ORF_split = ORF.replace("\n","").split(";")
-        # print(ORF_split[-1])
         # Initiate the gathering.
         if ("checkm_marker" in ORF_split[-1]) and (key not in marker_dict.keys()):
             marker_dict[key] = ""
@@ -77,14 +72,14 @@ def store_basic_info(contig_id_array, contig_seq_array, contig_len_array, contig
         contig_seq_array.append(i.seq)
         contig_len_array.append(len(i.seq))
         contig_gc_array.append(GC_content(str(i.seq)))
-
     return
+
 def find_finest_taxon(id_hierarchy, all_organisms):
     i = 0
     length_id_hierarchy = len(id_hierarchy)
     while i < length_id_hierarchy:
         try:
-            that_organism = all_organisms[id_hierarchy[i]]
+            the_organism = all_organisms[id_hierarchy[i]]
             i+=1
         except KeyError:
             break
@@ -103,7 +98,6 @@ def all_organisms_dict(names_dump):
     return all_organisms
 
 def form_contig_taxa_array(empty_taxon_array, contig_id, names_dump, contig_annotation):
-    # follow the same order as the contig_id.
     with open(contig_annotation, "r") as contig_f:
         contig_taxonomy_lines = contig_f.readlines()
 
