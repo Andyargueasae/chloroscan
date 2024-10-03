@@ -10,13 +10,17 @@ The pip version of ChloroScan accepts following arguments:
 
 .. image:: ../_static/images/chloroscan_cli.png
 
-Among these arguments, only assembly path, depth text, alignment folder and output folder are required for inputs.  
+Among these arguments, only assembly path, depth text, alignment folder and a batch name are required for ChloroScan to run.
+
+Please prepare your assembly in unziped fasta format to allow for processing. 
+
+The sequence alignment folder should contain sorted.bam files to map each contig's sequence coverage in assembly.
 
 An example command for running ChloroScan if depth text file is available:
 
 .. code-block:: bash
 
-   chloroscan run --Inputs-assembly-path assembly.fasta --Inputs-depth-txt depth.txt --Inputs-batch-name BATCH_NAME --outputdir OUTPUT_DIR
+   chloroscan run --Inputs-assembly-path assembly.fasta --Inputs-depth-txt depth.txt --Inputs-batch-name BATCH_NAME --outputdir OUTPUT_DIR --cores N_CORES 
 
 An example command for running ChloroScan if depth text file is not available:
 
@@ -37,7 +41,7 @@ CORGI is responsible for contig filtering to extract chloroplast contigs. The de
 
 - --corgi-settings-pthreshold: P-value threshold for filtering contigs. Default is 0.90. Bigger value means more stringent filtering.
 
-- --corgi-settings-save-filtering: Whether to save the filtered contigs using CORGI. Default is False.
+- --corgi-settings-save-filtering: Whether to save the filtered contigs using CORGI. Default is False and the customized python scripts in chloroscan could achieve quite fast writing speed.
 
 - --corgi-settings-batch-size: number of contigs to be processed in one batch. Default is 1. Smaller batch size can reduce memory usage and elevate speed. 
 
@@ -57,12 +61,15 @@ CORGI is responsible for contig filtering to extract chloroplast contigs. The de
 
 3. Homology-based taxonomy prediction by CAT.
 
-- CAT-database: The database used for taxonomy prediction. Default is nrDB, but now there are other databases available such as Uniref90_algaProt.
+- CAT-database: The database used for taxonomy prediction by CAT/BAT, ensure this is an absolute path.
 
-- CAT-taxonomy: The taxonomy dump file for CAT to use.
+- CAT-taxonomy: The taxonomy dump file for CAT to use. Ensure this path is an absolute path.
 
 4. Other settings.
 
 - outputdir: The output directory for the workflow's results, usually named after batch name.
 
 - tmpdir: Temporary directory for storing intermediate files. Default is /tmp.
+
+Note: Currently the pip version of chloroscan recommends to use a snakemake virtual environment with snakemake=6.15.5 installed for binny's module to use. 
+Other wise the binny module might fail while running.   

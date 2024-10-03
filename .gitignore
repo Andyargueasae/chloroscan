@@ -169,6 +169,8 @@ databases
 binny_Chloroscan
 MGYS*
 SRP*
+DRP*
+
 tmp/
 chloroscan_outputs/
 DRP*

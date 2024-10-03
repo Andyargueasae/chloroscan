@@ -44,6 +44,8 @@ do
             hdb_epsilon=$OPTARG;;
         m) 
             hdb_min_sample=$OPTARG;;
+        n)
+            snakemake_env=$OPTARG;;
         c)
             min_completeness=$OPTARG;;
         s) 
@@ -57,8 +59,8 @@ do
     esac
 done
 
-echo "assembly points to: $assembly";
-echo "Default binny config file: $default_config";
+echo "assembly path: $assembly";
+echo "Default binny config file path: $default_config";
 echo "Config file to be used: $curr_config";
 echo "offered alignment files: $alignment";
 echo "offered depth profile: $depth_text"
@@ -69,7 +71,7 @@ echo "minimum completeness of bin: $min_completeness";
 echo "start completeness of bin: $start_completeness";
 echo "purity chosen: $purity";
 echo "Universal Length cutoff: $lengthcutoff"
-
+echo "Offered Customized snakemake env: $snakemake_env"
 # Now edit the file one by one.
 ## copy that default file and change the copy to be the one.
 # error comes from here first.
@@ -135,8 +137,7 @@ sed -i "s@include_depth_initial: 'False'@include_depth_initial: 'True'@g" $curr_
 
 sed -i "s@include_depth_main: 'False'@include_depth_main: 'True'@g" $curr_config
 
-SNAKEMAKE_ENV="/home/yuhtong/.conda/envs/snakemake-env" 
-sed -i "s@snakemake_env: \"\"@snakemake_env: \"$SNAKEMAKE_ENV\"@g" $curr_config
+sed -i "s@snakemake_env: \"\"@snakemake_env: \"$snakemake_env\"@g" $curr_config
 
 # sed -i 's@prokka_env: ""@prokka_env: "/home/student.unimelb.edu.au/yuhtong/mambaforge/envs/prokkaenv"@g' $curr_config
 # by applying \ before any characters, could help to identify them with efficiency.

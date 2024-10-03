@@ -43,6 +43,11 @@ cli:
         help: "Length cutoff for universal binning."
         required: False
         default: 1500
+    snakemake_env:
+        type: Path
+        help: "Customized snakemake environment for binny to run."
+        required: False
+        default: None
     outputdir:
         type: Path
         help: "Path to the output directory of the binning."
@@ -52,7 +57,7 @@ cli:
     clustering:
       epsilon_range:
           type: string
-          help: "Range of epsilon values for DBSCAN clustering."
+          help: "Range of epsilon values for HDBSCAN clustering."
           required: False
           default: "0.250,0.000"
       hdbscan_min_sample_range:
