@@ -34,6 +34,7 @@ OUTPUT_DIR = Path(config['outputdir'])
 BATCH_NAME = config['Inputs']['batch_name']
 
 BINNY_OUTPUT_DIR = config['binning']['outputdir']    
+BINNY_SNAKEMAKE_ENV = config['binning']['snakemake_env']
 # For binny: some global names.
 GLOBAL_CONFIG = "config.ChloroScan.yaml"
 
@@ -51,6 +52,7 @@ TAXA = os.path.join(CAT_TAXON_DIR, "names.dmp")
 
 GLOBAL_PREFIX="OUT"
 GLOBAL_PREFIX_contigs="out.CAT"
+# GLOBAL_PREFIX_contigs="out.CAT.{}".format(BATCH_NAME)
 # create the output directory.
 OUTPUT_DIR.mkdir(parents=True, exist_ok=True)
 
@@ -195,6 +197,7 @@ rule binny_workflow:
         quality_start_completeness = config['binning']['bin_quality']['starting_completeness'],
         quality_min_purity = config['binning']['bin_quality']['purity'],
         outputdir_within_binny = config['binning']['outputdir'], # within binny.
+        binny_snakemake_env = BINNY_SNAKEMAKE_ENV,
     output:
         dir_binny = directory(OUTPUT_DIR/"working/binny")
     message:
