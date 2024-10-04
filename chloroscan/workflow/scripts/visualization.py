@@ -96,7 +96,7 @@ binned_contigs_per_batch['marker count per contig'] = marker_count
 
 Scatter_GC_log_depth=(
                         ggplot(binned_contigs_per_batch, aes(x="GC contents", y="log10 depth per contig", color="Bin name simplified", size = "marker count per contig"))
-                            + geom_point()
+                            + geom_point(alpha=0.5)
                             + gg.labs(color="Bins", size="marker count per contig")
                             + gg.theme(legend_title=gg.element_text(size=12, weight='bold'), 
                                     legend_text=gg.element_text(size=10))
