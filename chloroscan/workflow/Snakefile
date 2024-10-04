@@ -259,8 +259,8 @@ rule CAT_taxonomy_identification_plus_annotation:
         # Check to see if the binny directory is empty or not
         find {input.binny_output} -mindepth 1 -maxdepth 1 >> {log}
         if [ -f "{input.binny_output}/{params.path_to_contigs}" ] ; then
-            CAT contigs -c {input.binny_output}/{params.path_to_contigs} -d {CAT_DB_DIR} -t {CAT_TAXON_DIR} --force >> {log} 
-            mv ./{params.prefix}.* {output.CAT_output}
+            CAT contigs -c {input.binny_output}/{params.path_to_contigs} -d {CAT_DB_DIR} -t {CAT_TAXON_DIR} -o {output}/{params.prefix} --force >> {log} 
+            # mv ./{params.prefix}.* {output.CAT_output}
         fi
         """
 
