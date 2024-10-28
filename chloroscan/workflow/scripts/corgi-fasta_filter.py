@@ -11,7 +11,7 @@ def main(assembly, accession, fasta_file_name):
     plastid_accession_id = []
     with open(accession, "r") as plastida:
         for lines in plastida:
-            plastid_accession = lines.replace("\n","")
+            plastid_accession = lines.strip()
             # print(plastid_accession)
             plastid_accession_id.append(plastid_accession)
     # print(len(plastid_accession_id)) 
@@ -28,7 +28,7 @@ def main(assembly, accession, fasta_file_name):
     index = 0
 
     while index < len(assembly_lines):
-        accession_id = assembly_lines[index].replace(">","").split(" ")[0].replace("\n", "")
+        accession_id = assembly_lines[index].replace(">","").split(" ")[0].strip()
         # print(accession_id)
         if accession_id in plastid_accession_id:
             # print("sequence classified as plastidial.\n")

@@ -32,7 +32,7 @@ def form_marker_array(empty_marker_array, annot_file, contig_id):
         
         key = i_th_ORF[0]
         ORF = i_th_ORF[-1]
-        ORF_split = ORF.replace("\n","").split(";")
+        ORF_split = ORF.strip().split(";")
         # Initiate the gathering.
         if ("checkm_marker" in ORF_split[-1]) and (key not in marker_dict.keys()):
             marker_dict[key] = ""
@@ -60,7 +60,7 @@ def form_depth_array(empty_depth_array, contig_id, depth_file):
         depth_lines = df.readlines()
     # Here we missed the point that last year I only took 500 as length cutoff, if I test using other length cutoffs < 500, problems arise.
     for i in range(len(depth_lines)):
-        contig, depth = depth_lines[i].replace("\n", "").split("\t",1)[0], depth_lines[i].replace("\n","").split("\t",1)[1]
+        contig, depth = depth_lines[i].strip().split("\t",1)[0], depth_lines[i].strip().split("\t",1)[1]
         if contig in contig_id:
             empty_depth_array[contig_id.index(contig)] = depth
     return empty_depth_array
@@ -91,7 +91,7 @@ def all_organisms_dict(names_dump):
         org_lines = nd.readlines()
     
     for i in org_lines:
-        i = i.replace("\n", "").replace("\t", "")
+        i = i.strip().replace("\t", "")
         org_line = i.split("|")
         if "scientific name" in org_line:
             all_organisms[org_line[0]] = org_line[1]
