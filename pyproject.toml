@@ -1,8 +1,8 @@
 [tool.poetry]
 name = "chloroscan"
-version = "0.1.0"
+version = "0.1.1"
 description = "A computational workflow designed to recover plastid genomes from metagenomes."
-authors = ["Andy Tong, Robert Turnbull for acknowledgement"]
+authors = ["Andy Tong, Robert Turnbull, Vanessa Rossetto Marcelino, Heroen Verbruggen"]
 license = "Apache-2.0"
 readme = "README.rst"
 
