@@ -185,3 +185,6 @@ chloroscan/MGYS*
 binny_output/
 conda_envs/
 Mocky*
+metag*
+slurm-*
+SAMEA*

@@ -70,8 +70,11 @@ for i in list_of_seqrec.keys():
     logging.info(f"Inspect bin {i.split('/')[-1]} contig composition.")
     contig_comp = list_of_seqrec[i]
     contig_ids = [i.id for i in contig_comp]
+    contig_length = [len(i.seq) for i in contig_comp]
     logging.info(f"contig composition before refinement: {','.join(contig_ids)}\n")
     logging.info(f"Number of contigs: {len(contig_ids)}")
+    logging.info(f"Summed Length of MAG: {sum(contig_length)}")
+    # Length of MAG should be reported.
     for elem in contig_comp:
         elem_id = elem.id
         elem_in_crossref = cross_ref_refine_df.loc[cross_ref_refine_df['contig id'] == elem_id]
@@ -109,6 +112,9 @@ for i in list_of_seqrec.keys():
         if req.id in refined_contig_ids:
             refined_contigs_dict[i].append(req)
     logging.info("Number of contigs from the refined bin {}".format(len(refined_contigs_dict[i])))
+    # Length of MAG should be reported.
+    new_contig_length = [len(i.seq) for i in contig_comp if i.id in contig_ids]
+    logging.info(f"MAG length after refinement: {sum(new_contig_length)}")
     logging.info("-"*50)
 
 # update the df, and change it back to the place!

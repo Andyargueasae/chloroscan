@@ -99,8 +99,8 @@ Scatter_GC_log_depth=(
                             + geom_point(alpha=0.5)
                             + gg.labs(color="Bins", size="marker count per contig")
                             + gg.theme(legend_title=gg.element_text(size=12, weight='bold'), 
-                                    legend_text=gg.element_text(size=10))
-                            + gg.ggtitle("Demo: dot-scaled scatterplot")
+                                    legend_text=gg.element_text(size=8))
+                            + gg.ggtitle("dot-scaled GC x LogDepth scatterplot")
                     ).draw(show=False) # Add size and colors here.
                             # Add point scale. 
 
@@ -114,14 +114,19 @@ bins_quality_dict = dict()
 bins_quality_dict['Bin Completeness'] = []
 bins_quality_dict['Bin Purity'] = []
 bin_xticks = []
+
+# Need to consider scMAG problem: we need a cool shit to process their name. 
 for i in bins:
     bin_base_names = i.split("_")
     prefix = "bin"
     for j in range(len(bin_base_names)):
         if "C" in bin_base_names[j]:
-            individual_comp = int(bin_base_names[j].replace("C", ""))
-            bins_quality_dict['Bin Completeness'].append(individual_comp)
-            identifier = bin_base_names[j-1]
+            try: 
+                individual_comp = int(bin_base_names[j].replace("C", ""))
+                bins_quality_dict['Bin Completeness'].append(individual_comp)
+                identifier = bin_base_names[j-1]
+            except ValueError:
+                continue
         if "P" in bin_base_names[j]:
             individual_pur = int(bin_base_names[j].replace("P", ""))
             bins_quality_dict['Bin Purity'].append(individual_pur)

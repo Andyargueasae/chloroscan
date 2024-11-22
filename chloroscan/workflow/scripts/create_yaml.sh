@@ -22,7 +22,7 @@ usage() {
     echo "       -y (Absolute) Path (and names) of your binny config to be executed." 1>&2
 }
 
-while getopts ":ha:b:d:t:l:o:e:m:c:s:p:u:y:" option
+while getopts ":ha:b:d:t:l:o:e:m:n:c:s:p:u:v:y:" option
 do
     case $option in
         h) 
@@ -54,6 +54,8 @@ do
             purity=$OPTARG;;
         u) 
             lengthcutoff=$OPTARG;;
+        v)
+            mantis_env=$OPTARG;;
         y)
             curr_config=$OPTARG;;
     esac
@@ -72,6 +74,7 @@ echo "start completeness of bin: $start_completeness";
 echo "purity chosen: $purity";
 echo "Universal Length cutoff: $lengthcutoff"
 echo "Offered Customized snakemake env: $snakemake_env"
+echo "Offered customized mantis env: $mantis_env"
 # Now edit the file one by one.
 ## copy that default file and change the copy to be the one.
 # error comes from here first.

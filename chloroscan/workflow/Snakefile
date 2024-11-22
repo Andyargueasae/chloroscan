@@ -35,6 +35,7 @@ BATCH_NAME = config['Inputs']['batch_name']
 
 BINNY_OUTPUT_DIR = config['binning']['outputdir']    
 BINNY_SNAKEMAKE_ENV = config['binning']['snakemake_env']
+BINNY_MANTIS_ENV = config['binning']['mantis_env']
 # For binny: some global names.
 GLOBAL_CONFIG = "config.ChloroScan.yaml"
 
@@ -198,6 +199,7 @@ rule binny_workflow:
         quality_min_purity = config['binning']['bin_quality']['purity'],
         outputdir_within_binny = config['binning']['outputdir'], # within binny.
         binny_snakemake_env = BINNY_SNAKEMAKE_ENV,
+        binny_mantis_env = BINNY_MANTIS_ENV
     output:
         dir_binny = directory(OUTPUT_DIR/"working/binny")
     message:
@@ -215,7 +217,7 @@ rule binny_workflow:
         if [ -s {input.plastid_contigs} ]; then
             [ -n $BINNY_DIR/config/config.default.yaml ] && echo "default config file for binny found."
             bash {params.bash_create_yaml} -a "{input.plastid_contigs}" -b "$BINNY_DIR/A2K_database" -d "$BINNY_DIR/config/config.default.yaml" -t "{input.depth_text}" -o "{params.outputdir_within_binny}"\
-                -e '{params.hdbscan_epsilon_range}' -m '{params.hdbscan_min_samples_range}' -c {params.quality_min_completeness}\
+                -e '{params.hdbscan_epsilon_range}' -m '{params.hdbscan_min_samples_range}' -n {params.binny_snakemake_env} -c {params.quality_min_completeness}\
                 -s {params.quality_start_completeness} -p {params.quality_min_purity} -u {params.universal_length_cutoff}\
                 -y "$BINNY_DIR/config/config.ChloroScan.yaml"
 
@@ -237,7 +239,7 @@ rule binny_workflow:
         fi
         """
 
-# Add another checkpoint here, I want to cease the workflow if there are no bins made of plastid contigs.
+# Add a rule using metabat2 to bin MAGs. 
 
 rule CAT_taxonomy_identification_plus_annotation:
     input: 

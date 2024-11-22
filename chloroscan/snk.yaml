@@ -44,8 +44,13 @@ cli:
         required: False
         default: 1500
     snakemake_env:
-        type: Path
+        type: string
         help: "Customized snakemake environment for binny to run."
+        required: False
+        default: None
+    mantis_env:
+        type: string
+        help: "Customized Mantis virtual environment to have mantis_pfa installed, annotating genes."
         required: False
         default: None
     outputdir:
