@@ -3,12 +3,20 @@
 ChloroScan: A metagenomic workflow to recover chloroplast genomes.
 ==================================================================
 
+.. start-badges
+
+|testing badge| |docs badge|
+
+.. |testing badge| image:: https://github.com/Andyargueasae/chloroscan/actions/workflows/testing.yml/badge.svg
+    :target: https://github.com/Andyargueasae/chloroscan/actions
+
+.. |docs badge| image:: https://github.com/Andyargueasae/chloroscan/actions/workflows/docs.yml/badge.svg
+    :target: https://Andyargueasae.github.io/chloroscan
+    
+.. end-badges
+
 
 Author: Yuhao Tong (The University of Melbourne)
-
-.. image:: https://github.com/Andyargueasae/chloroscan/badge.svg
-   :target: https://github.com/Andyargueasae/chloroscan/badge.svg
-   :alt: example workflow
 
 .. image:: docs/source/_static/images/Flow_ChloroScan.drawio.png
 
