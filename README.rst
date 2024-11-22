@@ -1,6 +1,6 @@
 
 ==================================================================
-ChloroScan: A metagenomic workflow to recover chloroplast genomes.
+ChloroScan: A metagenomic workflow to recover chloroplast genomes
 ==================================================================
 
 .. start-badges
@@ -17,9 +17,6 @@ ChloroScan: A metagenomic workflow to recover chloroplast genomes.
 
 
 .. image:: docs/source/_static/images/Flow_ChloroScan.drawio.png
-
-A snakemake workflow for MMA metagenomics for recovering chloroplast genomes.
-=============================================================================
 
 This workflow is designed to recover chloroplast genomes from metagenomic datasets.
 
