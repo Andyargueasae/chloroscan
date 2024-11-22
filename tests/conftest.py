@@ -199,27 +199,36 @@ def run_workflow(tmpdir: Path):
             symlinks=True,
         )
         root_dir = Path(__file__).parent.parent
-        snakefile = root_dir/"chloroscan"/"workflow"/"Snakefile"
-        configfile = root_dir/"config"/"ChloroScan.init.yaml"
+        # snakefile = root_dir/"chloroscan"/"workflow"/"Snakefile"
+        # configfile = root_dir/"config"/"ChloroScan.init.yaml"
+        input_assembly = root_dir/"tests"/"test-data"/"test_plastid.fasta"
+        input_depth_txt = root_dir/"tests"/"test-data"/"contig_depth_test.txt"
+        input_batch_name = "test_data"
+        output_dir = "TEST_OUT"
+        conda_prefix = root_dir/"conda_envs"
 
 
         sp.check_output(
             [
-                "snakemake",
+                "chloroscan",
+                "run",
+                "--Inputs-assembly",
+                input_assembly,
+                "--Inputs-depth-txt",
+                input_depth_txt,
+                "--Inputs-batch-name",
+                input_batch_name,
+                "--outputdir",
+                output_dir,
                 "-c",
                 "11",
                 "--use-conda",
-                "--snakefile",
-                str(snakefile),
-                "--configfile",
-                configfile,
                 "--force",
                 "-j1",
-                "--directory",
-                work_dir,
+                "--verbose",
+                "--directory={}".format(work_dir),
                 "--keep-target-files",
-                "--conda-prefix",
-                str(get_default_conda_prefix()),
+                "--conda-prefix={}".format(conda_prefix),
                 *targets,
             ]
         )
