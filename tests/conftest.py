@@ -204,7 +204,7 @@ def run_workflow(tmpdir: Path):
         input_assembly = root_dir/"tests"/"test-data"/"test_plastid.fasta"
         input_depth_txt = root_dir/"tests"/"test-data"/"contig_depth_test.txt"
         input_batch_name = "test_data"
-        output_dir = "TEST_OUT"
+        output_dir = "TEST_OUT2"
         conda_prefix = root_dir/"conda_envs"
 
 
@@ -226,6 +226,8 @@ def run_workflow(tmpdir: Path):
                 "--force",
                 "-j1",
                 "--verbose",
+                "--rerun-triggers",
+                "code", # mtime is the key that we got blocked, so only change it to code. 
                 "--directory={}".format(work_dir),
                 "--keep-target-files",
                 "--conda-prefix={}".format(conda_prefix),
