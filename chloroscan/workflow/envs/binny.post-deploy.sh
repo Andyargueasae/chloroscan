@@ -15,8 +15,22 @@ cd $CONDA_PREFIX/lib/binny_Chloroscan
 
 BINNY_DIR=$(pwd)
 
+DEFAULT_BINNY_CONDASOURCE=$BINNY_DIR/conda
+
+default_binny_config_path="$CONDA_PREFIX/lib/binny_Chloroscan/config/config.default.yaml"
+
 # Now that the code has been changed, we circumvent the download.
 # ./binny -i config/config.init.yaml
+echo "snakemake env: $(which snakemake)"
+# Create the envs for snakemake.
+mamba create --prefix $BINNY_DIR/snakemake_env -y snakemake=7.16.0 unzip python=3.8 
+
+# Create envs for other binny rules.
+# snakemake --use-conda --conda-create-envs-only --conda-prefix $DEFAULT_BINNY_CONDASOURCE --configfile $default_binny_config_path --snakefile $BINNY_DIR/Snakefile --cores 1 --verbose
+
+# Add this new env to config file of binny. 
+sed -i "s@snakemake_env: \"\"@snakemake_env: \"$BINNY_DIR/snakemake_env\"@g" $default_binny_config_path
+
 
 # This is the original code, but we need to change the database to the one A2K one.
 USE_DB_DIR="A2K_database/hmms/checkm_pf/checkm_filtered_pf.hmm"

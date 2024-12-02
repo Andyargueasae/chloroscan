@@ -26,6 +26,7 @@ def refine_bins_renaming(seqs, cross_ref_df):
     return taxon_with_longest_length
 
 output_dir_for_refined_bins = snakemake.output[0]
+output_summary_info = snakemake.output[1]
 
 # Inputs and params.
 
@@ -89,15 +90,23 @@ for i in list_of_seqrec.keys():
                 logging.info("contig id: {} This is a bacterial contamination.".format(elem_id))
                 contig_ids.remove(elem_id)
                 to_be_modified_id.append(elem_id)
+                with open(output_summary_info, "a") as si:
+                    si.write(f"MAG {i.split('/')[-1]} has suspicious contamination contig: {elem_id}. Taxonomy: {elem_lineage_hierarchy}.")
 
             elif (EUKARYA_ID in elem_lineage_hierarchy) and (pd.isna(np.array(elem_in_crossref['markers on the contig'])[0])):
                 logging.info("Contig id: {}. This is a eukaryotic contig without marker genes on it.".format(elem_id))
                 contig_ids.remove(elem_id)
                 to_be_modified_id.append(elem_id)
+                with open(output_summary_info, "a") as si:
+                    si.write(f"MAG {i.split('/')[-1]} has a eukaryotic contig without single-copy marker genes in database: {elem_id}. Taxonomy: {elem_lineage_hierarchy}.")
+
             elif (ROOT_ID in elem_lineage_hierarchy) and (pd.isna(np.array(elem_in_crossref['markers on the contig'])[0])):
                 logging.info("Contig id: {}. This is a contig with ambiguous taxonomic classification and without recognizable A2K marker genes, discarded.".format(elem_id))
                 contig_ids.remove(elem_id)
                 to_be_modified_id.append(elem_id)
+                with open(output_summary_info, "a") as si:
+                    si.write(f"MAG {i.split('/')[-1]} has an unclassified contig: {elem_id}.")
+
             else:
                 continue
         else:
@@ -117,10 +126,9 @@ for i in list_of_seqrec.keys():
     logging.info(f"MAG length after refinement: {sum(new_contig_length)}")
     logging.info("-"*50)
 
-# update the df, and change it back to the place!
+# Do we want to update the df?
 for id_change in to_be_modified_id:
     row = cross_ref_refine_df.loc[cross_ref_refine_df['contig id'] == id_change]
-    #get the index.
     row_index = row.index[0]
     cross_ref_refine_df.at[row_index, "Contig2Bin"] = ""
     
@@ -137,4 +145,3 @@ for i in refined_contigs_dict.items():
 
 
 cross_ref_refine_df.to_csv(snakemake.input['cross_ref'], sep="\t")
-del cross_ref_refine_df

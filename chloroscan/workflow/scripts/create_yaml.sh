@@ -140,11 +140,10 @@ sed -i "s@include_depth_initial: 'False'@include_depth_initial: 'True'@g" $curr_
 
 sed -i "s@include_depth_main: 'False'@include_depth_main: 'True'@g" $curr_config
 
-sed -i "s@snakemake_env: \"\"@snakemake_env: \"$snakemake_env\"@g" $curr_config
-
-# sed -i 's@prokka_env: ""@prokka_env: "/home/student.unimelb.edu.au/yuhtong/mambaforge/envs/prokkaenv"@g' $curr_config
-# by applying \ before any characters, could help to identify them with efficiency.
+if [ -n $snakemake_env ]; then
+    sed -i "s@snakemake_env: \"\"@snakemake_env: \"$snakemake_env\"@g" $curr_config
+else
+    echo "Use default snakemake env inside binny's conda source: snakemake_env."
+fi
 
 # Work done. Now the yaml file is ready to be put into binny. 
-
-# Now you should see it in your binny workflow config directory.

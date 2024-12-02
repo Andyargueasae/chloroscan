@@ -224,6 +224,8 @@ def run_workflow(tmpdir: Path):
                 "11",
                 "--use-conda",
                 "--force",
+                # "--touch",
+                "--reason",
                 "-j1",
                 "--verbose",
                 "--rerun-triggers",
