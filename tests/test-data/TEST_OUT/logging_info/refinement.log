@@ -1,0 +1,23 @@
+2024-12-02 19:10:36,083 - root - INFO - Inspect bin binny_I04R01.000000_C84_P97_Haptophyta.fasta contig composition.
+2024-12-02 19:10:36,083 - root - INFO - contig composition before refinement: k127_41428,k127_11926,k127_14538,k127_37878,k127_5658,k127_42002
+
+2024-12-02 19:10:36,083 - root - INFO - Number of contigs: 6
+2024-12-02 19:10:36,083 - root - INFO - Summed Length of MAG: 102658
+2024-12-02 19:10:36,085 - root - INFO - CAT/BAT taxonomic assignment of contig k127_14538: ['1', '131567', '2759', '2608109', '2830', '2608131', '73028', '1136790', '35140*']
+2024-12-02 19:10:36,085 - root - INFO - Marker genes found on the contig: ,petD,thiG,minD,psbY,rbcR,psbE,ycf45,rps6,psbA,ccs1,ycf20,psbV,psbC,psaD,ycf39,rps10,infB,petB,rps7,rps12,rpl31,rps9,rpoA,rps11,rps13,secY,rps5,rpl6,rps8,rpl5,rpl14,rps17,rpl16,rps3,rpl22,rps19,rpl2,psbA,rpl23,rpl13,dnaK,atpA,atpD,atpF,atpG,atpH,atpI,rps4,rps2,rpoC2,ycf3,rpoC1,rpoB,ycf27,rps14,ycf1,psaJ,psaF,rpl34,ycf44,rps16,rbcL,rbcS,rpl27,rpl20,rpl21,ycf80,chlI
+2024-12-02 19:10:36,086 - root - INFO - CAT/BAT taxonomic assignment of contig k127_37878: ['1', '131567', '2759', '2608109', '2830', '2608131', '73028', '1136790', '35140*']
+2024-12-02 19:10:36,086 - root - INFO - Marker genes found on the contig: ,secA,ycf35,petG,cfxQ,psaC,ftsH,psbH,psbN,psbB,psbZ,atpB,atpE,clpC,petM,psaL,thiS,psaB,psaA,ycf24,ycf19,ycf60,rpl33,rps18,petA,tatC,groEL
+2024-12-02 19:10:36,086 - root - INFO - CAT/BAT taxonomic assignment of contig k127_5658: ['1', '131567']
+2024-12-02 19:10:36,086 - root - INFO - Marker genes found on the contig: nan
+2024-12-02 19:10:36,086 - root - INFO - Contig id: k127_5658. This is a contig with ambiguous taxonomic classification and without recognizable A2K marker genes, discarded.
+2024-12-02 19:10:36,087 - root - INFO - contig composition after refinement: k127_41428,k127_11926,k127_14538,k127_37878,k127_42002
+
+2024-12-02 19:10:36,087 - root - INFO - length equals to 5
+2024-12-02 19:10:36,087 - root - INFO - Number of contigs from the refined bin 5
+2024-12-02 19:10:36,087 - root - INFO - MAG length after refinement: 99595
+2024-12-02 19:10:36,087 - root - INFO - --------------------------------------------------
+2024-12-02 19:10:36,088 - root - INFO - k127_41428
+2024-12-02 19:10:36,088 - root - INFO - k127_11926
+2024-12-02 19:10:36,088 - root - INFO - k127_14538
+2024-12-02 19:10:36,088 - root - INFO - k127_37878
+2024-12-02 19:10:36,088 - root - INFO - k127_42002

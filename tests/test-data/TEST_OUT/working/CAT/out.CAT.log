@@ -1,0 +1,48 @@
+# CAT v5.2.3.
+
+CAT is running. Protein prediction, alignment, and contig classification are carried out.
+Rarw!
+
+Supplied command: /data/chloroscan/conda_envs/8770c5ed5d84c2d969cb223bbe534e0d_/bin/CAT contigs -c TEST_OUT/working/binny/intermediary/assembly.formatted.fa -d /home/student.unimelb.edu.au/yuhtong/andy/data/uniref90_algaProt/db -t /home/student.unimelb.edu.au/yuhtong/andy/data/uniref90_algaProt/tax -o TEST_OUT/working/CAT/out.CAT --force
+
+Contigs fasta: ./TEST_OUT/working/binny/intermediary/assembly.formatted.fa
+Taxonomy folder: /home/student.unimelb.edu.au/yuhtong/andy/data/uniref90_algaProt/tax/
+Database folder: /home/student.unimelb.edu.au/yuhtong/andy/data/uniref90_algaProt/db/
+Parameter r: 10
+Parameter f: 0.5
+Log file: ./TEST_OUT/working/CAT/out.CAT.log
+
+-----------------
+
+Doing some pre-flight checks first.
+[2024-12-02 19:03:42] Prodigal found: Prodigal V2.6.3: February, 2016.
+[2024-12-02 19:03:42] DIAMOND found: diamond version 2.1.10.
+Ready to fly!
+
+-----------------
+
+[2024-12-02 19:03:42] Importing contig names from ./TEST_OUT/working/binny/intermediary/assembly.formatted.fa.
+[2024-12-02 19:03:42] Running Prodigal for ORF prediction. Files ./TEST_OUT/working/CAT/out.CAT.predicted_proteins.faa and ./TEST_OUT/working/CAT/out.CAT.predicted_proteins.gff will be generated. Do not forget to cite Prodigal when using CAT or BAT in your publication.
+[2024-12-02 19:03:42] ORF prediction done!
+[2024-12-02 19:03:42] Parsing ORF file ./TEST_OUT/working/CAT/out.CAT.predicted_proteins.faa
+[2024-12-02 19:03:42] Homology search with DIAMOND is starting. Please be patient. Do not forget to cite DIAMOND when using CAT or BAT in your publication.
+			query: ./TEST_OUT/working/CAT/out.CAT.predicted_proteins.faa
+			database: /home/student.unimelb.edu.au/yuhtong/andy/data/uniref90_algaProt/db/2024-09-11_CAT_pack.dmnd
+			mode: fast
+			top: 50
+			no-self-hits: False
+			number of cores: 32
+			block-size (billions of letters): 2.0
+			index-chunks: 4
+			tmpdir: ./TEST_OUT/working/CAT/
+			compress: 0
+[2024-12-02 19:09:20] Homology search done! File ./TEST_OUT/working/CAT/out.CAT.alignment.diamond created.
+[2024-12-02 19:09:20] Parsing alignment file ./TEST_OUT/working/CAT/out.CAT.alignment.diamond.
+[2024-12-02 19:09:20] Loading file /home/student.unimelb.edu.au/yuhtong/andy/data/uniref90_algaProt/tax/nodes.dmp.
+[2024-12-02 19:09:24] Loading file /home/student.unimelb.edu.au/yuhtong/andy/data/uniref90_algaProt/db/2024-09-11_CAT_pack.fastaid2LCAtaxid.
+[2024-12-02 19:10:27] Loading file /home/student.unimelb.edu.au/yuhtong/andy/data/uniref90_algaProt/db/2024-09-11_CAT_pack.taxids_with_multiple_offspring.
+[2024-12-02 19:10:27] CAT is spinning! Files ./TEST_OUT/working/CAT/out.CAT.contig2classification.txt and ./TEST_OUT/working/CAT/out.CAT.ORF2LCA.txt are created.
+
+-----------------
+
+[2024-12-02 19:10:27] CAT is done! 4/8 contigs have taxonomy assigned.

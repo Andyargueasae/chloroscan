@@ -1,0 +1,165 @@
+02/12/2024 07:02:12 PM - Starting Binny run for sample test.
+02/12/2024 07:02:12 PM - Looking for single contig bins.
+02/12/2024 07:02:16 PM - Found 0 single contig bins.
+02/12/2024 07:02:16 PM - Calculating N90
+02/12/2024 07:02:16 PM - N90 is 31265, with scMAGs would be 31265.
+02/12/2024 07:02:16 PM - Masking potentially disruptive sequences from k-mer counting.
+02/12/2024 07:02:16 PM - Calculating k-mer frequencies of sizes: 2, 3, 4.
+02/12/2024 07:02:16 PM - K-mer frequency matrix created in 0s.
+02/12/2024 07:02:16 PM - Using single sample mode.
+02/12/2024 07:02:16 PM - Running with 4 contigs. Filtered 4 contigs using a min contig size of 1500 to stay below 500000.0 contigs
+02/12/2024 07:02:16 PM - Running manifold learning and dimensionality-reduction.
+02/12/2024 07:02:16 PM - Initializing embedding.
+02/12/2024 07:02:16 PM - Perplexity value 10 is too high. Using perplexity 1.00 instead
+02/12/2024 07:02:16 PM - Perplexity value 100 is too high. Dropping because the max perplexity is already in the list.
+02/12/2024 07:02:16 PM - EE iteration 125 - KLD: 1.0986
+02/12/2024 07:02:18 PM - EE iteration 250 - KLD: 0.0476, KLDRC: 95.66%
+02/12/2024 07:02:20 PM - EE iteration 375 - KLD: 0.0331, KLDRC: 30.49%
+02/12/2024 07:02:21 PM - EE iteration 500 - KLD: 0.0272, KLDRC: 17.85%
+02/12/2024 07:02:23 PM - EE iteration 625 - KLD: 0.0237, KLDRC: 12.91%
+02/12/2024 07:02:25 PM - EE iteration 750 - KLD: 0.0215, KLDRC: 9.07%
+02/12/2024 07:02:27 PM - EE iteration 875 - KLD: 0.0201, KLDRC: 6.64%
+02/12/2024 07:02:28 PM - EE iteration 1000 - KLD: 0.0191, KLDRC: 4.95%
+02/12/2024 07:02:30 PM - EE iteration 1125 - KLD: 0.0184, KLDRC: 3.72%
+02/12/2024 07:02:32 PM - EE iteration 1250 - KLD: 0.0179, KLDRC: 2.78%
+02/12/2024 07:02:33 PM - EE iteration 1375 - KLD: 0.0175, KLDRC: 2.04%
+02/12/2024 07:02:35 PM - EE iteration 1500 - KLD: 0.0173, KLDRC: 1.45%
+02/12/2024 07:02:36 PM - EE iteration 1625 - KLD: 0.0171, KLDRC: 0.98%
+02/12/2024 07:02:36 PM - Main iteration learning rate: 200
+02/12/2024 07:02:37 PM - Main iteration 125 - KLD: 1.6245, KLDRC: -9400.53%
+02/12/2024 07:02:39 PM - Main iteration 250 - KLD: 2.4596, KLDRC: -51.4%
+02/12/2024 07:02:40 PM - Main iteration 375 - KLD: 1.4787, KLDRC: 39.88%
+02/12/2024 07:02:42 PM - Main iteration 500 - KLD: 0.2842, KLDRC: 80.78%
+02/12/2024 07:02:43 PM - Main iteration 625 - KLD: 1.4877, KLDRC: -423.55%
+02/12/2024 07:02:43 PM - Finished dimensionality-reduction in 2250 iterations. Final KLD: 1.4877
+02/12/2024 07:02:43 PM - Reading annotation.
+02/12/2024 07:02:43 PM - Reading embedding coordinates.
+02/12/2024 07:02:43 PM - 1 samples for depth data found.
+02/12/2024 07:02:43 PM - Clustering round 1.
+02/12/2024 07:02:43 PM - Running initial clustering.
+02/12/2024 07:02:44 PM - HDBSCAN found only noise trying with lower min_cluster_size=3.
+02/12/2024 07:02:44 PM - Final number of clusters: 1.
+02/12/2024 07:02:44 PM - Clustering round 2.
+02/12/2024 07:02:44 PM - Running initial clustering.
+02/12/2024 07:02:44 PM - HDBSCAN found only noise trying with lower min_cluster_size=3.
+02/12/2024 07:02:44 PM - Final number of clusters: 1.
+02/12/2024 07:02:44 PM - Clustering round 3.
+02/12/2024 07:02:44 PM - Running initial clustering.
+02/12/2024 07:02:44 PM - HDBSCAN found only noise trying with lower min_cluster_size=3.
+02/12/2024 07:02:44 PM - Final number of clusters: 1.
+02/12/2024 07:02:44 PM - Clustering round 4.
+02/12/2024 07:02:44 PM - Running initial clustering.
+02/12/2024 07:02:44 PM - HDBSCAN found only noise trying with lower min_cluster_size=3.
+02/12/2024 07:02:44 PM - Final number of clusters: 1.
+02/12/2024 07:02:44 PM - Good bins this embedding iteration: 0.
+02/12/2024 07:02:44 PM - Median of good bins per round < 1. Minimum contig size lowered to 750.
+02/12/2024 07:02:44 PM - Total number of good bins: 0.
+02/12/2024 07:02:44 PM - Running with 7 contigs. Filtered 1 contigs using a min contig size of 750 to stay below 500000.0 contigs
+02/12/2024 07:02:44 PM - Running manifold learning and dimensionality-reduction.
+02/12/2024 07:02:44 PM - Initializing embedding.
+02/12/2024 07:02:44 PM - Perplexity value 12 is too high. Using perplexity 2.00 instead
+02/12/2024 07:02:44 PM - Perplexity value 105 is too high. Dropping because the max perplexity is already in the list.
+02/12/2024 07:02:44 PM - EE iteration 125 - KLD: 1.097
+02/12/2024 07:02:45 PM - EE iteration 250 - KLD: 0.2858, KLDRC: 73.95%
+02/12/2024 07:02:46 PM - EE iteration 375 - KLD: 0.276, KLDRC: 3.44%
+02/12/2024 07:02:48 PM - EE iteration 500 - KLD: 0.2716, KLDRC: 1.57%
+02/12/2024 07:02:49 PM - EE iteration 625 - KLD: 0.2692, KLDRC: 0.91%
+02/12/2024 07:02:49 PM - Main iteration learning rate: 200
+02/12/2024 07:02:51 PM - Main iteration 125 - KLD: 1.8238, KLDRC: -577.61%
+02/12/2024 07:02:52 PM - Main iteration 250 - KLD: 1.4813, KLDRC: 18.78%
+02/12/2024 07:02:54 PM - Main iteration 375 - KLD: 1.6901, KLDRC: -14.1%
+02/12/2024 07:02:56 PM - Main iteration 500 - KLD: 1.4289, KLDRC: 15.46%
+02/12/2024 07:02:58 PM - Main iteration 625 - KLD: 2.1555, KLDRC: -50.85%
+02/12/2024 07:02:58 PM - Finished dimensionality-reduction in 1250 iterations. Final KLD: 2.1555
+02/12/2024 07:02:58 PM - Reading annotation.
+02/12/2024 07:02:58 PM - Reading embedding coordinates.
+02/12/2024 07:02:58 PM - 1 samples for depth data found.
+02/12/2024 07:02:58 PM - Clustering round 1.
+02/12/2024 07:02:58 PM - Running initial clustering.
+02/12/2024 07:02:58 PM - HDBSCAN found only noise trying with lower min_cluster_size=3.
+02/12/2024 07:02:58 PM - Final number of clusters: 2.
+02/12/2024 07:03:00 PM - Clustering round 2.
+02/12/2024 07:03:00 PM - Running initial clustering.
+02/12/2024 07:03:00 PM - HDBSCAN found only noise trying with lower min_cluster_size=3.
+02/12/2024 07:03:00 PM - Final number of clusters: 1.
+02/12/2024 07:03:00 PM - Clustering round 3.
+02/12/2024 07:03:00 PM - Running initial clustering.
+02/12/2024 07:03:00 PM - HDBSCAN found only noise trying with lower min_cluster_size=3.
+02/12/2024 07:03:00 PM - Final number of clusters: 1.
+02/12/2024 07:03:00 PM - Clustering round 4.
+02/12/2024 07:03:00 PM - Running initial clustering.
+02/12/2024 07:03:00 PM - HDBSCAN found only noise trying with lower min_cluster_size=3.
+02/12/2024 07:03:00 PM - Final number of clusters: 1.
+02/12/2024 07:03:00 PM - Good bins this embedding iteration: 0.
+02/12/2024 07:03:00 PM - Median of good bins per round < 1. Minimum contig size lowered to 500.
+02/12/2024 07:03:00 PM - Total number of good bins: 0.
+02/12/2024 07:03:00 PM - Running with 8 contigs. Filtered 0 contigs using a min contig size of 500 to stay below 500000.0 contigs
+02/12/2024 07:03:00 PM - Running manifold learning and dimensionality-reduction.
+02/12/2024 07:03:00 PM - Initializing embedding.
+02/12/2024 07:03:00 PM - Perplexity value 14 is too high. Using perplexity 2.33 instead
+02/12/2024 07:03:00 PM - Perplexity value 110 is too high. Dropping because the max perplexity is already in the list.
+02/12/2024 07:03:00 PM - EE iteration 125 - KLD: 1.063
+02/12/2024 07:03:02 PM - EE iteration 250 - KLD: 0.253, KLDRC: 76.2%
+02/12/2024 07:03:03 PM - EE iteration 375 - KLD: 0.2423, KLDRC: 4.26%
+02/12/2024 07:03:05 PM - EE iteration 500 - KLD: 0.2376, KLDRC: 1.91%
+02/12/2024 07:03:06 PM - EE iteration 625 - KLD: 0.235, KLDRC: 1.08%
+02/12/2024 07:03:07 PM - EE iteration 750 - KLD: 0.2334, KLDRC: 0.7%
+02/12/2024 07:03:07 PM - Main iteration learning rate: 200
+02/12/2024 07:03:09 PM - Main iteration 125 - KLD: 2.1015, KLDRC: -800.38%
+02/12/2024 07:03:12 PM - Main iteration 250 - KLD: 1.8201, KLDRC: 13.39%
+02/12/2024 07:03:15 PM - Main iteration 375 - KLD: 1.3846, KLDRC: 23.93%
+02/12/2024 07:03:18 PM - Main iteration 500 - KLD: 1.7197, KLDRC: -24.2%
+02/12/2024 07:03:21 PM - Main iteration 625 - KLD: 1.6351, KLDRC: 4.92%
+02/12/2024 07:03:25 PM - Main iteration 750 - KLD: 2.1865, KLDRC: -33.73%
+02/12/2024 07:03:25 PM - Finished dimensionality-reduction in 1500 iterations. Final KLD: 2.1865
+02/12/2024 07:03:25 PM - Reading annotation.
+02/12/2024 07:03:25 PM - Reading embedding coordinates.
+02/12/2024 07:03:25 PM - 1 samples for depth data found.
+02/12/2024 07:03:25 PM - Clustering round 1.
+02/12/2024 07:03:25 PM - Running initial clustering.
+02/12/2024 07:03:25 PM - Final number of clusters: 2.
+02/12/2024 07:03:25 PM - Clustering round 2.
+02/12/2024 07:03:25 PM - Running initial clustering.
+02/12/2024 07:03:25 PM - HDBSCAN found only noise trying with lower min_cluster_size=3.
+02/12/2024 07:03:25 PM - Final number of clusters: 1.
+02/12/2024 07:03:25 PM - Clustering round 3.
+02/12/2024 07:03:25 PM - Running initial clustering.
+02/12/2024 07:03:25 PM - HDBSCAN found only noise trying with lower min_cluster_size=3.
+02/12/2024 07:03:25 PM - Final number of clusters: 1.
+02/12/2024 07:03:25 PM - Clustering round 4.
+02/12/2024 07:03:25 PM - Running initial clustering.
+02/12/2024 07:03:25 PM - HDBSCAN found only noise trying with lower min_cluster_size=3.
+02/12/2024 07:03:25 PM - Final number of clusters: 1.
+02/12/2024 07:03:25 PM - Good bins this embedding iteration: 0.
+02/12/2024 07:03:25 PM - Running with contigs >= 1500bp, minimum completeness 82.5.
+02/12/2024 07:03:25 PM - Total number of good bins: 0.
+02/12/2024 07:03:25 PM - Less than 5 contigs to bin. Decreasing min length threshold.
+02/12/2024 07:03:25 PM - Less than 5 contigs to bin. Decreasing min length threshold.
+02/12/2024 07:03:25 PM - Running with 6 contigs. Filtered 2 contigs using a min contig size of 1250 to stay below 500000.0 contigs
+02/12/2024 07:03:25 PM - Running manifold learning and dimensionality-reduction.
+02/12/2024 07:03:25 PM - Initializing embedding.
+02/12/2024 07:03:25 PM - Perplexity value 16 is too high. Using perplexity 1.67 instead
+02/12/2024 07:03:25 PM - Perplexity value 115 is too high. Dropping because the max perplexity is already in the list.
+02/12/2024 07:03:25 PM - EE iteration 125 - KLD: 1.0691
+02/12/2024 07:03:26 PM - EE iteration 250 - KLD: 0.3532, KLDRC: 66.96%
+02/12/2024 07:03:28 PM - EE iteration 375 - KLD: 0.353, KLDRC: 0.04%
+02/12/2024 07:03:28 PM - Main iteration learning rate: 200
+02/12/2024 07:03:29 PM - Main iteration 125 - KLD: 0.9667, KLDRC: -173.83%
+02/12/2024 07:03:31 PM - Main iteration 250 - KLD: 11.3931, KLDRC: -1078.5%
+02/12/2024 07:03:32 PM - Main iteration 375 - KLD: 1.9437, KLDRC: 82.94%
+02/12/2024 07:03:34 PM - Main iteration 500 - KLD: 1.4396, KLDRC: 25.93%
+02/12/2024 07:03:35 PM - Main iteration 625 - KLD: 0.9033, KLDRC: 37.26%
+02/12/2024 07:03:36 PM - Main iteration 750 - KLD: 1.5455, KLDRC: -71.11%
+02/12/2024 07:03:36 PM - Finished dimensionality-reduction in 1125 iterations. Final KLD: 1.5455
+02/12/2024 07:03:36 PM - Reading annotation.
+02/12/2024 07:03:36 PM - Reading embedding coordinates.
+02/12/2024 07:03:36 PM - 1 samples for depth data found.
+02/12/2024 07:03:36 PM - Clustering round 1.
+02/12/2024 07:03:36 PM - Running initial clustering.
+02/12/2024 07:03:36 PM - HDBSCAN found only noise trying with lower min_cluster_size=3.
+02/12/2024 07:03:36 PM - Final number of clusters: 1.
+02/12/2024 07:03:36 PM - No leftover contigs to cluster. Exiting.
+02/12/2024 07:03:36 PM - Good bins this embedding iteration: 1.
+02/12/2024 07:03:36 PM - Total number of good bins: 1.
+02/12/2024 07:03:36 PM - Writing contig data to file.
+02/12/2024 07:03:36 PM - Run finished.

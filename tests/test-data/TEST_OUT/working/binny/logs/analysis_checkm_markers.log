@@ -1,0 +1,55 @@
+rm: cannot remove '/data/chloroscan/binny_output/intermediary/mantis_out/*': No such file or directory
+Executing command:
+ /data/chloroscan/conda_envs/c52db60b071005c606a464b1c012b894_/lib/binny_Chloroscan/conda/bb700cecfdedc4df08b2b1ad522e63c4_/bin/mantis run -i /data/chloroscan/binny_output/intermediary/prokka.faa -da heuristic -mc /data/chloroscan/conda_envs/c52db60b071005c606a464b1c012b894_/lib/binny_Chloroscan/config/binny_mantis.cfg -o /data/chloroscan/binny_output/intermediary/mantis_out -c 32 --no_taxonomy -et 1e-3
+------------------------------------------
+#  Setting up Mantis!
+------------------------------------------
+#  Reading config file and setting up paths
+[32mUsing custom MANTIS.cfg: /data/chloroscan/conda_envs/c52db60b071005c606a464b1c012b894_/lib/binny_Chloroscan/config/binny_mantis.cfg[0m
+User configuration:
+------------------------------------------
+Output folder:			/data/chloroscan/binny_output/intermediary/mantis_out/
+Mantis config:			/data/chloroscan/conda_envs/c52db60b071005c606a464b1c012b894_/lib/binny_Chloroscan/config/binny_mantis.cfg
+Target path:			/data/chloroscan/binny_output/intermediary/prokka.faa
+E-value threshold:		0.001
+Overlap value:			0.1
+User cores:			32
+HMMER threads:			1
+Algorithm:			heuristic
+Use taxonomy:	False
+------------------------------------------
+#  This MANTIS process started running at 2024-12-02 19:02:06
+Cores allocated: 32
+Memory allocated: 120.04
+Workers per core: 1
+Metadata file missing: /data/chloroscan/conda_envs/c52db60b071005c606a464b1c012b894_/lib/binny_Chloroscan/A2K_database/hmms/checkm_pf/metadata.tsv
+[32mCython correctly compiled![0m
+[33mChecking extra files[0m
+[32mPassed installation check on: /data/chloroscan/conda_envs/c52db60b071005c606a464b1c012b894_/lib/binny_Chloroscan/conda/bb700cecfdedc4df08b2b1ad522e63c4_/lib/python3.12/site-packages/Resources/essential_genes[0m
+[32mPassed installation check on: /data/chloroscan/conda_envs/c52db60b071005c606a464b1c012b894_/lib/binny_Chloroscan/conda/bb700cecfdedc4df08b2b1ad522e63c4_/lib/python3.12/site-packages/Resources/NCBI/gc.prt.dmp[0m
+[33mChecking references installation[0m
+[32mPassed installation check on: /data/chloroscan/conda_envs/c52db60b071005c606a464b1c012b894_/lib/binny_Chloroscan/A2K_database/hmms/checkm_pf/[0m
+[32m------------------------------------------[0m
+[32m--------INSTALLATION CHECK PASSED!--------[0m
+[32m------------------------------------------[0m
+#  Reading input file
+#  Determining lineage
+#  Splitting samples into chunks!
+#  Samples will be split into 1 chunks with 1 workers
+#  Running homology search with 1 workers.
+Homology search took 1 seconds to run
+#  Processing output with 32 workers.
+Output processing took 0 seconds to run
+#  Interpreting output with 32 workers.
+Output interpretation took 0 seconds to run
+#  Generating consensus output with 32 workers.
+Consensus generation took 1 seconds to run
+#  Merging output with 32 workers.
+Output merge took 0 seconds to run
+In total, Mantis took 2 seconds to process homology search results
+#  Removing temporary files
+Mantis has finished running! It took 3 seconds to run.
+#  This MANTIS process finished running at 2024-12-02 19:02:10 and took 3 seconds to complete.
+##########################################################################################################################
+# Thank you for using Mantis, please make sure you cite the respective paper https://doi.org/10.1093/gigascience/giab042 #
+##########################################################################################################################
