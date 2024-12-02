@@ -1,116 +1,305 @@
 ------------------------------------------
 #  Target file:
-/home/student.unimelb.edu.au/yuhtong/andy/MMA_organelle_metagenomics/binny_output/intermediary/prokka.faa
+/data/chloroscan/binny_output/intermediary/prokka.faa
  has no organism lineage!
 ------------------------------------------
-The current sample: /home/student.unimelb.edu.au/yuhtong/andy/MMA_organelle_metagenomics/binny_output/intermediary/prokka.faa will be split into 1 chunks (up to 200 sequences each), which will be stored at:
-/home/student.unimelb.edu.au/yuhtong/andy/MMA_organelle_metagenomics/binny_output/intermediary/mantis_out/fasta_chunks/
+The current sample: /data/chloroscan/binny_output/intermediary/prokka.faa will be split into 1 chunks (up to 200 sequences each), which will be stored at:
+/data/chloroscan/binny_output/intermediary/mantis_out/fasta_chunks/
 Running homology search command:
-hmmsearch -o /dev/null --domtblout /home/student.unimelb.edu.au/yuhtong/andy/MMA_organelle_metagenomics/binny_output/intermediary/mantis_out/fasta_chunks/p2_c0/searchout/checkm_filtered_pf_chunk_0.domtblout --cpu 1 --domE 0.01 --notextw /home/student.unimelb.edu.au/yuhtong/andy/MMA_organelle_metagenomics/binny_Chloroscan/database/hmms/checkm_pf/chunks/checkm_filtered_pf_chunk_0.hmm /home/student.unimelb.edu.au/yuhtong/andy/MMA_organelle_metagenomics/binny_output/intermediary/mantis_out/fasta_chunks/p2_c0/p2_c0.faa
-Finished running homology search (1.015 seconds):
-hmmsearch -o /dev/null --domtblout /home/student.unimelb.edu.au/yuhtong/andy/MMA_organelle_metagenomics/binny_output/intermediary/mantis_out/fasta_chunks/p2_c0/searchout/checkm_filtered_pf_chunk_0.domtblout --cpu 1 --domE 0.01 --notextw /home/student.unimelb.edu.au/yuhtong/andy/MMA_organelle_metagenomics/binny_Chloroscan/database/hmms/checkm_pf/chunks/checkm_filtered_pf_chunk_0.hmm /home/student.unimelb.edu.au/yuhtong/andy/MMA_organelle_metagenomics/binny_output/intermediary/mantis_out/fasta_chunks/p2_c0/p2_c0.faa
+hmmsearch -o /dev/null --domtblout /data/chloroscan/binny_output/intermediary/mantis_out/fasta_chunks/p2_c0/searchout/checkm_filtered_pf_chunk_0.domtblout --cpu 1 --domE 0.01 --notextw /data/chloroscan/conda_envs/c52db60b071005c606a464b1c012b894_/lib/binny_Chloroscan/A2K_database/hmms/checkm_pf/chunks/checkm_filtered_pf_chunk_0.hmm /data/chloroscan/binny_output/intermediary/mantis_out/fasta_chunks/p2_c0/p2_c0.faa
+Finished running homology search (1.016 seconds):
+hmmsearch -o /dev/null --domtblout /data/chloroscan/binny_output/intermediary/mantis_out/fasta_chunks/p2_c0/searchout/checkm_filtered_pf_chunk_0.domtblout --cpu 1 --domE 0.01 --notextw /data/chloroscan/conda_envs/c52db60b071005c606a464b1c012b894_/lib/binny_Chloroscan/A2K_database/hmms/checkm_pf/chunks/checkm_filtered_pf_chunk_0.hmm /data/chloroscan/binny_output/intermediary/mantis_out/fasta_chunks/p2_c0/p2_c0.faa
 ------------------------------------------
 Processing hits for:
-/home/student.unimelb.edu.au/yuhtong/andy/MMA_organelle_metagenomics/binny_output/intermediary/mantis_out/fasta_chunks/p2_c0/searchout/checkm_filtered_pf.domtblout_chunk_8
-Found 4 hits in:
-/home/student.unimelb.edu.au/yuhtong/andy/MMA_organelle_metagenomics/binny_output/intermediary/mantis_out/fasta_chunks/p2_c0/searchout/checkm_filtered_pf.domtblout_chunk_8
+/data/chloroscan/binny_output/intermediary/mantis_out/fasta_chunks/p2_c0/searchout/checkm_filtered_pf.domtblout_chunk_18
+Found 3 hits in:
+/data/chloroscan/binny_output/intermediary/mantis_out/fasta_chunks/p2_c0/searchout/checkm_filtered_pf.domtblout_chunk_18
 Will now get best hits!
 Finished processing hits for:
-/home/student.unimelb.edu.au/yuhtong/andy/MMA_organelle_metagenomics/binny_output/intermediary/mantis_out/fasta_chunks/p2_c0/searchout/checkm_filtered_pf.domtblout_chunk_8
-------------------------------------------
-------------------------------------------
-Processing hits for:
-/home/student.unimelb.edu.au/yuhtong/andy/MMA_organelle_metagenomics/binny_output/intermediary/mantis_out/fasta_chunks/p2_c0/searchout/checkm_filtered_pf.domtblout_chunk_5
-Found 4 hits in:
-/home/student.unimelb.edu.au/yuhtong/andy/MMA_organelle_metagenomics/binny_output/intermediary/mantis_out/fasta_chunks/p2_c0/searchout/checkm_filtered_pf.domtblout_chunk_5
-Will now get best hits!
-Finished processing hits for:
-/home/student.unimelb.edu.au/yuhtong/andy/MMA_organelle_metagenomics/binny_output/intermediary/mantis_out/fasta_chunks/p2_c0/searchout/checkm_filtered_pf.domtblout_chunk_5
+/data/chloroscan/binny_output/intermediary/mantis_out/fasta_chunks/p2_c0/searchout/checkm_filtered_pf.domtblout_chunk_18
 ------------------------------------------
 ------------------------------------------
 Processing hits for:
-/home/student.unimelb.edu.au/yuhtong/andy/MMA_organelle_metagenomics/binny_output/intermediary/mantis_out/fasta_chunks/p2_c0/searchout/checkm_filtered_pf.domtblout_chunk_4
-Found 4 hits in:
-/home/student.unimelb.edu.au/yuhtong/andy/MMA_organelle_metagenomics/binny_output/intermediary/mantis_out/fasta_chunks/p2_c0/searchout/checkm_filtered_pf.domtblout_chunk_4
+/data/chloroscan/binny_output/intermediary/mantis_out/fasta_chunks/p2_c0/searchout/checkm_filtered_pf.domtblout_chunk_17
+------------------------------------------
+Processing hits for:
+/data/chloroscan/binny_output/intermediary/mantis_out/fasta_chunks/p2_c0/searchout/checkm_filtered_pf.domtblout_chunk_7
+Found 3 hits in:
+/data/chloroscan/binny_output/intermediary/mantis_out/fasta_chunks/p2_c0/searchout/checkm_filtered_pf.domtblout_chunk_7
+Will now get best hits!
+Found 3 hits in:
+/data/chloroscan/binny_output/intermediary/mantis_out/fasta_chunks/p2_c0/searchout/checkm_filtered_pf.domtblout_chunk_17
 Will now get best hits!
 Finished processing hits for:
-/home/student.unimelb.edu.au/yuhtong/andy/MMA_organelle_metagenomics/binny_output/intermediary/mantis_out/fasta_chunks/p2_c0/searchout/checkm_filtered_pf.domtblout_chunk_4
+/data/chloroscan/binny_output/intermediary/mantis_out/fasta_chunks/p2_c0/searchout/checkm_filtered_pf.domtblout_chunk_7
+------------------------------------------
+Finished processing hits for:
+/data/chloroscan/binny_output/intermediary/mantis_out/fasta_chunks/p2_c0/searchout/checkm_filtered_pf.domtblout_chunk_17
 ------------------------------------------
 ------------------------------------------
 Processing hits for:
-/home/student.unimelb.edu.au/yuhtong/andy/MMA_organelle_metagenomics/binny_output/intermediary/mantis_out/fasta_chunks/p2_c0/searchout/checkm_filtered_pf.domtblout_chunk_0
-Found 5 hits in:
-/home/student.unimelb.edu.au/yuhtong/andy/MMA_organelle_metagenomics/binny_output/intermediary/mantis_out/fasta_chunks/p2_c0/searchout/checkm_filtered_pf.domtblout_chunk_0
+/data/chloroscan/binny_output/intermediary/mantis_out/fasta_chunks/p2_c0/searchout/checkm_filtered_pf.domtblout_chunk_3
+Found 3 hits in:
+/data/chloroscan/binny_output/intermediary/mantis_out/fasta_chunks/p2_c0/searchout/checkm_filtered_pf.domtblout_chunk_3
 Will now get best hits!
 Finished processing hits for:
-/home/student.unimelb.edu.au/yuhtong/andy/MMA_organelle_metagenomics/binny_output/intermediary/mantis_out/fasta_chunks/p2_c0/searchout/checkm_filtered_pf.domtblout_chunk_0
+/data/chloroscan/binny_output/intermediary/mantis_out/fasta_chunks/p2_c0/searchout/checkm_filtered_pf.domtblout_chunk_3
 ------------------------------------------
 ------------------------------------------
 Processing hits for:
-/home/student.unimelb.edu.au/yuhtong/andy/MMA_organelle_metagenomics/binny_output/intermediary/mantis_out/fasta_chunks/p2_c0/searchout/checkm_filtered_pf.domtblout_chunk_1
-Found 5 hits in:
-/home/student.unimelb.edu.au/yuhtong/andy/MMA_organelle_metagenomics/binny_output/intermediary/mantis_out/fasta_chunks/p2_c0/searchout/checkm_filtered_pf.domtblout_chunk_1
+/data/chloroscan/binny_output/intermediary/mantis_out/fasta_chunks/p2_c0/searchout/checkm_filtered_pf.domtblout_chunk_8
+Found 3 hits in:
+/data/chloroscan/binny_output/intermediary/mantis_out/fasta_chunks/p2_c0/searchout/checkm_filtered_pf.domtblout_chunk_8
 Will now get best hits!
 Finished processing hits for:
-/home/student.unimelb.edu.au/yuhtong/andy/MMA_organelle_metagenomics/binny_output/intermediary/mantis_out/fasta_chunks/p2_c0/searchout/checkm_filtered_pf.domtblout_chunk_1
+/data/chloroscan/binny_output/intermediary/mantis_out/fasta_chunks/p2_c0/searchout/checkm_filtered_pf.domtblout_chunk_8
 ------------------------------------------
 ------------------------------------------
 Processing hits for:
-/home/student.unimelb.edu.au/yuhtong/andy/MMA_organelle_metagenomics/binny_output/intermediary/mantis_out/fasta_chunks/p2_c0/searchout/checkm_filtered_pf.domtblout_chunk_9
-Found 4 hits in:
-/home/student.unimelb.edu.au/yuhtong/andy/MMA_organelle_metagenomics/binny_output/intermediary/mantis_out/fasta_chunks/p2_c0/searchout/checkm_filtered_pf.domtblout_chunk_9
+/data/chloroscan/binny_output/intermediary/mantis_out/fasta_chunks/p2_c0/searchout/checkm_filtered_pf.domtblout_chunk_16
+Found 3 hits in:
+/data/chloroscan/binny_output/intermediary/mantis_out/fasta_chunks/p2_c0/searchout/checkm_filtered_pf.domtblout_chunk_16
 Will now get best hits!
 Finished processing hits for:
-/home/student.unimelb.edu.au/yuhtong/andy/MMA_organelle_metagenomics/binny_output/intermediary/mantis_out/fasta_chunks/p2_c0/searchout/checkm_filtered_pf.domtblout_chunk_9
+/data/chloroscan/binny_output/intermediary/mantis_out/fasta_chunks/p2_c0/searchout/checkm_filtered_pf.domtblout_chunk_16
 ------------------------------------------
 ------------------------------------------
 Processing hits for:
-/home/student.unimelb.edu.au/yuhtong/andy/MMA_organelle_metagenomics/binny_output/intermediary/mantis_out/fasta_chunks/p2_c0/searchout/checkm_filtered_pf.domtblout_chunk_10
-Found 4 hits in:
-/home/student.unimelb.edu.au/yuhtong/andy/MMA_organelle_metagenomics/binny_output/intermediary/mantis_out/fasta_chunks/p2_c0/searchout/checkm_filtered_pf.domtblout_chunk_10
+/data/chloroscan/binny_output/intermediary/mantis_out/fasta_chunks/p2_c0/searchout/checkm_filtered_pf.domtblout_chunk_11
+Found 3 hits in:
+/data/chloroscan/binny_output/intermediary/mantis_out/fasta_chunks/p2_c0/searchout/checkm_filtered_pf.domtblout_chunk_11
 Will now get best hits!
 Finished processing hits for:
-/home/student.unimelb.edu.au/yuhtong/andy/MMA_organelle_metagenomics/binny_output/intermediary/mantis_out/fasta_chunks/p2_c0/searchout/checkm_filtered_pf.domtblout_chunk_10
+/data/chloroscan/binny_output/intermediary/mantis_out/fasta_chunks/p2_c0/searchout/checkm_filtered_pf.domtblout_chunk_11
 ------------------------------------------
 ------------------------------------------
 Processing hits for:
-/home/student.unimelb.edu.au/yuhtong/andy/MMA_organelle_metagenomics/binny_output/intermediary/mantis_out/fasta_chunks/p2_c0/searchout/checkm_filtered_pf.domtblout_chunk_3
-Found 4 hits in:
-/home/student.unimelb.edu.au/yuhtong/andy/MMA_organelle_metagenomics/binny_output/intermediary/mantis_out/fasta_chunks/p2_c0/searchout/checkm_filtered_pf.domtblout_chunk_3
+/data/chloroscan/binny_output/intermediary/mantis_out/fasta_chunks/p2_c0/searchout/checkm_filtered_pf.domtblout_chunk_4
+------------------------------------------
+Processing hits for:
+/data/chloroscan/binny_output/intermediary/mantis_out/fasta_chunks/p2_c0/searchout/checkm_filtered_pf.domtblout_chunk_21
+Found 3 hits in:
+/data/chloroscan/binny_output/intermediary/mantis_out/fasta_chunks/p2_c0/searchout/checkm_filtered_pf.domtblout_chunk_4
 Will now get best hits!
 Finished processing hits for:
-/home/student.unimelb.edu.au/yuhtong/andy/MMA_organelle_metagenomics/binny_output/intermediary/mantis_out/fasta_chunks/p2_c0/searchout/checkm_filtered_pf.domtblout_chunk_3
+/data/chloroscan/binny_output/intermediary/mantis_out/fasta_chunks/p2_c0/searchout/checkm_filtered_pf.domtblout_chunk_4
+------------------------------------------
+Found 3 hits in:
+/data/chloroscan/binny_output/intermediary/mantis_out/fasta_chunks/p2_c0/searchout/checkm_filtered_pf.domtblout_chunk_21
+Will now get best hits!
+Finished processing hits for:
+/data/chloroscan/binny_output/intermediary/mantis_out/fasta_chunks/p2_c0/searchout/checkm_filtered_pf.domtblout_chunk_21
 ------------------------------------------
 ------------------------------------------
 Processing hits for:
-/home/student.unimelb.edu.au/yuhtong/andy/MMA_organelle_metagenomics/binny_output/intermediary/mantis_out/fasta_chunks/p2_c0/searchout/checkm_filtered_pf.domtblout_chunk_7
-Found 4 hits in:
-/home/student.unimelb.edu.au/yuhtong/andy/MMA_organelle_metagenomics/binny_output/intermediary/mantis_out/fasta_chunks/p2_c0/searchout/checkm_filtered_pf.domtblout_chunk_7
+/data/chloroscan/binny_output/intermediary/mantis_out/fasta_chunks/p2_c0/searchout/checkm_filtered_pf.domtblout_chunk_14
+------------------------------------------
+Found 3 hits in:
+/data/chloroscan/binny_output/intermediary/mantis_out/fasta_chunks/p2_c0/searchout/checkm_filtered_pf.domtblout_chunk_14
+Will now get best hits!
+------------------------------------------
+Processing hits for:
+/data/chloroscan/binny_output/intermediary/mantis_out/fasta_chunks/p2_c0/searchout/checkm_filtered_pf.domtblout_chunk_26
+Processing hits for:
+/data/chloroscan/binny_output/intermediary/mantis_out/fasta_chunks/p2_c0/searchout/checkm_filtered_pf.domtblout_chunk_6
+Found 3 hits in:
+/data/chloroscan/binny_output/intermediary/mantis_out/fasta_chunks/p2_c0/searchout/checkm_filtered_pf.domtblout_chunk_6
 Will now get best hits!
 Finished processing hits for:
-/home/student.unimelb.edu.au/yuhtong/andy/MMA_organelle_metagenomics/binny_output/intermediary/mantis_out/fasta_chunks/p2_c0/searchout/checkm_filtered_pf.domtblout_chunk_7
+/data/chloroscan/binny_output/intermediary/mantis_out/fasta_chunks/p2_c0/searchout/checkm_filtered_pf.domtblout_chunk_6
+------------------------------------------
+Finished processing hits for:
+/data/chloroscan/binny_output/intermediary/mantis_out/fasta_chunks/p2_c0/searchout/checkm_filtered_pf.domtblout_chunk_14
+------------------------------------------
+Found 3 hits in:
+/data/chloroscan/binny_output/intermediary/mantis_out/fasta_chunks/p2_c0/searchout/checkm_filtered_pf.domtblout_chunk_26
+Will now get best hits!
+------------------------------------------
+Processing hits for:
+/data/chloroscan/binny_output/intermediary/mantis_out/fasta_chunks/p2_c0/searchout/checkm_filtered_pf.domtblout_chunk_9
+Found 3 hits in:
+/data/chloroscan/binny_output/intermediary/mantis_out/fasta_chunks/p2_c0/searchout/checkm_filtered_pf.domtblout_chunk_9
+Will now get best hits!
+Finished processing hits for:
+/data/chloroscan/binny_output/intermediary/mantis_out/fasta_chunks/p2_c0/searchout/checkm_filtered_pf.domtblout_chunk_9
+------------------------------------------
+Finished processing hits for:
+/data/chloroscan/binny_output/intermediary/mantis_out/fasta_chunks/p2_c0/searchout/checkm_filtered_pf.domtblout_chunk_26
 ------------------------------------------
 ------------------------------------------
 Processing hits for:
-/home/student.unimelb.edu.au/yuhtong/andy/MMA_organelle_metagenomics/binny_output/intermediary/mantis_out/fasta_chunks/p2_c0/searchout/checkm_filtered_pf.domtblout_chunk_6
-Found 4 hits in:
-/home/student.unimelb.edu.au/yuhtong/andy/MMA_organelle_metagenomics/binny_output/intermediary/mantis_out/fasta_chunks/p2_c0/searchout/checkm_filtered_pf.domtblout_chunk_6
+/data/chloroscan/binny_output/intermediary/mantis_out/fasta_chunks/p2_c0/searchout/checkm_filtered_pf.domtblout_chunk_24
+Found 3 hits in:
+/data/chloroscan/binny_output/intermediary/mantis_out/fasta_chunks/p2_c0/searchout/checkm_filtered_pf.domtblout_chunk_24
 Will now get best hits!
 Finished processing hits for:
-/home/student.unimelb.edu.au/yuhtong/andy/MMA_organelle_metagenomics/binny_output/intermediary/mantis_out/fasta_chunks/p2_c0/searchout/checkm_filtered_pf.domtblout_chunk_6
+/data/chloroscan/binny_output/intermediary/mantis_out/fasta_chunks/p2_c0/searchout/checkm_filtered_pf.domtblout_chunk_24
 ------------------------------------------
 ------------------------------------------
 Processing hits for:
-/home/student.unimelb.edu.au/yuhtong/andy/MMA_organelle_metagenomics/binny_output/intermediary/mantis_out/fasta_chunks/p2_c0/searchout/checkm_filtered_pf.domtblout_chunk_2
-Found 5 hits in:
-/home/student.unimelb.edu.au/yuhtong/andy/MMA_organelle_metagenomics/binny_output/intermediary/mantis_out/fasta_chunks/p2_c0/searchout/checkm_filtered_pf.domtblout_chunk_2
+/data/chloroscan/binny_output/intermediary/mantis_out/fasta_chunks/p2_c0/searchout/checkm_filtered_pf.domtblout_chunk_30
+Found 2 hits in:
+/data/chloroscan/binny_output/intermediary/mantis_out/fasta_chunks/p2_c0/searchout/checkm_filtered_pf.domtblout_chunk_30
 Will now get best hits!
 Finished processing hits for:
-/home/student.unimelb.edu.au/yuhtong/andy/MMA_organelle_metagenomics/binny_output/intermediary/mantis_out/fasta_chunks/p2_c0/searchout/checkm_filtered_pf.domtblout_chunk_2
+/data/chloroscan/binny_output/intermediary/mantis_out/fasta_chunks/p2_c0/searchout/checkm_filtered_pf.domtblout_chunk_30
 ------------------------------------------
-Merging chunks to /home/student.unimelb.edu.au/yuhtong/andy/MMA_organelle_metagenomics/binny_output/intermediary/mantis_out/fasta_chunks/p2_c0/output_annotation.tsv
-Merging chunks to /home/student.unimelb.edu.au/yuhtong/andy/MMA_organelle_metagenomics/binny_output/intermediary/mantis_out/output_annotation.tsv
-Merging chunks to /home/student.unimelb.edu.au/yuhtong/andy/MMA_organelle_metagenomics/binny_output/intermediary/mantis_out/integrated_annotation.tsv
-Merging chunks to /home/student.unimelb.edu.au/yuhtong/andy/MMA_organelle_metagenomics/binny_output/intermediary/mantis_out/consensus_annotation.tsv
+------------------------------------------
+Processing hits for:
+/data/chloroscan/binny_output/intermediary/mantis_out/fasta_chunks/p2_c0/searchout/checkm_filtered_pf.domtblout_chunk_1
+Found 3 hits in:
+/data/chloroscan/binny_output/intermediary/mantis_out/fasta_chunks/p2_c0/searchout/checkm_filtered_pf.domtblout_chunk_1
+Will now get best hits!
+Finished processing hits for:
+/data/chloroscan/binny_output/intermediary/mantis_out/fasta_chunks/p2_c0/searchout/checkm_filtered_pf.domtblout_chunk_1
+------------------------------------------
+------------------------------------------
+Processing hits for:
+/data/chloroscan/binny_output/intermediary/mantis_out/fasta_chunks/p2_c0/searchout/checkm_filtered_pf.domtblout_chunk_15
+Found 3 hits in:
+/data/chloroscan/binny_output/intermediary/mantis_out/fasta_chunks/p2_c0/searchout/checkm_filtered_pf.domtblout_chunk_15
+Will now get best hits!
+------------------------------------------
+Processing hits for:
+/data/chloroscan/binny_output/intermediary/mantis_out/fasta_chunks/p2_c0/searchout/checkm_filtered_pf.domtblout_chunk_2
+Finished processing hits for:
+/data/chloroscan/binny_output/intermediary/mantis_out/fasta_chunks/p2_c0/searchout/checkm_filtered_pf.domtblout_chunk_15
+Found 3 hits in:
+/data/chloroscan/binny_output/intermediary/mantis_out/fasta_chunks/p2_c0/searchout/checkm_filtered_pf.domtblout_chunk_2
+Will now get best hits!
+------------------------------------------
+Finished processing hits for:
+/data/chloroscan/binny_output/intermediary/mantis_out/fasta_chunks/p2_c0/searchout/checkm_filtered_pf.domtblout_chunk_2
+------------------------------------------
+------------------------------------------
+Processing hits for:
+/data/chloroscan/binny_output/intermediary/mantis_out/fasta_chunks/p2_c0/searchout/checkm_filtered_pf.domtblout_chunk_20
+------------------------------------------
+Processing hits for:
+/data/chloroscan/binny_output/intermediary/mantis_out/fasta_chunks/p2_c0/searchout/checkm_filtered_pf.domtblout_chunk_31
+------------------------------------------
+Processing hits for:
+/data/chloroscan/binny_output/intermediary/mantis_out/fasta_chunks/p2_c0/searchout/checkm_filtered_pf.domtblout_chunk_13
+Found 3 hits in:
+/data/chloroscan/binny_output/intermediary/mantis_out/fasta_chunks/p2_c0/searchout/checkm_filtered_pf.domtblout_chunk_20
+Will now get best hits!
+Found 2 hits in:
+/data/chloroscan/binny_output/intermediary/mantis_out/fasta_chunks/p2_c0/searchout/checkm_filtered_pf.domtblout_chunk_31
+Will now get best hits!
+Finished processing hits for:
+/data/chloroscan/binny_output/intermediary/mantis_out/fasta_chunks/p2_c0/searchout/checkm_filtered_pf.domtblout_chunk_31
+------------------------------------------
+Found 3 hits in:
+/data/chloroscan/binny_output/intermediary/mantis_out/fasta_chunks/p2_c0/searchout/checkm_filtered_pf.domtblout_chunk_13
+Will now get best hits!
+Finished processing hits for:
+/data/chloroscan/binny_output/intermediary/mantis_out/fasta_chunks/p2_c0/searchout/checkm_filtered_pf.domtblout_chunk_13
+------------------------------------------
+Finished processing hits for:
+/data/chloroscan/binny_output/intermediary/mantis_out/fasta_chunks/p2_c0/searchout/checkm_filtered_pf.domtblout_chunk_20
+------------------------------------------
+------------------------------------------
+Processing hits for:
+/data/chloroscan/binny_output/intermediary/mantis_out/fasta_chunks/p2_c0/searchout/checkm_filtered_pf.domtblout_chunk_23
+Found 3 hits in:
+/data/chloroscan/binny_output/intermediary/mantis_out/fasta_chunks/p2_c0/searchout/checkm_filtered_pf.domtblout_chunk_23
+Will now get best hits!
+Finished processing hits for:
+/data/chloroscan/binny_output/intermediary/mantis_out/fasta_chunks/p2_c0/searchout/checkm_filtered_pf.domtblout_chunk_23
+------------------------------------------
+------------------------------------------
+Processing hits for:
+/data/chloroscan/binny_output/intermediary/mantis_out/fasta_chunks/p2_c0/searchout/checkm_filtered_pf.domtblout_chunk_19
+Found 3 hits in:
+/data/chloroscan/binny_output/intermediary/mantis_out/fasta_chunks/p2_c0/searchout/checkm_filtered_pf.domtblout_chunk_19
+Will now get best hits!
+Finished processing hits for:
+/data/chloroscan/binny_output/intermediary/mantis_out/fasta_chunks/p2_c0/searchout/checkm_filtered_pf.domtblout_chunk_19
+------------------------------------------
+------------------------------------------
+Processing hits for:
+/data/chloroscan/binny_output/intermediary/mantis_out/fasta_chunks/p2_c0/searchout/checkm_filtered_pf.domtblout_chunk_29
+Found 3 hits in:
+/data/chloroscan/binny_output/intermediary/mantis_out/fasta_chunks/p2_c0/searchout/checkm_filtered_pf.domtblout_chunk_29
+Will now get best hits!
+Finished processing hits for:
+/data/chloroscan/binny_output/intermediary/mantis_out/fasta_chunks/p2_c0/searchout/checkm_filtered_pf.domtblout_chunk_29
+------------------------------------------
+------------------------------------------
+Processing hits for:
+/data/chloroscan/binny_output/intermediary/mantis_out/fasta_chunks/p2_c0/searchout/checkm_filtered_pf.domtblout_chunk_5
+------------------------------------------
+Processing hits for:
+/data/chloroscan/binny_output/intermediary/mantis_out/fasta_chunks/p2_c0/searchout/checkm_filtered_pf.domtblout_chunk_10
+Found 3 hits in:
+/data/chloroscan/binny_output/intermediary/mantis_out/fasta_chunks/p2_c0/searchout/checkm_filtered_pf.domtblout_chunk_5
+Will now get best hits!
+Found 3 hits in:
+/data/chloroscan/binny_output/intermediary/mantis_out/fasta_chunks/p2_c0/searchout/checkm_filtered_pf.domtblout_chunk_10
+Will now get best hits!
+Finished processing hits for:
+/data/chloroscan/binny_output/intermediary/mantis_out/fasta_chunks/p2_c0/searchout/checkm_filtered_pf.domtblout_chunk_5
+------------------------------------------
+Finished processing hits for:
+/data/chloroscan/binny_output/intermediary/mantis_out/fasta_chunks/p2_c0/searchout/checkm_filtered_pf.domtblout_chunk_10
+------------------------------------------
+------------------------------------------
+Processing hits for:
+/data/chloroscan/binny_output/intermediary/mantis_out/fasta_chunks/p2_c0/searchout/checkm_filtered_pf.domtblout_chunk_12
+Found 3 hits in:
+/data/chloroscan/binny_output/intermediary/mantis_out/fasta_chunks/p2_c0/searchout/checkm_filtered_pf.domtblout_chunk_12
+Will now get best hits!
+Finished processing hits for:
+/data/chloroscan/binny_output/intermediary/mantis_out/fasta_chunks/p2_c0/searchout/checkm_filtered_pf.domtblout_chunk_12
+------------------------------------------
+------------------------------------------
+Processing hits for:
+/data/chloroscan/binny_output/intermediary/mantis_out/fasta_chunks/p2_c0/searchout/checkm_filtered_pf.domtblout_chunk_25
+------------------------------------------
+Processing hits for:
+/data/chloroscan/binny_output/intermediary/mantis_out/fasta_chunks/p2_c0/searchout/checkm_filtered_pf.domtblout_chunk_22
+Found 3 hits in:
+/data/chloroscan/binny_output/intermediary/mantis_out/fasta_chunks/p2_c0/searchout/checkm_filtered_pf.domtblout_chunk_22
+Will now get best hits!
+Finished processing hits for:
+/data/chloroscan/binny_output/intermediary/mantis_out/fasta_chunks/p2_c0/searchout/checkm_filtered_pf.domtblout_chunk_22
+------------------------------------------
+------------------------------------------
+Processing hits for:
+/data/chloroscan/binny_output/intermediary/mantis_out/fasta_chunks/p2_c0/searchout/checkm_filtered_pf.domtblout_chunk_27
+Found 3 hits in:
+/data/chloroscan/binny_output/intermediary/mantis_out/fasta_chunks/p2_c0/searchout/checkm_filtered_pf.domtblout_chunk_25
+Will now get best hits!
+------------------------------------------
+Processing hits for:
+/data/chloroscan/binny_output/intermediary/mantis_out/fasta_chunks/p2_c0/searchout/checkm_filtered_pf.domtblout_chunk_0
+Found 3 hits in:
+/data/chloroscan/binny_output/intermediary/mantis_out/fasta_chunks/p2_c0/searchout/checkm_filtered_pf.domtblout_chunk_27
+Will now get best hits!
+Found 3 hits in:
+/data/chloroscan/binny_output/intermediary/mantis_out/fasta_chunks/p2_c0/searchout/checkm_filtered_pf.domtblout_chunk_0
+Will now get best hits!
+Finished processing hits for:
+/data/chloroscan/binny_output/intermediary/mantis_out/fasta_chunks/p2_c0/searchout/checkm_filtered_pf.domtblout_chunk_27
+------------------------------------------
+Finished processing hits for:
+/data/chloroscan/binny_output/intermediary/mantis_out/fasta_chunks/p2_c0/searchout/checkm_filtered_pf.domtblout_chunk_0
+------------------------------------------
+------------------------------------------
+Processing hits for:
+/data/chloroscan/binny_output/intermediary/mantis_out/fasta_chunks/p2_c0/searchout/checkm_filtered_pf.domtblout_chunk_28
+Finished processing hits for:
+/data/chloroscan/binny_output/intermediary/mantis_out/fasta_chunks/p2_c0/searchout/checkm_filtered_pf.domtblout_chunk_25
+------------------------------------------
+Found 3 hits in:
+/data/chloroscan/binny_output/intermediary/mantis_out/fasta_chunks/p2_c0/searchout/checkm_filtered_pf.domtblout_chunk_28
+Will now get best hits!
+Finished processing hits for:
+/data/chloroscan/binny_output/intermediary/mantis_out/fasta_chunks/p2_c0/searchout/checkm_filtered_pf.domtblout_chunk_28
+------------------------------------------
+Merging chunks to /data/chloroscan/binny_output/intermediary/mantis_out/fasta_chunks/p2_c0/output_annotation.tsv
+Merging chunks to /data/chloroscan/binny_output/intermediary/mantis_out/output_annotation.tsv
+Merging chunks to /data/chloroscan/binny_output/intermediary/mantis_out/integrated_annotation.tsv
+Merging chunks to /data/chloroscan/binny_output/intermediary/mantis_out/consensus_annotation.tsv
 ------------------------------------------
 #  This sample has been sucessfully annotated!

@@ -1,7 +1,7 @@
 NX_value: 90
 bin_quality:
   min_completeness: 72.5
-  purity: 95
+  purity: 95.0
   start_completeness: 92.5
 clustering:
   hdbscan_epsilon_range: 0.250,0.000
@@ -10,7 +10,7 @@ clustering:
   include_depth_main: 'True'
 coassembly_mode: auto
 conda_source: ''
-db_path: ''
+db_path: /data/chloroscan/conda_envs/c52db60b071005c606a464b1c012b894_/lib/binny_Chloroscan/A2K_database
 distance_metric: manhattan
 embedding:
   max_iterations: 50
@@ -31,10 +31,10 @@ min_cont_length_cutoff_marker: 1500
 outputdir: binny_output
 prokka_env: ''
 raws:
-  assembly: /home/student.unimelb.edu.au/yuhtong/andy/MMA_organelle_metagenomics/test_data/test_plastid.fasta
-  contig_depth: /home/student.unimelb.edu.au/yuhtong/andy/MMA_organelle_metagenomics/test_data/contig_depth_test.txt
+  assembly: TEST_OUT/working/corgi/plastid.fasta
+  contig_depth: tests/test-data/contig_depth_test.txt
   metagenomics_alignment: ''
 sample: test
-snakemake_env: ''
+snakemake_env: /data/chloroscan/conda_envs/c52db60b071005c606a464b1c012b894_/lib/binny_Chloroscan/snakemake_env
 tmp_dir: tmp
 write_contig_data: 'True'

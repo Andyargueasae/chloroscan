@@ -1,2 +1,2 @@
-total classified contigs containing all 5 domains: 27
-total number of plastid contigs: 27
+total classified contigs containing all 5 domains: 8
+total number of plastid contigs: 8
