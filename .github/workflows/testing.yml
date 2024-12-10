@@ -43,4 +43,7 @@ jobs:
       run: |
         export CHLOROSCAN_CONDA_PREFIX=/home/runner/mamba-cache/chloroscan
         export PATH=/home/runner/mamba-cache/mamba/condabin:$PATH
+
+        mamba config --add channels conda-forge
+        mamba config --set channel_priority strict
         poetry run pytest -v -s -o faulthandler_timeout=60
