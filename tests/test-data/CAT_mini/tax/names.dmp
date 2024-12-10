@@ -1,0 +1,993 @@
+1	|	all	|		|	synonym	|
+1	|	root	|		|	scientific name	|
+2759	|	Eucarya	|		|	synonym	|
+2759	|	Eucaryotae	|		|	synonym	|
+2759	|	eucaryotes	|		|	genbank common name	|
+2759	|	Eukarya	|		|	synonym	|
+2759	|	Eukaryotae	|		|	synonym	|
+2759	|	Eukaryota	|		|	scientific name	|
+2759	|	eukaryotes	|	eukaryotes <blast name>	|	blast name	|
+2759	|	eukaryotes	|	eukaryotes <common name>	|	common name	|
+2608109	|	Haptista Cavalier-Smith, 2003	|		|	authority	|
+2608109	|	Haptista	|		|	scientific name	|
+2830	|	algae	|	algae <haptophytes>	|	in-part	|
+2830	|	Chromophyta	|	Chromophyta <haptophytes>	|	in-part	|
+2830	|	coccolithophorids	|		|	common name	|
+2830	|	Haptophyceae	|		|	synonym	|
+2830	|	Haptophyta Hibberd, 1976	|		|	authority	|
+2830	|	Haptophyta	|		|	scientific name	|
+2830	|	haptophytes	|		|	blast name	|
+2830	|	Prymnesiophyta	|		|	synonym	|
+2831	|	Pavlova Butcher, 1952	|		|	authority	|
+2831	|	Pavlova	|		|	scientific name	|
+2902	|	Emiliania	|		|	scientific name	|
+2903	|	Emiliania huxleyi (Lohmann) W.W.Hay & H.P.Mohler	|		|	authority	|
+2903	|	Emiliania huxleyi	|		|	scientific name	|
+2903	|	Gephyrocapsa huxleyi (Lohmann) Reinhardt 1972	|		|	authority	|
+2903	|	Gephyrocapsa huxleyi	|		|	synonym	|
+2903	|	Pontosphaera huxleyi Lohmann 1902	|		|	authority	|
+2903	|	Pontosphaera huxleyi	|		|	synonym	|
+2905	|	Ochrosphaera	|		|	scientific name	|
+2907	|	Ochrosphaera sp. 181	|		|	scientific name	|
+13220	|	Pleurochrysis	|	Pleurochrysis <haptophytes>	|	scientific name	|
+13221	|	Chrysotila carterae	|		|	scientific name	|
+13221	|	Chrysotila carterae (T.Braarud & E.Fagerland) Andersen, Kim, Tittley & Yoon 2014	|		|	authority	|
+13221	|	Pleurochrysis carterae (Braarud & Fagerland) Christensen 1978	|		|	authority	|
+13221	|	Pleurochrysis carterae	|		|	synonym	|
+13221	|	Syracosphaera carterae Braarud & Fargerland 1946	|		|	authority	|
+13221	|	Syracosphaera carterae	|		|	synonym	|
+33656	|	Phaeocystis	|		|	scientific name	|
+33657	|	Phaeocystis antarctica Karsten 1905	|		|	authority	|
+33657	|	Phaeocystis antarctica	|		|	scientific name	|
+33658	|	Phaeocystis globosa	|		|	scientific name	|
+33659	|	Phaeocystis pouchetii	|		|	scientific name	|
+35135	|	Pleurochrysis haptonemofera	|		|	scientific name	|
+35137	|	Ochrosphaera neapolitana Schussnig, 1930	|		|	authority	|
+35137	|	Ochrosphaera neapolitana	|		|	scientific name	|
+35137	|	Ochrosphaera sp. CCMP2002	|		|	includes	|
+35138	|	Calyptrosphaera	|		|	scientific name	|
+35139	|	Calyptrosphaera sphaeroidea	|		|	scientific name	|
+35140	|	Chrysochromulina	|		|	scientific name	|
+35141	|	Chrysochromulina alifera	|		|	scientific name	|
+35142	|	Chrysochromulina hirta Manton 1978	|		|	authority	|
+35142	|	Chrysochromulina hirta	|		|	synonym	|
+35142	|	Haptolina hirta (Manton) Edvardsen & Eikrem in Edvardsen et al. 2011	|		|	authority	|
+35142	|	Haptolina hirta	|		|	scientific name	|
+35143	|	Prymnesium	|		|	scientific name	|
+35144	|	Prymnesium parvum f. patelliferum	|		|	scientific name	|
+35144	|	Prymnesium patelliferum	|		|	synonym	|
+37098	|	Isochrysis Parke, 1949	|		|	authority	|
+37098	|	Isochrysis	|		|	scientific name	|
+37099	|	Isochrysis galbana Parke, 1949	|		|	authority	|
+37099	|	Isochrysis galbana	|		|	scientific name	|
+37099	|	SAG 13.92	|	SAG 13.92 <type material>	|	type material	|
+38816	|	Gephyrocapsa	|		|	scientific name	|
+38817	|	Gephyrocapsa oceanica	|		|	scientific name	|
+38818	|	Umbilicosphaera	|		|	scientific name	|
+38819	|	Umbilicosphaera sibogae	|		|	scientific name	|
+40639	|	Isochrysis sp.	|		|	scientific name	|
+44452	|	Pavlova gyrans	|		|	scientific name	|
+44452	|	Pavlova gyrans strain=CCMP 607	|		|	includes	|
+44453	|	Prymnesium calathiferum	|		|	scientific name	|
+44453	|	Prymnesium calathiferum strain=CCMP 707	|		|	includes	|
+44459	|	Coccoid haptophyte CCMP625	|		|	scientific name	|
+53264	|	Reticulosphaera	|		|	scientific name	|
+53265	|	Reticulosphaera socialis	|		|	scientific name	|
+70451	|	Diacronema Prauser, 1958	|		|	authority	|
+70451	|	Diacronema	|		|	scientific name	|
+70452	|	Diacronema vlkianum	|		|	scientific name	|
+72547	|	Chrysochromulina apheles	|		|	scientific name	|
+72548	|	Chrysochromulina polylepis Manton & Parke 1962	|		|	authority	|
+72548	|	Chrysochromulina polylepis	|		|	synonym	|
+72548	|	Prymnesium polylepis (Manton & Parke) Edvardsen, Eikrem & Probert in Edvardsen et al. 2011	|		|	authority	|
+72548	|	Prymnesium polylepis	|		|	scientific name	|
+73020	|	Isochrysidales	|		|	scientific name	|
+73021	|	Cricosphaera	|		|	scientific name	|
+73026	|	Pavlovales Green, 1976	|		|	authority	|
+73026	|	Pavlovales	|		|	scientific name	|
+73027	|	Coccosphaerales	|		|	scientific name	|
+73028	|	Prymnesiales	|		|	scientific name	|
+74025	|	Syracosphaera	|		|	scientific name	|
+74026	|	Syracosphaera sp. CCMP875	|		|	scientific name	|
+76568	|	Isochrysis sp. SAG 927-2	|		|	scientific name	|
+93931	|	Chrysochromulina fragaria	|		|	synonym	|
+93931	|	Chrysochromulina fragaria W.Eikrem & B.Edvardsen 1999	|		|	authority	|
+93931	|	Haptolina fragaria (Eikrem & Edvardsen) Eikrem & Edvardsen in Edvardsen et al. 2011	|		|	authority	|
+93931	|	Haptolina fragaria	|		|	scientific name	|
+97482	|	Pleurochrysis sp. CCMP875	|		|	scientific name	|
+97482	|	Pleurochrysis sp. CCMP 875	|		|	synonym	|
+97483	|	Pleurochrysis elongata	|		|	scientific name	|
+97484	|	Prymnesium nemamethecum	|		|	scientific name	|
+97485	|	Prymnesium parvum Carter, 1937	|		|	authority	|
+97485	|	Prymnesium parvum	|		|	scientific name	|
+97486	|	Chrysochromulina kappa Parke & Manton 1955	|		|	authority	|
+97486	|	Chrysochromulina kappa	|		|	synonym	|
+97486	|	Prymnesium kappa (Parke & Manton) Edvardsen, Eikrem & Probert in Edvardsen et al. 2011	|		|	authority	|
+97486	|	Prymnesium kappa	|		|	scientific name	|
+97487	|	Chrysochromulina scutellum	|		|	scientific name	|
+97488	|	Chrysochromulina throndsenii Eikrem 1996	|		|	authority	|
+97488	|	Chrysochromulina throndsenii	|		|	scientific name	|
+97489	|	Chrysochromulina acantha	|		|	scientific name	|
+97491	|	Coccolithus	|		|	scientific name	|
+97492	|	Coccolithus pelagicus	|		|	scientific name	|
+97493	|	unclassified Haptophyceae	|		|	scientific name	|
+97494	|	Imantonia	|		|	scientific name	|
+97496	|	unclassified coccolithophorid CCMP300	|		|	scientific name	|
+97496	|	unclassified coccolithophorid CCMP 300	|		|	synonym	|
+98217	|	Chrysochromulina campanulifera	|		|	scientific name	|
+98790	|	Coccoid haptophyte CCMP1416	|		|	synonym	|
+98790	|	Pavlova sp. CCMP1416	|		|	scientific name	|
+111754	|	unidentified prymnesiophyte clone OLI51050	|		|	scientific name	|
+111755	|	unidentified prymnesiophyte clone OLI51059	|		|	scientific name	|
+111756	|	unidentified prymnesiophyte clone OLI16010	|		|	scientific name	|
+111757	|	unidentified prymnesiophyte clone OLI16029	|		|	scientific name	|
+111758	|	unidentified prymnesiophyte clone OLI16108	|		|	scientific name	|
+111759	|	unidentified prymnesiophyte clone OLI26017	|		|	scientific name	|
+111760	|	unidentified prymnesiophyte clone OLI26041	|		|	scientific name	|
+111761	|	unidentified prymnesiophyte clone OLI26047	|		|	scientific name	|
+111762	|	unidentified prymnesiophyte clone OLI51004	|		|	scientific name	|
+111763	|	unidentified prymnesiophyte clone OLI51076	|		|	scientific name	|
+111764	|	unidentified prymnesiophyte clone OLI51080	|		|	scientific name	|
+111765	|	unidentified prymnesiophyte clone OLI51102	|		|	scientific name	|
+111766	|	unidentified prymnesiophyte clone OLI51033	|		|	scientific name	|
+113104	|	Phaeocystis sp. Santou	|		|	scientific name	|
+114045	|	Haptophyceae gen. sp. 4AH6	|		|	scientific name	|
+114046	|	Haptophyceae gen. sp. 4AH8	|		|	scientific name	|
+114047	|	Haptophyceae gen. sp. 4DCH2	|		|	scientific name	|
+114048	|	Haptophyceae gen. sp. 4DCH7	|		|	scientific name	|
+118079	|	Phaeocystis cordata	|		|	scientific name	|
+118080	|	Phaeocystis jahnii	|		|	scientific name	|
+119481	|	Pavlova pinguis	|		|	scientific name	|
+119496	|	Exanthemachrysis	|		|	scientific name	|
+119497	|	Exanthemachrysis gayraliae	|		|	scientific name	|
+119529	|	Pavlova sp. J013	|		|	scientific name	|
+124337	|	prymnesiophyte symbiont 1	|		|	scientific name	|
+124338	|	prymnesiophyte symbiont 3	|		|	scientific name	|
+124339	|	prymnesiophyte symbiont 4	|		|	scientific name	|
+126725	|	Phaeocystis sp. PLY559	|		|	scientific name	|
+126725	|	Phaeocystis sp. PLY 559	|		|	synonym	|
+127546	|	Cruciplaccolithus	|		|	synonym	|
+127546	|	Cruciplacolithus	|		|	scientific name	|
+127547	|	Cruciplaccolithus neohelis	|		|	synonym	|
+127547	|	Cruciplacolithus neohelis	|		|	scientific name	|
+127548	|	Calcidiscus	|		|	scientific name	|
+127549	|	Calcidiscus leptoporus	|		|	scientific name	|
+127561	|	Helicosphaera	|		|	scientific name	|
+127562	|	Helicosphaera carteri	|		|	scientific name	|
+127563	|	Chrysochromulina parva	|		|	scientific name	|
+127564	|	Chrysochromulina sp. TKB8936	|		|	scientific name	|
+127565	|	Platychrysis Geitler, 1930	|		|	authority	|
+127565	|	Platychrysis	|		|	scientific name	|
+127566	|	Platychrysis sp. TKB8934	|		|	scientific name	|
+127567	|	Chrysocampanula spinifera Fournier 1971	|		|	authority	|
+127567	|	Chrysocampanula spinifera	|		|	scientific name	|
+127567	|	Chrysochromulina spinifera (Fournier) Pienaar & R.E.Norris 1979	|		|	authority	|
+127567	|	Chrysochromulina spinifera	|		|	synonym	|
+131222	|	Isochrysidales sp. SIC.42345	|		|	scientific name	|
+132960	|	Phaeocystis sp. SIC.41345	|		|	scientific name	|
+156173	|	Chrysochromulina brevifilum Parke & Manton in Parke, Manton & Clarke 1955	|		|	authority	|
+156173	|	Chrysochromulina brevifilum	|		|	synonym	|
+156173	|	Haptolina brevifila (Parke & Manton) Edvardsen & Eikrem in Edvardsen et al. 2011	|		|	authority	|
+156173	|	Haptolina brevifila	|		|	scientific name	|
+156174	|	Chrysochromulina ericina Parke & Manton	|		|	authority	|
+156174	|	Chrysochromulina ericina	|		|	synonym	|
+156174	|	Haptolina ericina (Parke & Manton) Edvardsen & Eikrem in Edvardsen et al. 2011	|		|	authority	|
+156174	|	Haptolina ericina	|		|	scientific name	|
+156175	|	Chrysochromulina sp. MBIC10516	|		|	scientific name	|
+156181	|	Isochrysis sp. MBIC10464	|		|	scientific name	|
+156182	|	Isochrysis sp. MBIC10847	|		|	scientific name	|
+156184	|	Pavlova sp. MBIC10074	|		|	scientific name	|
+156215	|	Monochrysis	|		|	scientific name	|
+156216	|	Monochrysis sp. MBIC10558	|		|	scientific name	|
+156217	|	Monochrysis sp. MBIC10561	|		|	scientific name	|
+171259	|	Haptophyta environmental samples	|		|	scientific name	|
+171259	|	uncultured Haptophyceae	|		|	synonym	|
+171259	|	uncultured Haptophyta	|		|	synonym	|
+171259	|	uncultured haptophyte	|		|	synonym	|
+171259	|	uncultured Prymnesiophyceae	|		|	synonym	|
+171259	|	uncultured Prymnesiophyta	|		|	synonym	|
+171259	|	uncultured prymnesiophyte	|		|	synonym	|
+185005	|	Pseudoisochrysis	|		|	scientific name	|
+185006	|	Pseudoisochrysis paradoxa F.D.Ott	|		|	authority	|
+185006	|	Pseudoisochrysis paradoxa	|		|	scientific name	|
+213179	|	Pavlova virescens Billard	|		|	authority	|
+213179	|	Pavlova virescens	|		|	scientific name	|
+213180	|	Pavlova pseudogranifera	|		|	scientific name	|
+213180	|	Pavlova sp. HAP33	|		|	includes	|
+221441	|	Calcidiscus leptoporus ssp. quadriperforatus	|		|	synonym	|
+221441	|	Calcidiscus quadriperforatus	|		|	scientific name	|
+221442	|	Coccolithus braarudii	|		|	scientific name	|
+221443	|	Umbilicosphaera foliosa	|		|	synonym	|
+221443	|	Umbilicosphaera sibogae var. foliosa	|		|	scientific name	|
+221445	|	Helicosphaera carteri var. hyalina	|		|	synonym	|
+221445	|	Helicosphaera hyalina	|		|	scientific name	|
+234595	|	Pavlova aff. salina PLY468	|		|	equivalent name	|
+234595	|	Rebecca aff. salina PLY468	|		|	scientific name	|
+243281	|	environmental samples	|	environmental samples <haptophytes,phylum Haptophyta>	|	scientific name	|
+259384	|	Chrysoculter	|		|	scientific name	|
+259385	|	Chrysoculter rhomboideus	|		|	scientific name	|
+260686	|	Pavlova sp. MBIC 10389	|		|	scientific name	|
+280148	|	Emiliania huxleyi CCMP371	|		|	scientific name	|
+280463	|	Emiliania huxleyi CCMP1516	|		|	scientific name	|
+280463	|	Emiliania huxleyi CCMP2090	|		|	synonym	|
+284051	|	Hyalochrysis neolepis	|		|	synonym	|
+284051	|	Hyalolithus neolepis	|		|	synonym	|
+284051	|	Prymnesium neolepis	|		|	scientific name	|
+284051	|	Prymnesium neolepis (Yosida et al. 2006) Edvardsen, Eikrem & Probert 2011	|		|	authority	|
+284693	|	Pavlova sp. MBIC10094	|		|	scientific name	|
+284699	|	Pavlova sp. MBIC10442	|		|	scientific name	|
+284702	|	Pleurochrysis sp. MBIC10443	|		|	scientific name	|
+284706	|	Pavlova sp. MBIC10455	|		|	scientific name	|
+284726	|	Pavlova sp. MBIC10635	|		|	scientific name	|
+284727	|	Pavlova sp. MBIC10640	|		|	scientific name	|
+284729	|	Pavlova sp. MBIC10652	|		|	scientific name	|
+284730	|	Pavlova sp. MBIC10665	|		|	scientific name	|
+284755	|	Isochrysis sp. MBIC10475	|		|	scientific name	|
+284756	|	Ochrosphaera sp. MBIC10476	|		|	scientific name	|
+284757	|	Imantonia sp. MBIC10497	|		|	scientific name	|
+284758	|	Imantonia sp. MBIC10500	|		|	scientific name	|
+284759	|	Calyptrosphaera sp. MBIC10517	|		|	scientific name	|
+284760	|	Platychrysis sp. MBIC10528	|		|	scientific name	|
+284783	|	Prymnesium sp. MBIC10533	|		|	scientific name	|
+284784	|	Gephyrocapsa sp. MBIC10535	|		|	scientific name	|
+284787	|	Ochrosphaera sp. MBIC10548	|		|	scientific name	|
+284788	|	Pleurochrysis sp. MBIC10549	|		|	scientific name	|
+284789	|	Isochrysis sp. MBIC10557	|		|	scientific name	|
+284790	|	Emiliania sp. MBIC10582	|		|	scientific name	|
+284792	|	Ochrosphaera sp. MBIC10788	|		|	scientific name	|
+284803	|	Calyptrosphaeraceae	|		|	scientific name	|
+284804	|	Helladosphaera	|		|	scientific name	|
+284805	|	Helladosphaera sp. MBIC10514	|		|	scientific name	|
+296654	|	Pavlova sp. CCMP1234	|		|	scientific name	|
+296657	|	Pavlova sp. RCC437	|		|	scientific name	|
+296657	|	Pavlova sp. RCC 437	|		|	synonym	|
+296658	|	Pavlova sp. RCC441	|		|	scientific name	|
+298111	|	Pavlova sp. CCMP459	|		|	scientific name	|
+301185	|	Chrysochromulina sp. TKB79	|		|	scientific name	|
+307103	|	Chrysochromulina sp. MBIC10518	|		|	scientific name	|
+308028	|	Pavlova sp. MBIC10663	|		|	scientific name	|
+309984	|	Chrysochromulina sp. MBIC10513	|		|	scientific name	|
+332610	|	Isochrysis sp. CCAP 927/14	|		|	scientific name	|
+337100	|	Isochrysis sp. santou 2	|		|	scientific name	|
+337320	|	Pavlova sp. J1	|		|	scientific name	|
+337322	|	Phaeocystis sp. Hongkong2	|		|	scientific name	|
+337323	|	Isochrysis aff. galbana 'Tahitian isolate'	|		|	scientific name	|
+337324	|	Isochrysis sp. zhangjiangensis	|		|	scientific name	|
+345935	|	Chrysochromulina sp. clone 124	|		|	scientific name	|
+349099	|	Corcontochrysis noctivaga Kalina 1970	|		|	authority	|
+349099	|	Corcontochrysis noctivaga	|		|	synonym	|
+349099	|	Pavlova noctivaga (Kalina) van der Veer & Leewis 1977	|		|	authority	|
+349099	|	Pavlova noctivaga	|		|	scientific name	|
+351438	|	Isochrysis galbana 3011	|		|	scientific name	|
+351438	|	Isochrysis sp. 3011	|		|	synonym	|
+351439	|	Isochrysis galbana 8701	|		|	scientific name	|
+351439	|	Isochrysis sp. 8701	|		|	synonym	|
+351440	|	Isochrysis aff. galbana	|		|	scientific name	|
+351441	|	Isochrysis aff. galbana T-iso	|		|	scientific name	|
+354139	|	Isochrysis zhangjiangensis	|		|	synonym	|
+354139	|	Isochrysis zhanjiangensis Hu et Liu 2007	|		|	authority	|
+354139	|	Isochrysis zhanjiangensis	|		|	scientific name	|
+373041	|	Braarudosphaera Deflandre, 1947	|		|	authority	|
+373041	|	Braarudosphaera	|		|	scientific name	|
+373042	|	Braarudosphaera bigelowii (Gran & Braarud) Deflandre 1947	|		|	authority	|
+373042	|	Braarudosphaera bigelowii	|		|	scientific name	|
+373044	|	Braarudosphaeraceae	|		|	scientific name	|
+407208	|	Chrysochromulina sp. NIES-1333	|		|	scientific name	|
+412153	|	Chrysochromulina aff. polylepis	|		|	synonym	|
+412153	|	Prymnesium aff. polylepis	|		|	scientific name	|
+412154	|	Chrysochromulina cymbium	|		|	scientific name	|
+412155	|	Chrysochromulina herdlensis B.Leadbeater 1972	|		|	authority	|
+412155	|	Chrysochromulina herdlensis	|		|	synonym	|
+412155	|	Haptolina herdlensis (B.Leadbeater) Edvardsen & Eikrem 2011	|		|	authority	|
+412155	|	Haptolina herdlensis	|		|	scientific name	|
+412156	|	Chrysochromulina leadbeateri	|		|	scientific name	|
+412157	|	Chrysochromulina rotalis	|		|	scientific name	|
+412158	|	Chrysochromulina simplex	|		|	scientific name	|
+412163	|	Dicrateria	|		|	scientific name	|
+412164	|	Dicrateria inornata	|		|	scientific name	|
+412166	|	Isochrysis cf. galbana	|		|	scientific name	|
+412167	|	Phaeocystis sp. MC679	|		|	scientific name	|
+418907	|	Chrysotila pseudoroscoffensis (Gayral & Fresnel) R.A.Andersen, J.I.Kim, Tittley & H.S.Yoon 2015	|		|	authority	|
+418907	|	Chrysotila pseudoroscoffensis	|		|	scientific name	|
+418907	|	Pleurochrysis pseudoroscoffensis Gayral & Fresnel 1983	|		|	authority	|
+418907	|	Pleurochrysis pseudoroscoffensis	|		|	synonym	|
+418908	|	Chrysotila roscoffensis	|		|	scientific name	|
+418908	|	Cricosphaera roscoffensis	|		|	synonym	|
+418908	|	Pleurochrysis roscoffensis (P.A.Dangeard) J.Fresnel & C.Billard 1991	|		|	authority	|
+418908	|	Pleurochrysis roscoffensis	|		|	synonym	|
+418908	|	Syracolithus roscoffensis	|		|	synonym	|
+418908	|	Syracosphaera roscoffensis P.A.Dangeard 1934	|		|	authority	|
+418908	|	Syracosphaera roscoffensis	|		|	synonym	|
+418909	|	Chrysotila placolithoides	|		|	scientific name	|
+418909	|	Pleurochrysis placolithoides J.Fresnel & C.Billard 1991	|		|	authority	|
+418909	|	Pleurochrysis placolithoides	|		|	synonym	|
+418910	|	Chrysotila scherffelii	|		|	scientific name	|
+418910	|	Pleurochrysis scherffelii Pringsheim 1955	|		|	authority	|
+418910	|	Pleurochrysis scherffelii	|		|	synonym	|
+418911	|	Jomonlithus	|		|	scientific name	|
+418912	|	Jomonlithus littoralis	|		|	scientific name	|
+418917	|	Coccolithales Schwarz 1932	|		|	authority	|
+418917	|	Coccolithales	|		|	scientific name	|
+418917	|	Reticulosphaerales	|		|	includes	|
+418918	|	Pleurochrysidaceae	|		|	scientific name	|
+418919	|	Phaeocystales	|		|	scientific name	|
+418920	|	Phaeocystaceae	|		|	scientific name	|
+418921	|	Zygodiscales	|		|	scientific name	|
+418928	|	Syracosphaerales	|		|	scientific name	|
+418931	|	Calcidiscaceae	|		|	scientific name	|
+418932	|	Syracosphaeraceae	|		|	scientific name	|
+418933	|	Coccolithaceae	|		|	scientific name	|
+418935	|	Hymenomonadaceae	|		|	scientific name	|
+418936	|	Hymenomonas	|		|	scientific name	|
+418937	|	Hymenomonas coronata	|		|	scientific name	|
+418938	|	Hymenomonas globosa	|		|	scientific name	|
+418939	|	Pontosphaeraceae	|		|	scientific name	|
+418940	|	Scyphosphaera apsteinii Lohmann 1902	|		|	authority	|
+418940	|	Scyphosphaera apsteinii	|		|	scientific name	|
+418941	|	Rhabdosphaeraceae	|		|	scientific name	|
+418942	|	Algirosphaera	|		|	scientific name	|
+418943	|	Algirosphaera robusta	|		|	scientific name	|
+418944	|	Coronosphaera	|		|	scientific name	|
+418945	|	Coronosphaera mediterranea	|		|	scientific name	|
+418946	|	Syracosphaera pulchra	|		|	scientific name	|
+418950	|	Umbilicosphaera hulburtiana	|		|	scientific name	|
+418951	|	Isochrysidaceae	|		|	scientific name	|
+418952	|	Isochrysis litoralis	|		|	scientific name	|
+418956	|	Prymnesium faveolatum	|		|	scientific name	|
+418958	|	Chrysochromulina minor Parke & Manton in Parke, Manton & Clarke 1955	|		|	authority	|
+418958	|	Chrysochromulina minor	|		|	synonym	|
+418958	|	Prymnesium minus (Parke & Manton) Edvardsen, Eikrem & Probert in Edvardsen et al. 2011	|		|	authority	|
+418958	|	Prymnesium minus	|		|	scientific name	|
+418962	|	Platychrysis pienaarii Gayral & Fresnel 1983	|		|	authority	|
+418962	|	Platychrysis pienaarii	|		|	synonym	|
+418962	|	Prymnesium pienaarii (Gayral & Fresnel) Edvardsen, Eikrem & Probert in Edvardsen et al. 2011	|		|	authority	|
+418962	|	Prymnesium pienaarii	|		|	scientific name	|
+418963	|	Platychrysis simplex Gayral & Fresnel 1983	|		|	authority	|
+418963	|	Platychrysis simplex	|		|	synonym	|
+418963	|	Prymnesium simplex (Gayral & Fresnel) Edvardsen, Eikrem & Probert in Edvardsen et al. 2011	|		|	authority	|
+418963	|	Prymnesium simplex	|		|	scientific name	|
+418964	|	Chrysochromulina chiton Parke & Manton in Parke, Manton & Clarke 1958	|		|	authority	|
+418964	|	Chrysochromulina chiton	|		|	synonym	|
+418964	|	Prymnesium chiton (Parke & Manton) Edvardsen, Eikrem & Probert in Edvardsen et al. 2011	|		|	authority	|
+418964	|	Prymnesium chiton	|		|	scientific name	|
+418966	|	Noelaerhabdaceae	|		|	scientific name	|
+418967	|	Prymnesiaceae	|		|	scientific name	|
+418968	|	Helicosphaeraceae	|		|	scientific name	|
+418969	|	Pavlovaceae	|		|	scientific name	|
+418974	|	Chrysochromulina parkeae	|		|	scientific name	|
+424481	|	Chrysochromulina cf. polylepis	|		|	synonym	|
+424481	|	Prymnesium cf. polylepis	|		|	scientific name	|
+424482	|	Chrysochromulina cf. herdlensis	|		|	synonym	|
+424482	|	Haptolina cf. herdlensis	|		|	scientific name	|
+424484	|	cf. Imantonia sp. CCMP1404	|		|	scientific name	|
+424484	|	cf. Imantonia sp. CCMP 1404	|		|	synonym	|
+424525	|	Pleurochrysis sp. ALGO Langue du chat	|		|	scientific name	|
+424525	|	Pleurochrysis sp. Langue du chat	|		|	synonym	|
+424526	|	Ochrosphaera verrucosa	|		|	scientific name	|
+424529	|	Calyptrosphaera sp. LKM-2007-1	|		|	scientific name	|
+424530	|	Calyptrosphaera sp. LKM-2007-2	|		|	scientific name	|
+424531	|	Holococcolithophorid sp. ALGO holo	|		|	scientific name	|
+424531	|	Holococcolithophorid sp. Holo	|		|	synonym	|
+424537	|	Dicrateria sp. ALGO HAP49	|		|	scientific name	|
+424537	|	Dicrateria sp. Hap 49	|		|	synonym	|
+424538	|	Chrysotila	|		|	scientific name	|
+424539	|	Chrysotila lamellosa P.L.Anand 1937	|		|	authority	|
+424539	|	Chrysotila lamellosa	|		|	synonym	|
+424539	|	Chrysotila lamelosa	|		|	includes	|
+424539	|	Ruttnera lamellosa (Anand) Andersen, Kim, Tittley & Yoon, 2014	|		|	authority	|
+424539	|	Ruttnera lamellosa	|		|	scientific name	|
+424539	|	Ruttnera spectabilis Geitler 1942	|		|	authority	|
+424539	|	Ruttnera spectabilis	|		|	synonym	|
+424540	|	Chrysotila stipitata	|		|	scientific name	|
+424541	|	Prymnesium sp. ALGO HAP pt	|		|	scientific name	|
+424542	|	Prymnesium zebrinum	|		|	scientific name	|
+424544	|	Platychrysis pigra Geitler, 1930	|		|	authority	|
+424544	|	Platychrysis pigra	|		|	synonym	|
+424544	|	Prymnesium pigrum (Geitler) Edvardsen, Eikrem & Probert in Edvardsen et al. 2011	|		|	authority	|
+424544	|	Prymnesium pigrum	|		|	scientific name	|
+424545	|	Prymnesium sp. ALGO HAPPM	|		|	scientific name	|
+424546	|	Prymnesium annuliferum	|		|	scientific name	|
+424547	|	Chrysochromulina sp. LKM-2007-1	|		|	scientific name	|
+424548	|	Calyptrosphaera radiata	|		|	scientific name	|
+424549	|	Pleurochrysis sp. LKM-2007-2	|		|	scientific name	|
+424550	|	Helladosphaera sp. LKM-2007-1	|		|	scientific name	|
+429446	|	Phaeocystis sp. CCMP1728	|		|	scientific name	|
+429447	|	Haptophyceae sp. #8	|		|	scientific name	|
+429448	|	Haptophyceae sp. W6-4	|		|	scientific name	|
+429449	|	Haptophyceae sp. W5-1	|		|	scientific name	|
+431907	|	Calyptrosphaera sp. caly2	|		|	scientific name	|
+431909	|	Helladosphaera sp. Nieshe	|		|	scientific name	|
+431912	|	Prymnesium sp. HAP_Pt	|		|	scientific name	|
+432262	|	Gloeothamnion sp. HAPg	|		|	scientific name	|
+432262	|	Gloeothamnion sp. strain HAPg	|		|	synonym	|
+438493	|	Pleurochrysis sp. NMBjih026	|		|	scientific name	|
+448087	|	Diacronema sp. CCMP610	|		|	scientific name	|
+448087	|	Diacronema sp. CCMP 610	|		|	synonym	|
+462884	|	Chrysochromulina palpebralis Seoane, Eikrem, Edvardsen & Pienaar 2009	|		|	authority	|
+462884	|	Chrysochromulina palpebralis	|		|	synonym	|
+462884	|	Prymnesium palpebrale	|		|	scientific name	|
+462884	|	Prymnesium palpebrale (Seoane, Eikrem, Edvardsen & Pienaar) Edvardsen, Eikrem & Probert	|		|	authority	|
+462884	|	Prymnesium sp. sol	|		|	synonym	|
+464229	|	Phaeocystis sp. RCC1000	|		|	scientific name	|
+464230	|	Phaeocystis sp. RCC1006	|		|	scientific name	|
+464231	|	Phaeocystis sp. RCC1033	|		|	scientific name	|
+464232	|	Phaeocystis sp. RCC851	|		|	scientific name	|
+464233	|	Phaeocystis sp. RCC861	|		|	scientific name	|
+464234	|	Phaeocystis sp. RCC870	|		|	scientific name	|
+464235	|	Phaeocystis sp. RCC882	|		|	scientific name	|
+464236	|	Phaeocystis sp. RCC908	|		|	scientific name	|
+464237	|	Phaeocystis sp. RCC925	|		|	scientific name	|
+464238	|	Phaeocystis sp. RCC935	|		|	scientific name	|
+464239	|	Phaeocystis sp. RCC940	|		|	scientific name	|
+464240	|	Phaeocystis sp. RCC992	|		|	scientific name	|
+464241	|	Phaeocystis sp. RCC993	|		|	scientific name	|
+466167	|	Chrysochromulina sp. UIO TH2	|		|	scientific name	|
+466168	|	Imantonia sp. CCMP1404	|		|	scientific name	|
+466168	|	Imantonia sp. CCMP 1404	|		|	synonym	|
+466169	|	Prymnesium aff. parvum	|		|	scientific name	|
+466170	|	unclassified Prymnesiales	|		|	scientific name	|
+466171	|	Pseudohaptolina Edvardsen & Eikrem 2011	|		|	authority	|
+466171	|	Pseudohaptolina	|		|	scientific name	|
+480993	|	Pavlova sp. WO2007096387	|		|	scientific name	|
+483366	|	unclassified Pavlovales	|		|	scientific name	|
+483367	|	Pavlovales sp. CCMP2436	|		|	scientific name	|
+483367	|	Pavlovales sp. CCMP 2436	|		|	synonym	|
+498336	|	Pleurochrysis sp. HAPPLH	|		|	scientific name	|
+516869	|	Haptophyceae sp. CCMP1249	|		|	scientific name	|
+526280	|	Hymenomonas lacuna	|		|	scientific name	|
+526281	|	Phaeocystis sp. AC618	|		|	scientific name	|
+552365	|	Isochrysis sp. 0318	|		|	scientific name	|
+561098	|	Chrysochromulina camella	|		|	scientific name	|
+561153	|	Prymnesium sp. CCMP 711	|		|	scientific name	|
+561154	|	Prymnesium sp. RCC1440	|		|	scientific name	|
+561155	|	Prymnesium sp. RCC1443	|		|	scientific name	|
+561156	|	Prymnesium sp. RCC1446	|		|	scientific name	|
+561157	|	Prymnesium sp. RCC1450	|		|	scientific name	|
+561158	|	Platychrysis sp. RCC1385	|		|	scientific name	|
+561159	|	Helladosphaera sp. RCC1182	|		|	scientific name	|
+561160	|	Dicrateria sp. RCC1207	|		|	scientific name	|
+561161	|	Chrysochromulina sp. S-14	|		|	scientific name	|
+561162	|	Chrysochromulina sp. RCC1184	|		|	scientific name	|
+561164	|	Calcidiscus sp. RCC1157	|		|	scientific name	|
+561168	|	Rebecca	|		|	scientific name	|
+561169	|	Nephrochloris salina Carter 1937	|		|	synonym	|
+561169	|	Pavlova salina (Carter) Green, 1976	|		|	authority	|
+561169	|	Pavlova salina	|		|	synonym	|
+561169	|	Rebecca salina (N. Carter) J.C. Green	|		|	authority	|
+561169	|	Rebecca salina	|		|	scientific name	|
+561171	|	Chrysochromulina sp. HHL-2008	|		|	scientific name	|
+573975	|	Oolithotus	|		|	scientific name	|
+573976	|	Coccolithus fragilis	|		|	synonym	|
+573976	|	Oolithotus fragilis (Lohmann) Martini & C.Mueller 1972	|		|	authority	|
+573976	|	Oolithotus fragilis	|		|	scientific name	|
+578947	|	Chrysochromulina sp. G3-53-A2	|		|	scientific name	|
+582759	|	Platychrysis sp. GSL011	|		|	scientific name	|
+588876	|	environmental samples	|	environmental samples <haptophytes,order Prymnesiales>	|	scientific name	|
+588877	|	uncultured marine Prymnesiales	|		|	scientific name	|
+588878	|	uncultured marine haptophyte	|		|	scientific name	|
+588878	|	uncultured marine Prymnesiophyceae	|		|	synonym	|
+589354	|	environmental samples	|	environmental samples <haptophytes,family Phaeocystaceae>	|	scientific name	|
+589355	|	uncultured marine Phaeocystaceae	|		|	scientific name	|
+589357	|	environmental samples	|	environmental samples <haptophytes,order Phaeocystales>	|	scientific name	|
+589358	|	uncultured marine Phaeocystales	|		|	scientific name	|
+660904	|	environmental samples	|	environmental samples <haptophytes,genus Braarudosphaera>	|	scientific name	|
+660905	|	uncultured Braarudosphaera	|		|	scientific name	|
+660908	|	environmental samples	|	environmental samples <haptophytes,genus Calyptrosphaera>	|	scientific name	|
+660909	|	uncultured Calyptrosphaera	|		|	scientific name	|
+660910	|	environmental samples	|	environmental samples <haptophytes,genus Chrysochromulina>	|	scientific name	|
+660911	|	uncultured Chrysochromulina	|		|	scientific name	|
+660912	|	environmental samples	|	environmental samples <haptophytes,genus Emiliania>	|	scientific name	|
+660913	|	uncultured Emiliania	|		|	scientific name	|
+660918	|	environmental samples	|	environmental samples <haptophytes,genus Phaeocystis>	|	scientific name	|
+660919	|	uncultured Phaeocystis	|		|	scientific name	|
+664441	|	Helicosphaera wallichii	|		|	scientific name	|
+674932	|	Chrysochromulina sp. 170-E4	|		|	scientific name	|
+696961	|	Chrysochromulina strobilus Parke & Manton 1959	|		|	authority	|
+696961	|	Chrysochromulina strobilus	|		|	scientific name	|
+768360	|	Isochrysis sp. Tun08	|		|	scientific name	|
+858394	|	uncultured prymnesiophyte C19847	|		|	scientific name	|
+858395	|	uncultured prymnesiophyte C5574	|		|	scientific name	|
+858396	|	uncultured prymnesiophyte C8704	|		|	scientific name	|
+858397	|	uncultured prymnesiophyte SGZW1078	|		|	scientific name	|
+858398	|	uncultured prymnesiophyte SGZW1118	|		|	scientific name	|
+858399	|	uncultured prymnesiophyte SGZW832	|		|	scientific name	|
+871236	|	Prymnesium sp. BO18	|		|	scientific name	|
+882223	|	Haptophyceae sp. 01-A11	|		|	scientific name	|
+882224	|	Haptophyceae sp. 01-A12	|		|	scientific name	|
+882225	|	Haptophyceae sp. 01-A4	|		|	scientific name	|
+882226	|	Haptophyceae sp. 01-A9	|		|	scientific name	|
+882227	|	Haptophyceae sp. 01-B10	|		|	scientific name	|
+882228	|	Haptophyceae sp. 01-B11	|		|	scientific name	|
+882229	|	Haptophyceae sp. 01-B12	|		|	scientific name	|
+882230	|	Haptophyceae sp. 01-B2	|		|	scientific name	|
+882231	|	Haptophyceae sp. 01-B3	|		|	scientific name	|
+882232	|	Haptophyceae sp. 01-B7	|		|	scientific name	|
+882233	|	Haptophyceae sp. 01-B8	|		|	scientific name	|
+882234	|	Haptophyceae sp. 01-C2	|		|	scientific name	|
+882235	|	Haptophyceae sp. 01-C4	|		|	scientific name	|
+882236	|	Haptophyceae sp. 01-C6	|		|	scientific name	|
+882237	|	Haptophyceae sp. 01-C8	|		|	scientific name	|
+882238	|	Haptophyceae sp. 01-D11	|		|	scientific name	|
+882239	|	Haptophyceae sp. 01-D5	|		|	scientific name	|
+882240	|	Haptophyceae sp. 01-D7	|		|	scientific name	|
+882241	|	Haptophyceae sp. 01-E10	|		|	scientific name	|
+882242	|	Haptophyceae sp. 01-E11	|		|	scientific name	|
+882243	|	Haptophyceae sp. 01-E12	|		|	scientific name	|
+882244	|	Haptophyceae sp. 01-E5	|		|	scientific name	|
+882245	|	Haptophyceae sp. 01-E6	|		|	scientific name	|
+882246	|	Haptophyceae sp. 01-E9	|		|	scientific name	|
+882247	|	Haptophyceae sp. 01-F10	|		|	scientific name	|
+882248	|	Haptophyceae sp. 01-F11	|		|	scientific name	|
+882249	|	Haptophyceae sp. 01-F3	|		|	scientific name	|
+882250	|	Haptophyceae sp. 01-F5	|		|	scientific name	|
+882251	|	Haptophyceae sp. 01-G11	|		|	scientific name	|
+882252	|	Haptophyceae sp. 01-G12	|		|	scientific name	|
+882253	|	Haptophyceae sp. 01-G2	|		|	scientific name	|
+882254	|	Haptophyceae sp. 01-G9	|		|	scientific name	|
+882255	|	Haptophyceae sp. 01-H10	|		|	scientific name	|
+882256	|	Haptophyceae sp. 01-H12	|		|	scientific name	|
+882257	|	Haptophyceae sp. 01-H7	|		|	scientific name	|
+882258	|	Haptophyceae sp. 02-B1	|		|	scientific name	|
+882259	|	Haptophyceae sp. 02-C1	|		|	scientific name	|
+882260	|	Haptophyceae sp. 02-D2	|		|	scientific name	|
+882261	|	Haptophyceae sp. 02-E1	|		|	scientific name	|
+882262	|	Haptophyceae sp. 02-F2	|		|	scientific name	|
+882263	|	Haptophyceae sp. 02-G1	|		|	scientific name	|
+882264	|	Haptophyceae sp. 02-G3	|		|	scientific name	|
+882265	|	Haptophyceae sp. 03-A7	|		|	scientific name	|
+882266	|	Haptophyceae sp. 03-B4	|		|	scientific name	|
+882267	|	Haptophyceae sp. 03-E4	|		|	scientific name	|
+882268	|	Haptophyceae sp. 03-E7	|		|	scientific name	|
+882269	|	Haptophyceae sp. 03-F12	|		|	scientific name	|
+882270	|	Haptophyceae sp. 03-F8	|		|	scientific name	|
+882271	|	Haptophyceae sp. 3901-A1	|		|	scientific name	|
+882272	|	Haptophyceae sp. 3901-A12	|		|	scientific name	|
+882273	|	Haptophyceae sp. 3901-A2	|		|	scientific name	|
+882274	|	Haptophyceae sp. 3901-A4	|		|	scientific name	|
+882275	|	Haptophyceae sp. 3901-A6	|		|	scientific name	|
+882276	|	Haptophyceae sp. 3901-A7	|		|	scientific name	|
+882277	|	Haptophyceae sp. 3901-A8	|		|	scientific name	|
+882278	|	Haptophyceae sp. 3901-B1	|		|	scientific name	|
+882279	|	Haptophyceae sp. 3901-B12	|		|	scientific name	|
+882280	|	Haptophyceae sp. 3901-B3	|		|	scientific name	|
+882281	|	Haptophyceae sp. 3901-B4	|		|	scientific name	|
+882282	|	Haptophyceae sp. 3901-B6	|		|	scientific name	|
+882283	|	Haptophyceae sp. 3901-B7	|		|	scientific name	|
+882284	|	Haptophyceae sp. 3901-C1	|		|	scientific name	|
+882285	|	Haptophyceae sp. 3901-C10	|		|	scientific name	|
+882286	|	Haptophyceae sp. 3901-C12	|		|	scientific name	|
+882287	|	Haptophyceae sp. 3901-C2	|		|	scientific name	|
+882288	|	Haptophyceae sp. 3901-C4	|		|	scientific name	|
+882289	|	Haptophyceae sp. 3901-D1	|		|	scientific name	|
+882290	|	Haptophyceae sp. 3901-D2	|		|	scientific name	|
+882291	|	Haptophyceae sp. 3901-D9	|		|	scientific name	|
+882292	|	Haptophyceae sp. 3901-E11	|		|	scientific name	|
+882293	|	Haptophyceae sp. 3901-E3	|		|	scientific name	|
+882294	|	Haptophyceae sp. 3901-E5	|		|	scientific name	|
+882295	|	Haptophyceae sp. 3901-E6	|		|	scientific name	|
+882296	|	Haptophyceae sp. 3901-E7	|		|	scientific name	|
+882297	|	Haptophyceae sp. 3901-E8	|		|	scientific name	|
+882298	|	Haptophyceae sp. 3901-E9	|		|	scientific name	|
+882299	|	Haptophyceae sp. 3901-F2	|		|	scientific name	|
+882300	|	Haptophyceae sp. 3901-F3	|		|	scientific name	|
+882301	|	Haptophyceae sp. 3901-F9	|		|	scientific name	|
+882302	|	Haptophyceae sp. 3901-H2	|		|	scientific name	|
+882303	|	Haptophyceae sp. 3901-H4	|		|	scientific name	|
+882304	|	Haptophyceae sp. 3901-H6	|		|	scientific name	|
+882305	|	Haptophyceae sp. 3902-A1	|		|	scientific name	|
+882306	|	Haptophyceae sp. 3902-A2	|		|	scientific name	|
+882307	|	Haptophyceae sp. 3902-A3	|		|	scientific name	|
+882308	|	Haptophyceae sp. 3902-B1	|		|	scientific name	|
+882309	|	Haptophyceae sp. 3902-B4	|		|	scientific name	|
+882310	|	Haptophyceae sp. 3902-C2	|		|	scientific name	|
+882311	|	Haptophyceae sp. 3902-C3	|		|	scientific name	|
+882312	|	Haptophyceae sp. 3902-D1	|		|	scientific name	|
+882313	|	Haptophyceae sp. 3902-D2	|		|	scientific name	|
+882314	|	Haptophyceae sp. 3902-D3	|		|	scientific name	|
+882315	|	Haptophyceae sp. 3902-D4	|		|	scientific name	|
+882316	|	Haptophyceae sp. 3902-G1	|		|	scientific name	|
+882317	|	Haptophyceae sp. 3902-G2	|		|	scientific name	|
+882318	|	Haptophyceae sp. 3902-H2	|		|	scientific name	|
+882319	|	Haptophyceae sp. 3902-H3	|		|	scientific name	|
+948919	|	Isochrysis aff. galbana KMMCC H-1	|		|	scientific name	|
+948920	|	Pavlova sp. KMMCC H-8	|		|	scientific name	|
+948921	|	Pavlova sp. KMMCC H-9	|		|	scientific name	|
+948922	|	Isochrysis aff. galbana CCMP 463	|		|	scientific name	|
+948923	|	Pavlova sp. CCMP 1390	|		|	scientific name	|
+948924	|	Pavlova sp. CCMP 620	|		|	scientific name	|
+948925	|	Pavlova sp. KMMCC H-21	|		|	scientific name	|
+948926	|	Isochrysis sp. KMMCC H-22	|		|	scientific name	|
+984140	|	Platychrysis sp. BG-2011	|		|	scientific name	|
+984140	|	Prymnesium sp. BG-2011	|		|	synonym	|
+1000983	|	Chrysocapsa granifera	|		|	synonym	|
+1000983	|	Pavlova granifera (Mack) J.C.Green 1973	|		|	authority	|
+1000983	|	Pavlova granifera	|		|	scientific name	|
+1000984	|	Pavlova sp. AC19	|		|	scientific name	|
+1000985	|	Pavlova sp. AC248	|		|	scientific name	|
+1000986	|	Pavlova sp. AC250	|		|	scientific name	|
+1000987	|	Pavlova sp. AC251	|		|	scientific name	|
+1000988	|	Pavlova sp. AC33	|		|	scientific name	|
+1000989	|	Rebecca sp. AC537	|		|	scientific name	|
+1000990	|	Exanthemachrysis sp. AC245	|		|	scientific name	|
+1000991	|	Exanthemachrysis sp. AC246	|		|	scientific name	|
+1000992	|	Exanthemachrysis sp. AC249	|		|	scientific name	|
+1000993	|	Exanthemachrysis sp. AC35	|		|	scientific name	|
+1000994	|	Exanthemachrysis sp. AC37	|		|	scientific name	|
+1000995	|	Diacronema ennorea	|		|	scientific name	|
+1000995	|	Diacronema ennorea (van der Veer & Leewis) Bendif & Veron, 2011	|		|	authority	|
+1000995	|	Pavlova ennorea	|		|	synonym	|
+1000995	|	Pavlova ennorea van der Veer & Leewis 1977	|		|	authority	|
+1000997	|	Diacronema sp. AC247	|		|	scientific name	|
+1000998	|	Diacronema sp. AC54	|		|	scientific name	|
+1007193	|	Diacronema sp. EMB-2011	|		|	scientific name	|
+1007194	|	Pavlova sp. EMB-2011	|		|	scientific name	|
+1007195	|	Exanthemachrysis sp. EMB-2011	|		|	scientific name	|
+1007196	|	Rebecca sp. EMB-2011	|		|	scientific name	|
+1034826	|	Monochrysis sp. CCAP 931/2	|		|	scientific name	|
+1034827	|	Pavlova sp. CCAP 940/2	|		|	scientific name	|
+1035520	|	Chrysochromulina sp. RCC 2300	|		|	synonym	|
+1035520	|	Chrysochromulina sp. RCC2300	|		|	synonym	|
+1035520	|	Haptolina sp. RCC2300	|		|	scientific name	|
+1038838	|	Tergestiella	|		|	scientific name	|
+1038839	|	Tergestiella adriatica Kamptner 1941	|		|	authority	|
+1038839	|	Tergestiella adriatica	|		|	scientific name	|
+1082672	|	Isochrysis sp. MBTD-CMFRI-S001	|		|	scientific name	|
+1082673	|	Isochrysis sp. MBTD-CMFRI-S002	|		|	scientific name	|
+1082687	|	Ochrosphaera sp. MBTD-CMFRI-S003	|		|	scientific name	|
+1090112	|	Haptolina Edvardsen & Eikrem	|		|	authority	|
+1090112	|	Haptolina	|		|	scientific name	|
+1133105	|	Isochrysis sp. CCMM5001	|		|	scientific name	|
+1136786	|	Chrysochromulina CCMP1204	|		|	synonym	|
+1136786	|	Chrysochromulina sp. CCMP 1204	|		|	synonym	|
+1136786	|	Chrysochromulina sp. CCMP1204	|		|	synonym	|
+1136786	|	Pseudohaptolina arctica Edvardsen & Eikrem 2011	|		|	authority	|
+1136786	|	Pseudohaptolina arctica	|		|	scientific name	|
+1136786	|	Pseudohaptolina sp. CCMP 1204	|		|	synonym	|
+1136786	|	Pseudohaptolina sp. CCMP1204	|		|	synonym	|
+1136790	|	Chrysochromulinaceae Edvardsen, Eikrem & Medlin 2011	|		|	authority	|
+1136790	|	Chrysochromulinaceae	|		|	scientific name	|
+1136807	|	Chrysocampanula	|		|	scientific name	|
+1147738	|	Isochrysis sp. MA-2012	|		|	scientific name	|
+1155436	|	Imantonia sp. RCC2298	|		|	scientific name	|
+1173710	|	Isochrysis sp. LL-2012	|		|	scientific name	|
+1178805	|	Isochrysis sp. GB-2012	|		|	scientific name	|
+1181167	|	Ochrosphaera sp. Marex-10S012	|		|	scientific name	|
+1235886	|	Isochrysis sp. strain U4	|		|	synonym	|
+1235886	|	Isochrysis sp. U4	|		|	scientific name	|
+1239447	|	Chrysochromulina sp. JD-2012	|		|	scientific name	|
+1239450	|	Phaeocystis sp. JD-2012	|		|	scientific name	|
+1290988	|	environmental samples	|	environmental samples <haptophytes,order Coccolithales>	|	scientific name	|
+1290989	|	uncultured Calcidiscus	|		|	scientific name	|
+1290992	|	environmental samples	|	environmental samples <haptophytes,order Isochrysidales>	|	scientific name	|
+1290993	|	uncultured Isochrysis	|		|	scientific name	|
+1291726	|	environmental samples	|	environmental samples <haptophytes,order Pavlovales>	|	scientific name	|
+1291727	|	uncultured pavlovophyte	|		|	scientific name	|
+1321667	|	Chrysotila sp. 1 EMB-2013	|		|	scientific name	|
+1321668	|	Isochrysis nuda Bendif & Probert in Bendif et al. 2013	|		|	authority	|
+1321668	|	Isochrysis nuda	|		|	scientific name	|
+1321668	|	Isochrysis sp. 1 EMB-2013	|		|	synonym	|
+1321669	|	Haptophyceae sp. 1 EMB-2013	|		|	synonym	|
+1321669	|	Tisochrysis lutea El M.Bendif & I.Probert, 2013	|		|	authority	|
+1321669	|	Tisochrysis lutea	|		|	scientific name	|
+1349694	|	Isochrysis sp. SW-2013	|		|	scientific name	|
+1411682	|	Phaeocystis sp. CCMP2710	|		|	scientific name	|
+1411682	|	Phaeocystis sp. CCMP 2710	|		|	synonym	|
+1430388	|	Chrysotila dentata Johansen & Doucette) Andersen, Kim, Tittley & Yoon, 2015	|		|	authority	|
+1430388	|	Chrysotila dentata	|		|	scientific name	|
+1430388	|	Chrysotila sp. 1 JIK-2013	|		|	includes	|
+1430388	|	Pleurochrysis carterae var. dentata Johansen & Doucette, 1988	|		|	authority	|
+1430388	|	Pleurochrysis carterae var. dentata	|		|	synonym	|
+1430388	|	Pleurochrysis dentata	|		|	synonym	|
+1434934	|	Chrysochromulina birgeri Hllfors & Niemi, 1974	|		|	authority	|
+1434934	|	Chrysochromulina birgeri	|		|	scientific name	|
+1445890	|	Pleurochrysis sp. ind-25	|		|	scientific name	|
+1460289	|	Chrysochromulina sp. CCMP291	|		|	includes	|
+1460289	|	Chrysochromulina tobinii Cattolico 2019	|		|	authority	|
+1460289	|	Chrysochromulina tobinii	|		|	scientific name	|
+1461488	|	Prymnesium sp. IOAC727S	|		|	scientific name	|
+1486463	|	Haptophyceae sp. EE-2014	|		|	scientific name	|
+1510398	|	Chrysochromulina elegans Estep et al., 1984	|		|	authority	|
+1510398	|	Chrysochromulina elegans	|		|	scientific name	|
+1522683	|	Ochrosphaera sp. ERP-2014	|		|	scientific name	|
+1522719	|	Isochrysis sp. MBTD-CMFRI-S157	|		|	scientific name	|
+1537485	|	Prymnesium sp. MACC 15	|		|	scientific name	|
+1537486	|	Prymnesium sp. MACC 16	|		|	scientific name	|
+1538616	|	Gladiolithus	|		|	scientific name	|
+1538618	|	Haptophyta incertae sedis	|		|	scientific name	|
+1538619	|	Gladiolithus sp. KH-2014	|		|	scientific name	|
+1574290	|	Tisochrysis El M.Bendif & I.Probert, 2013	|		|	authority	|
+1574290	|	Tisochrysis	|		|	scientific name	|
+1606586	|	Calcidiscus sp. RCC2325	|		|	scientific name	|
+1606589	|	Chrysochromulina sp. RCC1191	|		|	scientific name	|
+1606590	|	Chrysochromulina sp. RCC574	|		|	scientific name	|
+1606591	|	Cruciplacolithus sp. RCC2977	|		|	scientific name	|
+1606592	|	Cruciplacolithus sp. RCC2978	|		|	scientific name	|
+1606615	|	Ochrosphaera sp. RCC1366	|		|	scientific name	|
+1606616	|	Ochrosphaera sp. RCC2959	|		|	scientific name	|
+1606617	|	Ochrosphaera sp. RCC2970	|		|	scientific name	|
+1606618	|	Ochrosphaera sp. RCC2972	|		|	scientific name	|
+1606619	|	Ochrosphaera sp. RCC2973	|		|	scientific name	|
+1606620	|	Ochrosphaera sp. RCC2974	|		|	scientific name	|
+1606621	|	Ochrosphaera sp. RCC2976	|		|	scientific name	|
+1606625	|	Pavlova sp. RCC2541	|		|	scientific name	|
+1606626	|	Pavlova sp. RCC2550	|		|	scientific name	|
+1606627	|	Pavlova sp. RCC2551	|		|	scientific name	|
+1606640	|	Phaeocystis sp. RCC994	|		|	scientific name	|
+1606643	|	Pleurochrysis sp. RCC1392	|		|	scientific name	|
+1606644	|	Pleurochrysis sp. RCC1393	|		|	scientific name	|
+1606645	|	Pleurochrysis sp. RCC2476	|		|	scientific name	|
+1606692	|	Prymnesium sp. RCC1389	|		|	scientific name	|
+1606693	|	Prymnesium sp. RCC1941	|		|	scientific name	|
+1606694	|	Prymnesium sp. RCC1948	|		|	scientific name	|
+1606782	|	Isochrysis sp. RC-2015	|		|	scientific name	|
+1615609	|	Reticulosphaera japonensis K.G.Grell 1990	|		|	authority	|
+1615609	|	Reticulosphaera japonensis	|		|	scientific name	|
+1615609	|	Reticulosphaera socialis japonesis	|		|	synonym	|
+1615609	|	Reticulosphaera socialis subsp. japonesis	|		|	synonym	|
+1631189	|	Haptophyceae sp. CCMP 2000	|		|	synonym	|
+1631189	|	Haptophyceae sp. CCMP2000	|		|	synonym	|
+1631189	|	Phaeocystis rex Andersen, Bailey, Decelle & Probert 2015	|		|	authority	|
+1631189	|	Phaeocystis rex RA-2015a	|		|	includes	|
+1631189	|	Phaeocystis rex	|		|	scientific name	|
+1631190	|	Phaeocystis rex RA-2015b	|		|	scientific name	|
+1663125	|	Gephyrocapsa muellerae Breheret 1978	|		|	authority	|
+1663125	|	Gephyrocapsa muellerae	|		|	scientific name	|
+1707607	|	Isochrysis sp. SKMKUIso1	|		|	scientific name	|
+1762034	|	Imantonia sp. RCC4500	|		|	scientific name	|
+1762035	|	Imantonia sp. RCC4501	|		|	scientific name	|
+1764808	|	Ochrosphaera sp. RCC1963	|		|	scientific name	|
+1764809	|	Ochrosphaera sp. RCC1964	|		|	scientific name	|
+1764810	|	Ochrosphaera sp. RCC1965	|		|	scientific name	|
+1764811	|	Ochrosphaera sp. RCC1966	|		|	scientific name	|
+1764812	|	Ochrosphaera sp. RCC1971	|		|	scientific name	|
+1764813	|	Ochrosphaera sp. RCC2690	|		|	scientific name	|
+1764814	|	Ochrosphaera sp. RCC2691	|		|	scientific name	|
+1764815	|	Ochrosphaera sp. RCC2698	|		|	scientific name	|
+1764816	|	Ochrosphaera sp. RCC2954	|		|	scientific name	|
+1764817	|	Ochrosphaera sp. RCC2971	|		|	scientific name	|
+1764818	|	Ochrosphaera sp. RCC2975	|		|	scientific name	|
+1764833	|	Chrysochromulina sp. RCC400	|		|	scientific name	|
+1764834	|	Chrysochromulina sp. RCC656	|		|	scientific name	|
+1764854	|	Chrysochromulina sp. RCC390	|		|	scientific name	|
+1764876	|	Imantonia sp. RCC1042	|		|	scientific name	|
+1764877	|	Imantonia sp. RCC1722	|		|	scientific name	|
+1764878	|	Imantonia sp. RCC1723	|		|	scientific name	|
+1764879	|	Imantonia sp. RCC1728	|		|	scientific name	|
+1764880	|	Imantonia sp. RCC3050	|		|	scientific name	|
+1764881	|	Imantonia sp. RCC404	|		|	scientific name	|
+1764882	|	Imantonia sp. RCC470	|		|	scientific name	|
+1764883	|	Imantonia sp. RCC471	|		|	scientific name	|
+1764884	|	Imantonia sp. RCC671	|		|	scientific name	|
+1764885	|	Imantonia sp. RCC704	|		|	scientific name	|
+1764886	|	Isochrysis sp. RCC1956	|		|	scientific name	|
+1764887	|	Isochrysis sp. RCC2692	|		|	scientific name	|
+1764888	|	Isochrysis sp. RCC90	|		|	scientific name	|
+1764905	|	Phaeocystis sp. RCC1002	|		|	scientific name	|
+1764906	|	Phaeocystis sp. RCC1617	|		|	scientific name	|
+1764907	|	Phaeocystis sp. RCC1619	|		|	scientific name	|
+1764908	|	Phaeocystis sp. RCC1725	|		|	scientific name	|
+1764909	|	Phaeocystis sp. RCC1729	|		|	scientific name	|
+1764910	|	Phaeocystis sp. RCC1869	|		|	scientific name	|
+1764911	|	Phaeocystis sp. RCC1933	|		|	scientific name	|
+1764912	|	Phaeocystis sp. RCC872	|		|	scientific name	|
+1764966	|	Haptolina cf. hirta	|		|	scientific name	|
+1779351	|	Chrysochromulina sp. Hp34EHU	|		|	scientific name	|
+1824563	|	uncultured Phaeocystaceae	|		|	scientific name	|
+1824916	|	environmental samples	|	environmental samples <haptophytes,family Pavlovaceae>	|	scientific name	|
+1824917	|	uncultured Pavlovaceae	|		|	scientific name	|
+1827187	|	Isochrysis sp. MNURFJ12	|		|	scientific name	|
+1827192	|	Prymnesium sp. MNURFJ13	|		|	scientific name	|
+1827199	|	Diacronema sp. MNURFJ14	|		|	scientific name	|
+1850951	|	Imantonia sp. RCC4575	|		|	scientific name	|
+1850952	|	Imantonia sp. RCC4576	|		|	scientific name	|
+1850953	|	Imantonia sp. RCC4577	|		|	scientific name	|
+1850954	|	Imantonia sp. RCC4578	|		|	scientific name	|
+1850963	|	Phaeocystis sp. RCC4579	|		|	scientific name	|
+1856764	|	Reticulofenestra	|		|	scientific name	|
+1856764	|	Reticulofenestra W.W.Hay, Mohler & M.Wade, 1966	|		|	authority	|
+1856765	|	Crenalithus parvulus	|		|	synonym	|
+1856765	|	Gephyrocapsa parvula (Okada & McIntyre 1977) Bendif, Probert, Young & von Dassow, 2016	|		|	authority	|
+1856765	|	Gephyrocapsa parvula	|		|	scientific name	|
+1856765	|	Reticulofenestra parvula (Okada & McIntyre) Biekart, 1989	|		|	authority	|
+1856765	|	Reticulofenestra parvula	|		|	synonym	|
+1856766	|	Gephyrocapsa ericsonii McIntyre & Be, 1967	|		|	authority	|
+1856766	|	Gephyrocapsa ericsonii	|		|	scientific name	|
+1891361	|	Pseudohaptolina sorokinii Orlova, Efimova & Stonik 2016	|		|	authority	|
+1891361	|	Pseudohaptolina sorokinii	|		|	scientific name	|
+1907789	|	Imantonia sp.	|		|	scientific name	|
+1907791	|	Phaeocystis sp.	|		|	scientific name	|
+1908220	|	Imantonia sp. RCC4426	|		|	scientific name	|
+1908220	|	Imantonia sp. RCC 4426	|		|	synonym	|
+1908228	|	Phaeocystis sp. RCC4639	|		|	scientific name	|
+1908228	|	Phaeocystis sp. RCC 4639	|		|	synonym	|
+1908229	|	Phaeocystis sp. RCC4640	|		|	scientific name	|
+1908229	|	Phaeocystis sp. RCC 4640	|		|	synonym	|
+1908230	|	Phaeocystis sp. RCC4641	|		|	scientific name	|
+1908230	|	Phaeocystis sp. RCC 4641	|		|	synonym	|
+1908231	|	Phaeocystis sp. RCC4642	|		|	scientific name	|
+1908231	|	Phaeocystis sp. RCC 4642	|		|	synonym	|
+1908232	|	Imantonia sp. RCC4644	|		|	scientific name	|
+1908232	|	Imantonia sp. RCC 4644	|		|	synonym	|
+1908243	|	Imantonia sp. RCC4780	|		|	scientific name	|
+1908243	|	Imantonia sp. RCC 4780	|		|	synonym	|
+1982023	|	Haptophyceae sp.	|		|	scientific name	|
+2039259	|	unclassified Isochrysis	|		|	scientific name	|
+2039260	|	Isochrysis sp. Sh 1	|		|	scientific name	|
+2039261	|	Isochrysis sp. Sh 2	|		|	scientific name	|
+2039262	|	Isochrysis sp. Sc 1	|		|	scientific name	|
+2039263	|	Isochrysis sp. Sc 2	|		|	scientific name	|
+2039264	|	Isochrysis sp. Dm 2	|		|	scientific name	|
+2039265	|	Isochrysis sp. Dm 3	|		|	scientific name	|
+2039266	|	Isochrysis sp. Dm 1	|		|	scientific name	|
+2041809	|	Phaeocystis sp. RCC4814	|		|	scientific name	|
+2041810	|	Phaeocystis sp. RCC4818	|		|	scientific name	|
+2047258	|	Pleurochrysis sp.	|		|	equivalent name	|
+2047258	|	Pleurochrysis sp. (in: haptophytes)	|		|	scientific name	|
+2081491	|	Diacronema lutheri (Droop) Bendif & Veron 2011	|		|	authority	|
+2081491	|	Diacronema lutheri	|		|	scientific name	|
+2081491	|	Monochrysis lutheri	|		|	synonym	|
+2081491	|	Pavlova lutheri (Droop) J.C.Green 1975	|		|	authority	|
+2081491	|	Pavlova lutheri	|		|	synonym	|
+2134067	|	Scyphosphaera Lohmann	|		|	authority	|
+2134067	|	Scyphosphaera	|		|	scientific name	|
+2200936	|	Chrysochromulina sp.	|		|	scientific name	|
+2302108	|	Isochrysis sp. RCC5353	|		|	scientific name	|
+2302109	|	Isochrysis sp. RCC5486	|		|	scientific name	|
+2302110	|	Isochrysis sp. RCC5487	|		|	scientific name	|
+2302168	|	Pseudohaptolina sp. RCC5268	|		|	scientific name	|
+2302169	|	Pseudohaptolina sp. RCC5270	|		|	scientific name	|
+2303163	|	Chrysochromulina sp. RCC4210	|		|	scientific name	|
+2303164	|	Dicrateria sp. RCC4214	|		|	scientific name	|
+2303166	|	Isochrysis sp. RCC4207	|		|	scientific name	|
+2303168	|	Pavlova sp. RCC4496	|		|	scientific name	|
+2303169	|	Pavlova sp. RCC4497	|		|	scientific name	|
+2303170	|	Phaeocystis sp. RCC4499	|		|	scientific name	|
+2303242	|	Imantonia sp. RCC5635	|		|	scientific name	|
+2303243	|	Imantonia sp. RCC5636	|		|	scientific name	|
+2303244	|	Imantonia sp. RCC5637	|		|	scientific name	|
+2303245	|	Imantonia sp. RCC5638	|		|	scientific name	|
+2303246	|	Imantonia sp. RCC5639	|		|	scientific name	|
+2303247	|	Imantonia sp. RCC5657	|		|	scientific name	|
+2303283	|	Phaeocystis sp. RCC5646	|		|	scientific name	|
+2303284	|	Phaeocystis sp. RCC5647	|		|	scientific name	|
+2303285	|	Phaeocystis sp. RCC5680	|		|	scientific name	|
+2303286	|	Phaeocystis sp. RCC5682	|		|	scientific name	|
+2315410	|	Chrysotila sp.	|		|	scientific name	|
+2315411	|	Chrysotila gayraliae (Beuffe) R.A.Andersen, J.I.Kim, Tittley & H.S.Yoon 2014	|		|	authority	|
+2315411	|	Chrysotila gayraliae	|		|	scientific name	|
+2315411	|	Pleurochrysis gayraliae	|		|	synonym	|
+2315641	|	Calcidiscus sp. RCC1132	|		|	scientific name	|
+2315642	|	Calyptrosphaera sp. RCC1179	|		|	scientific name	|
+2315643	|	Calyptrosphaera sp. RCC1180	|		|	scientific name	|
+2315645	|	Chrysotila sp. 1 JIK-2013 RCC1394	|		|	scientific name	|
+2315646	|	Chrysotila sp. 1 JIK-2013 RCC1400	|		|	scientific name	|
+2315647	|	Chrysotila sp. RCC1405	|		|	scientific name	|
+2315648	|	Chrysotila sp. RCC1407	|		|	scientific name	|
+2315649	|	Chrysotila sp. RCC1408	|		|	scientific name	|
+2315650	|	Chrysotila sp. RCC1409	|		|	scientific name	|
+2315651	|	Chrysotila sp. RCC1410	|		|	scientific name	|
+2315652	|	Chrysotila sp. RCC1411	|		|	scientific name	|
+2315653	|	Chrysotila sp. RCC1412	|		|	scientific name	|
+2315654	|	Chrysotila sp. RCC1413	|		|	scientific name	|
+2315655	|	Chrysotila sp. RCC1414	|		|	scientific name	|
+2315656	|	Chrysotila sp. RCC1415	|		|	scientific name	|
+2315657	|	Chrysotila sp. RCC1416	|		|	scientific name	|
+2315658	|	Chrysotila sp. RCC1417	|		|	scientific name	|
+2315659	|	Chrysotila sp. RCC1419	|		|	scientific name	|
+2315660	|	Chrysotila sp. RCC1422	|		|	scientific name	|
+2315661	|	Chrysotila sp. RCC1424	|		|	scientific name	|
+2315662	|	Chrysotila sp. RCC1425	|		|	scientific name	|
+2315663	|	Chrysotila sp. RCC1426	|		|	scientific name	|
+2315664	|	Chrysotila sp. RCC1427	|		|	scientific name	|
+2315665	|	Chrysotila sp. RCC1428	|		|	scientific name	|
+2315679	|	Isochrysis sp. RCC1447	|		|	scientific name	|
+2315681	|	Ochrosphaera sp. RCC1360	|		|	scientific name	|
+2315682	|	Ochrosphaera sp. RCC1364	|		|	scientific name	|
+2315683	|	Ochrosphaera sp. RCC1365	|		|	scientific name	|
+2315684	|	Ochrosphaera sp. RCC1367	|		|	scientific name	|
+2315685	|	Ochrosphaera sp. RCC1369	|		|	scientific name	|
+2316538	|	unclassified Syracosphaerales	|		|	scientific name	|
+2316539	|	Syracosphaerales sp.	|		|	scientific name	|
+2316540	|	Dicrateria sp.	|		|	scientific name	|
+2316573	|	Gephyrocapsa sp.	|		|	scientific name	|
+2483873	|	Isochrysidales sp.	|		|	scientific name	|
+2483874	|	Pavlovales sp.	|		|	scientific name	|
+2496628	|	Pavlova sp. RCC5946	|		|	scientific name	|
+2555874	|	Chrysochromulina andersonii	|		|	scientific name	|
+2555874	|	Chrysochromulina andersonii Yuasa, Kawachi, Horiguchi & Takahashi 2019	|		|	authority	|
+2555874	|	haptophyte symbiont of Dictyocoryne truncatum	|		|	includes	|
+2572249	|	Phaeocystis cf. globosa	|		|	scientific name	|
+2572250	|	Phaeocystis sp. CCMP2192	|		|	scientific name	|
+2604707	|	Phaeocystis sp. RCC3538	|		|	scientific name	|
+2608131	|	Coccolithophyceae	|		|	synonym	|
+2608131	|	Prymnesiophyceae Hibberd, 1976	|		|	authority	|
+2608131	|	Prymnesiophyceae	|		|	scientific name	|
+2611280	|	Haptophyta sp.	|		|	scientific name	|
+2611280	|	unidentified haptophyte	|		|	synonym	|
+2619771	|	unclassified Cruciplacolithus	|		|	scientific name	|
+2622794	|	unclassified Rebecca	|		|	scientific name	|
+2624151	|	unclassified Calyptrosphaera	|		|	scientific name	|
+2624329	|	unclassified Gephyrocapsa	|		|	scientific name	|
+2625709	|	unclassified Dicrateria	|		|	scientific name	|
+2627442	|	unclassified Helladosphaera	|		|	scientific name	|
+2627643	|	unclassified Haptolina	|		|	scientific name	|
+2627664	|	unclassified Imantonia	|		|	scientific name	|
+2631402	|	unclassified Chrysotila	|		|	scientific name	|
+2632026	|	unclassified Gladiolithus	|		|	scientific name	|
+2633354	|	unclassified Syracosphaera	|		|	scientific name	|
+2635182	|	unclassified Emiliania	|		|	scientific name	|
+2636333	|	unclassified Phaeocystis	|		|	scientific name	|
+2636553	|	unclassified Ochrosphaera	|		|	scientific name	|
+2637902	|	unclassified Monochrysis	|		|	scientific name	|
+2638998	|	unclassified Platychrysis	|		|	scientific name	|
+2640112	|	unclassified Calcidiscus	|		|	scientific name	|
+2643179	|	unclassified Exanthemachrysis	|		|	scientific name	|
+2644989	|	unclassified Diacronema	|		|	scientific name	|
+2647170	|	unclassified Pavlova	|		|	scientific name	|
+2647842	|	unclassified Chrysochromulina	|		|	scientific name	|
+2648245	|	unclassified Prymnesium	|		|	scientific name	|
+2649944	|	unclassified Pseudohaptolina	|		|	scientific name	|
+2661850	|	Calyptrosphaera sp. RCC6294	|		|	scientific name	|
+2661851	|	Pavlova sp. RCC6257	|		|	scientific name	|
+2661852	|	Phaeocystis sp. RCC6665	|		|	scientific name	|
+2661855	|	unclassified Prymnesiophyceae	|		|	scientific name	|
+2661856	|	Prymnesiophyceae sp. RCC6258	|		|	scientific name	|
+2661857	|	Prymnesiophyceae sp. RCC6262	|		|	scientific name	|
+2661858	|	Prymnesiophyceae sp. RCC6270	|		|	scientific name	|
+2661859	|	Prymnesiophyceae sp. RCC6271	|		|	scientific name	|
+2661860	|	Prymnesium sp. RCC6265	|		|	scientific name	|
+2661861	|	Prymnesium sp. RCC6268	|		|	scientific name	|
+2661862	|	Prymnesium sp. RCC6295	|		|	scientific name	|
+2661863	|	Prymnesium sp. RCC6296	|		|	scientific name	|
+2661864	|	Prymnesium sp. RCC6298	|		|	scientific name	|
+2661868	|	unclassified Umbilicosphaera	|		|	scientific name	|
+2661869	|	Umbilicosphaera sp. RCC6252	|		|	scientific name	|
+2661870	|	Umbilicosphaera sp. RCC6255	|		|	scientific name	|
+2661871	|	Umbilicosphaera sp. RCC6261	|		|	scientific name	|
+2661872	|	Umbilicosphaera sp. RCC6275	|		|	scientific name	|
+2676660	|	unclassified Pleurochrysis (in: haptophytes)	|		|	scientific name	|
+2686093	|	Pavlova sp. NIVA-4/92	|		|	scientific name	|
+2703868	|	Dicrateria rotunda (Reynolds) Bendif & Probert, 2014	|		|	authority	|
+2703868	|	Dicrateria rotunda	|		|	scientific name	|
+2703868	|	Imantonia rotunda	|		|	synonym	|
+2722872	|	Isochrysis sp. DM672	|		|	scientific name	|
+2748608	|	Haptophyceae sp. NIES-3900	|		|	scientific name	|
+2781980	|	Phaeocystis cf. pouchetii	|		|	scientific name	|
+2793420	|	Diacronema viridis	|		|	scientific name	|
+2793420	|	Diacronema viridis (Tseng, Chen & Zhang) Bendif & Veron, 2011	|		|	authority	|
+2793420	|	Pavlova viridis	|		|	synonym	|
+2793420	|	Pavlova viridis Tseng, Chen & Zhang, 1991	|		|	authority	|
+2802064	|	Chrysochromulina sp. AL-TEMP	|		|	scientific name	|
+2802065	|	Chrysochromulina sp. KB-HA01	|		|	scientific name	|
+2811745	|	Gephyrocapsa cf. muellerae	|		|	scientific name	|
+2811746	|	Gephyrocapsa cf. oceanica	|		|	scientific name	|
+2812047	|	Diacronema sp.	|		|	scientific name	|
+2812048	|	unclassified Pavlovaceae	|		|	scientific name	|
+2812049	|	Pavlovaceae sp.	|		|	scientific name	|
+2812474	|	unclassified Algirosphaera	|		|	scientific name	|
+2812475	|	Algirosphaera sp.	|		|	scientific name	|
+2812476	|	Prymnesiophyceae sp.	|		|	scientific name	|
+2812477	|	unclassified Chrysocampanula	|		|	scientific name	|
+2812478	|	Chrysocampanula sp.	|		|	scientific name	|
+2812479	|	Haptolina sp.	|		|	scientific name	|
+2812480	|	unclassified Noelaerhabdaceae	|		|	scientific name	|
+2812481	|	Noelaerhabdaceae sp.	|		|	scientific name	|
+2812482	|	unclassified Prymnesiaceae	|		|	scientific name	|
+2812483	|	Prymnesiaceae sp.	|		|	scientific name	|
+2812484	|	Prymnesiales sp.	|		|	scientific name	|
+2812485	|	Prymnesium sp.	|		|	scientific name	|
+2827246	|	Pontosphaera sessilis Lohmann, 1912	|		|	authority	|
+2827246	|	Pontosphaera sessilis	|		|	synonym	|
+2827246	|	Reticulofenestra sessilis (Lohmann) Jordan & Young, 1990	|		|	authority	|
+2827246	|	Reticulofenestra sessilis	|		|	scientific name	|
+2850687	|	Emiliania sp.	|		|	scientific name	|
+2861148	|	unclassified Coccolithus	|		|	scientific name	|
+2861149	|	Coccolithus sp.	|		|	scientific name	|
+2922897	|	Ruttnera	|		|	scientific name	|
+3056105	|	Hayaster Bukry, 1973	|		|	authority	|
+3056105	|	Hayaster	|		|	scientific name	|
+3056106	|	Discoaster perplexus Bramlette & Riedel, 1954	|		|	authority	|
+3056106	|	Discoaster perplexus	|		|	synonym	|
+3056106	|	Hayaster perplexus (Bramlette & Riedel) Bukry, 1973	|		|	authority	|
+3056106	|	Hayaster perplexus	|		|	scientific name	|
+3075302	|	Pavlova sp. NIES-3813	|		|	scientific name	|

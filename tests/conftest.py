@@ -203,6 +203,8 @@ def run_workflow(tmpdir: Path):
         # configfile = root_dir/"config"/"ChloroScan.init.yaml"
         input_assembly = root_dir/"tests"/"test-data"/"test_plastid.fasta"
         input_depth_txt = root_dir/"tests"/"test-data"/"contig_depth_test.txt"
+        CAT_db = root_dir/"tests"/"test-data"/"CAT_mini"/"db"
+        CAT_tax = root_dir/"tests"/"test-data"/"CAT_mini"/"tax"
         input_batch_name = "TEST_OUT"
         output_dir = "TEST_OUT"
         conda_prefix = root_dir/"conda_envs"
@@ -220,14 +222,15 @@ def run_workflow(tmpdir: Path):
                 input_batch_name,
                 "--outputdir",
                 output_dir,
-                "--cat-database=/home/student.unimelb.edu.au/yuhtong/andy/data/uniref90_algaProt/db",
-                "--cat-taxonomy=/home/student.unimelb.edu.au/yuhtong/andy/data/uniref90_algaProt/tax",
+                "--cat-database={}".format(CAT_db),
+                "--cat-taxonomy={}".format(CAT_tax),
                 "-c",
                 "32",
                 "--use-conda",
                 "--force",
                 "--reason",
                 "-j1",
+                "--rerun-triggers=code",
                 "--verbose",
                 "--latency-wait=15", 
                 "--directory={}".format(work_dir),
