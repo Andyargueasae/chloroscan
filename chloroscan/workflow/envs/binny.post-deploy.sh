@@ -49,5 +49,6 @@ mkdir -p "$CONDA_PREFIX/etc/conda/activate.d"
 echo -e "export BINNY_DIR=\"$BINNY_DIR\"" > "$CONDA_PREFIX/etc/conda/activate.d/binny.sh"
 
 # Prepare the nltk resources.
+mamba install -c conda-forge nltk
 python3 -c "import nltk; nltk.download('averaged_perceptron_tagger_eng')"
 
