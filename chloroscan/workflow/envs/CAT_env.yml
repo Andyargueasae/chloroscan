@@ -5,7 +5,8 @@ dependencies:
   - CAT=5.2.3
   - prodigal=2.6.3
   - diamond=2.1.8
-  - setuptools
-  - pip
+  - python=3.9
+  - coreutils
+  
 
 # need collaboration.
