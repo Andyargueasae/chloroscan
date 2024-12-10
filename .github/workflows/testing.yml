@@ -45,5 +45,7 @@ jobs:
         export PATH=/home/runner/mamba-cache/mamba/condabin:$PATH
 
         conda config --add channels conda-forge
+        conda config --add channels bioconda
+        conda config --add channels defaults
         conda config --set channel_priority strict
         poetry run pytest -v -s -o faulthandler_timeout=60
