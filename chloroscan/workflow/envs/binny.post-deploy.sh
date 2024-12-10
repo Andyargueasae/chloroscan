@@ -2,6 +2,7 @@
 set -o pipefail
 set -e 
 
+
 git config --global http.postBuffer 524288000
 
 # We don't even know whether this one is being installed.
@@ -23,7 +24,9 @@ default_binny_config_path="$CONDA_PREFIX/lib/binny_Chloroscan/config/config.defa
 # ./binny -i config/config.init.yaml
 echo "snakemake env: $(which snakemake)"
 # Create the envs for snakemake.
-mamba create --prefix $BINNY_DIR/snakemake_env -y snakemake>=7.16 unzip python=3.8 
+echo "which mamba: $(which mamba)"
+
+mamba create --prefix $BINNY_DIR/snakemake_env -y snakemake=7.16 unzip python=3.8 
 
 # Create envs for other binny rules.
 # snakemake --use-conda --conda-create-envs-only --conda-prefix $DEFAULT_BINNY_CONDASOURCE --configfile $default_binny_config_path --snakefile $BINNY_DIR/Snakefile --cores 1 --verbose
