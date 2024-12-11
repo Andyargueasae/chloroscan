@@ -20,8 +20,16 @@ def test_run_help():
     print(result.stderr)
     assert result.exit_code == 0
     assert result.stderr == ""
-    assert "Path to fasta format assembly of contigs from all sorts of organisms." in result.stdout
-    assert "Path to a tab-separated text storing abundance of each contig in the sample." in result.stdout
-    assert "Path to the folder containing alignment files of the contigs." in result.stdout
+    assert "--Inputs-assembly" in result.stdout
+    assert "--Inputs-depth-txt" in result.stdout
+    assert "--Inputs-alignment" in result.stdout
+    assert "--Inputs-batch-name" in result.stdout
+    assert "--outputdir" in result.stdout
+    assert "--cat-database" in result.stdout
+    assert "--cat-taxonomy" in result.stdout
+    assert "--krona-env" in result.stdout
+    assert "--binning" in result.stdout
+    assert "--corgi" in result.stdout
+    assert "--tmpdir" in result.stdout
     
         
