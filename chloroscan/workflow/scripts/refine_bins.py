@@ -6,6 +6,8 @@ import pandas as pd
 import numpy as np
 import sys
 import logging
+from pathlib import Path
+
 
 def refine_bins_renaming(seqs, cross_ref_df):
     taxonomy_dict = dict()
@@ -28,6 +30,9 @@ def refine_bins_renaming(seqs, cross_ref_df):
 output_dir_for_refined_bins = snakemake.output[0]
 output_summary_info = snakemake.output[1]
 
+
+# Touch the output file first.
+Path(output_summary_info).touch()
 # Inputs and params.
 
 cross_reference_table = snakemake.input['cross_ref']
