@@ -17,5 +17,8 @@ def test_run_help():
     result = runner.invoke(["run", "--help"])
     assert result.exit_code == 0
     assert result.stderr == ""
-    assert "Path to fasta format assembly of contigs " in result.stdout
+    assert "Path to fasta format assembly of contigs from all sorts of organisms." in result.stdout
+    assert "Path to a tab-separated text storing abundance of each contig in the sample." in result.stdout
+    assert "Path to the folder containing alignment files of the contigs." in result.stdout
+    
         
