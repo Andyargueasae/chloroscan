@@ -48,4 +48,6 @@ jobs:
         conda config --add channels bioconda
         conda config --add channels defaults
         conda config --set channel_priority strict
+        
+        df -H
         poetry run pytest -v -s -o faulthandler_timeout=60
