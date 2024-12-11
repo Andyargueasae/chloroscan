@@ -15,6 +15,9 @@ def test_help():
 def test_run_help():
     runner = SnkCliRunner(chloroscan)
     result = runner.invoke(["run", "--help"])
+    # breakpoint()
+    print(result.stdout)
+    print(result.stderr)
     assert result.exit_code == 0
     assert result.stderr == ""
     assert "Path to fasta format assembly of contigs from all sorts of organisms." in result.stdout
