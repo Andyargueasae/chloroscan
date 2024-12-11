@@ -1,7 +1,0 @@
-Config file /home/student.unimelb.edu.au/yuhtong/andy/data/MMA_organelle_metagenomics/binny/config/config.default.yaml is extended by additional config specified via the command line.
-Building DAG of jobs...
-MissingInputException in rule prepare_input_data in line 213 of /home/student.unimelb.edu.au/yuhtong/andy/data/MMA_organelle_metagenomics/binny/Snakefile:
-Missing input files for rule prepare_input_data:
-    output: /data/MMA_organelle_metagenomics/binny_output/intermediary/assembly.fa
-    affected files:
-        /data/MMA_organelle_metagenomics/../output/working/corgi/plastid.fasta

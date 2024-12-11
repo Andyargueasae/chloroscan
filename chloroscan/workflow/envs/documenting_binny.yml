@@ -1,7 +1,6 @@
 channels:
   - conda-forge
 dependencies:
-  - coreutils
   - python=3.9
   - numpy<2
   - pandas

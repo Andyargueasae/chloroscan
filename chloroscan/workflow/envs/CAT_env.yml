@@ -7,7 +7,6 @@ dependencies:
   - prodigal=2.6.3
   - diamond=2.1.7
   - python=3.9
-  - coreutils
 
 
 # need collaboration.

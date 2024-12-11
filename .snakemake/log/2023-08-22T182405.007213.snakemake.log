@@ -1,4 +1,0 @@
-Config file /home/student.unimelb.edu.au/yuhtong/andy/data/MMA_organelle_metagenomics/binny/config/config.default.yaml is extended by additional config specified via the command line.
-Building DAG of jobs...
-Nothing to be done (all requested files are present and up to date).
-Complete log: ../.snakemake/log/2023-08-22T182405.007213.snakemake.log

@@ -1,8 +1,0 @@
-The flag 'directory' used in rule all is only valid for outputs, not inputs.
-The flag 'directory' used in rule documenting_binny_results is only valid for outputs, not inputs.
-The flag 'directory' used in rule CAT_taxonomy_identification_plus_annotation is only valid for outputs, not inputs.
-Building DAG of jobs...
-LockException:
-Error: Directory cannot be locked. Please make sure that no other Snakemake process is trying to create the same files in the following directory:
-/data/MMA_organelle_metagenomics
-If you are sure that no other instances of snakemake are running on this directory, the remaining lock was likely caused by a kill signal or a power loss. It can be removed with the --unlock argument.

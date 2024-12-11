@@ -7,7 +7,6 @@ dependencies:
   - hmmer
   - cython
   - pip
-  - snakemake=6.15.5
   - pip:
     - pandas==2.2.2
     - numpy<2

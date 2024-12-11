@@ -1,5 +1,0 @@
-Config file /home/student.unimelb.edu.au/yuhtong/andy/data/MMA_organelle_metagenomics/binny/config/config.default.yaml is extended by additional config specified via the command line.
-PermissionErrorin line 82 of /home/student.unimelb.edu.au/yuhtong/andy/data/MMA_organelle_metagenomics/binny/Snakefile:
-[Errno 13] Permission denied: '/binny_output'
-  File "/home/student.unimelb.edu.au/yuhtong/andy/data/MMA_organelle_metagenomics/binny/Snakefile", line 82, in <module>
-  File "/home/student.unimelb.edu.au/yuhtong/andy/data/MMA_organelle_metagenomics/binny/conda/snakemake_env/lib/python3.9/os.py", line 225, in makedirs
