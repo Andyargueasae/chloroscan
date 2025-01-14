@@ -17,7 +17,7 @@ from snakemake.utils import min_version
 import logging
 from pathlib import Path
 
-min_version("6.0")
+# min_version("6.0")
 
 shell.executable("bash")
 
@@ -351,7 +351,8 @@ rule cds_extraction:
 
 rule krona_taxonomy_plot:
     input: 
-        CAT_pred_whole_data=rules.CAT_taxonomy_identification_plus_annotation.output.CAT_output
+        CAT_pred_whole_data=rules.CAT_taxonomy_identification_plus_annotation.output.CAT_output,
+        # summary_info=rules.documenting_binny_results.output,
     params:
         file_to_remodel="out.CAT.contig2classification.txt",
         file_after_remodel="out.CAT.krona.intake.tsv",

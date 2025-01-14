@@ -4,6 +4,7 @@ import click
 @click.command()
 @click.option("--cat_prediction_txt", type=click.Path(exists=True))
 @click.option("--output", type=click.STRING)
+# @click.option("--abundance", type=click.STRING)
 
 def main(cat_prediction_txt, output):
     # transfer it into a pandas dataframe.
@@ -33,6 +34,9 @@ def main(cat_prediction_txt, output):
     krona_intake = pd.DataFrame()
     krona_intake['count'] = counts
     krona_intake['taxon id'] = taxon_id
+
+    # add the magnitude of contigs by its depth
+    
     krona_intake.to_csv(output, sep="\t", index=False)
     ##firstly, filter those without a ORF hit, retain those having it.
     return
