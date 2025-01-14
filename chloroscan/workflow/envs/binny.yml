@@ -10,3 +10,4 @@ dependencies:
   - pip:
     - pandas==2.2.2
     - numpy<2
+    - nltk

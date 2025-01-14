@@ -48,7 +48,12 @@ sed -i '/^$/d' $CFG_PATH
 mkdir -p "$CONDA_PREFIX/etc/conda/activate.d"
 echo -e "export BINNY_DIR=\"$BINNY_DIR\"" > "$CONDA_PREFIX/etc/conda/activate.d/binny.sh"
 
+echo "$(which python)"
 # Prepare the nltk resources.
-mamba install -c conda-forge -y nltk
-python3 -c "import nltk; nltk.download('averaged_perceptron_tagger_eng')"
-
+# mamba install -c conda-forge -y nltk
+if [ ! -d ~/nltk_data/taggers/averaged_perceptron_tagger_eng ]; then
+    pip install nltk
+    python3 -c "import nltk; nltk.download('averaged_perceptron_tagger_eng')"
+else
+    echo "nltk averaged_perceptron_tagger_eng is found in home directory. Skip downloading."
+fi

@@ -96,7 +96,7 @@ for i in list_of_seqrec.keys():
                 contig_ids.remove(elem_id)
                 to_be_modified_id.append(elem_id)
                 with open(output_summary_info, "a") as si:
-                    si.write(f"MAG {i.split('/')[-1]} has suspicious contamination contig: {elem_id}. Taxonomy: {elem_lineage_hierarchy}.")
+                    si.write(f"MAG {i.split('/')[-1]} has suspicious contamination contig: {elem_id}. Taxonomy: {elem_lineage_hierarchy}.\n")
 
             elif (EUKARYA_ID in elem_lineage_hierarchy) and (pd.isna(np.array(elem_in_crossref['markers on the contig'])[0])):
                 logging.info("Contig id: {}. This is a eukaryotic contig without marker genes on it.".format(elem_id))
