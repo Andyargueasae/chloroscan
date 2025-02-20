@@ -146,7 +146,8 @@ for attribute, measurement in bins_quality_dict.items():
     bin_record = axsc[1].bar(x+offset, measurement, width, label=attribute)
     axsc[1].bar_label(bin_record, padding=3)
     multiplier += 1
-axsc[0].scatter(bins_quality_dict["Bin Completeness"], bins_quality_dict["Bin Purity"])
+axsc[0].scatter(bins_quality_dict["Bin Completeness"], bins_quality_dict["Bin Purity"], color="red", s=100)
+axsc[0].set_title("Bin Purity vs Completeness")
 axsc[0].set_xlabel("Bin Completeness (%)")
 axsc[0].set_ylabel("Bin Purity (%)")
 

@@ -24,7 +24,7 @@ shell.executable("bash")
 # Some major configuration parameters and inputs.
 assembly_path = config['Inputs']['assembly']
 ALIGNMENT_FILES = config['Inputs']['alignment']
-DEPTH_TEXT_FILE=config['Inputs']['depth_txt']
+DEPTH_TEXT_FILE = config['Inputs']['depth_txt']
 try:
     DEPTH_FILE_EXISTS = Path(DEPTH_TEXT_FILE).exists()
 except TypeError:
@@ -43,8 +43,6 @@ WORKFLOW_DIR = Path(workflow.basedir)
 # BINNY_DIR = WORKFLOW_DIR.parent.parent/"binny_Chloroscan" 
 
 SCR_DIR = WORKFLOW_DIR/"scripts"
-
-DEFAULT_DB_DIR = Path("/home/student.unimelb.edu.au/yuhtong/andy/MMA_organelle_metagenomics/databases")
  
 # For CAT taxonomy prediction, please provide tax and db directory path.
 CAT_DB_DIR = config['cat']['database']
@@ -67,6 +65,28 @@ TMP_DIR.mkdir(parents=True, exist_ok=True) # what if we do want to prepare data 
 # Krona environment name.
 # Now rules are introduced. They are placed into the single snakefile in order to increase efficiency for debugging.
 # Major output: MMA.done, branching summary results: cross_ref.xlsx and CAT_taxonomy_annotation.tsv. 
+
+# Add the essential parameters to a file that users could check.
+CONFIG_RECORD=os.path.join(OUTPUT_DIR, "arguments.txt")
+with open(CONFIG_RECORD, "w") as cr:
+    cr.write("assembly path: {}\n".format(assembly_path))
+    cr.write("abundance profile: {}\n".format(ALIGNMENT_FILES))
+    cr.write("depth profile: {}\n".format(DEPTH_TEXT_FILE))
+    cr.write("output dir: {}\n".format(OUTPUT_DIR))
+    cr.write("contig classification settings:\n")
+    cr.write("\tprobability threshold: {}\n".format(config['corgi']['pthreshold']))
+    cr.write("\tminimum contig length cutoff: {}\n".format(config['corgi']['min_length']))
+    cr.write("\tbatch size for prediction: {}\n".format(config['corgi']['batch_size']))
+    cr.write("binning settings: # Note: by default binny automatically uses coassembly mode for the input metagenome.\n")
+    cr.write("\tcontig length cutoff for clustering and marker gene detection: {}\n".format(config['binning']['universal_length_cutoff']))
+    cr.write("\tHDBSCAN epsilon range: {}\n".format(config['binning']['clustering']['epsilon_range']))
+    cr.write("\tHDBSCAN minimum sample range: {}\n".format(config['binning']['clustering']['hdbscan_min_sample_range']))
+    cr.write("\tMAG starting completeness: {}\n".format(config['binning']['bin_quality']['starting_completeness']))
+    cr.write("\tMAG minimum completeness: {}\n".format(config['binning']['bin_quality']['min_completeness']))
+    cr.write("\tMAG purity (1-contamination) cutoff: {}\n".format(config['binning']['bin_quality']['purity']))
+    cr.write("CAT database: {}\n".format(CAT_DB_DIR))
+
+
 rule all:
     input:
         OUTPUT_DIR/"working/binny",
@@ -149,7 +169,7 @@ rule corgi_prediction:
         fi
         
         """    
- 
+
 if not DEPTH_FILE_EXISTS:
     rule contig_depth_calculation:
         input:
@@ -265,7 +285,8 @@ rule CAT_taxonomy_identification_plus_annotation:
         find {input.binny_output} -mindepth 1 -maxdepth 1 >> {log}
         if [ -f "{input.binny_output}/{params.path_to_contigs}" ] ; then
             CAT contigs -c {input.binny_output}/{params.path_to_contigs} -d {CAT_DB_DIR} -t {CAT_TAXON_DIR} -o {output}/{params.prefix} --force >> {log} 
-            # mv ./{params.prefix}.* {output.CAT_output}
+            
+            
         fi
         """
 
@@ -321,7 +342,7 @@ rule visualize_results:
     params:
         BATCH_NAME,
         script_dir = SCR_DIR,
-        refine_bins_dir=OUTPUT_DIR/"working/refined_bins",
+        refine_bins_dir=OUTPUT_DIR/"working/binny",
     output:
         directory(OUTPUT_DIR/"working/visualizations")
     conda:
@@ -333,7 +354,7 @@ rule visualize_results:
 
 rule cds_extraction:
     input:
-        binny_dir = Path(OUTPUT_DIR/"working/refined_bins")
+        binny_dir = Path(OUTPUT_DIR/"working/binny/bins"),
     params:
         batch_name=BATCH_NAME,
         gff_file_flag="GFFs",

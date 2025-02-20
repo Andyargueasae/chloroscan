@@ -103,10 +103,10 @@ for i in list_of_seqrec.keys():
                 contig_ids.remove(elem_id)
                 to_be_modified_id.append(elem_id)
                 with open(output_summary_info, "a") as si:
-                    si.write(f"MAG {i.split('/')[-1]} has a eukaryotic contig without single-copy marker genes in database: {elem_id}. Taxonomy: {elem_lineage_hierarchy}.")
+                    si.write(f"MAG {i.split('/')[-1]} has a eukaryotic contig without single-copy marker genes in database: {elem_id}. Taxonomy: {elem_lineage_hierarchy}.\n")
 
             elif (ROOT_ID in elem_lineage_hierarchy) and (pd.isna(np.array(elem_in_crossref['markers on the contig'])[0])):
-                logging.info("Contig id: {}. This is a contig with ambiguous taxonomic classification and without recognizable A2K marker genes, discarded.".format(elem_id))
+                logging.info("Contig id: {}. This is a contig with ambiguous taxonomic classification and without recognizable A2K marker genes in selected lineage, discarded.\n".format(elem_id))
                 contig_ids.remove(elem_id)
                 to_be_modified_id.append(elem_id)
                 with open(output_summary_info, "a") as si:
@@ -117,7 +117,7 @@ for i in list_of_seqrec.keys():
         else:
             continue
     logging.info(f"contig composition after refinement: {','.join(contig_ids)}\n")
-    logging.info(f"length equals to {len(contig_ids)}")
+    logging.info(f"length equals to {len(contig_ids)}\n")
     refined_contig_ids = contig_ids
     
     # Now store new bag of contigs.
