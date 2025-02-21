@@ -60,7 +60,7 @@ summary_dataframe['batch depth per contig']=compute_batch_depth(assembly_depth_a
 
 # depth_violin_plot(summary_dataframe, assembly_bin_array)
 binned_contigs_per_batch=summary_dataframe.loc[summary_dataframe["Contig2Bin"].notna()]
-simplified_binname = MAG_name_simplify(binned_contigs_per_batch, batch_name)
+simplified_binname = MAG_name_simplify(binned_contigs_per_batch)
 binned_contigs_per_batch['Bin name simplified'] = simplified_binname
 
 #store log10 contig depth.
@@ -146,7 +146,10 @@ for attribute, measurement in bins_quality_dict.items():
     bin_record = axsc[1].bar(x+offset, measurement, width, label=attribute)
     axsc[1].bar_label(bin_record, padding=3)
     multiplier += 1
-axsc[0].scatter(bins_quality_dict["Bin Completeness"], bins_quality_dict["Bin Purity"], color="red", s=100)
+
+# Add grid to axsc[0].
+axsc[0].grid(True)
+axsc[0].scatter(bins_quality_dict["Bin Completeness"], bins_quality_dict["Bin Purity"], color="red", s=120)
 axsc[0].set_title("Bin Purity vs Completeness")
 axsc[0].set_xlabel("Bin Completeness (%)")
 axsc[0].set_ylabel("Bin Purity (%)")
