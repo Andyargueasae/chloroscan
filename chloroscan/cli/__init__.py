@@ -4,7 +4,6 @@ from snk_cli import CLI
 
 chloroscan = CLI(Path(__file__).parent.parent)
 
-
 @chloroscan.app.command()
 def github():
     """ Launch the ChloroScan GitHub page. """

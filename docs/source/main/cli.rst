@@ -78,101 +78,122 @@ That will output something like:
 
 .. code-block:: 
 
-    Usage: chloroscan run [OPTIONS]                                                                                  
-                                                                                                                    
-    Run the workflow.                                                                                                
-    All unrecognized arguments are passed onto Snakemake.                                                            
-                                                                                                                    
-    ╭─ Options ──────────────────────────────────────────────────────────────────────────────────────────────────────╮
-    │ --config                   FILE     Path to snakemake config file. Overrides existing workflow configuration.  │
-    │                                     [default: None]                                                            │
-    │ --resource        -r       PATH     Additional resources to copy from workflow directory at run time.          │
-    │ --profile         -p       TEXT     Name of profile to use for configuring Snakemake. [default: None]          │
-    │ --dry             -n                Do not execute anything, and display what would be done.                   │
-    │ --lock            -l                Lock the working directory.                                                │
-    │ --dag             -d       PATH     Save directed acyclic graph to file. Must end in .pdf, .png or .svg        │
-    │                                     [default: None]                                                            │
-    │ --cores           -c       INTEGER  Set the number of cores to use. If None will use all cores.                │
-    │                                     [default: None]                                                            │
-    │ --no-conda                          Do not use conda environments.                                             │
-    │ --keep-resources                    Keep resources after pipeline completes.                                   │
-    │ --keep-snakemake                    Keep .snakemake folder after pipeline completes.                           │
-    │ --verbose         -v                Run workflow in verbose mode.                                              │
-    │ --help-snakemake  -hs               Print the snakemake help and exit.                                         │
-    │ --help            -h                Show this message and exit.                                                │
-    ╰────────────────────────────────────────────────────────────────────────────────────────────────────────────────╯
-    ╭─ Workflow Configuration ───────────────────────────────────────────────────────────────────────────────────────╮
-    │ --Inputs-assembly                    -a                            PATH     Path to fasta format assembly of   │
-    │                                                                             contigs from all sorts of          │
-    │                                                                             organisms.                         │
-    │                                                                             [default: None]                    │
-    │ --Inputs-depth-txt                   -d                            PATH     Path to a tab-separated text       │
-    │                                                                             storing abundance of each contig   │
-    │                                                                             in the sample.                     │
-    │                                                                             [default: None]                    │
-    │ --Inputs-alignment                   -l                            PATH     Path to the folder containing      │
-    │                                                                             alignment files of the contigs.    │
-    │                                                                             [default: None]                    │
-    │ --Inputs-batch-name                  -b                            TEXT     Name of the batch. [default: None] │
-    │ --outputdir                          -o                            PATH     Path to the output directory of    │
-    │                                                                             the workflow.                      │
-    │                                                                             [default: None]                    │
-    │ --tmpdir                             -t                            PATH     Path to the temporary directory of │
-    │                                                                             the workflow.                      │
-    │                                                                             [default: tmp]                     │
-    │ --binning-universal-length-cutoff                                  INTEGER  Length cutoff for universal        │
-    │                                                                             binning.                           │
-    │                                                                             [default: 1500]                    │
-    │ --binning-snakemake-env                                            TEXT     Customized snakemake environment   │
-    │                                                                             for binny to run.                  │
-    │                                                                             [default: None]                    │
-    │ --binning-mantis-env                                               TEXT     Customized Mantis virtual          │
-    │                                                                             environment to have mantis_pfa     │
-    │                                                                             installed, annotating genes.       │
-    │                                                                             [default: None]                    │
-    │ --binning-outputdir                  -o                            PATH     Path to the output directory of    │
-    │                                                                             the binning.                       │
-    │                                                                             [default: binny_output]            │
-    │ --binning-clustering-epsilon-range                                 TEXT     Range of epsilon values for        │
-    │                                                                             HDBSCAN clustering.                │
-    │                                                                             [default: 0.250,0.000]             │
-    │ --binning-clustering-hdbscan-min-s…                                TEXT     Range of min_samples values for    │
-    │                                                                             HDBSCAN clustering, larger value   │
-    │                                                                             means larger MAGs.                 │
-    │                                                                             [default: 1,4,7,10]                │
-    │ --binning-bin-quality-starting-com…                                FLOAT    Starting completeness for bin      │
-    │                                                                             quality.                           │
-    │                                                                             [default: 92.5]                    │
-    │ --binning-bin-quality-min-complete…                                FLOAT    Minimum completeness for bin       │
-    │                                                                             quality.                           │
-    │                                                                             [default: 72.5]                    │
-    │ --binning-bin-quality-purity                                       FLOAT    Purity for bin quality.            │
-    │                                                                             [default: 95]                      │
-    │ --corgi-min-length                                                 INTEGER  Minimum length of contigs to be    │
-    │                                                                             processed by CORGI.                │
-    │                                                                             [default: 500]                     │
-    │ --corgi-save-filter                      --no-corgi-save-filter             Save the filtered contigs by CORGI │
-    │                                                                             (Note: may take long time).        │
-    │                                                                             [default: no-corgi-save-filter]    │
-    │ --corgi-batch-size                                                 INTEGER  Batch size for CORGI to process    │
-    │                                                                             contigs.                           │
-    │                                                                             [default: 1]                       │
-    │ --corgi-pthreshold                                                 FLOAT    P-value threshold for CORGI to     │
-    │                                                                             determine if the contigs category  │
-    │                                                                             is authentically plastidial or     │
-    │                                                                             something else.                    │
-    │                                                                             [default: 0.9]                     │
-    │ --cat-database                       -d                            PATH     Path to the database of            │
-    │                                                                             chloroplast genomes.               │
-    │                                                                             [default:                          │
-    │                                                                             /home/yuhtong/scratch/andy/uniref… │
-    │ --cat-taxonomy                       -t                            PATH     Path to the taxonomy of the        │
-    │                                                                             database.                          │
-    │                                                                             [default:                          │
-    │                                                                             /home/yuhtong/scratch/andy/uniref… │
-    │ --krona-env                                                        TEXT     Path to the Krona environment.     │
-    │                                                                             [default: kronatools]              │
-    ╰────────────────────────────────────────────────────────────────────────────────────────────────────────────────╯
+    Usage: chloroscan run [OPTIONS]                                                            
+                                                                                                
+    Run the workflow.                                                                          
+    All unrecognized arguments are passed onto Snakemake.                                      
+                                                                                                
+    ╭─ Options ────────────────────────────────────────────────────────────────────────────────╮
+    │ --config                   FILE     Path to snakemake config file. Overrides existing    │
+    │                                     workflow configuration.                              │
+    │                                     [default: None]                                      │
+    │ --resource        -r       PATH     Additional resources to copy from workflow directory │
+    │                                     at run time.                                         │
+    │ --profile         -p       TEXT     Name of profile to use for configuring Snakemake.    │
+    │                                     [default: None]                                      │
+    │ --dry             -n                Do not execute anything, and display what would be   │
+    │                                     done.                                                │
+    │ --lock            -l                Lock the working directory.                          │
+    │ --dag             -d       PATH     Save directed acyclic graph to file. Must end in     │
+    │                                     .pdf, .png or .svg                                   │
+    │                                     [default: None]                                      │
+    │ --cores           -c       INTEGER  Set the number of cores to use. If None will use all │
+    │                                     cores.                                               │
+    │                                     [default: None]                                      │
+    │ --no-conda                          Do not use conda environments.                       │
+    │ --keep-resources                    Keep resources after pipeline completes.             │
+    │ --keep-snakemake                    Keep .snakemake folder after pipeline completes.     │
+    │ --verbose         -v                Run workflow in verbose mode.                        │
+    │ --help-snakemake  -hs               Print the snakemake help and exit.                   │
+    │ --help            -h                Show this message and exit.                          │
+    ╰──────────────────────────────────────────────────────────────────────────────────────────╯
+    ╭─ Workflow Configuration ─────────────────────────────────────────────────────────────────╮
+    │ --Inputs-assembly        -a                            PATH     Path to fasta format     │
+    │                                                                 assembly of contigs from │
+    │                                                                 all sorts of organisms.  │
+    │                                                                 [default: None]          │
+    │ --Inputs-depth-txt       -d                            PATH     Path to a tab-separated  │
+    │                                                                 text storing abundance   │
+    │                                                                 of each contig in the    │
+    │                                                                 sample.                  │
+    │                                                                 [default: None]          │
+    │ --Inputs-alignment       -l                            PATH     Path to the folder       │
+    │                                                                 containing alignment     │
+    │                                                                 files of the contigs.    │
+    │                                                                 [default: None]          │
+    │ --Inputs-batch-name      -b                            TEXT     Name of the batch.       │
+    │                                                                 [default: None]          │
+    │ --outputdir              -o                            PATH     Path to the output       │
+    │                                                                 directory of the         │
+    │                                                                 workflow.                │
+    │                                                                 [default: None]          │
+    │ --tmpdir                 -t                            PATH     Path to the temporary    │
+    │                                                                 directory of the         │
+    │                                                                 workflow.                │
+    │                                                                 [default: tmp]           │
+    │ --binning-universal-le…                                INTEGER  Length cutoff for        │
+    │                                                                 universal binning.       │
+    │                                                                 [default: 1500]          │
+    │ --binning-snakemake-env                                TEXT     Customized snakemake     │
+    │                                                                 environment for binny to │
+    │                                                                 run.                     │
+    │                                                                 [default: None]          │
+    │ --binning-mantis-env                                   TEXT     Customized Mantis        │
+    │                                                                 virtual environment to   │
+    │                                                                 have mantis_pfa          │
+    │                                                                 installed, annotating    │
+    │                                                                 genes.                   │
+    │                                                                 [default: None]          │
+    │ --binning-outputdir      -o                            PATH     Path to the output       │
+    │                                                                 directory of the         │
+    │                                                                 binning.                 │
+    │                                                                 [default: binny_output]  │
+    │ --binning-clustering-e…                                TEXT     Range of epsilon values  │
+    │                                                                 for HDBSCAN clustering.  │
+    │                                                                 [default: 0.250,0.000]   │
+    │ --binning-clustering-h…                                TEXT     Range of min_samples     │
+    │                                                                 values for HDBSCAN       │
+    │                                                                 clustering, larger value │
+    │                                                                 means larger MAGs.       │
+    │                                                                 [default: 1,4,7,10]      │
+    │ --binning-bin-quality-…                                FLOAT    Starting completeness    │
+    │                                                                 for bin quality.         │
+    │                                                                 [default: 92.5]          │
+    │ --binning-bin-quality-…                                FLOAT    Minimum completeness for │
+    │                                                                 bin quality.             │
+    │                                                                 [default: 72.5]          │
+    │ --binning-bin-quality-…                                FLOAT    Purity for bin quality.  │
+    │                                                                 [default: 95]            │
+    │ --corgi-min-length                                     INTEGER  Minimum length of        │
+    │                                                                 contigs to be processed  │
+    │                                                                 by CORGI.                │
+    │                                                                 [default: 500]           │
+    │ --corgi-save-filter          --no-corgi-save-filter             Save the filtered        │
+    │                                                                 contigs by CORGI (Note:  │
+    │                                                                 may take long time).     │
+    │                                                                 [default:                │
+    │                                                                 no-corgi-save-filter]    │
+    │ --corgi-batch-size                                     INTEGER  Batch size for CORGI to  │
+    │                                                                 process contigs.         │
+    │                                                                 [default: 1]             │
+    │ --corgi-pthreshold                                     FLOAT    P-value threshold for    │
+    │                                                                 CORGI to determine if    │
+    │                                                                 the contigs category is  │
+    │                                                                 authentically plastidial │
+    │                                                                 or something else.       │
+    │                                                                 [default: 0.9]           │
+    │ --cat-database           -d                            PATH     Path to the database of  │
+    │                                                                 chloroplast genomes.     │
+    │                                                                 [default:                │
+    │                                                                 /home/yuhtong/scratch/a… │
+    │ --cat-taxonomy           -t                            PATH     Path to the taxonomy of  │
+    │                                                                 the database.            │
+    │                                                                 [default:                │
+    │                                                                 /home/yuhtong/scratch/a… │
+    │ --krona-env                                            TEXT     Path to the Krona        │
+    │                                                                 environment.             │
+    │                                                                 [default: kronatools]    │
+    ╰──────────────────────────────────────────────────────────────────────────────────────────╯
 
 config
 =========
