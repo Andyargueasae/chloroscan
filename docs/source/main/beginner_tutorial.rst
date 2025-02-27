@@ -34,10 +34,11 @@ Explaining the non-required arguments
 Some parameters are not required, but changing them can impact the outcomes and running processes, here are some instructions.
 
 1. CORGI settings
+-----------------
 
 CORGI is responsible for contig filtering to extract chloroplast contigs. The default device of CORGI is GPU.
 
-- --corgi-settings-min-length: Minimum length of contigs to be considered for chloroplast contigs. Default is 500. 
+- ``--corgi-settings-min-length``: Minimum length of contigs to be considered for chloroplast contigs. Default is 500. 
 
 - --corgi-settings-pthreshold: P-value threshold for filtering contigs. Default is 0.90. Bigger value means more stringent filtering.
 
@@ -45,7 +46,8 @@ CORGI is responsible for contig filtering to extract chloroplast contigs. The de
 
 - --corgi-settings-batch-size: number of contigs to be processed in one batch. Default is 1. Smaller batch size can reduce memory usage and elevate speed. 
 
-2. Binning module settings.
+2. Binning module settings
+--------------------------
 
 - --binning-universal-length-cutoff: The length cutoff for all contigs that enters selection regardless of presenting marker genes. Default is 1500.
 
@@ -59,17 +61,21 @@ CORGI is responsible for contig filtering to extract chloroplast contigs. The de
 
 - --binning-bin-quality-purity: Purity cutoff for MAGs to enter selection. Default is 95.
 
-3. Homology-based taxonomy prediction by CAT.
+3. Homology-based taxonomy prediction by CAT
+--------------------------------------------
 
 - CAT-database: The database used for taxonomy prediction by CAT/BAT, ensure this is an absolute path.
 
 - CAT-taxonomy: The taxonomy dump file for CAT to use. Ensure this path is an absolute path.
 
-4. Other settings.
+4. Other settings
+-----------------
 
 - outputdir: The output directory for the workflow's results, usually named after batch name.
 
 - tmpdir: Temporary directory for storing intermediate files. Default is /tmp.
 
-Note: Currently the pip version of chloroscan recommends to use a snakemake virtual environment with snakemake=6.15.5 installed for binny's module to use. 
-Other wise the binny module might fail while running.   
+.. note::
+
+   Currently the pip version of chloroscan recommends to use a snakemake virtual environment with snakemake=6.15.5 installed for binny's module to use. 
+   Otherwise the binny module might fail while running.   
