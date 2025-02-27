@@ -7,7 +7,7 @@
 # https://www.sphinx-doc.org/en/master/usage/configuration.html#project-information
 
 project = 'chloroscan'
-copyright = '2024, Yuhao Tong'
+copyright = '2024–2025, Yuhao Tong'
 author = 'Yuhao Tong'
 
 # -- General configuration ---------------------------------------------------
@@ -24,6 +24,7 @@ extensions = [
     "sphinx.ext.napoleon",
     "sphinx_copybutton",
     "sphinx.ext.graphviz",
+    'sphinx.ext.autosectionlabel',
     # 'sphinxcontrib.bibtex',
     # 'snakedoc'
 ]
@@ -31,6 +32,7 @@ extensions = [
 templates_path = ['_templates']
 exclude_patterns = []
 
+autosectionlabel_prefix_document = True  # optionally namespace labels by filename
 
 
 # -- Options for HTML output -------------------------------------------------

@@ -16,6 +16,7 @@ Welcome to chloroscan's documentation!
 
    main/installation
    main/beginner_tutorial
+   main/cli
    main/credits
 
 
