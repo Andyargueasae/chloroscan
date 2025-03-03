@@ -50,6 +50,12 @@ jobs:
         uses: actions/upload-pages-artifact@v3
         with:
           path: 'gh-pages'
+      - name: List Available Artifacts
+        run: ls -R ${{ github.workspace }}
+      - name: Debug Deployment Step
+        run: |
+          echo "Listing all files before deployment:"
+          ls -R gh-pages
       - name: Deploy to GitHub Pages
         id: deployment
         uses: actions/deploy-pages@v2
