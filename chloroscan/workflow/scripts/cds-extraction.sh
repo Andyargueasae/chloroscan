@@ -1,7 +1,7 @@
 #!/usr/bin/env bash
 
 # The binny directory.
-BINNY_DIR=${snakemake_input[binny_dir]}
+BINNY_DIR=${snakemake_input[binny_dir]}/bins
 
 # assign variables.
 FILE_FLAG=${snakemake_params[gff_file_flag]}

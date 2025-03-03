@@ -338,7 +338,6 @@ rule refine_bins:
 rule visualize_results:
     input:
         OUTPUT_DIR/"working/summary/cross_ref.tsv",
-        rules.refine_bins.output.refine_dir,
     params:
         BATCH_NAME,
         script_dir = SCR_DIR,
@@ -354,7 +353,7 @@ rule visualize_results:
 
 rule cds_extraction:
     input:
-        binny_dir = Path(OUTPUT_DIR/"working/binny/bins"),
+        binny_dir = Path(OUTPUT_DIR/"working/binny"),
     params:
         batch_name=BATCH_NAME,
         gff_file_flag="GFFs",
