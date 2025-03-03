@@ -1,0 +1,484 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en">
+<head>
+  <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Command Line Interface &mdash; chloroscan  documentation</title>
+      <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=80d5e7a1" />
+      <link rel="stylesheet" type="text/css" href="../_static/css/theme.css?v=19f00094" />
+      <link rel="stylesheet" type="text/css" href="../_static/copybutton.css?v=76b2166b" />
+      <link rel="stylesheet" type="text/css" href="../_static/graphviz.css?v=eafc0fe6" />
+
+  
+  <!--[if lt IE 9]>
+    <script src="../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+        <script src="../_static/jquery.js?v=5d32c60e"></script>
+        <script src="../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+        <script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js?v=b3ba4146"></script>
+        <script src="../_static/doctools.js?v=888ff710"></script>
+        <script src="../_static/sphinx_highlight.js?v=4825356b"></script>
+        <script src="../_static/clipboard.min.js?v=a7894cd8"></script>
+        <script src="../_static/copybutton.js?v=f281be69"></script>
+    <script src="../_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="Credits" href="credits.html" />
+    <link rel="prev" title="Beginner’s tutorial" href="beginner_tutorial.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="../index.html" class="icon icon-home">
+            chloroscan
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption" role="heading"><span class="caption-text">Contents:</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="installation.html">ChloroScan: A metagenomic workflow to recover chloroplast genomes.</a></li>
+<li class="toctree-l1"><a class="reference internal" href="beginner_tutorial.html">Beginner’s tutorial</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">Command Line Interface</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#run">run</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#config">config</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#env">env</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#env-list">env list</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#env-activate">env activate</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#env-create">env create</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#env-remove">env remove</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#env-run">env run</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#env-show">env show</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#info">info</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#profile">profile</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#profile-list">profile list</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#profile-show">profile show</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#load-a-profile">Load a profile</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#profile-edit">profile edit</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#script">script</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#script-list">script list</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#script-show">script show</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#script-run">script run</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#github">github</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#docs">docs</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="credits.html">Credits</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../index.html">chloroscan</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../index.html" class="icon icon-home" aria-label="Home"></a></li>
+      <li class="breadcrumb-item active">Command Line Interface</li>
+      <li class="wy-breadcrumbs-aside">
+            <a href="../_sources/main/cli.rst.txt" rel="nofollow"> View page source</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="command-line-interface">
+<h1>Command Line Interface<a class="headerlink" href="#command-line-interface" title="Permalink to this heading"></a></h1>
+<p>ChloroScan uses <a class="reference external" href="https://snk.wytamma.com/snk-cli/">Snk</a> to create a command-line utility. Here are the available commands:</p>
+<ul class="simple">
+<li><p><a class="reference internal" href="#run"><span class="std std-ref">run</span></a> - Run the ChloroScan pipeline.</p></li>
+<li><p><a class="reference internal" href="#config"><span class="std std-ref">config</span></a> - Show the workflow configuration.</p></li>
+<li><p><a class="reference internal" href="#env"><span class="std std-ref">env</span></a> - Access the workflow conda environments.</p></li>
+<li><p><a class="reference internal" href="#script"><span class="std std-ref">script</span></a> - Access the workflow scripts.</p></li>
+<li><p><a class="reference internal" href="#info"><span class="std std-ref">info</span></a> - Show information about the workflow.</p></li>
+<li><p><a class="reference internal" href="#profile"><span class="std std-ref">profile</span></a> - Access the workflow profiles.</p></li>
+<li><p><a class="reference internal" href="#github"><span class="std std-ref">github</span></a> - Launch the ChloroScan GitHub page.</p></li>
+<li><p><a class="reference internal" href="#docs"><span class="std std-ref">docs</span></a> - Launch the ChloroScan documentation.</p></li>
+</ul>
+<p>To find out more about a command, run:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>chloroscan<span class="w"> </span>--help
+</pre></div>
+</div>
+<section id="run">
+<h2>run<a class="headerlink" href="#run" title="Permalink to this heading"></a></h2>
+<p>The main command to run the ChloroScan pipeline is:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>chloroscan<span class="w"> </span>run
+</pre></div>
+</div>
+<p>The run command will pass all unrecognized arguments to Snakemake.
+That means that if you want to use any of the Snakemake options, you can pass them to the run command e.g. <code class="docutils literal notranslate"><span class="pre">chloroscan</span> <span class="pre">run</span> <span class="pre">--use-singularity</span></code>.
+To see all the options available in Snakemake, you can use the <code class="docutils literal notranslate"><span class="pre">--help-snakemake</span></code> (<code class="docutils literal notranslate"><span class="pre">-hs</span></code>) flag.</p>
+<p>You can use the <code class="docutils literal notranslate"><span class="pre">--config</span></code> flag to specify a configuration file to override the existing workflow configuration.
+This is the same as using the <code class="docutils literal notranslate"><span class="pre">--configfile</span></code> flag in Snakemake.</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>chloroscan<span class="w"> </span>run<span class="w"> </span>--config<span class="w"> </span>config.yaml
+</pre></div>
+</div>
+<p>You can use the <code class="docutils literal notranslate"><span class="pre">--profile</span></code> flag to specify a profile to use for configuring Snakemake. You can specify the profile by name. The profile must be located in the profiles directory of the workflow.</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>chloroscan<span class="w"> </span>run<span class="w"> </span>--profile<span class="w"> </span>slurm
+</pre></div>
+</div>
+<p>You can use the <code class="docutils literal notranslate"><span class="pre">--dag</span></code> flag to save the directed acyclic graph to a file. The output file must end in .pdf, .png, or .svg.</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>chloroscan<span class="w"> </span>run<span class="w"> </span>--dag<span class="w"> </span>workflow.pdf
+</pre></div>
+</div>
+<p>You can use the <code class="docutils literal notranslate"><span class="pre">--dry</span></code> flag to display what would be done without executing anything (this is the same as using the <code class="docutils literal notranslate"><span class="pre">--dry-run</span></code> flag in Snakemake).</p>
+<p>The <code class="docutils literal notranslate"><span class="pre">--lock</span></code> flag is used to lock the working directory (by default, the working directory is not locked e.g. <code class="docutils literal notranslate"><span class="pre">--nolock</span></code> is passed to Snakemake).</p>
+<p>The <code class="docutils literal notranslate"><span class="pre">--cores</span></code> flag is used to set the number of cores to use. If None is specified, all cores will be used by default.</p>
+<p>The <code class="docutils literal notranslate"><span class="pre">--no-conda</span></code> flag is used to disable the use of conda environments.</p>
+<p>The <code class="docutils literal notranslate"><span class="pre">--keep-snakemake</span></code> flag is used to keep the .snakemake folder after the pipeline completes. This is useful for debugging purposes. By default, the .snakemake folder is removed after the pipeline completes.</p>
+<p>The chloroscan help message is broken into two sections.
+The first section lists the options available for the run command.
+The second section lists the workflow configuration options (generated from the snakemake configfile).</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>chloroscan<span class="w"> </span>run<span class="w"> </span>--help
+</pre></div>
+</div>
+<p>That will output something like:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>Usage: chloroscan run [OPTIONS]
+
+Run the workflow.
+All unrecognized arguments are passed onto Snakemake.
+
+╭─ Options ────────────────────────────────────────────────────────────────────────────────╮
+│ --config                   FILE     Path to snakemake config file. Overrides existing    │
+│                                     workflow configuration.                              │
+│                                     [default: None]                                      │
+│ --resource        -r       PATH     Additional resources to copy from workflow directory │
+│                                     at run time.                                         │
+│ --profile         -p       TEXT     Name of profile to use for configuring Snakemake.    │
+│                                     [default: None]                                      │
+│ --dry             -n                Do not execute anything, and display what would be   │
+│                                     done.                                                │
+│ --lock            -l                Lock the working directory.                          │
+│ --dag             -d       PATH     Save directed acyclic graph to file. Must end in     │
+│                                     .pdf, .png or .svg                                   │
+│                                     [default: None]                                      │
+│ --cores           -c       INTEGER  Set the number of cores to use. If None will use all │
+│                                     cores.                                               │
+│                                     [default: None]                                      │
+│ --no-conda                          Do not use conda environments.                       │
+│ --keep-resources                    Keep resources after pipeline completes.             │
+│ --keep-snakemake                    Keep .snakemake folder after pipeline completes.     │
+│ --verbose         -v                Run workflow in verbose mode.                        │
+│ --help-snakemake  -hs               Print the snakemake help and exit.                   │
+│ --help            -h                Show this message and exit.                          │
+╰──────────────────────────────────────────────────────────────────────────────────────────╯
+╭─ Workflow Configuration ─────────────────────────────────────────────────────────────────╮
+│ --Inputs-assembly        -a                            PATH     Path to fasta format     │
+│                                                                 assembly of contigs from │
+│                                                                 all sorts of organisms.  │
+│                                                                 [default: None]          │
+│ --Inputs-depth-txt       -d                            PATH     Path to a tab-separated  │
+│                                                                 text storing abundance   │
+│                                                                 of each contig in the    │
+│                                                                 sample.                  │
+│                                                                 [default: None]          │
+│ --Inputs-alignment       -l                            PATH     Path to the folder       │
+│                                                                 containing alignment     │
+│                                                                 files of the contigs.    │
+│                                                                 [default: None]          │
+│ --Inputs-batch-name      -b                            TEXT     Name of the batch.       │
+│                                                                 [default: None]          │
+│ --outputdir              -o                            PATH     Path to the output       │
+│                                                                 directory of the         │
+│                                                                 workflow.                │
+│                                                                 [default: None]          │
+│ --tmpdir                 -t                            PATH     Path to the temporary    │
+│                                                                 directory of the         │
+│                                                                 workflow.                │
+│                                                                 [default: tmp]           │
+│ --binning-universal-le…                                INTEGER  Length cutoff for        │
+│                                                                 universal binning.       │
+│                                                                 [default: 1500]          │
+│ --binning-snakemake-env                                TEXT     Customized snakemake     │
+│                                                                 environment for binny to │
+│                                                                 run.                     │
+│                                                                 [default: None]          │
+│ --binning-mantis-env                                   TEXT     Customized Mantis        │
+│                                                                 virtual environment to   │
+│                                                                 have mantis_pfa          │
+│                                                                 installed, annotating    │
+│                                                                 genes.                   │
+│                                                                 [default: None]          │
+│ --binning-outputdir      -o                            PATH     Path to the output       │
+│                                                                 directory of the         │
+│                                                                 binning.                 │
+│                                                                 [default: binny_output]  │
+│ --binning-clustering-e…                                TEXT     Range of epsilon values  │
+│                                                                 for HDBSCAN clustering.  │
+│                                                                 [default: 0.250,0.000]   │
+│ --binning-clustering-h…                                TEXT     Range of min_samples     │
+│                                                                 values for HDBSCAN       │
+│                                                                 clustering, larger value │
+│                                                                 means larger MAGs.       │
+│                                                                 [default: 1,4,7,10]      │
+│ --binning-bin-quality-…                                FLOAT    Starting completeness    │
+│                                                                 for bin quality.         │
+│                                                                 [default: 92.5]          │
+│ --binning-bin-quality-…                                FLOAT    Minimum completeness for │
+│                                                                 bin quality.             │
+│                                                                 [default: 72.5]          │
+│ --binning-bin-quality-…                                FLOAT    Purity for bin quality.  │
+│                                                                 [default: 95]            │
+│ --corgi-min-length                                     INTEGER  Minimum length of        │
+│                                                                 contigs to be processed  │
+│                                                                 by CORGI.                │
+│                                                                 [default: 500]           │
+│ --corgi-save-filter          --no-corgi-save-filter             Save the filtered        │
+│                                                                 contigs by CORGI (Note:  │
+│                                                                 may take long time).     │
+│                                                                 [default:                │
+│                                                                 no-corgi-save-filter]    │
+│ --corgi-batch-size                                     INTEGER  Batch size for CORGI to  │
+│                                                                 process contigs.         │
+│                                                                 [default: 1]             │
+│ --corgi-pthreshold                                     FLOAT    P-value threshold for    │
+│                                                                 CORGI to determine if    │
+│                                                                 the contigs category is  │
+│                                                                 authentically plastidial │
+│                                                                 or something else.       │
+│                                                                 [default: 0.9]           │
+│ --cat-database           -d                            PATH     Path to the database of  │
+│                                                                 chloroplast genomes.     │
+│                                                                 [default:                │
+│                                                                 /home/yuhtong/scratch/a… │
+│ --cat-taxonomy           -t                            PATH     Path to the taxonomy of  │
+│                                                                 the database.            │
+│                                                                 [default:                │
+│                                                                 /home/yuhtong/scratch/a… │
+│ --krona-env                                            TEXT     Path to the Krona        │
+│                                                                 environment.             │
+│                                                                 [default: kronatools]    │
+╰──────────────────────────────────────────────────────────────────────────────────────────╯
+</pre></div>
+</div>
+</section>
+<section id="config">
+<h2>config<a class="headerlink" href="#config" title="Permalink to this heading"></a></h2>
+<p>The config subcommand will display the workflow configuration file contents.
+You can use the <code class="docutils literal notranslate"><span class="pre">--pretty</span></code> (<code class="docutils literal notranslate"><span class="pre">-p</span></code>) flag to display the configuration in a more readable format.</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>chloroscan<span class="w"> </span>config
+</pre></div>
+</div>
+<p>You can redirect the output to a file to save the configuration.</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>chloroscan<span class="w"> </span>config<span class="w"> </span>&gt;<span class="w"> </span>config.yaml
+</pre></div>
+</div>
+<p>You can then edit the configuration file and use it to run the workflow.</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>chloroscan<span class="w"> </span>run<span class="w"> </span>--config<span class="w"> </span>config.yaml
+</pre></div>
+</div>
+</section>
+<section id="env">
+<h2>env<a class="headerlink" href="#env" title="Permalink to this heading"></a></h2>
+<p>The env subcommand in the workflow tool allows you to access and manage the conda environments used within the workflow. This guide provides an overview of the available options and commands for working with workflow environments.</p>
+<section id="env-list">
+<h3>env list<a class="headerlink" href="#env-list" title="Permalink to this heading"></a></h3>
+<p>List the environments in the workflow.</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>chloroscan<span class="w"> </span>env<span class="w"> </span>list<span class="w"> </span><span class="o">[</span>OPTIONS<span class="o">]</span>
+</pre></div>
+</div>
+</section>
+<section id="env-activate">
+<h3>env activate<a class="headerlink" href="#env-activate" title="Permalink to this heading"></a></h3>
+<p>This command activates the specified conda environment within the workflow.</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>chloroscan<span class="w"> </span>env<span class="w"> </span>activate<span class="w"> </span><span class="o">[</span>OPTIONS<span class="o">]</span><span class="w"> </span>ENV_NAME
+</pre></div>
+</div>
+<p><code class="docutils literal notranslate"><span class="pre">ENV_NAME</span></code>: Name of the environment to activate.</p>
+</section>
+<section id="env-create">
+<h3>env create<a class="headerlink" href="#env-create" title="Permalink to this heading"></a></h3>
+<p>This command creates all the conda environments specified in the envs dir. Individual conda envs can be create with workflow env create <code class="docutils literal notranslate"><span class="pre">ENV_NAME</span></code>.</p>
+<p>Snakemake workflows that use a lot of conda environments can take a long time to install as each env is created sequentially. Running workflow env create –workers number_of_workers will create all the conda envs in parallel up to the number of workers requested (defaults to 1).</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>chloroscan<span class="w"> </span>env<span class="w"> </span>create<span class="w"> </span>--workers<span class="w"> </span><span class="m">4</span><span class="w">  </span><span class="c1"># create up to 4 conda envs at a time</span>
+</pre></div>
+</div>
+<div class="admonition warning">
+<p class="admonition-title">Warning</p>
+<p>Some conda envs may not support parallel creation. If you encounter an error, try reducing the number of workers.</p>
+</div>
+</section>
+<section id="env-remove">
+<h3>env remove<a class="headerlink" href="#env-remove" title="Permalink to this heading"></a></h3>
+<p>This command deletes all the conda environments in the workflow. You can also delete individual environments by specifying the environment name. Use the <code class="docutils literal notranslate"><span class="pre">--force</span></code> option to skip the confirmation prompt.</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>chloroscan<span class="w"> </span>env<span class="w"> </span>remove<span class="w"> </span><span class="o">[</span>OPTIONS<span class="o">]</span><span class="w"> </span><span class="o">[</span>ENV_NAME...<span class="o">]</span>
+</pre></div>
+</div>
+<p><code class="docutils literal notranslate"><span class="pre">ENV_NAME</span></code>: Name of the environment to remove.</p>
+</section>
+<section id="env-run">
+<h3>env run<a class="headerlink" href="#env-run" title="Permalink to this heading"></a></h3>
+<p>The env run command in the workflow tool allows you to run a command within one of the workflow environments.</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>chloroscan<span class="w"> </span>env<span class="w"> </span>run<span class="w"> </span>--env<span class="w"> </span>ENV_NAME<span class="w"> </span>CMD...
+</pre></div>
+</div>
+<p><code class="docutils literal notranslate"><span class="pre">CMD...</span></code>: The command and its arguments to execute within the specified environment.</p>
+<p>Make sure to replace <code class="docutils literal notranslate"><span class="pre">ENV_NAME</span></code> with the actual name of the desired environment, and <code class="docutils literal notranslate"><span class="pre">CMD</span></code> with the command you want to run.</p>
+<p>For example:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>chloroscan<span class="w"> </span>env<span class="w"> </span>run<span class="w"> </span>-e<span class="w"> </span>my_environment<span class="w"> </span><span class="s2">&quot;python script.py --input input_file.txt --output output_file.txt&quot;</span>
+</pre></div>
+</div>
+<p>This command runs the <code class="docutils literal notranslate"><span class="pre">python</span> <span class="pre">script.py</span> <span class="pre">--input</span> <span class="pre">input_file.txt</span> <span class="pre">--output</span> <span class="pre">output_file.txt</span></code> command within the <code class="docutils literal notranslate"><span class="pre">my_environment</span></code> environment in the workflow.
+Adjust the command and environment name according to your specific use case.</p>
+</section>
+<section id="env-show">
+<h3>env show<a class="headerlink" href="#env-show" title="Permalink to this heading"></a></h3>
+<p>This command displays the contents of the environments configuration file used in the workflow.</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>chloroscan<span class="w"> </span>env<span class="w"> </span>show<span class="w"> </span><span class="o">[</span>OPTIONS<span class="o">]</span>
+</pre></div>
+</div>
+</section>
+</section>
+<section id="info">
+<h2>info<a class="headerlink" href="#info" title="Permalink to this heading"></a></h2>
+<p>The info subcommand provides JSON formatted information about the workflow.</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>chloroscan<span class="w"> </span>info
+</pre></div>
+</div>
+<div class="highlight-json notranslate"><div class="highlight"><pre><span></span><span class="p">{</span>
+<span class="w">    </span><span class="nt">&quot;name&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;chloroscan&quot;</span><span class="p">,</span>
+<span class="w">    </span><span class="nt">&quot;version&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;0.1.1&quot;</span><span class="p">,</span>
+<span class="w">    </span><span class="nt">&quot;snakefile&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;~/chloroscan/workflow/Snakefile&quot;</span><span class="p">,</span>
+<span class="w">    </span><span class="nt">&quot;conda_prefix_dir&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;~/chloroscan/.conda&quot;</span><span class="p">,</span>
+<span class="w">    </span><span class="nt">&quot;singularity_prefix_dir&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;~/chloroscan/.singularity&quot;</span><span class="p">,</span>
+<span class="w">    </span><span class="nt">&quot;workflow_dir_path&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;~/chloroscan&quot;</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+</section>
+<section id="profile">
+<h2>profile<a class="headerlink" href="#profile" title="Permalink to this heading"></a></h2>
+<p>The profile subcommand provides several commands to manage the workflow profiles. Profiles are used to define different configurations for the workflow e.g. you can configure how the workflow will run on a HPC. You can read more about profiles in the Snakemake documentation.</p>
+<section id="profile-list">
+<h3>profile list<a class="headerlink" href="#profile-list" title="Permalink to this heading"></a></h3>
+<p>List the profiles in the workflow.</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>chloroscan<span class="w"> </span>profile<span class="w"> </span>list
+</pre></div>
+</div>
+</section>
+<section id="profile-show">
+<h3>profile show<a class="headerlink" href="#profile-show" title="Permalink to this heading"></a></h3>
+<p>The show command will display the contents of a profile.</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>chloroscan<span class="w"> </span>profile<span class="w"> </span>show<span class="w"> </span>slurm
+</pre></div>
+</div>
+<p>You can save the profiles by piping the output to a file.</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>chloroscan<span class="w"> </span>profile<span class="w"> </span>show<span class="w"> </span>slurm<span class="w"> </span>&gt;<span class="w"> </span>profile/config.yaml
+</pre></div>
+</div>
+</section>
+<section id="load-a-profile">
+<h3>Load a profile<a class="headerlink" href="#load-a-profile" title="Permalink to this heading"></a></h3>
+<p>You can load a profile by using the <code class="docutils literal notranslate"><span class="pre">--profile</span></code> option in the run command.</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>chloroscan<span class="w"> </span>run<span class="w"> </span>--profile<span class="w"> </span>profile/config.yaml
+</pre></div>
+</div>
+</section>
+<section id="profile-edit">
+<h3>profile edit<a class="headerlink" href="#profile-edit" title="Permalink to this heading"></a></h3>
+<p>The edit command will open the profile in the default editor. Changes saved will modify the default profile settings for the installation.</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>chloroscan<span class="w"> </span>profile<span class="w"> </span>edit<span class="w"> </span>slurm
+</pre></div>
+</div>
+</section>
+</section>
+<section id="script">
+<h2>script<a class="headerlink" href="#script" title="Permalink to this heading"></a></h2>
+<p>The script commands allow you to interact with the scripts that come with ChloroScan.</p>
+<section id="script-list">
+<h3>script list<a class="headerlink" href="#script-list" title="Permalink to this heading"></a></h3>
+<p>The list command will list all scripts in the workflow.</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>chloroscan<span class="w"> </span>script<span class="w"> </span>list
+</pre></div>
+</div>
+</section>
+<section id="script-show">
+<h3>script show<a class="headerlink" href="#script-show" title="Permalink to this heading"></a></h3>
+<p>The show command will display the contents of a script.</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>chloroscan<span class="w"> </span>script<span class="w"> </span>show<span class="w"> </span>hello.py
+</pre></div>
+</div>
+</section>
+<section id="script-run">
+<h3>script run<a class="headerlink" href="#script-run" title="Permalink to this heading"></a></h3>
+<p>The run command will run a script. Use the <code class="docutils literal notranslate"><span class="pre">--env</span></code> option to specify the environment to run the script in.</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>chloroscan<span class="w"> </span>script<span class="w"> </span>run<span class="w"> </span>--env<span class="w"> </span>summary<span class="w"> </span>merge_contig_depth.py<span class="w"> </span>--help
+</pre></div>
+</div>
+</section>
+</section>
+<section id="github">
+<h2>github<a class="headerlink" href="#github" title="Permalink to this heading"></a></h2>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>chloroscan<span class="w"> </span>github
+</pre></div>
+</div>
+<p>Launches the ChloroScan GitHub page at <a class="reference external" href="https://github.com/andyargueasae/chloroscan">https://github.com/andyargueasae/chloroscan</a></p>
+</section>
+<section id="docs">
+<h2>docs<a class="headerlink" href="#docs" title="Permalink to this heading"></a></h2>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>chloroscan<span class="w"> </span>docs
+</pre></div>
+</div>
+<p>Launches the ChloroScan GitHub page at <a class="reference external" href="https://andyargueasae.github.io/chloroscan/">https://andyargueasae.github.io/chloroscan/</a></p>
+</section>
+</section>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="beginner_tutorial.html" class="btn btn-neutral float-left" title="Beginner’s tutorial" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="credits.html" class="btn btn-neutral float-right" title="Credits" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2024–2025, Yuhao Tong.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>
