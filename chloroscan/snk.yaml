@@ -106,7 +106,7 @@ cli:
       type: Float
       help: "P-value threshold for CORGI to determine if the contigs category is authentically plastidial or something else."
       required: False
-      default: 0.90
+      default: 0.50
   cat:
     database:
         type: Path
