@@ -2,10 +2,10 @@ channels:
   - conda-forge
 dependencies:
   - coreutils
-  - python=3.9
+  - python=3.11
   - pip
   - pip:
-    - bio-corgi>=0.4.0
-    - scipy==1.10
+    - bio-corgi==0.4.1
+    - pandas
   - click
   
