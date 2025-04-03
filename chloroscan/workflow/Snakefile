@@ -12,8 +12,6 @@ Before you run this snakemake workflow, please ensure that:
 import os
 import sys
 import yaml
-import urllib.request
-from snakemake.utils import min_version
 import logging
 from pathlib import Path
 
@@ -51,8 +49,6 @@ TAXA = os.path.join(CAT_TAXON_DIR, "names.dmp")
 
 GLOBAL_PREFIX="OUT"
 GLOBAL_PREFIX_contigs="out.CAT"
-# GLOBAL_PREFIX_contigs="out.CAT.{}".format(BATCH_NAME)
-# create the output directory.
 OUTPUT_DIR.mkdir(parents=True, exist_ok=True)
 
 # create temporary directory.
@@ -60,13 +56,11 @@ TMP_DIR = config['tmpdir']
 if not os.path.isabs(TMP_DIR):
     TMP_DIR = OUTPUT_DIR/TMP_DIR
 
-TMP_DIR.mkdir(parents=True, exist_ok=True) # what if we do want to prepare data and put it here?
+TMP_DIR.mkdir(parents=True, exist_ok=True) # what if we do want to prepare data and put it here? 
 
-# Krona environment name.
-# Now rules are introduced. They are placed into the single snakefile in order to increase efficiency for debugging.
-# Major output: MMA.done, branching summary results: cross_ref.xlsx and CAT_taxonomy_annotation.tsv. 
+# ANVIO_PREPARE=config['anvio']['prepare']
+# ANVIO_READS=config['anvio']['reads']
 
-# Add the essential parameters to a file that users could check.
 CONFIG_RECORD=os.path.join(OUTPUT_DIR, "arguments.txt")
 with open(CONFIG_RECORD, "w") as cr:
     cr.write("assembly path: {}\n".format(assembly_path))
@@ -89,10 +83,6 @@ with open(CONFIG_RECORD, "w") as cr:
 
 rule all:
     input:
-        OUTPUT_DIR/"working/binny",
-        OUTPUT_DIR/"working/summary/cross_ref.tsv",
-        OUTPUT_DIR/"working/visualizations",
-        OUTPUT_DIR/"Krona.html",
         OUTPUT_DIR/"ChloroScan.done"
 
 # The most important two rules are: corgi and binny.
@@ -305,7 +295,8 @@ rule documenting_binny_results:
         ANNOT_FILE="out.CAT.contig2classification.txt",
         script_dir = SCR_DIR
     output:
-        OUTPUT_DIR/"working/summary/cross_ref.tsv"
+        OUTPUT_DIR/"working/summary/cross_ref.tsv",
+        OUTPUT_DIR/"working/summary/contig_collections.tsv"
     benchmark:
         OUTPUT_DIR/"logging_info/summarize_binny.tsv"
     conda:
@@ -360,8 +351,7 @@ rule cds_extraction:
         script_dir = SCR_DIR,
         path_fraggenescanrs = OUTPUT_DIR/"working/FragGeneScanRs",
     output:
-        CDS_EXTRACTION=directory(OUTPUT_DIR/"working/cds-extraction"),
-        END_FLAG=OUTPUT_DIR/"ChloroScan.done"
+        CDS_EXTRACTION=directory(OUTPUT_DIR/"working/cds-extraction")
     conda:
         "envs/gffread.yml"
     message:
@@ -399,4 +389,68 @@ rule krona_taxonomy_plot:
         python {params.script_dir}/create_taxonomy_profile.py --cat_prediction_txt {input}/{params.file_to_remodel} --output {input}/{params.file_after_remodel}
         sed 1d {input}/{params.file_after_remodel} > {input}/{params.intake_krona}
         ktImportTaxonomy -m 1 -o {output} {input}/{params.intake_krona}
+        """
+
+# if ANVIO_PREPARE:
+#     rule reads_remapping:
+#         input:
+#             assembly = rules.corgi_prediction.output.plastid_contigs,
+#             reads = ANVIO_READS # Directory of reads.
+#         conda:
+#             "envs/prep_anvio.yml"
+#         output:
+#             directory(OUTPUT_DIR/"working/anvio_prepare")
+#         message:
+#             "Remap the reads to filtered assemblies and generate bam files for anvio outputs."
+#         shell:
+#         """
+#         mkdir -p {output}
+#         minimap2 -d {output}/assembly.mmi {input.assembly}
+
+#         # only map paired-end reads.
+#         for f in {input.reads}/*_1.fastq.gz; do
+#             basename=$(basename "$f" _1.fastq.gz)
+#             reads2="{input.reads}/${basename}_2.fastq.gz"
+#             output_sam="{output}/${basename}.sam"
+#             output_bam="{output}/${basename}.bam"
+#             output_sorted_bam="{output}/${basename}.sorted.bam"
+#             minimap2 -ax sr {output}/assembly.mmi $f $reads2 > $output_sam
+#             samtools view -bS $output_sam > $output_bam
+#             samtools sort $output_bam -o $output_sorted_bam --threads 16
+#             rm $output_sam
+#             rm $output_bam
+#         done
+#         """
+
+rule check_done:
+    input:
+        OUTPUT_DIR/"working/visualizations",
+        OUTPUT_DIR/"working/refined_bins",
+        OUTPUT_DIR/"working/binny",
+        OUTPUT_DIR/"working/CAT",
+        OUTPUT_DIR/"working/cds-extraction",
+        OUTPUT_DIR/"working/summary/cross_ref.tsv",
+        rules.refine_bins.output.refine_dir,
+        OUTPUT_DIR/"Krona.html",
+        # anvio_flag = ANVIO_PREPARE
+    log:
+        OUTPUT_DIR/"logging_info/check_done.log"
+    output:
+        OUTPUT_DIR/"ChloroScan.done"
+    shell:
+        """
+        # check if all files are present, if yes, then touch the done file.
+        flag=0
+        for f in {input}:
+            if [ ! -s $f ]; then
+                flag=1
+                break
+            fi
+        done
+
+        echo "Flag is $flag" >> {log}
+
+        if [ $flag -eq 0 ]; then
+            touch {output}
+        fi
         """

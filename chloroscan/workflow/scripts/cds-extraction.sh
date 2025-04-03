@@ -10,7 +10,7 @@ BATCH_NAME=${snakemake_params[batch_name]}
 FGSR_OUTPUT=${snakemake_params[path_fraggenescanrs]}
 
 CDS_OUTPUT=${snakemake_output[CDS_EXTRACTION]}
-END_FLAG=${snakemake_output[END_FLAG]}
+
 mkdir -p $FGSR_OUTPUT/$FILE_FLAG
 
 # iterate over each bin recovered by binny.
@@ -39,8 +39,6 @@ do
     rm $BINNY_DIR/*.fai
 
 done
-
 # So basically, every script uses a for loop to do batch jobs for each of the files.
 ## As this rule is the last rule of the workflow, touch one final file within output.
 # We can't just let the flag file come out, we must need to test whether there are files in cds here!
-touch $END_FLAG

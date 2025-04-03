@@ -125,4 +125,3 @@ cli:
     help: "Path to the Krona environment."
     required: False
     default: "kronatools"
-  

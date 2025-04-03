@@ -79,3 +79,16 @@ CORGI is responsible for contig filtering to extract chloroplast contigs. The de
 
    Currently the pip version of chloroscan recommends to use a snakemake virtual environment with snakemake=6.15.5 installed for binny's module to use. 
    Otherwise the binny module might fail while running.   
+
+5. Cooperate with Anvi'o to make sense of your database
+-------------------------------------------------------
+
+Anvi'o is a powerful tool for visualizing and analyzing metagenomic data. After running ChloroScan, you can use Anvi'o to visualize the results and gain insights into your data.
+Potentially it can help you to refine the plastid MAGs. 
+
+The inputs required for Anvi'o are:
+- ``reformatted fasta-format assembly``: Filtered contigs from contig classification module, anvi-script-reformat-fasta can take the assembly and output this file.
+- ``bam files``: sorted.bam files that contains all contigs in the filtered assembly. Original bam files will fail anvi'o's workflow, so users can use bowtie2/minimap2 to map their raw reads back to the assembly and generate the bam files.
+- ``binning collection (tsv)``: The binning mapping file, with the first column being the contig id and the seconda column being the bin id.
+
+After doing these, you can put these data to anvi'o for further analysis. 

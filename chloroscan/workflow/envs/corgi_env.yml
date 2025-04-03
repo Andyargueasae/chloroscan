@@ -7,5 +7,6 @@ dependencies:
   - pip:
     - bio-corgi==0.4.1
     - pandas
+    - fastai==2.7.12
   - click
   

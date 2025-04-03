@@ -1,0 +1,7 @@
+channels:
+  - defaults
+  - conda-forge
+  - bioconda
+dependencies:
+  - minimap2
+  - samtools
