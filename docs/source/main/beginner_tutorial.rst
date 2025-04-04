@@ -87,8 +87,11 @@ Anvi'o is a powerful tool for visualizing and analyzing metagenomic data. After 
 Potentially it can help you to refine the plastid MAGs. 
 
 The inputs required for Anvi'o are:
+
 - ``reformatted fasta-format assembly``: Filtered contigs from contig classification module, anvi-script-reformat-fasta can take the assembly and output this file.
-- ``bam files``: sorted.bam files that contains all contigs in the filtered assembly. Original bam files will fail anvi'o's workflow, so users can use bowtie2/minimap2 to map their raw reads back to the assembly and generate the bam files.
+
+- ``bam files``: sorted.bam files that contains all contigs in the filtered assembly. Original bam files will fail anvi'o's workflow, so users can use bowtie2/minimap2 to map their raw reads back to the filtered assembly and generate the bam files.
+
 - ``binning collection (tsv)``: The binning mapping file, with the first column being the contig id and the seconda column being the bin id.
 
 After doing these, you can put these data to anvi'o for further analysis. 
