@@ -440,7 +440,7 @@ rule check_done:
         """
         # check if all files are present, if yes, then touch the done file.
         flag=0
-        for f in {input}:
+        for f in {input}; do
             if [ ! -s $f ]; then
                 flag=1
                 break
