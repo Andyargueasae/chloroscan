@@ -296,7 +296,6 @@ rule documenting_binny_results:
         script_dir = SCR_DIR
     output:
         OUTPUT_DIR/"working/summary/cross_ref.tsv",
-        OUTPUT_DIR/"working/summary/contig_collections.tsv"
     benchmark:
         OUTPUT_DIR/"logging_info/summarize_binny.tsv"
     conda:
