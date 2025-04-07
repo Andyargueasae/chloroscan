@@ -39,6 +39,36 @@ jobs:
       run: |
         poetry env use "${{ matrix.python-version }}"
         poetry install
+    - name: Install FragGeneScanRs
+      run: |
+        if command -v cargo &> /dev/null
+        then
+          echo "Cargo is already installed."
+        else
+          echo "Cargo is not installed."
+          # The program assumes that the user has the curl installed.
+          curl --proto '=https' --tlsv1.2 -sSf https://sh.rustup.rs | sh
+          source $HOME/.cargo/env
+        fi
+
+        cargo install frag_gene_scan_rs
+
+        CARGO_BIN_DIR="$HOME/.cargo/bin"
+
+        if [[ ":$PATH:" != *":$CARGO_BIN_DIR:"* ]]; then
+          echo "Adding Cargo bin directory ($CARGO_BIN_DIR) to PATH."
+          export PATH=$CARGO_BIN_DIR:$PATH
+    
+          # Persist this PATH update in .bashrc
+          if ! grep -q "$CARGO_BIN_DIR" ~/.bashrc; then
+            echo "export PATH=$CARGO_BIN_DIR:\$PATH" >> ~/.bashrc
+            source ~/.bashrc
+            echo "Added Cargo bin directory to PATH in ~/.bashrc."
+          fi
+        fi
+
+        echo "FragGeneScanRs has been installed and added to the PATH."
+        # Add fraggenescans to the PATH.
     - name: Testing
       run: |
         export CHLOROSCAN_CONDA_PREFIX=/home/runner/mamba-cache/chloroscan
