@@ -36,6 +36,7 @@ install_fraggenescans() {
         # Persist this PATH update in .bashrc
         if ! grep -q "$CARGO_BIN_DIR" ~/.bashrc; then
             echo "export PATH=$CARGO_BIN_DIR:\$PATH" >> ~/.bashrc
+            source ~/.bashrc
             echo "Added Cargo bin directory to PATH in ~/.bashrc."
         fi
     fi
