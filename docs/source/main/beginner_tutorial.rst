@@ -64,9 +64,13 @@ CORGI is responsible for contig filtering to extract chloroplast contigs. The de
 3. Homology-based taxonomy prediction by CAT
 --------------------------------------------
 
-- ``CAT-database``: The database used for taxonomy prediction by CAT/BAT, ensure this is an absolute path.
+- ``CAT-database``: The CAT-prepared database used for taxonomy prediction by CAT/BAT, ensure this is an absolute path. E.g.: ~/path/to/nrDB/db
 
-- ``CAT-taxonomy``: The taxonomy dump file for CAT to use. Ensure this path is an absolute path.
+- ``CAT-taxonomy``: The taxonomy dump file that CAT uses. Ensure this path is an absolute path. E.g.: ~/path/to/nrDB/tax
+
+.. Note::
+
+   We prepared a CAT-database for users called "UniRef90_AlgaProt" for users to predict plastid contigs, it is free for download with url:  
 
 4. Other settings
 -----------------

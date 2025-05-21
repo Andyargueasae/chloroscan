@@ -110,7 +110,7 @@ for i in list_of_seqrec.keys():
                 contig_ids.remove(elem_id)
                 to_be_modified_id.append(elem_id)
                 with open(output_summary_info, "a") as si:
-                    si.write(f"MAG {i.split('/')[-1]} has an unclassified contig: {elem_id}.")
+                    si.write(f"MAG {i.split('/')[-1]} has an unclassified contig: {elem_id}.\n")
 
             else:
                 continue
