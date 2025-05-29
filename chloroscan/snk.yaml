@@ -80,18 +80,18 @@ cli:
           type: Float
           help: "Minimum completeness for bin quality."
           required: False
-          default: 72.5
+          default: 50.0
       purity:
           type: Float
           help: "Purity for bin quality."
           required: False
-          default: 95
+          default: 90.0
   corgi:
     min_length:
         type: Integer
         help: "Minimum length of contigs to be processed by CORGI."
         required: False
-        default: 500
+        default: 1000
     save_filter:
         type: Boolean
         help: "Save the filtered contigs by CORGI (Note: may take long time)."
