@@ -10,59 +10,30 @@ jobs:
     runs-on: ubuntu-latest
     strategy:
       matrix:
-        python-version: ['3.11']  # Specify the Python version(s) explicitly
+        python-version: ['3.11']
+
     steps:
-      #----------------------------------------------
-      # Checkout the repository
-      #----------------------------------------------
       - name: Check out repository
         uses: actions/checkout@v3
 
-      #----------------------------------------------
-      # Set up Python
-      #----------------------------------------------
       - name: Set up Python
         uses: actions/setup-python@v5
         with:
           python-version: '3.11.12'
-          cache: false  # Enable setup-python's poetry cache (optional)
+          cache: 'poetry'
 
-      #----------------------------------------------
-      # Install Poetry
-      #----------------------------------------------
       - name: Install Poetry
         uses: snok/install-poetry@v1
         with:
           virtualenvs-create: true
           virtualenvs-in-project: true
 
-      #----------------------------------------------
-      # Cache virtual environment
-      #----------------------------------------------
-      - name: Cache virtual environment
-        uses: actions/cache@v3
-        with:
-          path: .venv
-          key: venv-${{ runner.os }}-py${{ matrix.python-version }}-${{ hashFiles('**/poetry.lock') }}
-          restore-keys: |
-            venv-${{ runner.os }}-py${{ matrix.python-version }}-
-            venv-${{ runner.os }}-
-
-      #----------------------------------------------
-      # Install dependencies (if not cached)
-      #----------------------------------------------
       - name: Install dependencies
         run: poetry install --no-interaction --no-root
 
-      #----------------------------------------------
-      # Build the package
-      #----------------------------------------------
       - name: Build library
         run: poetry build
 
-      #----------------------------------------------
-      # Publish to PyPI
-      #----------------------------------------------
       - name: Publish library
         env:
           PYPI_TOKEN: ${{ secrets.PYPI_TOKEN }}
