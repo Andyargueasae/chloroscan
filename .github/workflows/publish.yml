@@ -22,10 +22,10 @@ jobs:
       # Set up Python
       #----------------------------------------------
       - name: Set up Python
-        uses: actions/setup-python@v3
+        uses: actions/setup-python@v5
         with:
-          python-version: ${{ matrix.python-version }}
-          cache: 'poetry'  # Enable setup-python's poetry cache (optional)
+          python-version: '3.11.12'
+          cache: false  # Enable setup-python's poetry cache (optional)
 
       #----------------------------------------------
       # Install Poetry
