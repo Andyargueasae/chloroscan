@@ -1,52 +1,68 @@
 name: publish
+
 on:
   push:
     tags:
       - 'v*.*.*'
+
 jobs:
   build:
     runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        python-version: ['3.11']  # Specify the Python version(s) explicitly
     steps:
       #----------------------------------------------
-      #       check-out repo and set-up python
+      # Checkout the repository
       #----------------------------------------------
       - name: Check out repository
         uses: actions/checkout@v3
-      - name: Set up python ${{ matrix.python-version }}
+
+      #----------------------------------------------
+      # Set up Python
+      #----------------------------------------------
+      - name: Set up Python
         uses: actions/setup-python@v3
         with:
           python-version: ${{ matrix.python-version }}
-          cache: false
+          cache: 'poetry'  # Enable setup-python's poetry cache (optional)
+
       #----------------------------------------------
-      #  -----  install & configure poetry  -----
+      # Install Poetry
       #----------------------------------------------
       - name: Install Poetry
         uses: snok/install-poetry@v1
         with:
           virtualenvs-create: true
           virtualenvs-in-project: true
+
       #----------------------------------------------
-      #       load cached venv if cache exists
+      # Cache virtual environment
       #----------------------------------------------
-      - name: Load cached venv
-        id: cached-poetry-dependencies
+      - name: Cache virtual environment
         uses: actions/cache@v3
         with:
           path: .venv
-          key: venv-${{ runner.os }}-${{ hashFiles('**/poetry.lock') }}
+          key: venv-${{ runner.os }}-py${{ matrix.python-version }}-${{ hashFiles('**/poetry.lock') }}
+          restore-keys: |
+            venv-${{ runner.os }}-py${{ matrix.python-version }}-
+            venv-${{ runner.os }}-
+
       #----------------------------------------------
-      # install dependencies if cache does not exist
+      # Install dependencies (if not cached)
       #----------------------------------------------
       - name: Install dependencies
-        if: steps.cached-poetry-dependencies.outputs.cache-hit != 'true'
         run: poetry install --no-interaction --no-root
+
       #----------------------------------------------
-      # install your root project, if required
+      # Build the package
       #----------------------------------------------
-      - name: Install library
-        run: poetry install --no-interaction
       - name: Build library
         run: poetry build
+
+      #----------------------------------------------
+      # Publish to PyPI
+      #----------------------------------------------
       - name: Publish library
         env:
           PYPI_TOKEN: ${{ secrets.PYPI_TOKEN }}
