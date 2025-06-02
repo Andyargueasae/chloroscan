@@ -189,7 +189,13 @@ slurm-*
 SAMEA*
 Mock*
 SRR*
+chloroscan/.conda/*
 chloroscan/.conda
+chloroscan/.snakemake/*
+chloroscan/.snakemake
 chloroscan_output*
 protist*
 PRJNA*
+.snakemake
+
+MergeDepthTMPDIR/
