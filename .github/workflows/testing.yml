@@ -1,7 +1,7 @@
-# Based on https://github.com/actions/starter-workflows/blob/main/ci/python-package.yml
 name: testing
 
 on: [push]
+
 jobs:
   build:
     runs-on: ubuntu-latest
@@ -9,11 +9,12 @@ jobs:
       fail-fast: false
       matrix:
         python-version: ["3.11"]
-        # python-version: [3.7, 3.8, 3.9]
     steps:
     - uses: actions/checkout@v4
+
     - name: Install poetry
       run: pipx install poetry
+
     - name: Cache
       id: cache
       uses: actions/cache@v3
@@ -21,33 +22,36 @@ jobs:
         key: ${{ runner.os }}-${{ matrix.python-version }}-mamba
         path: |
           /home/runner/mamba-cache
+
     - name: Install Mamba
       run: |
-          if [ ! -f /home/runner/mamba-cache/mamba/etc/profile.d/conda.sh ] ; then
-            wget "https://github.com/conda-forge/miniforge/releases/latest/download/Miniforge3-$(uname)-$(uname -m).sh"
-            bash Miniforge3-$(uname)-$(uname -m).sh -b -p "/home/runner/mamba-cache/mamba"
-          fi
-          source "/home/runner/mamba-cache/mamba/etc/profile.d/conda.sh"
-          mamba --version
-          which mamba
+        if [ ! -f /home/runner/mamba-cache/mamba/etc/profile.d/conda.sh ]; then
+          wget "https://github.com/conda-forge/miniforge/releases/latest/download/Miniforge3-$(uname)-$(uname -m).sh"
+          bash Miniforge3-$(uname)-$(uname -m).sh -b -p "/home/runner/mamba-cache/mamba"
+        fi
+        source "/home/runner/mamba-cache/mamba/etc/profile.d/conda.sh"
+        conda install -y -c conda-forge mamba=1
+        mamba --version
+        which mamba
+
     - name: Install dependencies for Python ${{ matrix.python-version }}
       uses: actions/setup-python@v5
       with:
         python-version: ${{ matrix.python-version }}
         cache: 'poetry'
+
     - name: Installation
       run: |
         poetry env use "${{ matrix.python-version }}"
         poetry install
+
     - name: Install FragGeneScanRs
       run: |
-        if command -v cargo &> /dev/null
-        then
+        if command -v cargo &> /dev/null; then
           echo "Cargo is already installed."
         else
           echo "Cargo is not installed."
-          # The program assumes that the user has the curl installed.
-          curl --proto '=https' --tlsv1.2 -sSf https://sh.rustup.rs | sh
+          curl --proto '=https' --tlsv1.2 -sSf https://sh.rustup.rs | sh -s -- -y
           source $HOME/.cargo/env
         fi
 
@@ -58,8 +62,7 @@ jobs:
         if [[ ":$PATH:" != *":$CARGO_BIN_DIR:"* ]]; then
           echo "Adding Cargo bin directory ($CARGO_BIN_DIR) to PATH."
           export PATH=$CARGO_BIN_DIR:$PATH
-    
-          # Persist this PATH update in .bashrc
+
           if ! grep -q "$CARGO_BIN_DIR" ~/.bashrc; then
             echo "export PATH=$CARGO_BIN_DIR:\$PATH" >> ~/.bashrc
             source ~/.bashrc
@@ -68,7 +71,7 @@ jobs:
         fi
 
         echo "FragGeneScanRs has been installed and added to the PATH."
-        # Add fraggenescans to the PATH.
+
     - name: Testing
       run: |
         export CHLOROSCAN_CONDA_PREFIX=/home/runner/mamba-cache/chloroscan
@@ -78,6 +81,6 @@ jobs:
         conda config --add channels bioconda
         conda config --add channels defaults
         conda config --set channel_priority strict
-        
+
         df -H
         poetry run pytest -v -s -o faulthandler_timeout=60
