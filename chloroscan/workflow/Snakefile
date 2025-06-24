@@ -116,6 +116,7 @@ rule corgi_prediction:
         """
         set -e
         touch {output.plastid_contigs}
+        python -c "import torchapp.util"
         echo "new version: corgi --input {input.seqs} --output-csv {output.corgi_out} --batch-size {params.batch_size} --min-length {params.min_length}"
         corgi --file {input.seqs} --csv {output.corgi_out} --batch-size {params.batch_size} --min-length {params.min_length} --no-save-filtered 
         # &> {log}
