@@ -22,7 +22,6 @@ def form_bin_array(bin_dir, collected_bins, bin_array, contig_id_list):
     return 
 
 def form_marker_array(empty_marker_array, annot_file, contig_id):
-    # empty_marker_Array needs to be defined before.
     with open(annot_file) as af:
         annot_lines = af.readlines()
     marker_dict = {}
@@ -52,13 +51,11 @@ def form_marker_array(empty_marker_array, annot_file, contig_id):
         index = contig_id.index(key)
         empty_marker_array[index] = value
 
-    # Now the marker array is no longer empty.
     return empty_marker_array
 
 def form_depth_array(empty_depth_array, contig_id, depth_file):
     with open(depth_file) as df:
         depth_lines = df.readlines()
-    # Here we missed the point that last year I only took 500 as length cutoff, if I test using other length cutoffs < 500, problems arise.
     for i in range(len(depth_lines)):
         contig, depth = depth_lines[i].strip().split("\t",1)[0], depth_lines[i].strip().split("\t",1)[1]
         if contig in contig_id:

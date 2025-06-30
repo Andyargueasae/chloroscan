@@ -31,7 +31,6 @@ output_dir_for_refined_bins = snakemake.output[0]
 output_summary_info = snakemake.output[1]
 
 
-# Touch the output file first.
 Path(output_summary_info).touch()
 # Inputs and params.
 
@@ -131,11 +130,6 @@ for i in list_of_seqrec.keys():
     logging.info(f"MAG length after refinement: {sum(new_contig_length)}")
     logging.info("-"*50)
 
-# Do we want to update the df?
-# for id_change in to_be_modified_id:
-#     row = cross_ref_refine_df.loc[cross_ref_refine_df['contig id'] == id_change]
-#     row_index = row.index[0]
-#     cross_ref_refine_df.at[row_index, "Contig2Bin"] = ""
     
 for i in refined_contigs_dict.items():
     filename = output_dir_for_refined_bins + "/" + "refined_" + i[0].split("/")[-1]    

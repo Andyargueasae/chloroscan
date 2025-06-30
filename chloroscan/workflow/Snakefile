@@ -116,10 +116,9 @@ rule corgi_prediction:
         """
         set -e
         touch {output.plastid_contigs}
-        python -c "import torchapp.util"
+        
         echo "new version: corgi --input {input.seqs} --output-csv {output.corgi_out} --batch-size {params.batch_size} --min-length {params.min_length}"
-        corgi --file {input.seqs} --csv {output.corgi_out} --batch-size {params.batch_size} --min-length {params.min_length} --no-save-filtered 
-        # &> {log}
+        corgi --file {input.seqs} --csv {output.corgi_out} --batch-size {params.batch_size} --min-length {params.min_length} --no-save-filtered &> {log}
         ls -lh {output.corgi_out}
         
         header=1
@@ -184,7 +183,7 @@ if not DEPTH_FILE_EXISTS:
 
     rule merge_contig_depth:
         input:
-            depth_files = directory(OUTPUT_DIR/"working/call_contig_depth")
+            depth_files = OUTPUT_DIR/"working/call_contig_depth"
         output:
             OUTPUT_DIR/"working/depth_profile.txt"
         params:
@@ -286,7 +285,7 @@ rule CAT_taxonomy_identification_plus_annotation:
 rule documenting_binny_results:
     input: 
         # bins = OUTPUT_DIR/"working/binny"/BINNY_OUTPUT_DIR/"bins",
-        contig_level_annotation = directory(OUTPUT_DIR/"working/CAT")
+        contig_level_annotation = OUTPUT_DIR/"working/CAT"
     params: 
         bins = Path(OUTPUT_DIR/"working/binny/bins"),
         assembly_files = OUTPUT_DIR/"working/binny/intermediary/assembly.formatted.fa",

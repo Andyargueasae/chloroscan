@@ -9,7 +9,6 @@
 plastid_key="plastid"
 bacteria_control=0.10
 
-# #prediction="plastid"
 while getopts c:o:p: flag
 do
     case "${flag}" in
@@ -19,12 +18,6 @@ do
     esac
 done
 
-# if [ "$prediction" = "$plastid_key" ]; then
-#     echo "The prediction matches the key"
-# else
-#     echo "The prediction did not match the key"
-# fi 
-
 while IFS=, read -r file accession archaea bacteria eukaryote mitochondrion plastid prediction eukaryotic prokaryotic organellar
 do 
     if [ "$prediction" = "$plastid_key" ] && (( $(echo $plastid $pthreshold | awk '{if ($1 >= $2) print 1;}') )); then
@@ -32,8 +25,3 @@ do
     fi
 done < <(tail -n +2 $prediction_csv) > $output_path
 
-# Now we have collected plastid contigs' accession, write in fasta now!
-# So we have accession_list, can we store it into an array rather than using it as a file?
-# Then we can take the fasta file into the while loop and finally output the new fasta.
-
-# assembly path: mediaflux_BATCHES/SRP182625/assembly/merged.megahit.contigs.fa

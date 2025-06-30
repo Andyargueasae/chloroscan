@@ -199,3 +199,4 @@ PRJNA*
 .snakemake
 
 MergeDepthTMPDIR/
+conda_env/

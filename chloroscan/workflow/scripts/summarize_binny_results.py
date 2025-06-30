@@ -29,7 +29,6 @@ taxonomy_names = snakemake.params['names_dump']
 MMA_SUMMARY=snakemake.params['MMA_summary']
 contig_level_annotation = os.path.join(snakemake.input['contig_level_annotation'], snakemake.params['ANNOT_FILE'])
 
-# Here we want to know if the results from binny are empty.
 if ((not Path(contig_level_annotation).exists() or os.stat(contig_level_annotation).st_size == 0) 
     and (not Path(assemblyfasta).exists()) 
     and (not Path(assemblydepth).exists()) 
@@ -39,7 +38,6 @@ if ((not Path(contig_level_annotation).exists() or os.stat(contig_level_annotati
     Path(snakemake.output[0]).write_text("")
     sys.exit(0)
 
-# Meanwhile, if all those files are not there, we should simply go out.
 
 dataset_bin_df = pd.DataFrame()
 assembly_fasta_contigs = list(SeqIO.parse(assemblyfasta, "fasta"))
@@ -72,8 +70,6 @@ dataset_bin_df[CONTIG_TAXON] = taxon_array
 dataset_bin_df[CONTIG_marker] = marker_per_contig
 dataset_bin_df[CONTIG_BIN] = bin_array
 dataset_bin_df[CONTIG_SEQ] = contig_seq
-
-# dataset_bin_df.to_csv(snakemake.output[0])
 
 dataset_bin_df.to_csv(snakemake.output[0], sep="\t")
 

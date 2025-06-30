@@ -20,8 +20,6 @@ figure_output_dir = Path(snakemake.output[0])
 batch_name = snakemake.params[0]
 refine_bins_dir = snakemake.params['refine_bins_dir']
 
-# In order to avoid confusions, split batch name by "/".
-# Because we want to have a valid single dirname.
 batch_name = batch_name.split("/")[-1]
 
 figure_output_dir.mkdir(parents=True, exist_ok=True)
@@ -29,7 +27,6 @@ figure_output_dir.mkdir(parents=True, exist_ok=True)
 time_stamp_file = ".snakemake_timestamp"
 
 refine_bins_list = [i for i in listdir(refine_bins_dir) if i != time_stamp_file]
-# Safety check if there were nothing.
 if (os.stat(cross_reference_tsv).st_size == 0):
     print("Empty cross reference tsv, then nothing will be visualized.")
     sys.exit(0)
@@ -51,9 +48,6 @@ assembly_depth_array = np.array(summary_dataframe['contig depth'])
 assembly_bin_array = list(summary_dataframe['Contig2Bin'])
 contig_taxon = summary_dataframe['Taxon per Contig']
 contig_2_bin = summary_dataframe['Contig2Bin']
-
-# colors = ['black', 'red', 'green', 'blue', 'brown','cyan','grey','goldenrod','lime','violet','indigo','coral','olive','azure', 'light pink', 'dark blue']
-# color_iter = iter(colors)
 
 # output the violin plot.
 summary_dataframe['batch depth per contig']=compute_batch_depth(assembly_depth_array)
@@ -115,7 +109,6 @@ bins_quality_dict['Bin Completeness'] = []
 bins_quality_dict['Bin Purity'] = []
 bin_xticks = []
 
-# Need to consider scMAG problem: we need a cool shit to process their name. 
 for i in bins:
     bin_base_names = i.split("_")
     prefix = "bin"
