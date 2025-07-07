@@ -69,7 +69,7 @@ cli:
           type: string
           help: "Range of min_samples values for HDBSCAN clustering, larger value means larger MAGs."
           required: False
-          default: "1,4,7,10"
+          default: "1,5,10"
     bin_quality:
       starting_completeness:
           type: Float
