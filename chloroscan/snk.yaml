@@ -38,6 +38,11 @@ cli:
       short: t
       default: "tmp"
   binning:
+    database:
+        type: Path
+        help: "Path to the database of marker genes for binning."
+        required: False
+        default: None
     universal_length_cutoff:
         type: Integer
         help: "Length cutoff for universal binning."

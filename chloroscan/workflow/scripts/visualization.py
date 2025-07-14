@@ -1,18 +1,15 @@
 import pandas as pd
 import numpy as np
 import matplotlib.pyplot as plt
-from matplotlib.collections import PathCollection
-import matplotlib
-import math
 import os
 from os import listdir
-import statistics
 import seaborn as sns
 from pathlib import Path
 import sys
 from visualization_utils import *
 from plotnine import ggplot, geom_point, aes, stat_smooth, facet_wrap, geom_boxplot, geom_bar, coord_flip, geom_violin
 import plotnine as gg
+import re
 
 
 cross_reference_tsv = snakemake.input[0]
@@ -100,60 +97,63 @@ Scatter_GC_log_depth=(
 
 Scatter_GC_log_depth.savefig(f"{figure_output_dir}/Scatter_GCLogDepth.png", dpi=300)
 
-# The second plot is the bar chart of the completeness and purity.
-bins = [i for i in list(set(binned_contigs_per_batch['Contig2Bin']))]
-# works at the x-label.
-bins_quality_dict = dict()
-# works as the legend.
-bins_quality_dict['Bin Completeness'] = []
-bins_quality_dict['Bin Purity'] = []
-bin_xticks = []
+# # The second plot is the bar chart of the completeness and purity.
+# bins = [i for i in list(set(binned_contigs_per_batch['Contig2Bin']))]
+# # works at the x-label.
+# bins_quality_dict = dict()
+# # works as the legend.
+# bins_quality_dict['Bin Completeness'] = []
+# bins_quality_dict['Bin Purity'] = []
+# bin_xticks = []
 
-for i in bins:
-    bin_base_names = i.split("_")
-    prefix = "bin"
-    for j in range(len(bin_base_names)):
-        if "C" in bin_base_names[j]:
-            try: 
-                individual_comp = int(bin_base_names[j].replace("C", ""))
-                bins_quality_dict['Bin Completeness'].append(individual_comp)
-                identifier = bin_base_names[j-1]
-            except ValueError:
-                continue
-        if "P" in bin_base_names[j]:
-            individual_pur = int(bin_base_names[j].replace("P", ""))
-            bins_quality_dict['Bin Purity'].append(individual_pur)
-        else:
-            continue
-    bin_name = prefix + "." + f"{identifier}_C{individual_comp}_P{individual_pur}"
-    bin_xticks.append(bin_name)
+# completeness_pattern = re.compile(r'C(\d+)')
+# purity_pattern = re.compile(r'P(\d+)')
 
-width = 0.2
-x=np.arange(len(bins))
-multiplier=0
+# for i in bins:
+#     bin_base_names = i.split("_")
+#     prefix = "bin"
+#     for j in range(len(bin_base_names)):
+#         if "C" in bin_base_names[j]:
+#             try: 
+#                 individual_comp = int(bin_base_names[j].replace("C", ""))
+#                 bins_quality_dict['Bin Completeness'].append(individual_comp)
+#                 identifier = bin_base_names[j-1]
+#             except ValueError:
+#                 continue
+#         if "P" in bin_base_names[j]:
+#             individual_pur = int(bin_base_names[j].replace("P", ""))
+#             bins_quality_dict['Bin Purity'].append(individual_pur)
+#         else:
+#             continue
+#     bin_name = prefix + "." + f"{identifier}_C{individual_comp}_P{individual_pur}"
+#     bin_xticks.append(bin_name)
 
-for attribute, measurement in bins_quality_dict.items():
-    # Add scatterplot of completeness against purity.
+# width = 0.2
+# x=np.arange(len(bins))
+# multiplier=0
 
-    offset = width * multiplier
-    bin_record = axsc[1].bar(x+offset, measurement, width, label=attribute)
-    axsc[1].bar_label(bin_record, padding=3)
-    multiplier += 1
+# for attribute, measurement in bins_quality_dict.items():
+#     # Add scatterplot of completeness against purity.
 
-# Add grid to axsc[0].
-axsc[0].grid(True)
-axsc[0].scatter(bins_quality_dict["Bin Completeness"], bins_quality_dict["Bin Purity"], color="red", s=120)
-axsc[0].set_title("Bin Purity vs Completeness")
-axsc[0].set_xlabel("Bin Completeness (%)")
-axsc[0].set_ylabel("Bin Purity (%)")
+#     offset = width * multiplier
+#     bin_record = axsc[1].bar(x+offset, measurement, width, label=attribute)
+#     axsc[1].bar_label(bin_record, padding=3)
+#     multiplier += 1
 
-axsc[1].set_ylabel("percentage")
-axsc[1].set_xlabel("bin name")
-axsc[1].set_xticks(x + width, bin_xticks, rotation=30)
-axsc[1].legend(loc='lower left', ncols=len(bins))
-axsc[1].set_ylim(50, 100)
+# # Add grid to axsc[0].
+# axsc[0].grid(True)
+# axsc[0].scatter(bins_quality_dict["Bin Completeness"], bins_quality_dict["Bin Purity"], color="red", s=120)
+# axsc[0].set_title("Bin Purity vs Completeness")
+# axsc[0].set_xlabel("Bin Completeness (%)")
+# axsc[0].set_ylabel("Bin Purity (%)")
 
-plt.savefig("{}/{}_bins_scatter_bar_chart.png".format(figure_output_dir, batch_name), dpi="figure")
+# axsc[1].set_ylabel("percentage")
+# axsc[1].set_xlabel("bin name")
+# axsc[1].set_xticks(x + width, bin_xticks, rotation=30)
+# axsc[1].legend(loc='lower left', ncols=len(bins))
+# axsc[1].set_ylim(50, 100)
+
+# plt.savefig("{}/{}_bins_scatter_bar_chart.png".format(figure_output_dir, batch_name), dpi="figure")
 
 #3. taxonomy pie chart.
 bin_set = set(contig_2_bin)
