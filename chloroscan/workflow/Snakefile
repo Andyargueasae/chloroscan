@@ -202,7 +202,7 @@ rule binny_workflow:
         
     params:
         bash_create_yaml = Path(SCR_DIR/"create_yaml.sh"),
-        binny_database = config['binning']['database'], # Path to the database of marker genes for binning.
+        # binny_database = config['binning']['database'], # Path to the database of marker genes for binning.
         universal_length_cutoff = config['binning']['universal_length_cutoff'],
         hdbscan_epsilon_range = config['binning']['clustering']['epsilon_range'],
         hdbscan_min_samples_range = config['binning']['clustering']['hdbscan_min_sample_range'],
@@ -228,7 +228,7 @@ rule binny_workflow:
         # If so, then run binny workflow.
         if [ -s {input.plastid_contigs} ]; then
             [ -n $BINNY_DIR/config/config.default.yaml ] && echo "default config file for binny found."
-            bash {params.bash_create_yaml} -a "{input.plastid_contigs}" -b {params.binny_database} -d "$BINNY_DIR/config/config.default.yaml" -t "{input.depth_text}" -o "{params.outputdir_within_binny}"\
+            bash {params.bash_create_yaml} -a "{input.plastid_contigs}" -b $BINNY_DIR/A2K_database -d "$BINNY_DIR/config/config.default.yaml" -t "{input.depth_text}" -o "{params.outputdir_within_binny}"\
                 -e '{params.hdbscan_epsilon_range}' -m '{params.hdbscan_min_samples_range}' -n {params.binny_snakemake_env} -c {params.quality_min_completeness}\
                 -s {params.quality_start_completeness} -p {params.quality_min_purity} -u {params.universal_length_cutoff}\
                 -y "$BINNY_DIR/config/config.ChloroScan.yaml"
