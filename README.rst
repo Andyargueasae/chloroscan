@@ -50,7 +50,8 @@ To avoid authentication issues, try the command below to download it:
 
     wget --referer=https://figshare.unimelb.edu.au --user-agent="Mozilla/5.0" -O "CAT_db.tar.gz" https://figshare.unimelb.edu.au/ndownloader/files/51053993
 
- - Note: The tar.gz format of CAT database's size is 47GB, and nearly 85GB after unzipped, please ensure you have enough disk storage. 
+
+``Note``: The tar.gz format of CAT database's size is 47GB, and nearly 85GB after unzipped, please ensure you have enough disk storage. 
 
 Sample data to try
 ==================
