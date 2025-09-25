@@ -46,7 +46,7 @@ To download our curated Uniref90-algae plastid protein database, use the link: h
 
 To avoid authentication issues, try the command below to download it:
 
-.. code block:: bash
+.. code-block:: bash
 
     wget --referer=https://figshare.unimelb.edu.au --user-agent="Mozilla/5.0" -O "CAT_db.tar.gz" https://figshare.unimelb.edu.au/ndownloader/files/51053993
 
@@ -56,7 +56,7 @@ Sample data to try
 ==================
 To try ChloroScan, I recommend downloading our synthetic metagenome data via the command: 
 
-.. code block:: bash
+.. code-block:: bash
 
     wget --referer=https://figshare.unimelb.edu.au --user-agent="Mozilla/5.0" -O "synthetic_sample_II.tar.gz" https://figshare.unimelb.edu.au/ndownloader/files/53499140
 
