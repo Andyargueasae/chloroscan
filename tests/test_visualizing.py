@@ -4,4 +4,4 @@ def test_visualizing(run_workflow):
     w.assert_exists()
     w.assert_exists("TEST_OUT/working/visualizations/Scatter_GCLogDepth.png")
     w.assert_exists("TEST_OUT/working/visualizations/LogDepth_Violin.png")
-    assert len([figure for figure in os.listdir("TEST_OUT/working/visualizations") if figure.endswith("_taxonomy_composition.png")]) == 1, "There should be exactly one visualization output directory"
+    w.assert_file_glob(result_directory="TEST_OUT/working/visualizations", pattern="*_taxonomy_composition.png", count=1)

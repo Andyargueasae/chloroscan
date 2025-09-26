@@ -104,8 +104,14 @@ class WorkflowResult:
                     assert line_count >= min
 
                 if max:
-                    assert line_count <= max                
+                    assert line_count <= max
 
+    def assert_file_glob(self, pattern, result_directory, count=None) -> bool:
+        generated_path = self.work_dir / result_directory
+        found_count = sum(1 for x in generated_path.glob(pattern))
+        if count:
+            assert count == found_count
+        return
 
     def assert_re(self, patterns:Union[str, List[str]], expected_files: Optional[TargetsType] = None,):
         if isinstance(patterns, str):
