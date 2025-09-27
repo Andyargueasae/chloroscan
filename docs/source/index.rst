@@ -15,8 +15,9 @@ Welcome to chloroscan's documentation!
    :caption: Contents:
 
    main/installation
-   main/beginner_tutorial
    main/cli
+   main/beginner_tutorial
+   main/inputs_and_outputs
    main/credits
 
 
