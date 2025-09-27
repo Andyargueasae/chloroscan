@@ -170,6 +170,8 @@ For all MAGs in the sample, we plot their GC contents against their log-transfor
 We also generate a violin plot showing the distribution of pooled average depths for all MAGs in the sample. The output is in ``output/working/visualizations``. The file ``depth_distribution.png`` is a violin plot showing the distribution of pooled average depths for all MAGs in the sample.
 For each bin, we plot their contig-level taxonomy classification in pie charts. The are named as ``{Batch_name}_{bin_id}_taxonomy_composition.png``.
 
+We also generate a krona plot for visualizing the count of each taxon's contigs in the sample. It's path is ``output/krona.html``.
+
 8. Some notes.
 ============================
 Parameters used for this analysis are stored in ``output/arguments.txt`` for users to check.
