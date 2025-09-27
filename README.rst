@@ -61,6 +61,11 @@ To try ChloroScan, I recommend downloading our synthetic metagenome data via the
 
     wget --referer=https://figshare.unimelb.edu.au --user-agent="Mozilla/5.0" -O "synthetic_sample_II.tar.gz" https://figshare.unimelb.edu.au/ndownloader/files/53499140
 
+
+Wanna try real-data derived test sample? See them here: https://figshare.unimelb.edu.au/articles/dataset/ChloroScan_test_data/30218614.
+
+
+
 Credit
 ============
 
