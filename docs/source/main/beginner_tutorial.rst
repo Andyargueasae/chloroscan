@@ -6,85 +6,60 @@ Beginner's tutorial
 Data Input and configuration
 ============================
 
-The pip version of ChloroScan accepts following arguments:
-
-.. image:: ../_static/images/chloroscan_cli.png
-
-Among these arguments, only assembly path, depth text, alignment folder and a batch name are required for ChloroScan to run.
-
-Please prepare your assembly in unziped fasta format to allow for processing. 
-
-The sequence alignment folder should contain sorted.bam files to map each contig's sequence coverage in assembly.
-
-An example command for running ChloroScan if depth text file is available:
+1. example commands.
+----------------------------
 
 .. code-block:: bash
 
-   chloroscan run --Inputs-assembly-path assembly.fasta --Inputs-depth-txt depth.txt --Inputs-batch-name BATCH_NAME --outputdir OUTPUT_DIR --cores N_CORES 
+   # You have assembly in fasta format and a directory of sorted bam files, you want to run de novo analysis.
+   ASSEMBLY="path/to/your/input-contigs.fasta"
+   ALIGNMENT="path/to/your/bam_directory"
+   BATCH_NAME="your_batch_name"
+   OUTPUT="path/to/your/chloroscan_output"
+   BINNY_OUTPUTDIR="path/to/your/binny_output_directory"
 
-An example command for running ChloroScan if depth text file is not available:
+   chloroscan run --Inputs-assembly=$ASSEMBLY \
+      --Inputs-alignment=$ALIGNMENT \
+      --Inputs-batch-name=$BATCH_NAME \
+      --outputdir=$OUTPUT \
+      --use-conda \
+      --conda-prefix="conda_env" \
+      --conda-frontend="mamba" \
+      --cores=12 \
+      --verbose \
+      --corgi-pthreshold=0.5 \
+      --binning-clustering-hdbscan-min-sample-range=1,5,10 \
+      --binning-bin-quality-purity=90 \
+      --binning-outputdir=$BINNY_OUTPUTDIR \
+      --corgi-min-length=1000 \
+      --force \
+      --cat-database "path/to/your/CAT_db/db" \
+      --cat-taxonomy "path/to/your/CAT_db/tax" \
+      --binning-bin-quality-min-completeness=50
 
-.. code-block:: bash
+   # You have assembly in fasta format and a depth profile table, you want to rerun your analysis.
+   DEPTH="path/to/your/depth_profile.tsv"
+   chloroscan run --Inputs-assembly=$ASSEMBLY \
+      --Inputs-depth-profile=$DEPTH \
+      --Inputs-batch-name=$BATCH_NAME \
+      --outputdir=$OUTPUT \
+      --use-conda \
+      --conda-prefix="conda_env" \
+      --conda-frontend="mamba" \
+      --cores=12 \
+      --verbose \
+      --corgi-pthreshold=0.5 \
+      --binning-clustering-hdbscan-min-sample-range=1,5,10
+      --binning-bin-quality-purity=90 \
+      --binning-outputdir=$BINNY_OUTPUTDIR \
+      --corgi-min-length=1000 \
+      --force \
+      --cat-database "path/to/your/CAT_db/db" \
+      --cat-taxonomy "path/to/your/CAT_db/tax" \
+      --binning-bin-quality-min-completeness=50
 
-   chloroscan run --Inputs-assembly-path assembly.fasta --Inputs-batch-name BATCH_NAME --outputdir OUTPUT_DIR --alignment-folder ALIGNMENT_FOLDER
 
-Explaining the non-required arguments
-=====================================
-
-Some parameters are not required, but changing them can impact the outcomes and running processes, here are some instructions.
-
-1. CORGI settings
------------------
-
-CORGI is responsible for contig filtering to extract chloroplast contigs. The default device of CORGI is GPU.
-
-- ``--corgi-settings-min-length``: Minimum length of contigs to be considered for chloroplast contigs. Default is 500. 
-
-- ``--corgi-settings-pthreshold``: P-value threshold for filtering contigs. Default is 0.90. Bigger value means more stringent filtering.
-
-- ``--corgi-settings-save-filtering``: Whether to save the filtered contigs using CORGI. Default is False and the customized python scripts in chloroscan could achieve quite fast writing speed.
-
-- ``--corgi-settings-batch-size``: number of contigs to be processed in one batch. Default is 1. Smaller batch size can reduce memory usage and elevate speed. 
-
-2. Binning module settings
---------------------------
-
-- ``--binning-universal-length-cutoff``: The length cutoff for all contigs that enters selection regardless of presenting marker genes. Default is 1500.
-
-- ``--binning-clustering-epsilon_range``: The range of epsilon for HDBSCAN clustering. Default is "0.250,0.000". Larger range takes more time to finish the clustering.
-
-- ``--binning-clustering-hdbscan-min_samples``: The minimum number of samples in a cluster. Default is 1,4,7,10. Picking smaller values can lead to more clusters but cluster contents may be spurious.
-
-- ``--binning-bin-quality-min_completeness``: Minimum completeness for MAGs to enter selection. Default is 72.5.
-
-- ``--binning-bin-quality-starting-completeness``: Starting completeness for MAGs to enter selection. Default is 92.5, note that the range between starting and min completeness affects the quality selections of bins.
-
-- ``--binning-bin-quality-purity``: Purity cutoff for MAGs to enter selection. Default is 95.
-
-3. Homology-based taxonomy prediction by CAT
---------------------------------------------
-
-- ``CAT-database``: The CAT-prepared database used for taxonomy prediction by CAT/BAT, ensure this is an absolute path. E.g.: ~/path/to/nrDB/db
-
-- ``CAT-taxonomy``: The taxonomy dump file that CAT uses. Ensure this path is an absolute path. E.g.: ~/path/to/nrDB/tax
-
-.. Note::
-
-   We prepared a CAT-database for users called "UniRef90_AlgaProt" for users to predict plastid contigs, it is free for download with url:  
-
-4. Other settings
------------------
-
-- ``outputdir``: The output directory for the workflow's results, usually named after batch name.
-
-- ``tmpdir``: Temporary directory for storing intermediate files. Default is /tmp.
-
-.. note::
-
-   Currently the pip version of chloroscan recommends to use a snakemake virtual environment with snakemake=6.15.5 installed for binny's module to use. 
-   Otherwise the binny module might fail while running.   
-
-5. Cooperate with Anvi'o to make sense of your database
+2. Cooperate with Anvi'o to make sense of your database
 -------------------------------------------------------
 
 Anvi'o is a powerful tool for visualizing and analyzing metagenomic data. After running ChloroScan, you can use Anvi'o to visualize the results and gain insights into your data.
