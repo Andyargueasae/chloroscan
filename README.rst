@@ -88,7 +88,7 @@ Citation (IEEE)
     1. A. arguease, Andyargueasae/chloroscan. (Sep. 27, 2025). HTML. Accessed: Oct. 02, 2025. [Online]. Available: https://github.com/Andyargueasae/chloroscan.
     2. O. Hickl, P. Queirós, P. Wilmes, P. May, and A. Heintz-Buschart, “binny : an automated binning algorithm to recover high-quality genomes from complex metagenomic datasets,” Briefings in Bioinformatics, vol. 23, no. 6, p. bbac431, Nov. 2022, doi: 10.1093/bib/bbac431.
     3. F. A. B. von Meijenfeldt, K. Arkhipova, D. D. Cambuy, F. H. Coutinho, and B. E. Dutilh, “Robust taxonomic classification of uncharted microbial sequences and bins with CAT and BAT,” Genome Biology, vol. 20, no. 1, p. 217, Oct. 2019, doi: 10.1186/s13059-019-1817-x.
-    4.R. Turnbull, rbturnbull/corgi. (Sep. 16, 2025). Python. Accessed: Oct. 02, 2025. [Online]. Available: https://github.com/rbturnbull/corgi
+    4. R. Turnbull, rbturnbull/corgi. (Sep. 16, 2025). Python. Accessed: Oct. 02, 2025. [Online]. Available: https://github.com/rbturnbull/corgi
     5. B. D. Ondov, N. H. Bergman, and A. M. Phillippy, “Interactive metagenomic visualization in a Web browser,” BMC Bioinformatics, vol. 12, no. 1, p. 385, Sep. 2011, doi: 10.1186/1471-2105-12-385. 
     6. F. Mölder et al., “Sustainable data analysis with Snakemake,” F1000Res, vol. 10, p. 33, Jan. 2021, doi: 10.12688/f1000research.29032.1. 
     7. W. Wirth, S. Mutch, and R. Turnbull, “Snk: A Snakemake CLI and Workflow Management System,” JOSS, vol. 9, no. 103, p. 7410, Nov. 2024, doi: 10.21105/joss.07410.
