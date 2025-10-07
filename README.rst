@@ -82,6 +82,7 @@ ChloroScan is developed by:
 
 Citation (IEEE)
 ===========
+When using ChloroScan, please also cite: Corgi, binny, CAT/BAT, snakemake, snk, FragGeneScanRs and Kronatools. 
 
 .. code-block:: text
 
@@ -92,4 +93,5 @@ Citation (IEEE)
     5. B. D. Ondov, N. H. Bergman, and A. M. Phillippy, “Interactive metagenomic visualization in a Web browser,” BMC Bioinformatics, vol. 12, no. 1, p. 385, Sep. 2011, doi: 10.1186/1471-2105-12-385. 
     6. F. Mölder et al., “Sustainable data analysis with Snakemake,” F1000Res, vol. 10, p. 33, Jan. 2021, doi: 10.12688/f1000research.29032.1. 
     7. W. Wirth, S. Mutch, and R. Turnbull, “Snk: A Snakemake CLI and Workflow Management System,” JOSS, vol. 9, no. 103, p. 7410, Nov. 2024, doi: 10.21105/joss.07410.
+    8.  F. Van der Jeugt, P. Dawyndt, and B. Mesuere, “FragGeneScanRs: faster gene prediction for short reads,” BMC Bioinformatics, vol. 23, no. 1, p. 198, May 2022, doi: 10.1186/s12859-022-04736-5.
 
