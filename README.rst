@@ -20,7 +20,7 @@ ChloroScan: A metagenomic workflow to recover chloroplast genomes
 
 This workflow is designed to recover chloroplast genomes from metagenomic datasets.
 
-.. image:: docs/source/_static/ChloroScan-Thumbnail.png
+.. image:: docs/source/_static/images/ChloroScan-Thumbnail.png
     :alt: ChloroScan Poster
     :align: right
     :width: 200px
