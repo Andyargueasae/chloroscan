@@ -23,7 +23,7 @@ This workflow is designed to recover chloroplast genomes from metagenomic datase
 Installation
 ============
 
-To install the workflow, use pip3. The background environment will require Python <4.0, >=3.9.
+To install the workflow, use pip3. The background environment will require Python <4.0, >=3.9 to set up the virtual environment.
 
 .. code-block:: bash
 
@@ -57,7 +57,7 @@ Then run:
     figshare download -o CAT_db.tar.gz 27990278
 
 
-``Note``: The tar.gz format of CAT database's size is 47GB, and nearly 85GB after unzipped, please ensure you have enough disk storage. 
+``Note``: The tar.gz format of CAT database's size is 47GB, and nearly 85GB after unzipped, please ensure you have enough disk storage. Meanwhile, the space to setup the conda environment also requires 15 GB of disk.  
 
 Sample data to try
 ==================
