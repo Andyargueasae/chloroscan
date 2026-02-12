@@ -23,7 +23,7 @@ This workflow is designed to recover chloroplast genomes from metagenomic datase
 Installation
 ============
 
-To install the workflow, use pip3:
+To install the workflow, use pip3. The background environment will require Python <4.0, >=3.9.
 
 .. code-block:: bash
 
@@ -33,7 +33,10 @@ Detailed workflow instructions can be found at: https://andyargueasae.github.io/
 
 Machine/OS Requirements
 =======================
-ChloroScan is only tested on Linux (x86_64), running on IOS system is not recommended.
+ChloroScan is only tested on Linux (x86_64), running on IOS system is not recommended. 
+ChloroScan can be installed on servers with hpc clusters and it is recommended to use a GPU to accelerate its running.
+
+``Note``: Through testing, current version of chloroscan cannot support NVIDIA H-100 GPU, due to cuda version incompatibilities. We will work on updating it to allow better performances. 
 
 
 Configuration databases
@@ -44,11 +47,14 @@ ChloroScan incorporates a marker gene database while running binning, you don't 
 
 To download our curated Uniref90-algae plastid protein database, use the link: https://doi.org/10.26188/27990278. 
 
-To avoid authentication issues, try the command below to download it:
+To avoid authentication issues, we recommend using the pyfigshare command-line tool to download. The information of this tool can be found at: https://pypi.org/project/pyfigshare/. Python > 3.0 is required to download it.
+
+Before downloading the files, set up your own figshare account and add an api token to the file ~/.figshare/token.
+Then run:
 
 .. code-block:: bash
 
-    wget --referer=https://figshare.unimelb.edu.au --user-agent="Mozilla/5.0" -O "CAT_db.tar.gz" https://figshare.unimelb.edu.au/ndownloader/files/51053993
+    figshare download -o CAT_db.tar.gz 27990278
 
 
 ``Note``: The tar.gz format of CAT database's size is 47GB, and nearly 85GB after unzipped, please ensure you have enough disk storage. 
@@ -59,10 +65,15 @@ To try ChloroScan, I recommend downloading our synthetic metagenome data via the
 
 .. code-block:: bash
 
-    wget --referer=https://figshare.unimelb.edu.au --user-agent="Mozilla/5.0" -O "synthetic_sample_II.tar.gz" https://figshare.unimelb.edu.au/ndownloader/files/53499140
+    figshare download -o simulated_metagenomes.tar.gz 28748540
 
-There are also some real metagenome datasets (modified to keep them lightweight) available at: https://figshare.unimelb.edu.au/articles/dataset/ChloroScan_test_data/30218614. To download, use the command above.
+There are also some real metagenome datasets (modified to keep them lightweight) available at: https://figshare.unimelb.edu.au/articles/dataset/ChloroScan_test_data/30218614.
 
+To download:
+
+.. code-block:: bash
+
+    figshare download -o real_test_samples.tar.gz 30218614
 
 Credit
 ============
