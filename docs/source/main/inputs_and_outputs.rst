@@ -2,6 +2,8 @@
 Inputs and Outputs
 ===================
 
+After giving a brief command for running ChloroScan, we here explain the inputs and outputs for ChloroScan, and talk about steps in the workflow in more details. We also give some tips for users to check their data and results.
+
 Overall ChloroScan takes the following inputs:
     - Metagenomic assembly in fasta format (required): configured by ``--Inputs-assembly``
     - Depth profile in tabular format (required ``tsv``, mutually exclusive with the next): configured by ``--Inputs-depth-profile``
@@ -38,7 +40,18 @@ The output directory structure of ChloroScan is as follows:
 
 Here is a brief description of each step regarding their inputs and outputs.
 
-1. Corgi predictions
+1. Raw input data
+=================
+
+- Metagenomic assembly (.fasta)
+    ChloroScan takes a metagenomic assembly, which contains all kinds of genomic fragments in the sample including bacteria, archaea, eukaryotes and viruses. 
+    The assembly type we currently tested is short-read only, you may derive it from megahit or metaSPAdes. We plan to test the outcome with long reads in the future. 
+    Make sure you have contigs with unique ids, and the ids are consistent with the bam files. For example, if your contig id in fasta file is "k141_1000298", the corresponding contig id in bam file should also be "k141_1000298".
+    Generally assemblies with on average longer contigs give better results, but it also depends on the quality of assembly. 
+- Depth profile in BAM format
+    Through mapping the reads back to the assembly, you can get the depth profile for each contig in samples. For short reads, minimap2 (short read mode), bowtie2 and bwa-mem all works well. 
+
+2. Corgi predictions
 ============================
 
 The input of the first step: contig classification by Corgi requires your ``input-contigs.fasta`` only.
@@ -53,7 +66,7 @@ To configure this step:
     - ``--corgi-save-filter``: run corgi's default filtering step to isolate plastid contigs, **not recommended** due to long runtime.
     - ``--corgi-batch-size``: batch size when inferring contigs, default is 1.
 
-2. binning results
+3. binning results
 ============================
 
 The inputs of this step is the ``plastids.fasta`` from Corgi and the tabular depth profile with the first column the contig ids and the rest columns the average depths in each sample.
@@ -105,7 +118,7 @@ To configure this step:
 
 For further information on HDBSCAN, see the sklearn docs: https://scikit-learn.org/stable/modules/generated/sklearn.cluster.HDBSCAN.html.
 
-3. CAT
+4. CAT
 ============================
 The input is the ``assembly.formatted.fasta`` from the intermediary directory. It stores putative plastid contigs longer than 500bp. 
 
@@ -126,7 +139,7 @@ To configure this step:
  - ``--cat-database``: path to CAT database (the ``db`` directory), we refer to the directory structure of the most recent CAT db release.
  - ``--cat-taxonomy``: path to the taxonomy file (the ``taxonomy`` / ``tax`` directory).
 
-4. Summary files
+5. Summary files
 ============================
 
 This step is to summarize the metadata including binning and CAT results. It takes inputs from previous jobs to summarize:
@@ -166,7 +179,11 @@ For all MAGs in the sample, we plot their GC contents against their log-transfor
 We also generate a violin plot showing the distribution of pooled average depths for all MAGs in the sample. The output is in ``output/working/visualizations``. The file ``depth_distribution.png`` is a violin plot showing the distribution of pooled average depths for all MAGs in the sample.
 For each bin, we plot their contig-level taxonomy classification in pie charts. The are named as ``{Batch_name}_{bin_id}_taxonomy_composition.png``.
 
-8. Some notes.
+8. Summary.
 ============================
-Parameters used for this analysis are stored in ``output/arguments.txt`` for users to check.
-"Plastid" contigs count out of total contigs is reported in ``corgi.summary.txt``.
+The most important outputs from ChloroScan are listed below:
+ - ``output/corgi/plastid.fasta``, file storing predicted plastid contigs.
+ - ``output/binny/bins``, directory storing binny-clustered plastid MAGs in fasta format.
+ - ``output/summary/cross_ref.tsv``, a tabular text file storing metadata for each contig including binning and CAT results, as well as raw sequence's coverage, GC contents.
+ - ``output/visualizations``, directory storing plots for users to have a glance at their MAGs for sanity check.
+ - ``output/cds-extraction``, the directory stores the predicted ORFs and amino acid sequences, which may work for phylogenetics.

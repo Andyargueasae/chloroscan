@@ -29,7 +29,8 @@ To install the workflow, use pip3. The background environment will require Pytho
 
     pip3 install chloroscan==0.1.5
 
-Detailed workflow instructions can be found at: https://andyargueasae.github.io/chloroscan/index.html
+Detailed workflow instructions can be found at: https://andyargueasae.github.io/chloroscan/index.html.
+The website also contains Chinese version of the documentation with identical contents.
 
 Machine/OS Requirements
 =======================
@@ -38,20 +39,17 @@ ChloroScan can be installed on servers with hpc clusters and it is recommended t
 
 ``Note``: Through testing, current version of chloroscan cannot support NVIDIA H-100 GPU, due to cuda version incompatibilities. We will work on updating it to allow better performances. 
 
-
 Configuration databases
 =======================
 Before running ChloroScan, some packages and datasets need to be installed to run CAT taxonomy prediction properly.
-
 ChloroScan incorporates a marker gene database while running binning, you don't need to do anything, it will be loaded since you build conda environments.
-
 To download our curated Uniref90-algae plastid protein database, use the link: https://doi.org/10.26188/27990278. 
 
-To avoid authentication issues, we recommend using the pyfigshare command-line tool to download. The information of this tool can be found at: https://pypi.org/project/pyfigshare/. Python > 3.0 is required to download it.
+To avoid authentication issues, we recommend using the pyfigshare command-line tool to download. The information of this tool can be found at: ``https://pypi.org/project/pyfigshare/``. 
+* **Python > 3.0** is required to download pyfigshare.
 
 Before downloading the files, set up your own figshare account and add an api token to the file ~/.figshare/token.
 Then run:
-
 .. code-block:: bash
 
     figshare download -o CAT_db.tar.gz 27990278
@@ -82,10 +80,16 @@ ChloroScan is developed by:
 
 .. start-credits
 
-- Yuhao Tong (University of Melbourne)
+- Yuhao Tong 童禹皓 (University of Melbourne)
 - `Dr Robert Turnbull <https://findanexpert.unimelb.edu.au/profile/877006-robert-turnbull>`_ 
 - `Dr Vanessa Rossetto Marcelino <https://findanexpert.unimelb.edu.au/profile/532755-vanessa-rossetto-marcelino>`_ 
 - `A/Prof Heroen Verbruggen <https://hverbruggen.github.io/>`_
 
 .. end-credits
+
+With Yuhao Tong the primary developer, if you want to contact us, please email to:
+
+.. code-block:: text
+    
+    yuhtong@student.unimelb.edu.au
 
