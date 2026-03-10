@@ -16,28 +16,12 @@ jobs:
       - name: Install poetry
         run: pipx install poetry
 
-      - name: Cache Miniforge
-        id: cache
-        uses: actions/cache@v3
+      - name: Setup Miniforge with Mamba 1.x
+        uses: conda-incubator/setup-miniconda@v3
         with:
-          key: ${{ runner.os }}-${{ matrix.python-version }}-miniforge-mamba1
-          path: /home/runner/mamba-cache
-
-      - name: Install Miniforge
-        run: |
-          if [ ! -f /home/runner/mamba-cache/mamba/etc/profile.d/conda.sh ]; then
-            wget -O Miniforge3.sh "https://github.com/conda-forge/miniforge/releases/latest/download/Miniforge3-$(uname)-$(uname -m).sh"
-            bash Miniforge3.sh -b -p "/home/runner/mamba-cache/mamba"
-          fi
-
-          source "/home/runner/mamba-cache/mamba/etc/profile.d/conda.sh"
-          source "/home/runner/mamba-cache/mamba/etc/profile.d/mamba.sh"
-          conda activate base
-
-          mamba install -y -c conda-forge 'mamba<2'
-
-          mamba --version
-          which mamba
+          miniforge-version: latest
+          mamba-version: "1.*"
+          activate-environment: base
 
       - name: Install dependencies for Python ${{ matrix.python-version }}
         uses: actions/setup-python@v5
@@ -63,14 +47,8 @@ jobs:
           echo "$HOME/.cargo/bin" >> "$GITHUB_PATH"
 
       - name: Testing
+        shell: bash -el {0}
         run: |
-          export CHLOROSCAN_CONDA_PREFIX=/home/runner/mamba-cache/chloroscan
-          export PATH=/home/runner/mamba-cache/mamba/condabin:$PATH
-
-          source /home/runner/mamba-cache/mamba/etc/profile.d/conda.sh
-          source /home/runner/mamba-cache/mamba/etc/profile.d/mamba.sh
-          conda activate base
-
           which mamba
           which conda
           mamba --version

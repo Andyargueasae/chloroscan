@@ -1,0 +1,317 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" data-content_root="../">
+<head>
+  <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>运行 ChloroScan &mdash; chloroscan  documentation</title>
+      <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=b86133f3" />
+      <link rel="stylesheet" type="text/css" href="../_static/css/theme.css?v=e59714d7" />
+      <link rel="stylesheet" type="text/css" href="../_static/copybutton.css?v=76b2166b" />
+      <link rel="stylesheet" type="text/css" href="../_static/graphviz.css?v=fd3f3429" />
+
+  
+      <script src="../_static/jquery.js?v=5d32c60e"></script>
+      <script src="../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+      <script src="../_static/documentation_options.js?v=5929fcd5"></script>
+      <script src="../_static/doctools.js?v=9a2dae69"></script>
+      <script src="../_static/sphinx_highlight.js?v=dc90522c"></script>
+      <script src="../_static/clipboard.min.js?v=a7894cd8"></script>
+      <script src="../_static/copybutton.js?v=f281be69"></script>
+    <script src="../_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="输入与输出" href="inputs_and_outputs_CN.html" />
+    <link rel="prev" title="下载" href="installation_CN.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="../index.html" class="icon icon-home">
+            chloroscan
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption" role="heading"><span class="caption-text">Contents:</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="installation.html">Installation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="how_to_run.html">Running ChloroScan</a></li>
+<li class="toctree-l1"><a class="reference internal" href="inputs_and_outputs.html">Inputs and Outputs</a></li>
+<li class="toctree-l1"><a class="reference internal" href="snk_cli.html">Snakemake-related command line utilities</a></li>
+<li class="toctree-l1"><a class="reference internal" href="credits.html">Credits/鸣谢</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Contents:</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="installation_CN.html">下载</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">运行 ChloroScan</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#id1">1. 数据中是否存在叶绿体？</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#id2">2. 常用的最简命令</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#id3">3. 命令参数说明</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="inputs_and_outputs_CN.html">输入与输出</a></li>
+<li class="toctree-l1"><a class="reference internal" href="snk_cli_CN.html">Snakemake-相关的指令</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../index.html">chloroscan</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../index.html" class="icon icon-home" aria-label="Home"></a></li>
+      <li class="breadcrumb-item active">运行 ChloroScan</li>
+      <li class="wy-breadcrumbs-aside">
+            <a href="../_sources/main/how_to_run_CN.rst.txt" rel="nofollow"> View page source</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="chloroscan">
+<h1>运行 ChloroScan<a class="headerlink" href="#chloroscan" title="Link to this heading"></a></h1>
+<p>ChloroScan 专注于叶绿体基因组 MAGs 的恢复，特别是 <code class="docutils literal notranslate"><span class="pre">光合微藻和大型藻类，及其衍生的复杂质体，例如硅藻和定鞭藻</span></code>。它主要需要的输入是 contigs 及其测序深度。
+在大多数情况下，默认设置就能很好地工作，但你也可以为每个步骤配置参数。在这里，我们将简要介绍每个步骤的输入和输出，以及你可以为每个步骤配置的参数。</p>
+<section id="id1">
+<h2>1. 数据中是否存在叶绿体？<a class="headerlink" href="#id1" title="Link to this heading"></a></h2>
+<p>光合藻类/光合原生生物通常栖息在海洋水域、淡水、地衣和潮湿土壤等环境中。人为环境、地下环境和沉积物中它们的丰度通常较低。因此，如果你的数据来自这些环境，ChloroScan 可能无法恢复任何叶绿体 MAGs。</p>
+<p>同时，如果你的数据包含过于碎片化的叶绿体 contigs 且覆盖度较低（通常 &lt; 5.0 x），ChloroScan 仍可能无法检测到它们。希望我们更新的版本能够解决这些问题。</p>
+</section>
+<section id="id2">
+<h2>2. 常用的最简命令<a class="headerlink" href="#id2" title="Link to this heading"></a></h2>
+<p>你已经有了 contigs、bam 格式的映射文件和配置文件。现在你可以用一个命令运行整个工作流程：</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>chloroscan<span class="w"> </span>run<span class="w"> </span>--Inputs-assembly<span class="w"> </span>input_contigs.fasta<span class="w"> </span>--Inputs-alignment<span class="w"> </span>PATH/to/bams<span class="w"> </span><span class="se">\</span>
+<span class="w">   </span>--Inputs-batch-name<span class="w"> </span><span class="s2">&quot;my_batch&quot;</span><span class="w"> </span>--outputdir<span class="w"> </span>Path/to/output<span class="w"> </span>--use-conda<span class="w"> </span>--cores<span class="o">=</span><span class="m">12</span><span class="w"> </span><span class="se">\</span>
+<span class="w">   </span>--cat-database<span class="w"> </span>PATH/to/CAT_db/db<span class="w"> </span>--cat-taxonomy<span class="w"> </span>path/to/CAT_db/tax
+</pre></div>
+</div>
+<p>有时你可能还希望获得以表格形式表示的深度信息。它看起来像这样：</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">S0C861</span>       <span class="mf">3.52491757</span>
+<span class="n">S0C1664</span>      <span class="mf">2.73124830</span>
+<span class="n">S0C2713</span>      <span class="mf">12.64139886</span>
+<span class="n">S0C3242</span>      <span class="mf">2.51473363</span>
+<span class="n">S0C8106</span>      <span class="mf">23.82718202</span>
+<span class="n">S0C8631</span>      <span class="mf">2.69335600</span>
+<span class="n">S0C9609</span>      <span class="mf">2.49439900</span>
+<span class="o">...</span>
+</pre></div>
+</div>
+<p>第一列是 contig 的 ID，第二列是 contig 的平均深度。我们也接受这种格式，只需将命令更改为：</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="nv">DEPTH_PROFILE</span><span class="o">=</span>path/to/depth_profile.tsv
+chloroscan<span class="w"> </span>run<span class="w"> </span>--Inputs-assembly<span class="w"> </span>input_contigs.fasta<span class="w"> </span>--Inputs-depth-profile<span class="w"> </span><span class="nv">$DEPTH_PROFILE</span><span class="w"> </span><span class="se">\</span>
+<span class="w">   </span>--Inputs-batch-name<span class="w"> </span><span class="s2">&quot;my_batch&quot;</span><span class="w"> </span>--outputdir<span class="w"> </span>Path/to/output<span class="w"> </span>--use-conda<span class="w"> </span>--cores<span class="o">=</span><span class="m">12</span><span class="w"> </span><span class="se">\</span>
+<span class="w">   </span>--cat-database<span class="w"> </span>PATH/to/CAT_db/db<span class="w"> </span>--cat-taxonomy<span class="w"> </span>path/to/CAT_db/tax
+</pre></div>
+</div>
+<p>有关输入的更多详细信息，请查看 <span class="xref std std-ref">inputs_and_outputs</span> 部分。
+如果你想使用我们的测试数据，可以使用 <span class="xref std std-ref">README</span> 中显示的命令下载测试数据：</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>figshare<span class="w"> </span>download<span class="w"> </span>-o<span class="w"> </span>simulated_metagenomes.tar.gz<span class="w"> </span><span class="m">28748540</span>
+</pre></div>
+</div>
+</section>
+<section id="id3">
+<h2>3. 命令参数说明<a class="headerlink" href="#id3" title="Link to this heading"></a></h2>
+<p>ChloroScan 的完整命令空间如下所示：</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>Usage: chloroscan run [OPTIONS]
+
+Run the workflow.
+All unrecognized arguments are passed onto Snakemake.
+
+╭─ Options ────────────────────────────────────────────────────────────────────────────────╮
+│ --config                   FILE     Path to snakemake config file. Overrides existing    │
+│                                     workflow configuration.                              │
+│                                     [default: None]                                      │
+│ --resource        -r       PATH     Additional resources to copy from workflow directory │
+│                                     at run time.                                         │
+│ --profile         -p       TEXT     Name of profile to use for configuring Snakemake.    │
+│                                     [default: None]                                      │
+│ --dry             -n                Do not execute anything, and display what would be   │
+│                                     done.                                                │
+│ --lock            -l                Lock the working directory.                          │
+│ --dag             -d       PATH     Save directed acyclic graph to file. Must end in     │
+│                                     .pdf, .png or .svg                                   │
+│                                     [default: None]                                      │
+│ --cores           -c       INTEGER  Set the number of cores to use. If None will use all │
+│                                     cores.                                               │
+│                                     [default: None]                                      │
+│ --no-conda                          Do not use conda environments.                       │
+│ --keep-resources                    Keep resources after pipeline completes.             │
+│ --keep-snakemake                    Keep .snakemake folder after pipeline completes.     │
+│ --verbose         -v                Run workflow in verbose mode.                        │
+│ --help-snakemake  -hs               Print the snakemake help and exit.                   │
+│ --help            -h                Show this message and exit.                          │
+╰──────────────────────────────────────────────────────────────────────────────────────────╯
+╭─ Workflow Configuration ─────────────────────────────────────────────────────────────────╮
+│ --Inputs-assembly        -a                            PATH     Path to fasta format     │
+│                                                                 assembly of contigs from │
+│                                                                 all sorts of organisms.  │
+│                                                                 [default: None]          │
+│ --Inputs-depth-txt       -d                            PATH     Path to a tab-separated  │
+│                                                                 text storing abundance   │
+│                                                                 of each contig in the    │
+│                                                                 sample.                  │
+│                                                                 [default: None]          │
+│ --Inputs-alignment       -l                            PATH     Path to the folder       │
+│                                                                 containing alignment     │
+│                                                                 files of the contigs.    │
+│                                                                 [default: None]          │
+│ --Inputs-batch-name      -b                            TEXT     Name of the batch.       │
+│                                                                 [default: None]          │
+│ --outputdir              -o                            PATH     Path to the output       │
+│                                                                 directory of the         │
+│                                                                 workflow.                │
+│                                                                 [default: None]          │
+│ --tmpdir                 -t                            PATH     Path to the temporary    │
+│                                                                 directory of the         │
+│                                                                 workflow.                │
+│                                                                 [default: tmp]           │
+│ --binning-universal-le…                                INTEGER  Length cutoff for        │
+│                                                                 universal binning.       │
+│                                                                 [default: 1500]          │
+│ --binning-snakemake-env                                TEXT     Customized snakemake     │
+│                                                                 environment for binny to │
+│                                                                 run.                     │
+│                                                                 [default: None]          │
+│ --binning-mantis-env                                   TEXT     Customized Mantis        │
+│                                                                 virtual environment to   │
+│                                                                 have mantis_pfa          │
+│                                                                 installed, annotating    │
+│                                                                 genes.                   │
+│                                                                 [default: None]          │
+│ --binning-outputdir      -o                            PATH     Path to the output       │
+│                                                                 directory of the         │
+│                                                                 binning.                 │
+│                                                                 [default: binny_output]  │
+│ --binning-clustering-e…                                TEXT     Range of epsilon values  │
+│                                                                 for HDBSCAN clustering.  │
+│                                                                 [default: 0.250,0.000]   │
+│ --binning-clustering-h…                                TEXT     Range of min_samples     │
+│                                                                 values for HDBSCAN       │
+│                                                                 clustering, larger value │
+│                                                                 means larger MAGs.       │
+│                                                                 [default: 1,4,7,10]      │
+│ --binning-bin-quality-…                                FLOAT    Starting completeness    │
+│                                                                 for bin quality.         │
+│                                                                 [default: 92.5]          │
+│ --binning-bin-quality-…                                FLOAT    Minimum completeness for │
+│                                                                 bin quality.             │
+│                                                                 [default: 72.5]          │
+│ --binning-bin-quality-…                                FLOAT    Purity for bin quality.  │
+│                                                                 [default: 95]            │
+│ --corgi-min-length                                     INTEGER  Minimum length of        │
+│                                                                 contigs to be processed  │
+│                                                                 by CORGI.                │
+│                                                                 [default: 500]           │
+│ --corgi-save-filter          --no-corgi-save-filter             Save the filtered        │
+│                                                                 contigs by CORGI (Note:  │
+│                                                                 may take long time).     │
+│                                                                 [default:                │
+│                                                                 no-corgi-save-filter]    │
+│ --corgi-batch-size                                     INTEGER  Batch size for CORGI to  │
+│                                                                 process contigs.         │
+│                                                                 [default: 1]             │
+│ --corgi-pthreshold                                     FLOAT    P-value threshold for    │
+│                                                                 CORGI to determine if    │
+│                                                                 the contigs category is  │
+│                                                                 authentically plastidial │
+│                                                                 or something else.       │
+│                                                                 [default: 0.9]           │
+│ --cat-database           -d                            PATH     Path to the database of  │
+│                                                                 chloroplast genomes.     │
+│                                                                 [default:                │
+│                                                                 /home/yuhtong/scratch/a… │
+│ --cat-taxonomy           -t                            PATH     Path to the taxonomy of  │
+│                                                                 the database.            │
+│                                                                 [default:                │
+│                                                                 /home/yuhtong/scratch/a… │
+│ --krona-env                                            TEXT     Path to the Krona        │
+│                                                                 environment.             │
+│                                                                 [default: kronatools]    │
+╰──────────────────────────────────────────────────────────────────────────────────────────╯
+</pre></div>
+</div>
+<dl class="simple">
+<dt>以下列出了 ChloroScan 的所有参数。</dt><dd><ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">--Inputs-assembly</span></code>: Fasta 格式的 contigs 装配文件路径，包含各种生物的 contigs。</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">--Inputs-depth-txt</span></code>: 样本中每个 contig 丰度的制表符分隔文本文件路径。第一列是 contig 的 ID，第二列是 contig 的平均深度。我们也接受这种格式，只需将命令更改为 <code class="docutils literal notranslate"><span class="pre">--Inputs-depth-profile</span></code>。</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">--Inputs-alignment</span></code>: 包含 contigs 对齐文件的文件夹路径。对齐文件应为 bam 格式，并命名为 “sample_name.bam”。样本名称将从 bam 文件名中提取，通过去掉 “.bam” 后缀。样本名称将在下游分析和输出文件中使用。</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">--Inputs-batch-name</span></code>: 批次名称。该名称将在下游分析和输出文件中使用。</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">--outputdir</span></code>: 工作流的输出目录路径。最终结果将存储在此目录中。中间结果将存储在输出目录下名为 “working” 的子目录中。默认值为 “output”。</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">--tmpdir</span></code>: 工作流的临时目录路径。默认值为 “tmp”。</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">--binning-universal-length-cutoff</span></code>: 通用分箱的长度阈值。短于此长度的 contigs 将在分箱前被过滤。默认值为 1500bp。</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">--binning-snakemake-env</span></code>: 用于运行 binny 的自定义 snakemake 环境。如果未指定，将使用默认的 conda 环境。</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">--binning-mantis-env</span></code>: 用于安装 mantis_pfa 并注释基因的自定义 Mantis 虚拟环境。如果未指定，将使用默认的 conda 环境。</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">--binning-outputdir</span></code>: 分箱的输出目录路径。默认值为 “binny_output”。</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">--binning-clustering-epsilon-range</span></code>: HDBSCAN 聚类中重要的 epsilon的取值范围。默认值为 “0.250,0.000”。</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">--binning-clustering-hdbscan-min-sample-range</span></code>: HDBSCAN 聚类中 min_samples 的取值范围，较大的值意味着较大的 MAGs。默认值为 “1,4,7,10”。</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">--binning-bin-quality-purity</span></code>: 分箱质量的最小纯度。默认值为 95。</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">--binning-bin-quality-starting-completeness</span></code>: 分箱质量的起始完整性。Binny 使用滑动完整性来过滤分箱。默认值为 92.5。</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">--binning-bin-quality-min-completeness</span></code>: 分箱质量的最小完整性。默认值为 72.5。</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">--corgi-min-length</span></code>: CORGI 处理的 contigs 的最小长度。默认值为 500bp。</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">--corgi-save-filter</span></code>: 保存 CORGI 过滤后的 contigs（注意：可能需要较长时间）。默认值为 no-corgi-save-filter。</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">--corgi-batch-size</span></code>: CORGI 推断 contigs 分类标签的批次大小。默认值为 1。</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">--corgi-pthreshold</span></code>: CORGI 判断 contigs 类别是否为真正的叶绿体或其他类别的 P 值阈值。默认值为 0.9。</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">--cat-database</span></code>: CAT 数据库的路径，保存经过 diamond 处理的蛋白质序列。默认值为 “PATH/TO/CAT_db/db”。</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">--cat-taxonomy</span></code>: CAT 数据库的分类标签路径。默认值为 “PATH/TO/CAT_db/tax”。</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">--krona-env</span></code>: Krona 环境的路径。默认值为 “kronatools”。 <strong>现在通常不需要设置此项</strong>。</p></li>
+</ul>
+</dd>
+</dl>
+</section>
+</section>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="installation_CN.html" class="btn btn-neutral float-left" title="下载" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="inputs_and_outputs_CN.html" class="btn btn-neutral float-right" title="输入与输出" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2024-2025, Yuhao Tong.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

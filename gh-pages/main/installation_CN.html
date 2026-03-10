@@ -1,0 +1,193 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" data-content_root="../">
+<head>
+  <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>下载 &mdash; chloroscan  documentation</title>
+      <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=b86133f3" />
+      <link rel="stylesheet" type="text/css" href="../_static/css/theme.css?v=e59714d7" />
+      <link rel="stylesheet" type="text/css" href="../_static/copybutton.css?v=76b2166b" />
+      <link rel="stylesheet" type="text/css" href="../_static/graphviz.css?v=fd3f3429" />
+
+  
+      <script src="../_static/jquery.js?v=5d32c60e"></script>
+      <script src="../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+      <script src="../_static/documentation_options.js?v=5929fcd5"></script>
+      <script src="../_static/doctools.js?v=9a2dae69"></script>
+      <script src="../_static/sphinx_highlight.js?v=dc90522c"></script>
+      <script src="../_static/clipboard.min.js?v=a7894cd8"></script>
+      <script src="../_static/copybutton.js?v=f281be69"></script>
+    <script src="../_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="运行 ChloroScan" href="how_to_run_CN.html" />
+    <link rel="prev" title="Credits/鸣谢" href="credits.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="../index.html" class="icon icon-home">
+            chloroscan
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption" role="heading"><span class="caption-text">Contents:</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="installation.html">Installation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="how_to_run.html">Running ChloroScan</a></li>
+<li class="toctree-l1"><a class="reference internal" href="inputs_and_outputs.html">Inputs and Outputs</a></li>
+<li class="toctree-l1"><a class="reference internal" href="snk_cli.html">Snakemake-related command line utilities</a></li>
+<li class="toctree-l1"><a class="reference internal" href="credits.html">Credits/鸣谢</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Contents:</span></p>
+<ul class="current">
+<li class="toctree-l1 current"><a class="current reference internal" href="#">下载</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#pip-conda-mamba">1. pip 和 conda/mamba</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#cat">2. CAT 数据库</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#binny-conda">3. Binny 数据库和 conda 环境</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="how_to_run_CN.html">运行 ChloroScan</a></li>
+<li class="toctree-l1"><a class="reference internal" href="inputs_and_outputs_CN.html">输入与输出</a></li>
+<li class="toctree-l1"><a class="reference internal" href="snk_cli_CN.html">Snakemake-相关的指令</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../index.html">chloroscan</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../index.html" class="icon icon-home" aria-label="Home"></a></li>
+      <li class="breadcrumb-item active">下载</li>
+      <li class="wy-breadcrumbs-aside">
+            <a href="../_sources/main/installation_CN.rst.txt" rel="nofollow"> View page source</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="id1">
+<h1>下载<a class="headerlink" href="#id1" title="Link to this heading"></a></h1>
+<p>我们仍在升级 ChloroScan 以更好地还原环境中的叶绿体基因组MAG，为了获得最佳效果，请确保安装最新版本。</p>
+<section id="pip-conda-mamba">
+<h2>1. pip 和 conda/mamba<a class="headerlink" href="#pip-conda-mamba" title="Link to this heading"></a></h2>
+<p>要安装工作流程，请使用 pip。首先创建一个虚拟环境。确保您的计算机严格遵循 Python 版本限制：&gt; 3.9 且 &lt; 4.0。</p>
+<p>运行此命令以检查您的 Python 版本是否兼容：</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>python3<span class="w"> </span>--version
+</pre></div>
+</div>
+<p>如果您的 Python 版本在 3.9 和 4.0 之间，您将能够继续设置虚拟环境并安装 ChloroScan。</p>
+<p>另一个关键的包是mamba，它是您能够安装ChloroScan工作流中每一个步骤的虚拟环境的关键。您可以通过从以下链接下载 miniforge 来安装 mamba：</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>wget<span class="w"> </span>https://github.com/conda-forge/miniforge/releases/latest/download/Miniforge3-Linux-x86_64.sh
+</pre></div>
+</div>
+<p>下载完成后，运行以下命令安装 mamba（将 {OPERATING_SYSTEM} 和 {ARCHITECTURE} 替换为您自己的系统信息，例如 Miniforge3-Linux-x86_64.sh）：</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>bash<span class="w"> </span>Miniforge3-<span class="o">{</span>OPERATING_SYSTEM<span class="o">}</span>-<span class="o">{</span>ARCHITECTURE<span class="o">}</span>.sh
+</pre></div>
+</div>
+<p>可以通过运行以下命令检查 conda 和 mamba 是否完整安装：</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>conda<span class="w"> </span>--version
+mamba<span class="w"> </span>--version
+
+<span class="c1"># 查询 mamba 和 conda 的安装路径</span>
+which<span class="w"> </span>mamba
+which<span class="w"> </span>conda
+</pre></div>
+</div>
+<p>运行以下命令以设置虚拟环境并安装 ChloroScan。</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>python3<span class="w"> </span>-m<span class="w"> </span>venv<span class="w"> </span>chloroscan_env
+<span class="nb">source</span><span class="w"> </span>chloroscan_env/bin/activate
+</pre></div>
+</div>
+<p>最后确定以上条件达成后，运行以下命令安装 ChloroScan：</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>pip3<span class="w"> </span>install<span class="w"> </span>chloroscan
+</pre></div>
+</div>
+<p>或者，您可以创建一个具有兼容 Python 版本的 conda 环境，并在其中安装 chloroscan：</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>mamba<span class="w"> </span>env<span class="w"> </span>create<span class="w"> </span>-n<span class="w"> </span>chloroscan_env<span class="w"> </span><span class="nv">python</span><span class="o">=</span><span class="m">3</span>.10
+mamba<span class="w"> </span>activate<span class="w"> </span>chloroscan_env
+which<span class="w"> </span>pip<span class="p">;</span><span class="w"> </span>which<span class="w"> </span>python<span class="p">;</span><span class="w"> </span><span class="c1"># 检查 pip 和 python 是否来自 conda 环境，这是必须保证的。</span>
+<span class="c1">#!注意!: 系统的默认 Python （/usr/bin/python） 不应该显示在这里，否则将会导致令人头疼的问题。</span>
+pip3<span class="w"> </span>install<span class="w"> </span>chloroscan
+pip3<span class="w"> </span>install<span class="w"> </span>chloroscan
+</pre></div>
+</div>
+<p>除了安装，ChloroScan 还需要几个数据库：一个用于 CAT 的分类学分类，另一个用于通过分箱推断质体 MAG 的质量。</p>
+</section>
+<section id="cat">
+<h2>2. CAT 数据库<a class="headerlink" href="#cat" title="Link to this heading"></a></h2>
+<p>您的选择可以是使用包含 NCBI nr 数据库中所有蛋白质的 CAT 预处理数据库。然而，在运行 CAT 时，它占用大量内存且耗时，并且需要约 300GB 的磁盘空间。</p>
+<p>为了评估叶绿体 contig 的物种分类，我们建议下载我们精心策划的蛋白质数据库，该数据库包含来自 NCBI 的所有叶绿体基因组编码蛋白质和来自 UniRef90 的蛋白质（解压后大小约为 85GB）。</p>
+<p>下载命令：</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>figshare<span class="w"> </span>download<span class="w"> </span>-o<span class="w"> </span>CAT_db.tar.gz<span class="w"> </span><span class="m">27990278</span>
+</pre></div>
+</div>
+</section>
+<section id="binny-conda">
+<h2>3. Binny 数据库和 conda 环境<a class="headerlink" href="#binny-conda" title="Link to this heading"></a></h2>
+<p>您无需手动下载 binny 的数据库，ChloroScan 会在为每个作业安装 conda 环境后自动加载它。</p>
+<p>运行 chloroscan 并添加标志 “<code class="docutils literal notranslate"><span class="pre">--conda-create-envs-only</span></code>” 以设置 conda 环境。</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>chloroscan<span class="w"> </span>run<span class="w"> </span>--conda-create-envs-only
+</pre></div>
+</div>
+<p>坐到这儿就标志着 ChloroScan 的准备工作已经完成了，您可以开始运行它。</p>
+</section>
+</section>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="credits.html" class="btn btn-neutral float-left" title="Credits/鸣谢" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="how_to_run_CN.html" class="btn btn-neutral float-right" title="运行 ChloroScan" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2024-2025, Yuhao Tong.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

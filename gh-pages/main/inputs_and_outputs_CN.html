@@ -1,0 +1,330 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" data-content_root="../">
+<head>
+  <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>输入与输出 &mdash; chloroscan  documentation</title>
+      <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=b86133f3" />
+      <link rel="stylesheet" type="text/css" href="../_static/css/theme.css?v=e59714d7" />
+      <link rel="stylesheet" type="text/css" href="../_static/copybutton.css?v=76b2166b" />
+      <link rel="stylesheet" type="text/css" href="../_static/graphviz.css?v=fd3f3429" />
+
+  
+      <script src="../_static/jquery.js?v=5d32c60e"></script>
+      <script src="../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+      <script src="../_static/documentation_options.js?v=5929fcd5"></script>
+      <script src="../_static/doctools.js?v=9a2dae69"></script>
+      <script src="../_static/sphinx_highlight.js?v=dc90522c"></script>
+      <script src="../_static/clipboard.min.js?v=a7894cd8"></script>
+      <script src="../_static/copybutton.js?v=f281be69"></script>
+    <script src="../_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="Snakemake-相关的指令" href="snk_cli_CN.html" />
+    <link rel="prev" title="运行 ChloroScan" href="how_to_run_CN.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="../index.html" class="icon icon-home">
+            chloroscan
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption" role="heading"><span class="caption-text">Contents:</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="installation.html">Installation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="how_to_run.html">Running ChloroScan</a></li>
+<li class="toctree-l1"><a class="reference internal" href="inputs_and_outputs.html">Inputs and Outputs</a></li>
+<li class="toctree-l1"><a class="reference internal" href="snk_cli.html">Snakemake-related command line utilities</a></li>
+<li class="toctree-l1"><a class="reference internal" href="credits.html">Credits/鸣谢</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Contents:</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="installation_CN.html">下载</a></li>
+<li class="toctree-l1"><a class="reference internal" href="how_to_run_CN.html">运行 ChloroScan</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">输入与输出</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#id2">1. 输入数据</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#corgi">2. Corgi预测</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#binny">3. binny分箱结果</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#cat">4. CAT</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#id3">5. 总结模块</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#id4">5. “润色”模块</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#id5">6. 预测开放阅读框和基因蛋白序列</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#id6">7. 可视化</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#id7">8. 总结</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="snk_cli_CN.html">Snakemake-相关的指令</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../index.html">chloroscan</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../index.html" class="icon icon-home" aria-label="Home"></a></li>
+      <li class="breadcrumb-item active">输入与输出</li>
+      <li class="wy-breadcrumbs-aside">
+            <a href="../_sources/main/inputs_and_outputs_CN.rst.txt" rel="nofollow"> View page source</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="id1">
+<h1>输入与输出<a class="headerlink" href="#id1" title="Link to this heading"></a></h1>
+<p>本文将介绍ChloroScan的输入和输出，并详细介绍工作流程中的每个步骤。我们还将为用户提供一些检查数据和结果的提示。</p>
+<dl class="simple">
+<dt>总体而言，ChloroScan 接受以下输入：</dt><dd><ul class="simple">
+<li><p>以 fasta 格式的宏基因组组装（必需）：通过 <code class="docutils literal notranslate"><span class="pre">--Inputs-assembly</span></code> 参数配置。</p></li>
+<li><p>测序深度表格（必需 <code class="docutils literal notranslate"><span class="pre">tsv</span></code>，与下一个选项互斥）：通过 <code class="docutils literal notranslate"><span class="pre">--Inputs-depth-profile</span></code> 参数配置。</p></li>
+<li><p>存储排序后的 bam 文件的目录（必需）：通过 <code class="docutils literal notranslate"><span class="pre">--Inputs-alignment</span></code> 参数配置。</p></li>
+<li><p>批次名称（必需，仅用于在并行运行时区分不同作业以避免覆盖）：通过 <code class="docutils literal notranslate"><span class="pre">--Inputs-batch-name</span></code> 参数配置。</p></li>
+</ul>
+</dd>
+</dl>
+<p>通常对于那些第一次进行分析的数据（ <strong>de novo assembly</strong> ），我们建议使用 bam 目录，但如果您想使用现有的深度谱重新运行分析（可能调整参数），也可以使用它。</p>
+<p>ChloroScan 的输出目录结构如下：</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>chloroscan_output
+├── logging_info
+└── working
+    ├── binny
+    │   ├── bins
+    │   ├── intermediary
+    │   │   └── mantis_out
+    │   ├── job.errs.outs
+    │   ├── logs
+    │   └── tmp
+    ├── call_contig_depth
+    ├── CAT
+    ├── cds-extraction
+    │   ├── cds
+    │   └── faa
+    ├── corgi
+    ├── FragGeneScanRs
+    │   └── GFFs
+    ├── refined_bins
+    ├── summary
+    └── visualizations
+</pre></div>
+</div>
+<section id="id2">
+<h2>1. 输入数据<a class="headerlink" href="#id2" title="Link to this heading"></a></h2>
+<ul class="simple">
+<li><dl class="simple">
+<dt>宏基因组组装 (.fasta)</dt><dd><p>ChloroScan 接受宏基因组组装，其中包含样品中各种基因组片段，包括细菌、古菌、真核生物和病毒。
+我们目前测试的组装类型仅限于短读长，您可以使用 megahit 或 metaSPAdes 生成。我们计划在未来测试长读长的结果。
+在分析时，请确保您的 contigs 具有不重复的 id，并且这些 id 与 bam 文件中的 id 一致。例如，如果您的 fasta 文件中的 contig id 是 “k141_1000298”，则 bam 文件中的对应 contig id 也应为 “k141_1000298”。
+通常，平均 contig 较长的组装会产生更好的结果，但这也取决于组装的质量。</p>
+</dd>
+</dl>
+</li>
+<li><dl class="simple">
+<dt>BAM文件</dt><dd><p>通过将测序的reads比对回组装的contigs，您可以获得每个contig在样品中的测序深度。对于短读长，minimap2（短读模式）、bowtie2 和 bwa-mem 效果都不错。</p>
+</dd>
+</dl>
+</li>
+</ul>
+</section>
+<section id="corgi">
+<h2>2. Corgi预测<a class="headerlink" href="#corgi" title="Link to this heading"></a></h2>
+<p>Corgi 的第一个步骤：contig 分类仅需要您的 <code class="docutils literal notranslate"><span class="pre">input-contigs.fasta</span></code> 文件。</p>
+<p>程序首先将每个 contig 分类为五个基于 RefSeq 的类别：叶绿体、线粒体、原核生物、真核生物和未知。</p>
+<p>然后输出结果：分类结果 <code class="docutils literal notranslate"><span class="pre">corgi-prediction.csv</span></code>，以及分离的 <code class="docutils literal notranslate"><span class="pre">plastids.fasta</span></code> 文件将生成在 <code class="docutils literal notranslate"><span class="pre">output/working/corgi</span></code> 目录中。
+要配置此步骤：</p>
+<blockquote>
+<div><ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">--corgi-pthreshold</span></code>: 将 contig 分类为五个类别之一的后验概率阈值。默认值为 0.5。</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">--corgi-min-length</span></code>: 要考虑的 contig 的最小长度。默认值为 1000bp。</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">--corgi-save-filter</span></code>: 运行 corgi 的默认过滤步骤以分离叶绿体 contig。我们不推荐您这么做，因为运行时间较长。</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">--corgi-batch-size</span></code>: 推理contig的物种分类时的批次大小，默认值为 1。</p></li>
+</ul>
+</div></blockquote>
+</section>
+<section id="binny">
+<h2>3. binny分箱结果<a class="headerlink" href="#binny" title="Link to this heading"></a></h2>
+<p>此步骤的输入是来自 Corgi 的 <code class="docutils literal notranslate"><span class="pre">plastids.fasta</span></code> 文件和以表格形式表示的测序平均深度，第一列是 contig id，其余列是每个样品的平均深度。</p>
+<blockquote>
+<div><ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">注意</span></code>: 如果用户未指定测序深度表格，ChloroScan 会直接使用 binny 的代码生成深度谱。其路径为 <code class="docutils literal notranslate"><span class="pre">output/working/depth_profile.txt</span></code>。</p></li>
+</ul>
+</div></blockquote>
+<p>输出目录为 <code class="docutils literal notranslate"><span class="pre">output/working/binny</span></code>。目录 <code class="docutils literal notranslate"><span class="pre">bins</span></code> 包含最终的叶绿体MAGs，格式为 fasta。
+由于 binny 是一个 snakemake 工作流，其他中间结果也会保留在 ChloroScan 中。</p>
+<p>如下展示的是一个binny运行的中间结果目录结构：</p>
+<blockquote>
+<div><div class="highlight-default notranslate"><div class="highlight"><pre><span></span>intermediary
+├── annotation_CDS_RNA_hmms_checkm.gff
+├── annotation.filt.gff
+├── assembly.contig_depth.txt
+├── assembly.formatted.fa
+├── iteration_1_contigs2clusters.tsv
+├── iteration_2_contigs2clusters.tsv
+├── iteration_3_contigs2clusters.tsv
+├── mantis_out
+│   ├── consensus_annotation.tsv
+│   ├── integrated_annotation.tsv
+│   ├── Mantis.out
+│   └── output_annotation.tsv
+├── prokka.faa
+├── prokka.ffn
+├── prokka.fna
+├── prokka.fsa
+├── prokka.gff
+├── prokka.log
+├── prokka.tbl
+├── prokka.tsv
+└── prokka.txt
+</pre></div>
+</div>
+</div></blockquote>
+<dl class="simple">
+<dt>简单来说，您需要了解以下内容：</dt><dd><ul class="simple">
+<li><p>输入的 contigs 和以表格形式表示的测序深度分别在 <code class="docutils literal notranslate"><span class="pre">assembly.formatted.fa</span></code> 和 <code class="docutils literal notranslate"><span class="pre">assembly.contig_depth.txt</span></code> 中。</p></li>
+<li><p>从 contigs 预测的开放阅读框存储在文件 <code class="docutils literal notranslate"><span class="pre">annotation_CDS_RNA_hmms_checkm.gff</span></code> 中。</p></li>
+</ul>
+</dd>
+<dt>要配置此步骤：</dt><dd><ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">--binning-clustering-hdbscan-min-sample-range</span></code>: 运行 HDBSCAN 聚类时最小样本参数的范围，默认值为 1,5,10.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">--binning-bin-quality-purity</span></code>: 保留 bin 的最小纯度阈值，默认值为 90（最大可接受污染程度为10%）。</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">--binning-bin-quality-min-completeness</span></code>: 保留 bin 的最小完整性阈值，默认值为 50（最小可接受完整度为50%）。</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">--binning-outputdir</span></code>: 存储 binny 结果的输出目录，然后再移动到 ChloroScan 输出，默认值为 <code class="docutils literal notranslate"><span class="pre">output/working/binny</span></code>。</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">--binning-universal-length-cutoff</span></code>: 应用于过滤 contigs 以进行标记基因预测和聚类的长度截止值，默认值为 1500bp。</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">--binning-clustering-epsilon-range</span></code>: HDBSCAN 的 epsilon 取值范围。我们不建议更改此值，因为效果不大，默认值为 0.250,0.000。</p></li>
+</ul>
+</dd>
+</dl>
+<p>有关 HDBSCAN 的更多信息，请参见 sklearn 文档: <a class="reference external" href="https://scikit-learn.org/stable/modules/generated/sklearn.cluster.HDBSCAN.html">https://scikit-learn.org/stable/modules/generated/sklearn.cluster.HDBSCAN.html</a>.</p>
+</section>
+<section id="cat">
+<h2>4. CAT<a class="headerlink" href="#cat" title="Link to this heading"></a></h2>
+<p>输入是中间目录中的 <code class="docutils literal notranslate"><span class="pre">assembly.formatted.fasta</span></code> 文件。它存储了长度超过 500bp 的推定叶绿体 contigs。</p>
+<p>总体上，唯一有用的信息在 <code class="docutils literal notranslate"><span class="pre">out.CAT.contig2classification.txt</span></code> 中，它是一个表格文本文件，存储了每个 contig 的分类结果、推定谱系以及每个分类单元的相应分数。</p>
+<p>这个表格看起来如下所示：</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>    <span class="c1"># contig        classification  reason  lineage lineage scores</span>
+<span class="n">k141_1000298</span>        <span class="n">no</span> <span class="n">taxid</span> <span class="n">assigned</span>       <span class="n">no</span> <span class="n">hits</span> <span class="n">to</span> <span class="n">database</span>
+<span class="n">k141_1000835</span>        <span class="n">taxid</span> <span class="n">assigned</span>  <span class="n">based</span> <span class="n">on</span> <span class="mi">2</span><span class="o">/</span><span class="mi">2</span> <span class="n">ORFs</span>       <span class="mi">1</span><span class="p">;</span><span class="mi">131567</span><span class="p">;</span><span class="mi">2</span><span class="p">;</span><span class="mi">1224</span><span class="p">;</span><span class="mi">28211</span><span class="p">;</span><span class="mi">54526</span>     <span class="mf">1.00</span><span class="p">;</span><span class="mf">1.00</span><span class="p">;</span><span class="mf">1.00</span><span class="p">;</span><span class="mf">1.00</span><span class="p">;</span><span class="mf">1.00</span><span class="p">;</span><span class="mf">1.00</span>
+<span class="n">k141_1001040</span>        <span class="n">taxid</span> <span class="n">assigned</span>  <span class="n">based</span> <span class="n">on</span> <span class="mi">2</span><span class="o">/</span><span class="mi">2</span> <span class="n">ORFs</span>       <span class="mi">1</span><span class="p">;</span><span class="mi">131567</span><span class="p">;</span><span class="mi">2</span><span class="p">;</span><span class="mi">1224</span><span class="p">;</span><span class="mi">28211</span><span class="p">;</span><span class="mi">766</span><span class="p">;</span><span class="mi">1699067</span><span class="p">;</span><span class="mi">2026788</span>       <span class="mf">1.00</span><span class="p">;</span><span class="mf">1.00</span><span class="p">;</span><span class="mf">1.00</span><span class="p">;</span><span class="mf">1.00</span><span class="p">;</span><span class="mf">1.00</span><span class="p">;</span><span class="mf">1.00</span><span class="p">;</span><span class="mf">1.00</span><span class="p">;</span><span class="mf">1.00</span>
+<span class="n">k141_1002229</span>        <span class="n">taxid</span> <span class="n">assigned</span>  <span class="n">based</span> <span class="n">on</span> <span class="mi">2</span><span class="o">/</span><span class="mi">3</span> <span class="n">ORFs</span>       <span class="mi">1</span><span class="p">;</span><span class="mi">131567</span><span class="p">;</span><span class="mi">2</span>      <span class="mf">1.00</span><span class="p">;</span><span class="mf">1.00</span><span class="p">;</span><span class="mf">1.00</span>
+<span class="o">...</span>
+</pre></div>
+</div>
+<dl class="simple">
+<dt>要配置此步骤：</dt><dd><ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">--cat-database</span></code>: CAT 数据库的路径（ <code class="docutils literal notranslate"><span class="pre">db</span></code> 目录），我们参考最新 CAT 数据库发布的目录结构。</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">--cat-taxonomy</span></code>: 分类文件的路径（ <code class="docutils literal notranslate"><span class="pre">taxonomy</span></code> / <code class="docutils literal notranslate"><span class="pre">tax</span></code> 目录）。</p></li>
+</ul>
+</dd>
+</dl>
+</section>
+<section id="id3">
+<h2>5. 总结模块<a class="headerlink" href="#id3" title="Link to this heading"></a></h2>
+<p>此步骤用于总结包括 binning 和 CAT 结果在内的元数据。它从之前的作业中获取输入以进行总结：</p>
+<blockquote>
+<div><ul class="simple">
+<li><p>contigs 的基本信息，如 GC 含量、长度、每个样本的平均深度。</p></li>
+<li><p>binning 结果：每个 contig 的 bin id。未分配的 contigs 显示为 NaN。</p></li>
+<li><p>CAT 结果：每个 contig 的分类谱系。</p></li>
+<li><p>原始输入的contigs序列。</p></li>
+</ul>
+</div></blockquote>
+<p>输出的 <code class="docutils literal notranslate"><span class="pre">summary_table.tsv</span></code> 是一个表格文本文件，存储了每个 contig 的所有上述信息。</p>
+</section>
+<section id="id4">
+<h2>5. “润色”模块<a class="headerlink" href="#id4" title="Link to this heading"></a></h2>
+<p>虽然在 binning 步骤中，binny 已经在保持 bins 纯度方面做了大量工作，但我们仍然发现它容易受到片段化 contigs 的影响，将它们附加到 bins 中。因此，我们在总结模块之后添加了一个“润色”步骤，以帮助用户检查这些 contigs 是否具有可疑的分类身份，并将它们从 bins 中移除。</p>
+<p>为了向用户发出通知，我们在此报告了 binny 未预测标记基因且 CAT 分类不明确的 contigs（即非真核或未分类）。</p>
+<p>另一种帮助用户的方法是运行 anvi’o interactive 模式，以查看 contigs 是否在系统发育图中形成均匀的簇。进一步指南：<a class="reference external" href="https://astrobiomike.github.io/genomics/metagen_anvio">https://astrobiomike.github.io/genomics/metagen_anvio</a>.
+这个步骤的输入是上一步的 <code class="docutils literal notranslate"><span class="pre">summary_table.tsv</span></code>。输出目录为 <code class="docutils literal notranslate"><span class="pre">output/working/refined_bins</span></code>。我们还将信息总结到 <code class="docutils literal notranslate"><span class="pre">output/working/refinement_contig_summary.txt</span></code> 中，以报告哪个 bin 中的哪个 contig 具有可疑身份。</p>
+</section>
+<section id="id5">
+<h2>6. 预测开放阅读框和基因蛋白序列<a class="headerlink" href="#id5" title="Link to this heading"></a></h2>
+<p>对于每个 bin，我们通过 FragGeneScanRs 预测其编码的核苷酸序列和蛋白质序列。</p>
+<p>输出位于 <code class="docutils literal notranslate"><span class="pre">output/working/cds-extraction</span></code>。目录 <code class="docutils literal notranslate"><span class="pre">cds</span></code> 包含 fna 格式的核苷酸序列，而 <code class="docutils literal notranslate"><span class="pre">faa</span></code> 包含 faa 格式的蛋白质序列。</p>
+<dl class="simple">
+<dt>我们使用以下参数配置 FragGeneScanRs：</dt><dd><ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">-t</span> <span class="pre">illumina_5</span></code>: 使用 Illumina 错误模型，错误率为 0.5%，适用于宏基因组数据。</p></li>
+</ul>
+</dd>
+</dl>
+</section>
+<section id="id6">
+<h2>7. 可视化<a class="headerlink" href="#id6" title="Link to this heading"></a></h2>
+<p>此步骤生成一些可视化图表，供用户快速浏览其数据。</p>
+<p>对于样本中的所有 MAG，我们绘制它们的 GC 含量与对数转换后的汇总平均深度的关系。汇总平均深度是指对每个 contig 在每个样本中的深度进行求和。输出位于 <code class="docutils literal notranslate"><span class="pre">output/working/visualizations</span></code>。文件 <code class="docutils literal notranslate"><span class="pre">GC_vs_depth.png</span></code> 是一个散点图，显示了样本中所有 MAG 的分布。
+我们还生成了一个小提琴图，显示样本中所有 MAG 的汇总平均深度的分布。输出位于 <code class="docutils literal notranslate"><span class="pre">output/working/visualizations</span></code>。文件 <code class="docutils literal notranslate"><span class="pre">depth_distribution.png</span></code> 是一个小提琴图，显示样本中所有 MAG 的汇总平均深度的分布。
+对于每个 bin，我们绘制其 contig 级别的分类组成饼图。文件命名为 <code class="docutils literal notranslate"><span class="pre">{Batch_name}_{bin_id}_taxonomy_composition.png</span></code>。</p>
+</section>
+<section id="id7">
+<h2>8. 总结<a class="headerlink" href="#id7" title="Link to this heading"></a></h2>
+<dl class="simple">
+<dt>ChloroScan 的最重要输出如下：</dt><dd><ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">output/corgi/plastid.fasta</span></code>，存储预测的叶绿体 contigs 的文件。</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">output/binny/bins</span></code>，存储 binny 聚类的叶绿体 MAGs 的目录，格式为 fasta。</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">output/summary/cross_ref.tsv</span></code>，存储每个 contig 的元数据的表格文本文件，包括 binning 和 CAT 结果，以及原始序列的覆盖度和 GC 含量。</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">output/visualizations</span></code>，存储用于快速查看 MAGs 的图表的目录。</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">output/cds-extraction</span></code>，存储预测的 ORFs 和氨基酸序列的目录，可用于系统发育分析。</p></li>
+</ul>
+</dd>
+</dl>
+</section>
+</section>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="how_to_run_CN.html" class="btn btn-neutral float-left" title="运行 ChloroScan" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="snk_cli_CN.html" class="btn btn-neutral float-right" title="Snakemake-相关的指令" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2024-2025, Yuhao Tong.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

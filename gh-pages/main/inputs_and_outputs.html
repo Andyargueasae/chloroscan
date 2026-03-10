@@ -1,0 +1,332 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" data-content_root="../">
+<head>
+  <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Inputs and Outputs &mdash; chloroscan  documentation</title>
+      <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=b86133f3" />
+      <link rel="stylesheet" type="text/css" href="../_static/css/theme.css?v=e59714d7" />
+      <link rel="stylesheet" type="text/css" href="../_static/copybutton.css?v=76b2166b" />
+      <link rel="stylesheet" type="text/css" href="../_static/graphviz.css?v=fd3f3429" />
+
+  
+      <script src="../_static/jquery.js?v=5d32c60e"></script>
+      <script src="../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+      <script src="../_static/documentation_options.js?v=5929fcd5"></script>
+      <script src="../_static/doctools.js?v=9a2dae69"></script>
+      <script src="../_static/sphinx_highlight.js?v=dc90522c"></script>
+      <script src="../_static/clipboard.min.js?v=a7894cd8"></script>
+      <script src="../_static/copybutton.js?v=f281be69"></script>
+    <script src="../_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="Snakemake-related command line utilities" href="snk_cli.html" />
+    <link rel="prev" title="Running ChloroScan" href="how_to_run.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="../index.html" class="icon icon-home">
+            chloroscan
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption" role="heading"><span class="caption-text">Contents:</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="installation.html">Installation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="how_to_run.html">Running ChloroScan</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">Inputs and Outputs</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#raw-input-data">1. Raw input data</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#corgi-predictions">2. Corgi predictions</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#binning-results">3. binning results</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#cat">4. CAT</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#summary-files">5. Summary files</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#refinement-module">5. Refinement module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#cds-extraction">6. cds-extraction</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#visualizations">7. Visualizations</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#summary">8. Summary.</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="snk_cli.html">Snakemake-related command line utilities</a></li>
+<li class="toctree-l1"><a class="reference internal" href="credits.html">Credits/鸣谢</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Contents:</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="installation_CN.html">下载</a></li>
+<li class="toctree-l1"><a class="reference internal" href="how_to_run_CN.html">运行 ChloroScan</a></li>
+<li class="toctree-l1"><a class="reference internal" href="inputs_and_outputs_CN.html">输入与输出</a></li>
+<li class="toctree-l1"><a class="reference internal" href="snk_cli_CN.html">Snakemake-相关的指令</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../index.html">chloroscan</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../index.html" class="icon icon-home" aria-label="Home"></a></li>
+      <li class="breadcrumb-item active">Inputs and Outputs</li>
+      <li class="wy-breadcrumbs-aside">
+            <a href="../_sources/main/inputs_and_outputs.rst.txt" rel="nofollow"> View page source</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="inputs-and-outputs">
+<h1>Inputs and Outputs<a class="headerlink" href="#inputs-and-outputs" title="Link to this heading"></a></h1>
+<p>After giving a brief command for running ChloroScan, we here explain the inputs and outputs for ChloroScan, and talk about steps in the workflow in more details. We also give some tips for users to check their data and results.</p>
+<dl class="simple">
+<dt>Overall ChloroScan takes the following inputs:</dt><dd><ul class="simple">
+<li><p>Metagenomic assembly in fasta format (required): configured by <code class="docutils literal notranslate"><span class="pre">--Inputs-assembly</span></code></p></li>
+<li><p>Depth profile in tabular format (required <code class="docutils literal notranslate"><span class="pre">tsv</span></code>, mutually exclusive with the next): configured by <code class="docutils literal notranslate"><span class="pre">--Inputs-depth-profile</span></code></p></li>
+<li><p>directory storing alignment in sorted bam format (required): configured by <code class="docutils literal notranslate"><span class="pre">--Inputs-alignment</span></code></p></li>
+<li><p>Batch name (required, just to distinguish different jobs when running in parallel to avoid overwriting): configured by <code class="docutils literal notranslate"><span class="pre">--Inputs-batch-name</span></code></p></li>
+</ul>
+</dd>
+</dl>
+<p>Commonly for a <strong>de novo</strong> run we recommend using bam directory, but if you want to rerun your analysis (perhaps adjusting parameters) with present depth profile, you can use it.</p>
+<p>The output directory structure of ChloroScan is as follows:
+(This is a typical example showing only directories)</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>chloroscan_output
+├── logging_info
+└── working
+    ├── binny
+    │   ├── bins
+    │   ├── intermediary
+    │   │   └── mantis_out
+    │   ├── job.errs.outs
+    │   ├── logs
+    │   └── tmp
+    ├── call_contig_depth
+    ├── CAT
+    ├── cds-extraction
+    │   ├── cds
+    │   └── faa
+    ├── corgi
+    ├── FragGeneScanRs
+    │   └── GFFs
+    ├── refined_bins
+    ├── summary
+    └── visualizations
+</pre></div>
+</div>
+<p>Here is a brief description of each step regarding their inputs and outputs.</p>
+<section id="raw-input-data">
+<h2>1. Raw input data<a class="headerlink" href="#raw-input-data" title="Link to this heading"></a></h2>
+<ul class="simple">
+<li><dl class="simple">
+<dt>Metagenomic assembly (.fasta)</dt><dd><p>ChloroScan takes a metagenomic assembly, which contains all kinds of genomic fragments in the sample including bacteria, archaea, eukaryotes and viruses.
+The assembly type we currently tested is short-read only, you may derive it from megahit or metaSPAdes. We plan to test the outcome with long reads in the future.
+Make sure you have contigs with unique ids, and the ids are consistent with the bam files. For example, if your contig id in fasta file is “k141_1000298”, the corresponding contig id in bam file should also be “k141_1000298”.
+Generally assemblies with on average longer contigs give better results, but it also depends on the quality of assembly.</p>
+</dd>
+</dl>
+</li>
+<li><dl class="simple">
+<dt>Depth profile in BAM format</dt><dd><p>Through mapping the reads back to the assembly, you can get the depth profile for each contig in samples. For short reads, minimap2 (short read mode), bowtie2 and bwa-mem all works well.</p>
+</dd>
+</dl>
+</li>
+</ul>
+</section>
+<section id="corgi-predictions">
+<h2>2. Corgi predictions<a class="headerlink" href="#corgi-predictions" title="Link to this heading"></a></h2>
+<p>The input of the first step: contig classification by Corgi requires your <code class="docutils literal notranslate"><span class="pre">input-contigs.fasta</span></code> only.</p>
+<p>The program firstly classifies each contig into five RefSeq-based categories: chloroplast, mitochondria, prokaryote, eukaryote, and unknown.</p>
+<p>Then the outputs: classification results: <code class="docutils literal notranslate"><span class="pre">corgi-prediction.csv</span></code>, and the isolated <code class="docutils literal notranslate"><span class="pre">plastids.fasta</span></code> file will be generated in the <code class="docutils literal notranslate"><span class="pre">output/working/corgi</span></code> directory.</p>
+<dl class="simple">
+<dt>To configure this step:</dt><dd><ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">--corgi-pthreshold</span></code>: the posterior probability threshold to classify a contig into one of the five categories. Default is 0.5.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">--corgi-min-length</span></code>: minimum length of contigs to be considered. Default is 1000bp.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">--corgi-save-filter</span></code>: run corgi’s default filtering step to isolate plastid contigs, <strong>not recommended</strong> due to long runtime.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">--corgi-batch-size</span></code>: batch size when inferring contigs, default is 1.</p></li>
+</ul>
+</dd>
+</dl>
+</section>
+<section id="binning-results">
+<h2>3. binning results<a class="headerlink" href="#binning-results" title="Link to this heading"></a></h2>
+<p>The inputs of this step is the <code class="docutils literal notranslate"><span class="pre">plastids.fasta</span></code> from Corgi and the tabular depth profile with the first column the contig ids and the rest columns the average depths in each sample.</p>
+<blockquote>
+<div><ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">Note</span></code>: if users did not specify the depth table, ChloroScan directly incorporates the code from binny to generate depth profile. It’s path is <code class="docutils literal notranslate"><span class="pre">output/working/depth_profile.txt</span></code>.</p></li>
+</ul>
+</div></blockquote>
+<p>The output directory of binny is in <code class="docutils literal notranslate"><span class="pre">output/working/binny</span></code>. The directory <code class="docutils literal notranslate"><span class="pre">bins</span></code> contains the final plastid MAGs in fasta format.</p>
+<p>Meanwhile because binny is a snakemake workflow, other intermediary results are also retained in ChloroScan.</p>
+<p>Here is a typical example of it:</p>
+<blockquote>
+<div><div class="highlight-default notranslate"><div class="highlight"><pre><span></span>intermediary
+├── annotation_CDS_RNA_hmms_checkm.gff
+├── annotation.filt.gff
+├── assembly.contig_depth.txt
+├── assembly.formatted.fa
+├── iteration_1_contigs2clusters.tsv
+├── iteration_2_contigs2clusters.tsv
+├── iteration_3_contigs2clusters.tsv
+├── mantis_out
+│   ├── consensus_annotation.tsv
+│   ├── integrated_annotation.tsv
+│   ├── Mantis.out
+│   └── output_annotation.tsv
+├── prokka.faa
+├── prokka.ffn
+├── prokka.fna
+├── prokka.fsa
+├── prokka.gff
+├── prokka.log
+├── prokka.tbl
+├── prokka.tsv
+└── prokka.txt
+</pre></div>
+</div>
+</div></blockquote>
+<dl class="simple">
+<dt>To simply, here are the things you need to know:</dt><dd><ul class="simple">
+<li><p>The input contigs and depth profile in tabular format are in <code class="docutils literal notranslate"><span class="pre">assembly.formatted.fa</span></code> and <code class="docutils literal notranslate"><span class="pre">assembly.contig_depth.txt</span></code> respectively.</p></li>
+<li><p>The predicted open reading frames from contigs are dumped in the file <code class="docutils literal notranslate"><span class="pre">annotation_CDS_RNA_hmms_checkm.gff</span></code>.</p></li>
+</ul>
+</dd>
+<dt>To configure this step:</dt><dd><ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">--binning-clustering-hdbscan-min-sample-range</span></code>: the range of minimum samples parameter when running HDBSCAN clustering, default is 1,5,10.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">--binning-bin-quality-purity</span></code>: the minimum purity (i.e. max contamination) threshold for a bin to be retained, default is 90.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">--binning-bin-quality-min-completeness</span></code>: the minimum completeness threshold for a bin to be retained, default is 50.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">--binning-outputdir</span></code>: the output directory to store binny results before moving it to ChloroScan output, default is <code class="docutils literal notranslate"><span class="pre">output/working/binny</span></code>.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">--binning-universal-length-cutoff</span></code>: the length cutoff applied to filter contigs for marker gene prediction and clustering, default is 1500bp.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">--binning-clustering-epsilon-range</span></code>: the epsilon range for HDBSCAN. We do not recommend changing this, as it shows minimal effect, default is 0.250,0.000.</p></li>
+</ul>
+</dd>
+</dl>
+<p>For further information on HDBSCAN, see the sklearn docs: <a class="reference external" href="https://scikit-learn.org/stable/modules/generated/sklearn.cluster.HDBSCAN.html">https://scikit-learn.org/stable/modules/generated/sklearn.cluster.HDBSCAN.html</a>.</p>
+</section>
+<section id="cat">
+<h2>4. CAT<a class="headerlink" href="#cat" title="Link to this heading"></a></h2>
+<p>The input is the <code class="docutils literal notranslate"><span class="pre">assembly.formatted.fasta</span></code> from the intermediary directory. It stores putative plastid contigs longer than 500bp.</p>
+<p>Overall the only useful information is in <code class="docutils literal notranslate"><span class="pre">out.CAT.contig2classification.txt</span></code>, it is a tabular text file storing the classification outcome, putative lineage and the corresponding scores for each taxon for each contig.</p>
+<p>It looks like this:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>    <span class="c1"># contig        classification  reason  lineage lineage scores</span>
+<span class="n">k141_1000298</span>        <span class="n">no</span> <span class="n">taxid</span> <span class="n">assigned</span>       <span class="n">no</span> <span class="n">hits</span> <span class="n">to</span> <span class="n">database</span>
+<span class="n">k141_1000835</span>        <span class="n">taxid</span> <span class="n">assigned</span>  <span class="n">based</span> <span class="n">on</span> <span class="mi">2</span><span class="o">/</span><span class="mi">2</span> <span class="n">ORFs</span>       <span class="mi">1</span><span class="p">;</span><span class="mi">131567</span><span class="p">;</span><span class="mi">2</span><span class="p">;</span><span class="mi">1224</span><span class="p">;</span><span class="mi">28211</span><span class="p">;</span><span class="mi">54526</span>     <span class="mf">1.00</span><span class="p">;</span><span class="mf">1.00</span><span class="p">;</span><span class="mf">1.00</span><span class="p">;</span><span class="mf">1.00</span><span class="p">;</span><span class="mf">1.00</span><span class="p">;</span><span class="mf">1.00</span>
+<span class="n">k141_1001040</span>        <span class="n">taxid</span> <span class="n">assigned</span>  <span class="n">based</span> <span class="n">on</span> <span class="mi">2</span><span class="o">/</span><span class="mi">2</span> <span class="n">ORFs</span>       <span class="mi">1</span><span class="p">;</span><span class="mi">131567</span><span class="p">;</span><span class="mi">2</span><span class="p">;</span><span class="mi">1224</span><span class="p">;</span><span class="mi">28211</span><span class="p">;</span><span class="mi">766</span><span class="p">;</span><span class="mi">1699067</span><span class="p">;</span><span class="mi">2026788</span>       <span class="mf">1.00</span><span class="p">;</span><span class="mf">1.00</span><span class="p">;</span><span class="mf">1.00</span><span class="p">;</span><span class="mf">1.00</span><span class="p">;</span><span class="mf">1.00</span><span class="p">;</span><span class="mf">1.00</span><span class="p">;</span><span class="mf">1.00</span><span class="p">;</span><span class="mf">1.00</span>
+<span class="n">k141_1002229</span>        <span class="n">taxid</span> <span class="n">assigned</span>  <span class="n">based</span> <span class="n">on</span> <span class="mi">2</span><span class="o">/</span><span class="mi">3</span> <span class="n">ORFs</span>       <span class="mi">1</span><span class="p">;</span><span class="mi">131567</span><span class="p">;</span><span class="mi">2</span>      <span class="mf">1.00</span><span class="p">;</span><span class="mf">1.00</span><span class="p">;</span><span class="mf">1.00</span>
+<span class="o">...</span>
+</pre></div>
+</div>
+<dl class="simple">
+<dt>To configure this step:</dt><dd><ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">--cat-database</span></code>: path to CAT database (the <code class="docutils literal notranslate"><span class="pre">db</span></code> directory), we refer to the directory structure of the most recent CAT db release.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">--cat-taxonomy</span></code>: path to the taxonomy file (the <code class="docutils literal notranslate"><span class="pre">taxonomy</span></code> / <code class="docutils literal notranslate"><span class="pre">tax</span></code> directory).</p></li>
+</ul>
+</dd>
+</dl>
+</section>
+<section id="summary-files">
+<h2>5. Summary files<a class="headerlink" href="#summary-files" title="Link to this heading"></a></h2>
+<dl class="simple">
+<dt>This step is to summarize the metadata including binning and CAT results. It takes inputs from previous jobs to summarize:</dt><dd><ul class="simple">
+<li><p>basic information of contigs like GC contents, length, average depths in each sample.</p></li>
+<li><p>binning results: bin id for each contigs. Unbinned contigs are given as NaN.</p></li>
+<li><p>CAT results: taxonomic lineage for each contig.</p></li>
+<li><p>raw sequence.</p></li>
+</ul>
+</dd>
+</dl>
+<p>The output <code class="docutils literal notranslate"><span class="pre">summary_table.tsv</span></code> is a tabular text file storing all the above information for each contig.</p>
+</section>
+<section id="refinement-module">
+<h2>5. Refinement module<a class="headerlink" href="#refinement-module" title="Link to this heading"></a></h2>
+<p>Though in binning step, binny already takes serious efforts in maintaining the purity of bins. We still found it vulnerable to fragmental contigs by appending them into bins.</p>
+<p>So in order to give users a notification, we here reports the contigs with no marker genes predicted by binny and has ambiguous taxonomic classification by CAT (i.e. not eukaryotic or unclassified).</p>
+<p>Another way to assist users is to run anvi’o interactive mode to see if contigs form uniform clusters in the phylogram. Further guides: <a class="reference external" href="https://astrobiomike.github.io/genomics/metagen_anvio">https://astrobiomike.github.io/genomics/metagen_anvio</a>.</p>
+<p>The input is the <code class="docutils literal notranslate"><span class="pre">summary_table.tsv</span></code> from the previous step. The output directory is <code class="docutils literal notranslate"><span class="pre">output/working/refined_bins</span></code>. We also summarized the information into <code class="docutils literal notranslate"><span class="pre">output/working/refinement_contig_summary.txt</span></code> to report which contig in which bin has suspicious identity.</p>
+</section>
+<section id="cds-extraction">
+<h2>6. cds-extraction<a class="headerlink" href="#cds-extraction" title="Link to this heading"></a></h2>
+<p>For each bin we predict their coding nucleotide sequences and proteins via FragGeneScanRs.</p>
+<p>The output is in <code class="docutils literal notranslate"><span class="pre">output/working/cds-extraction</span></code>. The directory <code class="docutils literal notranslate"><span class="pre">cds</span></code> contains nucleotide sequences in fna format while <code class="docutils literal notranslate"><span class="pre">faa</span></code> contains protein sequences in faa format.</p>
+<dl class="simple">
+<dt>We configure FragGeneScanRs with the following parameters:</dt><dd><ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">-t</span> <span class="pre">illumina_5</span></code>: to use the Illumina error model with 0.5% error rate, which is suitable for metagenomic data.</p></li>
+</ul>
+</dd>
+</dl>
+</section>
+<section id="visualizations">
+<h2>7. Visualizations<a class="headerlink" href="#visualizations" title="Link to this heading"></a></h2>
+<p>This step generates some visualizations for users to have a glance at their data.</p>
+<p>For all MAGs in the sample, we plot their GC contents against their log-transformed pooled average depths. Pooled means summing up the depths in each sample for each contig. The output is in <code class="docutils literal notranslate"><span class="pre">output/working/visualizations</span></code>. The file <code class="docutils literal notranslate"><span class="pre">GC_vs_depth.png</span></code> is a scatter plot showing the distribution of all MAGs in the sample.
+We also generate a violin plot showing the distribution of pooled average depths for all MAGs in the sample. The output is in <code class="docutils literal notranslate"><span class="pre">output/working/visualizations</span></code>. The file <code class="docutils literal notranslate"><span class="pre">depth_distribution.png</span></code> is a violin plot showing the distribution of pooled average depths for all MAGs in the sample.
+For each bin, we plot their contig-level taxonomy classification in pie charts. The are named as <code class="docutils literal notranslate"><span class="pre">{Batch_name}_{bin_id}_taxonomy_composition.png</span></code>.</p>
+</section>
+<section id="summary">
+<h2>8. Summary.<a class="headerlink" href="#summary" title="Link to this heading"></a></h2>
+<dl class="simple">
+<dt>The most important outputs from ChloroScan are listed below:</dt><dd><ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">output/corgi/plastid.fasta</span></code>, file storing predicted plastid contigs.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">output/binny/bins</span></code>, directory storing binny-clustered plastid MAGs in fasta format.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">output/summary/cross_ref.tsv</span></code>, a tabular text file storing metadata for each contig including binning and CAT results, as well as raw sequence’s coverage, GC contents.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">output/visualizations</span></code>, directory storing plots for users to have a glance at their MAGs for sanity check.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">output/cds-extraction</span></code>, the directory stores the predicted ORFs and amino acid sequences, which may work for phylogenetics.</p></li>
+</ul>
+</dd>
+</dl>
+</section>
+</section>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="how_to_run.html" class="btn btn-neutral float-left" title="Running ChloroScan" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="snk_cli.html" class="btn btn-neutral float-right" title="Snakemake-related command line utilities" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2024-2025, Yuhao Tong.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>
