@@ -14,7 +14,7 @@
 
 ChloroScan 的输出目录结构如下：
 
-.. code-block:: text
+.. code-block::
 
     chloroscan_output
     ├── logging_info

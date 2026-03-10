@@ -28,7 +28,7 @@ Note we didn't upload chloroscan to conda.
 
 Besides installation, ChloroScan requires several databases: one for taxonomy classification by CAT and another for inferring plastid MAG qualities by binning.
 
-1. CAT database
+CAT database
 -------------------
 
 Your choices can be either using the CAT-prepared database which contains all proteins in NCBI's nr database. However, it is ram-taking and time-consuming when running CAT, and requires ~300GB of disk.
@@ -41,7 +41,7 @@ command to download:
 
    figshare download -o CAT_db.tar.gz 27990278
 
-2. Binny database and conda environments.
+Binny database and conda environments
 -------------------
 
 You don't need to download binny's database manually, ChloroScan will load it once you installed the conda environment for each job.

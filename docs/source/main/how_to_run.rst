@@ -27,6 +27,7 @@ You've got your contigs, mapping files in bam and configuration files. You now c
 Sometimes you may also wish to get a tabular represented depth profile. It looks like:
 
 .. code-block::
+
    S0C861	3.52491757
    S0C1664	2.73124830
    S0C2713	12.64139886
@@ -178,25 +179,25 @@ The whole command space of ChloroScan is shown below:
     │                                                                 [default: kronatools]    │
     ╰──────────────────────────────────────────────────────────────────────────────────────────╯
 Below lists those arguments for ChloroScan.
-* ``--Inputs-assembly``: Path to fasta format assembly of contigs from all sorts of organisms.
-* ``--Inputs-depth-txt``: Path to a tab-separated text storing abundance of each contig in the sample. The first column is the contig id, and the second column is the average depth of contig. We also accept this format with the command changed into ``--Inputs-depth-profile``.
-* ``--Inputs-alignment``: Path to the folder containing alignment files of the contigs. The alignment files should be in bam format, and named as "sample_name.bam". The sample name will be extracted from the bam file name by removing the ".bam" suffix. The sample name will be used in the downstream analysis and output files.
-* ``--Inputs-batch-name``: Name of the batch. This will be used in the downstream analysis and output files.
-* ``--outputdir``: Path to the output directory of the workflow. The final results will be stored in this directory. The intermediate results will be stored in a subdirectory called "working" under the output directory. The default value is "output".
-* ``--tmpdir``: Path to the temporary directory of the workflow. The default value is "tmp".
-* ``--binning-universal-length-cutoff``: Length cutoff for universal binning. Contigs shorter than this length will be filtered out before binning. The default value is 1500bp.
-* ``--binning-snakemake-env``: Customized snakemake environment for binny to run. If not specified, the default conda environment will be used.
-* ``--binning-mantis-env``: Customized Mantis virtual environment to have mantis_pfa installed, annotating genes. If not specified, the default conda environment will be used.
-* ``--binning-outputdir``: Path to the output directory of the binning. The default value is "binny_output".
-* ``--binning-clustering-epsilon-range``: Range of epsilon values for HDBSCAN clustering. The default value is "0.250,0.000".
-* ``--binning-clustering-hdbscan-min-sample-range``: Range of min_samples values for HDBSCAN clustering, larger value means larger MAGs. The default value is "1,4,7,10".
-* ``--binning-bin-quality-purity``: Minimum purity for bin quality. The default value is 95.
-* ``--binning-bin-quality-starting-completeness``: Starting completeness for bin quality. Binny uses a sliding completeness to filter bins. The default value is 92.5.
-* ``--binning-bin-quality-min-completeness``: Minimum completeness for bin quality. The default value is 72.5.
-* ``--corgi-min-length``: Minimum length of contigs to be processed by CORGI. The default value is 500bp.
-* ``--corgi-save-filter``: Save the filtered contigs by CORGI (Note: may take long time). The default value is no-corgi-save-filter.
-* ``--corgi-batch-size``: Batch size for CORGI to infer contigs' taxonomic labels. The default value is 1.
-* ``--corgi-pthreshold``: P-value threshold for CORGI to determine if the contigs category is authentically plastidial or something else. The default value is 0.9.
-* ``--cat-database``: Path to the database of CAT saving diamond-processed protein sequences. The default value is "PATH/TO/CAT_db/db".
-* ``--cat-taxonomy``: Path to the taxonomy labels of the CAT database. The default value is "PATH/TO/CAT_db/tax".
-* ``--krona-env``: Path to the Krona environment. The default value is "kronatools". **Now commonly we don't need to set up this**.
+ - ``--Inputs-assembly``: Path to fasta format assembly of contigs from all sorts of organisms.
+ - ``--Inputs-depth-txt``: Path to a tab-separated text storing abundance of each contig in the sample. The first column is the contig id, and the second column is the average depth of contig. We also accept this format with the command changed into ``--Inputs-depth-profile``.
+ - ``--Inputs-alignment``: Path to the folder containing alignment files of the contigs. The alignment files should be in bam format, and named as "sample_name.bam". The sample name will be extracted from the bam file name by removing the ".bam" suffix. The sample name will be used in the downstream analysis and output files.
+ - ``--Inputs-batch-name``: Name of the batch. This will be used in the downstream analysis and output files.
+ - ``--outputdir``: Path to the output directory of the workflow. The final results will be stored in this directory. The intermediate results will be stored in a subdirectory called "working" under the output directory. The default value is "output".
+ - ``--tmpdir``: Path to the temporary directory of the workflow. The default value is "tmp".
+ - ``--binning-universal-length-cutoff``: Length cutoff for universal binning. Contigs shorter than this length will be filtered out before binning. The default value is 1500bp.
+ - ``--binning-snakemake-env``: Customized snakemake environment for binny to run. If not specified, the default conda environment will be used.
+ - ``--binning-mantis-env``: Customized Mantis virtual environment to have mantis_pfa installed, annotating genes. If not specified, the default conda environment will be used.
+ - ``--binning-outputdir``: Path to the output directory of the binning. The default value is "binny_output".
+ - ``--binning-clustering-epsilon-range``: Range of epsilon values for HDBSCAN clustering. The default value is "0.250,0.000".
+ - ``--binning-clustering-hdbscan-min-sample-range``: Range of min_samples values for HDBSCAN clustering, larger value means larger MAGs. The default value is "1,4,7,10".
+ - ``--binning-bin-quality-purity``: Minimum purity for bin quality. The default value is 95.
+ - ``--binning-bin-quality-starting-completeness``: Starting completeness for bin quality. Binny uses a sliding completeness to filter bins. The default value is 92.5.
+ - ``--binning-bin-quality-min-completeness``: Minimum completeness for bin quality. The default value is 72.5.
+ - ``--corgi-min-length``: Minimum length of contigs to be processed by CORGI. The default value is 500bp.
+ - ``--corgi-save-filter``: Save the filtered contigs by CORGI (Note: may take long time). The default value is no-corgi-save-filter.
+ - ``--corgi-batch-size``: Batch size for CORGI to infer contigs' taxonomic labels. The default value is 1.
+ - ``--corgi-pthreshold``: P-value threshold for CORGI to determine if the contigs category is authentically plastidial or something else. The default value is 0.9.
+ - ``--cat-database``: Path to the database of CAT saving diamond-processed protein sequences. The default value is "PATH/TO/CAT_db/db".
+ - ``--cat-taxonomy``: Path to the taxonomy labels of the CAT database. The default value is "PATH/TO/CAT_db/tax".
+ - ``--krona-env``: Path to the Krona environment. The default value is "kronatools". **Now commonly we don't need to set up this**.

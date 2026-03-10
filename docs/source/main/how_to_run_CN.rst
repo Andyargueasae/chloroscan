@@ -5,6 +5,7 @@
 
 ChloroScan 专注于叶绿体基因组 MAGs 的恢复，特别是 ``光合微藻和大型藻类，及其衍生的复杂质体，例如硅藻和定鞭藻``。它主要需要的输入是 contigs 及其测序深度。
 在大多数情况下，默认设置就能很好地工作，但你也可以为每个步骤配置参数。在这里，我们将简要介绍每个步骤的输入和输出，以及你可以为每个步骤配置的参数。
+
 1. 数据中是否存在叶绿体？
 ======================================
 
@@ -175,26 +176,27 @@ ChloroScan 的完整命令空间如下所示：
     │                                                                 environment.             │
     │                                                                 [default: kronatools]    │
     ╰──────────────────────────────────────────────────────────────────────────────────────────╯
-如下列出了 ChloroScan 的参数。
-* ``--Inputs-assembly``: Fasta 格式的 contigs 装配文件路径，包含各种生物的 contigs。
-* ``--Inputs-depth-txt``: 样本中每个 contig 丰度的制表符分隔文本文件路径。第一列是 contig 的 ID，第二列是 contig 的平均深度。我们也接受这种格式，只需将命令更改为 ``--Inputs-depth-profile``。
-* ``--Inputs-alignment``: 包含 contigs 对齐文件的文件夹路径。对齐文件应为 bam 格式，并命名为 "sample_name.bam"。样本名称将从 bam 文件名中提取，通过去掉 ".bam" 后缀。样本名称将在下游分析和输出文件中使用。
-* ``--Inputs-batch-name``: 批次名称。该名称将在下游分析和输出文件中使用。
-* ``--outputdir``: 工作流的输出目录路径。最终结果将存储在此目录中。中间结果将存储在输出目录下名为 "working" 的子目录中。默认值为 "output"。
-* ``--tmpdir``: 工作流的临时目录路径。默认值为 "tmp"。
-* ``--binning-universal-length-cutoff``: 通用分箱的长度阈值。短于此长度的 contigs 将在分箱前被过滤。默认值为 1500bp。
-* ``--binning-snakemake-env``: 用于运行 binny 的自定义 snakemake 环境。如果未指定，将使用默认的 conda 环境。
-* ``--binning-mantis-env``: 用于安装 mantis_pfa 并注释基因的自定义 Mantis 虚拟环境。如果未指定，将使用默认的 conda 环境。
-* ``--binning-outputdir``: 分箱的输出目录路径。默认值为 "binny_output"。
-* ``--binning-clustering-epsilon-range``: HDBSCAN 聚类中重要的 epsilon的取值范围。默认值为 "0.250,0.000"。
-* ``--binning-clustering-hdbscan-min-sample-range``: HDBSCAN 聚类中 min_samples 的取值范围，较大的值意味着较大的 MAGs。默认值为 "1,4,7,10"。
-* ``--binning-bin-quality-purity``: 分箱质量的最小纯度。默认值为 95。
-* ``--binning-bin-quality-starting-completeness``: 分箱质量的起始完整性。Binny 使用滑动完整性来过滤分箱。默认值为 92.5。
-* ``--binning-bin-quality-min-completeness``: 分箱质量的最小完整性。默认值为 72.5。
-* ``--corgi-min-length``: CORGI 处理的 contigs 的最小长度。默认值为 500bp。
-* ``--corgi-save-filter``: 保存 CORGI 过滤后的 contigs（注意：可能需要较长时间）。默认值为 no-corgi-save-filter。
-* ``--corgi-batch-size``: CORGI 推断 contigs 分类标签的批次大小。默认值为 1。
-* ``--corgi-pthreshold``: CORGI 判断 contigs 类别是否为真正的叶绿体或其他类别的 P 值阈值。默认值为 0.9。
-* ``--cat-database``: CAT 数据库的路径，保存经过 diamond 处理的蛋白质序列。默认值为 "PATH/TO/CAT_db/db"。
-* ``--cat-taxonomy``: CAT 数据库的分类标签路径。默认值为 "PATH/TO/CAT_db/tax"。
-* ``--krona-env``: Krona 环境的路径。默认值为 "kronatools"。 **现在通常不需要设置此项**。
+
+以下列出了 ChloroScan 的所有参数。
+ - ``--Inputs-assembly``: Fasta 格式的 contigs 装配文件路径，包含各种生物的 contigs。
+ - ``--Inputs-depth-txt``: 样本中每个 contig 丰度的制表符分隔文本文件路径。第一列是 contig 的 ID，第二列是 contig 的平均深度。我们也接受这种格式，只需将命令更改为 ``--Inputs-depth-profile``。
+ - ``--Inputs-alignment``: 包含 contigs 对齐文件的文件夹路径。对齐文件应为 bam 格式，并命名为 "sample_name.bam"。样本名称将从 bam 文件名中提取，通过去掉 ".bam" 后缀。样本名称将在下游分析和输出文件中使用。
+ - ``--Inputs-batch-name``: 批次名称。该名称将在下游分析和输出文件中使用。
+ - ``--outputdir``: 工作流的输出目录路径。最终结果将存储在此目录中。中间结果将存储在输出目录下名为 "working" 的子目录中。默认值为 "output"。
+ - ``--tmpdir``: 工作流的临时目录路径。默认值为 "tmp"。
+ - ``--binning-universal-length-cutoff``: 通用分箱的长度阈值。短于此长度的 contigs 将在分箱前被过滤。默认值为 1500bp。
+ - ``--binning-snakemake-env``: 用于运行 binny 的自定义 snakemake 环境。如果未指定，将使用默认的 conda 环境。
+ - ``--binning-mantis-env``: 用于安装 mantis_pfa 并注释基因的自定义 Mantis 虚拟环境。如果未指定，将使用默认的 conda 环境。
+ - ``--binning-outputdir``: 分箱的输出目录路径。默认值为 "binny_output"。
+ - ``--binning-clustering-epsilon-range``: HDBSCAN 聚类中重要的 epsilon的取值范围。默认值为 "0.250,0.000"。
+ - ``--binning-clustering-hdbscan-min-sample-range``: HDBSCAN 聚类中 min_samples 的取值范围，较大的值意味着较大的 MAGs。默认值为 "1,4,7,10"。
+ - ``--binning-bin-quality-purity``: 分箱质量的最小纯度。默认值为 95。
+ - ``--binning-bin-quality-starting-completeness``: 分箱质量的起始完整性。Binny 使用滑动完整性来过滤分箱。默认值为 92.5。
+ - ``--binning-bin-quality-min-completeness``: 分箱质量的最小完整性。默认值为 72.5。
+ - ``--corgi-min-length``: CORGI 处理的 contigs 的最小长度。默认值为 500bp。
+ - ``--corgi-save-filter``: 保存 CORGI 过滤后的 contigs（注意：可能需要较长时间）。默认值为 no-corgi-save-filter。
+ - ``--corgi-batch-size``: CORGI 推断 contigs 分类标签的批次大小。默认值为 1。
+ - ``--corgi-pthreshold``: CORGI 判断 contigs 类别是否为真正的叶绿体或其他类别的 P 值阈值。默认值为 0.9。
+ - ``--cat-database``: CAT 数据库的路径，保存经过 diamond 处理的蛋白质序列。默认值为 "PATH/TO/CAT_db/db"。
+ - ``--cat-taxonomy``: CAT 数据库的分类标签路径。默认值为 "PATH/TO/CAT_db/tax"。
+ - ``--krona-env``: Krona 环境的路径。默认值为 "kronatools"。 **现在通常不需要设置此项**。

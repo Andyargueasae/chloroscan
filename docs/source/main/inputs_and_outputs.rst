@@ -14,7 +14,7 @@ Commonly for a **de novo** run we recommend using bam directory, but if you want
 
 The output directory structure of ChloroScan is as follows:
 (This is a typical example showing only directories)
-.. code-block:: text
+.. code-block::
 
     chloroscan_output
     ├── logging_info
@@ -79,7 +79,7 @@ Meanwhile because binny is a snakemake workflow, other intermediary results are 
 
 Here is a typical example of it:
 
- .. code-block:: text
+ .. code-block::
 
     intermediary
     ├── annotation_CDS_RNA_hmms_checkm.gff

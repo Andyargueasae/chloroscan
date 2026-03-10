@@ -28,7 +28,7 @@
 
 除了安装，ChloroScan 还需要几个数据库：一个用于 CAT 的分类学分类，另一个用于通过分箱推断质体 MAG 的质量。
 
-1. CAT 数据库
+CAT 数据库
 -------------------
 
 您的选择可以是使用包含 NCBI nr 数据库中所有蛋白质的 CAT 预处理数据库。然而，在运行 CAT 时，它占用大量内存且耗时，并且需要约 300GB 的磁盘空间。
@@ -41,7 +41,7 @@
 
    figshare download -o CAT_db.tar.gz 27990278
 
-2. Binny 数据库和 conda 环境
+Binny 数据库和 conda 环境
 -------------------
 
 您无需手动下载 binny 的数据库，ChloroScan 会在为每个作业安装 conda 环境后自动加载它。
