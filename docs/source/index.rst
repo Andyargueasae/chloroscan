@@ -28,8 +28,6 @@ Table of contents
 
 .. toctree::
    :maxdepth: 2
-   :caption: Contents:
-   
    main/installation_CN
    main/how_to_run_CN
    main/inputs_and_outputs_CN
