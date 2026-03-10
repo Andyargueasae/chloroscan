@@ -232,6 +232,8 @@ def run_workflow(tmpdir: Path):
                 input_batch_name,
                 "--outputdir",
                 output_dir,
+                "--corgi-min-length=500",
+                "--corgi-pthreshold=0.3",
                 "--cat-database={}".format(CAT_db),
                 "--cat-taxonomy={}".format(CAT_tax),
                 "-c",

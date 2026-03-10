@@ -23,7 +23,7 @@ while IFS=, read -r file accession prediction probability original_id descriptio
     Plastid_Eukaryota Plasmid_Bacteria Plasmid_Archaea Plasmid_Eukaryota
 
 do 
-    if [ "$prediction" = "$plastid_key" ] && (( $(echo $Plastid $pthreshold | awk '{if ($1 >= $2) print 1;}') )); then
+    if [ "$prediction" = "$plastid_key" ] || (( $(echo $Plastid $pthreshold | awk '{if ($1 >= $2) print 1;}') )); then
         echo "$accession"
     fi
 done < <(tail -n +2 $prediction_csv) > $output_path

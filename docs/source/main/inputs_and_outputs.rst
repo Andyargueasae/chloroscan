@@ -180,6 +180,14 @@ For all MAGs in the sample, we plot their GC contents against their log-transfor
 We also generate a violin plot showing the distribution of pooled average depths for all MAGs in the sample. The output is in ``output/working/visualizations``. The file ``depth_distribution.png`` is a violin plot showing the distribution of pooled average depths for all MAGs in the sample.
 For each bin, we plot their contig-level taxonomy classification in pie charts. The are named as ``{Batch_name}_{bin_id}_taxonomy_composition.png``.
 
+Example:
+ - GC x pooled average depths:
+    .. image:: ../_static/images/Scatter_GCLogDepth.png
+    
+
+- Depth distribution:
+    .. image:: ../_static/images/LogDepth_Violin.png
+
 8. Summary.
 ============================
 The most important outputs from ChloroScan are listed below:
