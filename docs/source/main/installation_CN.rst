@@ -15,7 +15,7 @@
 
     python3 --version
 
-如果您的 Python 版本在 3.9 和 4.0 之间，您将能够继续设置虚拟环境并安装 ChloroScan。
+请确保您的 Python 版本在 3.9 和 3.12 之间，您将能够继续设置虚拟环境并安装 ChloroScan。
 
 另一个关键的包是mamba，它是您能够安装ChloroScan工作流中每一个步骤的虚拟环境的关键。您可以通过从以下链接下载 miniforge 来安装 mamba：
 

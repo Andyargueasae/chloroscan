@@ -7,7 +7,7 @@ We are still upgrading ChloroScan for better plastid MAG recovery, for the best 
 1. pip and conda/mamba
 -----------------------
 
-To install the workflow, use pip. Firstly create a virtual environment. Ensure that your machine strictly follows the python version restrictions: > 3.9 and < 4.0.
+To install the workflow, use pip. Firstly create a virtual environment. Ensure that your machine strictly follows the python version restrictions: > 3.9 and < 3.12.
 
 Run this to check if your python version is compatible:
 

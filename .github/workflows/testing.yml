@@ -20,8 +20,11 @@ jobs:
         uses: conda-incubator/setup-miniconda@v3
         with:
           miniforge-version: latest
-          mamba-version: "1.*"
           activate-environment: base
+          python-version: "3.12"
+          mamba-version: "1.5.*"
+          channels: conda-forge,bioconda
+          channel-priority: strict
 
       - name: Install dependencies for Python ${{ matrix.python-version }}
         uses: actions/setup-python@v5
