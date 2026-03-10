@@ -46,8 +46,8 @@ ChloroScan 专注于叶绿体基因组 MAGs 的恢复，特别是 ``光合微藻
       --Inputs-batch-name "my_batch" --outputdir Path/to/output --use-conda --cores=12 \
       --cat-database PATH/to/CAT_db/db --cat-taxonomy path/to/CAT_db/tax
 
-有关输入的更多详细信息，请查看 :ref:`inputs_and_outputs` 部分。
-如果你想使用我们的测试数据，可以使用 :ref:`README` 中显示的命令下载测试数据：
+有关输入的更多详细信息，请查看 ``输入和输出`` 部分。
+如果你想使用我们的测试数据，可以使用 ``README`` 中显示的命令下载测试数据：
   
 .. code-block:: bash
    

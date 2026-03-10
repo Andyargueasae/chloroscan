@@ -22,7 +22,8 @@ jobs:
           miniforge-version: latest
           activate-environment: base
           python-version: "3.12"
-          mamba-version: "1.5.*"
+          conda-version: "24.11"
+          mamba-version: "1.5.12"
           channels: conda-forge,bioconda
           channel-priority: strict
 
@@ -56,9 +57,7 @@ jobs:
           which conda
           mamba --version
           conda --version
-
-          conda config --add channels bioconda
-          conda config --set channel_priority strict
+          python --version
 
           df -H
           poetry run pytest -v -s -o faulthandler_timeout=60

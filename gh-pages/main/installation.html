@@ -1,31 +1,29 @@
+
+
 <!DOCTYPE html>
-<html class="writer-html5" lang="en">
+<html class="writer-html5" lang="en" data-content_root="../">
 <head>
   <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>ChloroScan: A metagenomic workflow to recover chloroplast genomes. &mdash; chloroscan  documentation</title>
-      <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=80d5e7a1" />
-      <link rel="stylesheet" type="text/css" href="../_static/css/theme.css?v=19f00094" />
+  <title>Installation &mdash; chloroscan  documentation</title>
+      <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=b86133f3" />
+      <link rel="stylesheet" type="text/css" href="../_static/css/theme.css?v=e59714d7" />
       <link rel="stylesheet" type="text/css" href="../_static/copybutton.css?v=76b2166b" />
-      <link rel="stylesheet" type="text/css" href="../_static/graphviz.css?v=eafc0fe6" />
+      <link rel="stylesheet" type="text/css" href="../_static/graphviz.css?v=fd3f3429" />
 
   
-  <!--[if lt IE 9]>
-    <script src="../_static/js/html5shiv.min.js"></script>
-  <![endif]-->
-  
-        <script src="../_static/jquery.js?v=5d32c60e"></script>
-        <script src="../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
-        <script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js?v=b3ba4146"></script>
-        <script src="../_static/doctools.js?v=888ff710"></script>
-        <script src="../_static/sphinx_highlight.js?v=4825356b"></script>
-        <script src="../_static/clipboard.min.js?v=a7894cd8"></script>
-        <script src="../_static/copybutton.js?v=f281be69"></script>
+      <script src="../_static/jquery.js?v=5d32c60e"></script>
+      <script src="../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+      <script src="../_static/documentation_options.js?v=5929fcd5"></script>
+      <script src="../_static/doctools.js?v=9a2dae69"></script>
+      <script src="../_static/sphinx_highlight.js?v=dc90522c"></script>
+      <script src="../_static/clipboard.min.js?v=a7894cd8"></script>
+      <script src="../_static/copybutton.js?v=f281be69"></script>
     <script src="../_static/js/theme.js"></script>
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
-    <link rel="next" title="Beginner’s tutorial" href="beginner_tutorial.html" />
+    <link rel="next" title="Running ChloroScan" href="how_to_run.html" />
     <link rel="prev" title="Welcome to chloroscan’s documentation!" href="../index.html" /> 
 </head>
 
@@ -50,14 +48,23 @@
         </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
               <p class="caption" role="heading"><span class="caption-text">Contents:</span></p>
 <ul class="current">
-<li class="toctree-l1 current"><a class="current reference internal" href="#">ChloroScan: A metagenomic workflow to recover chloroplast genomes.</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="#a-snakemake-workflow-for-mma-metagenomics-for-recovering-chloroplast-genomes">A snakemake workflow for MMA metagenomics for recovering chloroplast genomes.</a></li>
-<li class="toctree-l2"><a class="reference internal" href="#installation">Installation</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">Installation</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#pip-and-conda-mamba">1. pip and conda/mamba</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#cat-database">2. CAT database</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#binny-database-and-conda-environments">3. Binny database and conda environments</a></li>
 </ul>
 </li>
-<li class="toctree-l1"><a class="reference internal" href="beginner_tutorial.html">Beginner’s tutorial</a></li>
-<li class="toctree-l1"><a class="reference internal" href="cli.html">Command Line Interface</a></li>
-<li class="toctree-l1"><a class="reference internal" href="credits.html">Credits</a></li>
+<li class="toctree-l1"><a class="reference internal" href="how_to_run.html">Running ChloroScan</a></li>
+<li class="toctree-l1"><a class="reference internal" href="inputs_and_outputs.html">Inputs and Outputs</a></li>
+<li class="toctree-l1"><a class="reference internal" href="snk_cli.html">Snakemake-related command line utilities</a></li>
+<li class="toctree-l1"><a class="reference internal" href="credits.html">Credits/鸣谢</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Contents:</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="installation_CN.html">下载</a></li>
+<li class="toctree-l1"><a class="reference internal" href="how_to_run_CN.html">运行 ChloroScan</a></li>
+<li class="toctree-l1"><a class="reference internal" href="inputs_and_outputs_CN.html">输入与输出</a></li>
+<li class="toctree-l1"><a class="reference internal" href="snk_cli_CN.html">Snakemake-相关的指令</a></li>
 </ul>
 
         </div>
@@ -74,7 +81,7 @@
           <div role="navigation" aria-label="Page navigation">
   <ul class="wy-breadcrumbs">
       <li><a href="../index.html" class="icon icon-home" aria-label="Home"></a></li>
-      <li class="breadcrumb-item active">ChloroScan: A metagenomic workflow to recover chloroplast genomes.</li>
+      <li class="breadcrumb-item active">Installation</li>
       <li class="wy-breadcrumbs-aside">
             <a href="../_sources/main/installation.rst.txt" rel="nofollow"> View page source</a>
       </li>
@@ -84,21 +91,65 @@
           <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
            <div itemprop="articleBody">
              
-  <section id="chloroscan-a-metagenomic-workflow-to-recover-chloroplast-genomes">
-<h1>ChloroScan: A metagenomic workflow to recover chloroplast genomes.<a class="headerlink" href="#chloroscan-a-metagenomic-workflow-to-recover-chloroplast-genomes" title="Permalink to this heading"></a></h1>
-<p>Author: Yuhao Tong (The University of Melbourne)</p>
-<a class="reference external image-reference" href="https://github.com/Andyargueasae/chloroscan/badge.svg"><img alt="example workflow" src="https://github.com/Andyargueasae/chloroscan/badge.svg" /></a>
-<img alt="../_images/Flow_ChloroScan.drawio.png" src="../_images/Flow_ChloroScan.drawio.png" />
-<section id="a-snakemake-workflow-for-mma-metagenomics-for-recovering-chloroplast-genomes">
-<h2>A snakemake workflow for MMA metagenomics for recovering chloroplast genomes.<a class="headerlink" href="#a-snakemake-workflow-for-mma-metagenomics-for-recovering-chloroplast-genomes" title="Permalink to this heading"></a></h2>
-<p>This workflow is designed to recover chloroplast genomes from metagenomic data.</p>
-</section>
-<section id="installation">
-<h2>Installation<a class="headerlink" href="#installation" title="Permalink to this heading"></a></h2>
-<p>To install the workflow, use pip3:</p>
+  <section id="installation">
+<h1>Installation<a class="headerlink" href="#installation" title="Link to this heading"></a></h1>
+<p>We are still upgrading ChloroScan for better plastid MAG recovery, for the best outcomes, make sure to install latest release.</p>
+<section id="pip-and-conda-mamba">
+<h2>1. pip and conda/mamba<a class="headerlink" href="#pip-and-conda-mamba" title="Link to this heading"></a></h2>
+<p>To install the workflow, use pip. Firstly create a virtual environment. Ensure that your machine strictly follows the python version restrictions: &gt; 3.9 and &lt; 3.12.</p>
+<p>Run this to check if your python version is compatible:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>python3<span class="w"> </span>--version
+</pre></div>
+</div>
+<p>Another key component of using ChloroScan is an appropriate conda distribution, so you need to install conda/mamba via downloading miniforge from the link: <a class="reference external" href="https://github.com/conda-forge/miniforge/releases/">https://github.com/conda-forge/miniforge/releases/</a>. This will give you minimal installers of conda and mamba.</p>
+<p>Once you download the installer, run the command below to install mamba (replace the {OPERATING_SYSTEM} and {ARCHITECTURE} with your own system information, e.g., Miniforge3-Linux-x86_64.sh).:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>bash<span class="w"> </span>Miniforge3-<span class="o">{</span>OPERATING_SYSTEM<span class="o">}</span>-<span class="o">{</span>ARCHITECTURE<span class="o">}</span>.sh
+</pre></div>
+</div>
+<p>Check whether conda and mamba are intactly installed by running the commands below:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>conda<span class="w"> </span>--version
+mamba<span class="w"> </span>--version
+
+which<span class="w"> </span>mamba
+which<span class="w"> </span>conda
+</pre></div>
+</div>
+<p>Now you can proceed to set up the virtual environment and install the chloroscan.</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>python3<span class="w"> </span>-m<span class="w"> </span>venv<span class="w"> </span>chloroscan_env
+<span class="nb">source</span><span class="w"> </span>chloroscan_env/bin/activate
+</pre></div>
+</div>
 <div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>pip3<span class="w"> </span>install<span class="w"> </span>chloroscan
 </pre></div>
 </div>
+<p>Alternatively, you can create a conda environment with compatible python version, and install chloroscan in it:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>mamba<span class="w"> </span>env<span class="w"> </span>create<span class="w"> </span>-n<span class="w"> </span>chloroscan_env<span class="w"> </span><span class="nv">python</span><span class="o">=</span><span class="m">3</span>.10
+mamba<span class="w"> </span>activate<span class="w"> </span>chloroscan_env
+which<span class="w"> </span>pip<span class="p">;</span><span class="w"> </span>which<span class="w"> </span>python<span class="p">;</span><span class="w"> </span><span class="c1"># check if the pip and python are from the conda environment,</span>
+<span class="c1">#!CAUTION!: default python in your machine shouldn&#39;t be shown here, it causes head-scratching issues.</span>
+pip3<span class="w"> </span>install<span class="w"> </span>chloroscan
+pip3<span class="w"> </span>install<span class="w"> </span>chloroscan
+</pre></div>
+</div>
+<p>Besides installation, ChloroScan requires several databases: one for taxonomy classification by CAT and another for inferring plastid MAG qualities by binning.</p>
+</section>
+<section id="cat-database">
+<h2>2. CAT database<a class="headerlink" href="#cat-database" title="Link to this heading"></a></h2>
+<p>Your choices can be either using the CAT-prepared database which contains all proteins in NCBI’s nr database. However, it is ram-taking and time-consuming when running CAT, and requires ~300GB of disk.</p>
+<p>To assess plastid contig taxonomy, we recommend downloading our curated protein database consisting of all plastid genome-encoded proteins from NCBI and proteins from UniRef90 (size: ~85GB after unzipping).</p>
+<p>command to download:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>figshare<span class="w"> </span>download<span class="w"> </span>-o<span class="w"> </span>CAT_db.tar.gz<span class="w"> </span><span class="m">27990278</span>
+</pre></div>
+</div>
+</section>
+<section id="binny-database-and-conda-environments">
+<h2>3. Binny database and conda environments<a class="headerlink" href="#binny-database-and-conda-environments" title="Link to this heading"></a></h2>
+<p>You don’t need to download binny’s database manually, ChloroScan will load it once you installed the conda environment for each job.</p>
+<p>Run chloroscan with the flag “<code class="docutils literal notranslate"><span class="pre">--conda-create-envs-only</span></code>” added to setup the conda environments.</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>chloroscan<span class="w"> </span>run<span class="w"> </span>--conda-create-envs-only
+</pre></div>
+</div>
+<p>Doing so marks the end of preparation of chloroscan for running.</p>
 </section>
 </section>
 
@@ -107,13 +158,13 @@
           </div>
           <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
         <a href="../index.html" class="btn btn-neutral float-left" title="Welcome to chloroscan’s documentation!" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
-        <a href="beginner_tutorial.html" class="btn btn-neutral float-right" title="Beginner’s tutorial" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+        <a href="how_to_run.html" class="btn btn-neutral float-right" title="Running ChloroScan" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
     </div>
 
   <hr/>
 
   <div role="contentinfo">
-    <p>&#169; Copyright 2024–2025, Yuhao Tong.</p>
+    <p>&#169; Copyright 2024-2025, Yuhao Tong.</p>
   </div>
 
   Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a

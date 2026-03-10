@@ -1,31 +1,29 @@
+
+
 <!DOCTYPE html>
-<html class="writer-html5" lang="en">
+<html class="writer-html5" lang="en" data-content_root="./">
 <head>
   <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Welcome to chloroscan’s documentation! &mdash; chloroscan  documentation</title>
-      <link rel="stylesheet" type="text/css" href="_static/pygments.css?v=80d5e7a1" />
-      <link rel="stylesheet" type="text/css" href="_static/css/theme.css?v=19f00094" />
+      <link rel="stylesheet" type="text/css" href="_static/pygments.css?v=b86133f3" />
+      <link rel="stylesheet" type="text/css" href="_static/css/theme.css?v=e59714d7" />
       <link rel="stylesheet" type="text/css" href="_static/copybutton.css?v=76b2166b" />
-      <link rel="stylesheet" type="text/css" href="_static/graphviz.css?v=eafc0fe6" />
+      <link rel="stylesheet" type="text/css" href="_static/graphviz.css?v=fd3f3429" />
 
   
-  <!--[if lt IE 9]>
-    <script src="_static/js/html5shiv.min.js"></script>
-  <![endif]-->
-  
-        <script src="_static/jquery.js?v=5d32c60e"></script>
-        <script src="_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
-        <script data-url_root="./" id="documentation_options" src="_static/documentation_options.js?v=b3ba4146"></script>
-        <script src="_static/doctools.js?v=888ff710"></script>
-        <script src="_static/sphinx_highlight.js?v=4825356b"></script>
-        <script src="_static/clipboard.min.js?v=a7894cd8"></script>
-        <script src="_static/copybutton.js?v=f281be69"></script>
+      <script src="_static/jquery.js?v=5d32c60e"></script>
+      <script src="_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+      <script src="_static/documentation_options.js?v=5929fcd5"></script>
+      <script src="_static/doctools.js?v=9a2dae69"></script>
+      <script src="_static/sphinx_highlight.js?v=dc90522c"></script>
+      <script src="_static/clipboard.min.js?v=a7894cd8"></script>
+      <script src="_static/copybutton.js?v=f281be69"></script>
     <script src="_static/js/theme.js"></script>
     <link rel="index" title="Index" href="genindex.html" />
     <link rel="search" title="Search" href="search.html" />
-    <link rel="next" title="ChloroScan: A metagenomic workflow to recover chloroplast genomes." href="main/installation.html" /> 
+    <link rel="next" title="Installation" href="main/installation.html" /> 
 </head>
 
 <body class="wy-body-for-nav"> 
@@ -49,10 +47,18 @@
         </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
               <p class="caption" role="heading"><span class="caption-text">Contents:</span></p>
 <ul>
-<li class="toctree-l1"><a class="reference internal" href="main/installation.html">ChloroScan: A metagenomic workflow to recover chloroplast genomes.</a></li>
-<li class="toctree-l1"><a class="reference internal" href="main/beginner_tutorial.html">Beginner’s tutorial</a></li>
-<li class="toctree-l1"><a class="reference internal" href="main/cli.html">Command Line Interface</a></li>
-<li class="toctree-l1"><a class="reference internal" href="main/credits.html">Credits</a></li>
+<li class="toctree-l1"><a class="reference internal" href="main/installation.html">Installation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="main/how_to_run.html">Running ChloroScan</a></li>
+<li class="toctree-l1"><a class="reference internal" href="main/inputs_and_outputs.html">Inputs and Outputs</a></li>
+<li class="toctree-l1"><a class="reference internal" href="main/snk_cli.html">Snakemake-related command line utilities</a></li>
+<li class="toctree-l1"><a class="reference internal" href="main/credits.html">Credits/鸣谢</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Contents:</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="main/installation_CN.html">下载</a></li>
+<li class="toctree-l1"><a class="reference internal" href="main/how_to_run_CN.html">运行 ChloroScan</a></li>
+<li class="toctree-l1"><a class="reference internal" href="main/inputs_and_outputs_CN.html">输入与输出</a></li>
+<li class="toctree-l1"><a class="reference internal" href="main/snk_cli_CN.html">Snakemake-相关的指令</a></li>
 </ul>
 
         </div>
@@ -80,38 +86,95 @@
            <div itemprop="articleBody">
              
   <section id="welcome-to-chloroscan-s-documentation">
-<h1>Welcome to chloroscan’s documentation!<a class="headerlink" href="#welcome-to-chloroscan-s-documentation" title="Permalink to this heading"></a></h1>
+<h1>Welcome to chloroscan’s documentation!<a class="headerlink" href="#welcome-to-chloroscan-s-documentation" title="Link to this heading"></a></h1>
 <p><a class="reference external" href="https://github.com/Andyargueasae/chloroscan/actions"><img alt="testing badge" src="https://github.com/Andyargueasae/chloroscan/actions/workflows/testing.yml/badge.svg" /></a> <a class="reference external" href="https://Andyargueasae.github.io/chloroscan"><img alt="docs badge" src="https://github.com/Andyargueasae/chloroscan/actions/workflows/docs.yml/badge.svg" /></a></p>
+</section>
+<section id="table-of-contents">
+<h1>Table of contents<a class="headerlink" href="#table-of-contents" title="Link to this heading"></a></h1>
 <div class="toctree-wrapper compound">
 <p class="caption" role="heading"><span class="caption-text">Contents:</span></p>
 <ul>
-<li class="toctree-l1"><a class="reference internal" href="main/installation.html">ChloroScan: A metagenomic workflow to recover chloroplast genomes.</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="main/installation.html#a-snakemake-workflow-for-mma-metagenomics-for-recovering-chloroplast-genomes">A snakemake workflow for MMA metagenomics for recovering chloroplast genomes.</a></li>
-<li class="toctree-l2"><a class="reference internal" href="main/installation.html#installation">Installation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="main/installation.html">Installation</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="main/installation.html#pip-and-conda-mamba">1. pip and conda/mamba</a></li>
+<li class="toctree-l2"><a class="reference internal" href="main/installation.html#cat-database">2. CAT database</a></li>
+<li class="toctree-l2"><a class="reference internal" href="main/installation.html#binny-database-and-conda-environments">3. Binny database and conda environments</a></li>
 </ul>
 </li>
-<li class="toctree-l1"><a class="reference internal" href="main/beginner_tutorial.html">Beginner’s tutorial</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="main/beginner_tutorial.html#data-input-and-configuration">Data Input and configuration</a></li>
-<li class="toctree-l2"><a class="reference internal" href="main/beginner_tutorial.html#explaining-the-non-required-arguments">Explaining the non-required arguments</a></li>
+<li class="toctree-l1"><a class="reference internal" href="main/how_to_run.html">Running ChloroScan</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="main/how_to_run.html#are-there-any-plastids-in-your-data">1. Are there any plastids in your data?</a></li>
+<li class="toctree-l2"><a class="reference internal" href="main/how_to_run.html#a-common-minimal-command">2. A common minimal command</a></li>
+<li class="toctree-l2"><a class="reference internal" href="main/how_to_run.html#explanations-to-arguments-in-commands">3. Explanations to arguments in commands</a></li>
 </ul>
 </li>
-<li class="toctree-l1"><a class="reference internal" href="main/cli.html">Command Line Interface</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="main/cli.html#run">run</a></li>
-<li class="toctree-l2"><a class="reference internal" href="main/cli.html#config">config</a></li>
-<li class="toctree-l2"><a class="reference internal" href="main/cli.html#env">env</a></li>
-<li class="toctree-l2"><a class="reference internal" href="main/cli.html#info">info</a></li>
-<li class="toctree-l2"><a class="reference internal" href="main/cli.html#profile">profile</a></li>
-<li class="toctree-l2"><a class="reference internal" href="main/cli.html#script">script</a></li>
-<li class="toctree-l2"><a class="reference internal" href="main/cli.html#github">github</a></li>
-<li class="toctree-l2"><a class="reference internal" href="main/cli.html#docs">docs</a></li>
+<li class="toctree-l1"><a class="reference internal" href="main/inputs_and_outputs.html">Inputs and Outputs</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="main/inputs_and_outputs.html#raw-input-data">1. Raw input data</a></li>
+<li class="toctree-l2"><a class="reference internal" href="main/inputs_and_outputs.html#corgi-predictions">2. Corgi predictions</a></li>
+<li class="toctree-l2"><a class="reference internal" href="main/inputs_and_outputs.html#binning-results">3. binning results</a></li>
+<li class="toctree-l2"><a class="reference internal" href="main/inputs_and_outputs.html#cat">4. CAT</a></li>
+<li class="toctree-l2"><a class="reference internal" href="main/inputs_and_outputs.html#summary-files">5. Summary files</a></li>
+<li class="toctree-l2"><a class="reference internal" href="main/inputs_and_outputs.html#refinement-module">5. Refinement module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="main/inputs_and_outputs.html#cds-extraction">6. cds-extraction</a></li>
+<li class="toctree-l2"><a class="reference internal" href="main/inputs_and_outputs.html#visualizations">7. Visualizations</a></li>
+<li class="toctree-l2"><a class="reference internal" href="main/inputs_and_outputs.html#summary">8. Summary.</a></li>
 </ul>
 </li>
-<li class="toctree-l1"><a class="reference internal" href="main/credits.html">Credits</a></li>
+<li class="toctree-l1"><a class="reference internal" href="main/snk_cli.html">Snakemake-related command line utilities</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="main/snk_cli.html#run">run</a></li>
+<li class="toctree-l2"><a class="reference internal" href="main/snk_cli.html#config">config</a></li>
+<li class="toctree-l2"><a class="reference internal" href="main/snk_cli.html#env">env</a></li>
+<li class="toctree-l2"><a class="reference internal" href="main/snk_cli.html#info">info</a></li>
+<li class="toctree-l2"><a class="reference internal" href="main/snk_cli.html#profile">profile</a></li>
+<li class="toctree-l2"><a class="reference internal" href="main/snk_cli.html#github">github</a></li>
+<li class="toctree-l2"><a class="reference internal" href="main/snk_cli.html#docs">docs</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="main/credits.html">Credits/鸣谢</a></li>
+</ul>
+</div>
+</section>
+<section id="id1">
+<h1>目录<a class="headerlink" href="#id1" title="Link to this heading"></a></h1>
+<div class="toctree-wrapper compound">
+<p class="caption" role="heading"><span class="caption-text">Contents:</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="main/installation_CN.html">下载</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="main/installation_CN.html#pip-conda-mamba">1. pip 和 conda/mamba</a></li>
+<li class="toctree-l2"><a class="reference internal" href="main/installation_CN.html#cat">2. CAT 数据库</a></li>
+<li class="toctree-l2"><a class="reference internal" href="main/installation_CN.html#binny-conda">3. Binny 数据库和 conda 环境</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="main/how_to_run_CN.html">运行 ChloroScan</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="main/how_to_run_CN.html#id1">1. 数据中是否存在叶绿体？</a></li>
+<li class="toctree-l2"><a class="reference internal" href="main/how_to_run_CN.html#id2">2. 常用的最简命令</a></li>
+<li class="toctree-l2"><a class="reference internal" href="main/how_to_run_CN.html#id3">3. 命令参数说明</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="main/inputs_and_outputs_CN.html">输入与输出</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="main/inputs_and_outputs_CN.html#id2">1. 输入数据</a></li>
+<li class="toctree-l2"><a class="reference internal" href="main/inputs_and_outputs_CN.html#corgi">2. Corgi预测</a></li>
+<li class="toctree-l2"><a class="reference internal" href="main/inputs_and_outputs_CN.html#binny">3. binny分箱结果</a></li>
+<li class="toctree-l2"><a class="reference internal" href="main/inputs_and_outputs_CN.html#cat">4. CAT</a></li>
+<li class="toctree-l2"><a class="reference internal" href="main/inputs_and_outputs_CN.html#id3">5. 总结模块</a></li>
+<li class="toctree-l2"><a class="reference internal" href="main/inputs_and_outputs_CN.html#id4">5. “润色”模块</a></li>
+<li class="toctree-l2"><a class="reference internal" href="main/inputs_and_outputs_CN.html#id5">6. 预测开放阅读框和基因蛋白序列</a></li>
+<li class="toctree-l2"><a class="reference internal" href="main/inputs_and_outputs_CN.html#id6">7. 可视化</a></li>
+<li class="toctree-l2"><a class="reference internal" href="main/inputs_and_outputs_CN.html#id7">8. 总结</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="main/snk_cli_CN.html">Snakemake-相关的指令</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="main/snk_cli_CN.html#config">配置/config</a></li>
+<li class="toctree-l2"><a class="reference internal" href="main/snk_cli_CN.html#env">env</a></li>
+<li class="toctree-l2"><a class="reference internal" href="main/snk_cli_CN.html#info">info</a></li>
+<li class="toctree-l2"><a class="reference internal" href="main/snk_cli_CN.html#profile">profile</a></li>
+<li class="toctree-l2"><a class="reference internal" href="main/snk_cli_CN.html#github">github</a></li>
+<li class="toctree-l2"><a class="reference internal" href="main/snk_cli_CN.html#docs">docs</a></li>
+</ul>
+</li>
 </ul>
 </div>
 </section>
 <section id="indices-and-tables">
-<h1>Indices and tables<a class="headerlink" href="#indices-and-tables" title="Permalink to this heading"></a></h1>
+<h1>Indices and tables<a class="headerlink" href="#indices-and-tables" title="Link to this heading"></a></h1>
 <ul class="simple">
 <li><p><a class="reference internal" href="genindex.html"><span class="std std-ref">Index</span></a></p></li>
 <li><p><a class="reference internal" href="py-modindex.html"><span class="std std-ref">Module Index</span></a></p></li>
@@ -123,13 +186,13 @@
            </div>
           </div>
           <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
-        <a href="main/installation.html" class="btn btn-neutral float-right" title="ChloroScan: A metagenomic workflow to recover chloroplast genomes." accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+        <a href="main/installation.html" class="btn btn-neutral float-right" title="Installation" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
     </div>
 
   <hr/>
 
   <div role="contentinfo">
-    <p>&#169; Copyright 2024–2025, Yuhao Tong.</p>
+    <p>&#169; Copyright 2024-2025, Yuhao Tong.</p>
   </div>
 
   Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a

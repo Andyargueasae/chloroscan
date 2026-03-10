@@ -10,15 +10,30 @@ Welcome to chloroscan's documentation!
    :start-after: start-badges
    :end-before: end-badges
 
+Table of contents
+==================
+
 .. toctree::
    :maxdepth: 2
    :caption: Contents:
 
    main/installation
-   main/beginner_tutorial
-   main/cli
+   main/how_to_run
+   main/inputs_and_outputs
+   main/snk_cli
    main/credits
 
+目录
+==================
+
+.. toctree::
+   :maxdepth: 2
+   :caption: Contents:
+   
+   main/installation_CN
+   main/how_to_run_CN
+   main/inputs_and_outputs_CN
+   main/snk_cli_CN
 
 Indices and tables
 ==================
