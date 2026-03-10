@@ -7,7 +7,6 @@ Snakemake-相关的指令
 * :ref:`main/snk_cli:run` - 运行 ChloroScan 流程。
 * :ref:`main/snk_cli:config` - 显示工作流程配置。
 * :ref:`main/snk_cli:env` - 访问工作流程的 conda 环境。
-* :ref:`main/snk_cli:script` - 访问工作流程脚本。
 * :ref:`main/snk_cli:info` - 显示工作流程信息。
 * :ref:`main/snk_cli:profile` - 访问工作流程配置文件。
 * :ref:`main/snk_cli:github` - 打开 ChloroScan 的 GitHub 页面。

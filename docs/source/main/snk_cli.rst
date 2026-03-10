@@ -4,14 +4,13 @@ Snakemake-related command line utilities
 
 Besides the commands used for running metagenomic analyses, ChloroScan uses `Snk <https://snk.wytamma.com/snk-cli/>`_ to create a command-line utility. Here are the available commands:
 
-* :ref:`main/cli:run` - Run the ChloroScan pipeline.
-* :ref:`main/cli:config` - Show the workflow configuration.
-* :ref:`main/cli:env` - Access the workflow conda environments.
-* :ref:`main/cli:script` - Access the workflow scripts.
-* :ref:`main/cli:info` - Show information about the workflow.
-* :ref:`main/cli:profile` - Access the workflow profiles.
-* :ref:`main/cli:github` - Launch the ChloroScan GitHub page. 
-* :ref:`main/cli:docs` - Launch the ChloroScan documentation.     
+* :ref:`main/snk_cli:run` - Run the ChloroScan pipeline.
+* :ref:`main/snk_cli:config` - Show the workflow configuration.
+* :ref:`main/snk_cli:env` - Access the workflow conda environments.
+* :ref:`main/snk_cli:info` - Show information about the workflow.
+* :ref:`main/snk_cli:profile` - Access the workflow profiles.
+* :ref:`main/snk_cli:github` - Launch the ChloroScan GitHub page. 
+* :ref:`main/snk_cli:docs` - Launch the ChloroScan documentation.     
 
 To find out more about a command, run:
 

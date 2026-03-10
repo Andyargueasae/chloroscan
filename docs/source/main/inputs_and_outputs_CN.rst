@@ -159,7 +159,7 @@ Corgi 的第一个步骤：contig 分类仅需要您的 ``input-contigs.fasta`` 
 这个步骤的输入是上一步的 ``summary_table.tsv``。输出目录为 ``output/working/refined_bins``。我们还将信息总结到 ``output/working/refinement_contig_summary.txt`` 中，以报告哪个 bin 中的哪个 contig 具有可疑身份。
 
 6. 预测开放阅读框和基因蛋白序列
-==============================
+===================================
 
 对于每个 bin，我们通过 FragGeneScanRs 预测其编码的核苷酸序列和蛋白质序列。
 

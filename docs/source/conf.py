@@ -35,7 +35,7 @@ exclude_patterns = []
 html_theme_options = {
     "github_url": "https://github.com/Andyargueasae/chloroscan",
     "repository_url": "https://github.com/Andyargueasae/chloroscan",
-    "repository_branch": "main",
+    "repository_branch": "release_v0.1.3",
     "home_page_in_toc": True,
     "path_to_docs": "docs",
     "show_navbar_depth": 2,
@@ -60,5 +60,5 @@ intersphinx_mapping = {
 # -- Options for HTML output -------------------------------------------------
 # https://www.sphinx-doc.org/en/master/usage/configuration.html#options-for-html-output
 
-html_theme = 'sphinx_rtd_theme'
+html_theme = 'sphinx_book_theme'
 html_static_path = ['_static']
