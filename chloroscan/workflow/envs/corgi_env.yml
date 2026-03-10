@@ -4,10 +4,10 @@ dependencies:
   - coreutils
   - python=3.11
   - pip<24.1
-  - click
+  - click>=8,<9
   - pip:
       - bio-corgi==0.4.1
-      - pandas==2.3.0
+      - pandas
       - torchapp==0.3.10
       - fastai==2.7.12
   
