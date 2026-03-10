@@ -39,6 +39,8 @@
     which mamba
     which conda
 
+``注意``: Mamba 和 conda 的版本会直接影响安装，作为参考，我们在开发ChloroScan的时候用的是conda=23.3.1和mamba=1.4.2。
+
 运行以下命令以设置虚拟环境并安装 ChloroScan。
 
 .. code-block:: bash

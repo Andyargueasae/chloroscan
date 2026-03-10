@@ -33,6 +33,7 @@ Check whether conda and mamba are intactly installed by running the commands bel
     which mamba
     which conda
 
+``NOTE``: Make sure mamba's version isn't > 2.0, current ChloroScan works well with mamba v1. As a reference, we developed ChloroScan under mamba v1.4.2 and conda v23.3.1.
 Now you can proceed to set up the virtual environment and install the chloroscan.
 
 .. code-block:: bash
