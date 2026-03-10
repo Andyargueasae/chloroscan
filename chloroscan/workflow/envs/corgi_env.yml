@@ -2,7 +2,7 @@ channels:
   - conda-forge
 dependencies:
   - coreutils
-  - python=3.11
+  - python=3.10
   - pip<24.1
   - click<8.0
   - pip:
