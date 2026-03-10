@@ -66,6 +66,11 @@ jobs:
           export PATH=/home/runner/mamba-cache/mamba/condabin:$PATH
           source /home/runner/mamba-cache/mamba/etc/profile.d/conda.sh
           source /home/runner/mamba-cache/mamba/etc/profile.d/mamba.sh
+
+          which mamba
+          which conda
+          mamba --version
+          conda --version
           conda activate base
 
           conda config --add channels bioconda
