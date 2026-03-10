@@ -215,6 +215,9 @@ def run_workflow(tmpdir: Path):
         output_dir = "TEST_OUT"
         conda_prefix = root_dir/"conda_envs"
 
+        if os.path.exists(conda_prefix):
+            shutil.rmtree(conda_prefix)
+
 
         sp.check_output(
             [

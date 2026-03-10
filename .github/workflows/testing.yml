@@ -64,6 +64,9 @@ jobs:
         run: |
           export CHLOROSCAN_CONDA_PREFIX=/home/runner/mamba-cache/chloroscan
           export PATH=/home/runner/mamba-cache/mamba/condabin:$PATH
+          source /home/runner/mamba-cache/mamba/etc/profile.d/conda.sh
+          source /home/runner/mamba-cache/mamba/etc/profile.d/mamba.sh
+          conda activate base
 
           conda config --add channels bioconda
           conda config --set channel_priority strict
