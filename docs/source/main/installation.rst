@@ -48,8 +48,8 @@ Alternatively, you can create a conda environment with compatible python version
 
 .. code-block:: bash
 
-    conda create -n chloroscan_env python=3.10
-    conda activate chloroscan_env
+    mamba env create -n chloroscan_env python=3.10
+    mamba activate chloroscan_env
     which pip; which python; # check if the pip and python are from the conda environment, 
     #!CAUTION!: default python in your machine shouldn't be shown here, it causes head-scratching issues.
     pip3 install chloroscan

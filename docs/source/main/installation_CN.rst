@@ -56,8 +56,8 @@
 
 .. code-block:: bash
 
-    conda create -n chloroscan_env python=3.10
-    conda activate chloroscan_env
+    mamba env create -n chloroscan_env python=3.10
+    mamba activate chloroscan_env
     which pip; which python; # 检查 pip 和 python 是否来自 conda 环境，这是必须保证的。 
     #!注意!: 系统的默认 Python （/usr/bin/python） 不应该显示在这里，否则将会导致令人头疼的问题。
     pip3 install chloroscan
