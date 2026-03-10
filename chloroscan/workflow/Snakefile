@@ -118,11 +118,13 @@ rule corgi_prediction:
         touch {output.plastid_contigs}
         
         echo "new version: corgi --input {input.seqs} --output-csv {output.corgi_out} --batch-size {params.batch_size} --min-length {params.min_length}"
-        corgi --file {input.seqs} --csv {output.corgi_out} --batch-size {params.batch_size} --min-length {params.min_length} --no-save-filtered &> {log}
+        corgi --input {input.seqs} --output-csv {output.corgi_out} --batch-size {params.batch_size} --min-length {params.min_length} &> {log}
         ls -lh {output.corgi_out}
+
+        head -2 {output.corgi_out}
         
         header=1
-        raw_plastid_contig_count=$(grep -o "plastid" {output.corgi_out} | wc -l)
+        raw_plastid_contig_count=$(grep -o ",Plastid," {output.corgi_out} | wc -l)
         plastid_contig_count=$((raw_plastid_contig_count-header))
 
         zero=0

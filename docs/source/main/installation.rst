@@ -45,7 +45,7 @@ Now you can proceed to set up the virtual environment and install the chloroscan
 
     pip3 install chloroscan
 
-Alternatively, you can create a conda environment with compatible python version, and install chloroscan in it:
+Alternatively, you can create a conda environment with compatible python version, and install chloroscan in it. Make sure that conda/mamba is initiated for bash. 
 
 .. code-block:: bash
 
@@ -53,7 +53,6 @@ Alternatively, you can create a conda environment with compatible python version
     mamba activate chloroscan_env
     which pip; which python; # check if the pip and python are from the conda environment, 
     #!CAUTION!: default python in your machine shouldn't be shown here, it causes head-scratching issues.
-    pip3 install chloroscan
     pip3 install chloroscan
 
 Besides installation, ChloroScan requires several databases: one for taxonomy classification by CAT and another for inferring plastid MAG qualities by binning.
