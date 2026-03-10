@@ -31,7 +31,7 @@ jobs:
           fi
           source "/home/runner/mamba-cache/mamba/etc/profile.d/conda.sh"
           source "/home/runner/mamba-cache/mamba/etc/profile.d/mamba.sh"
-          conda activate base
+          mamba install -y -c conda-forge mamba"<2"
           mamba --version
           which mamba
 
