@@ -30,7 +30,7 @@ jobs:
           bash Miniforge3-$(uname)-$(uname -m).sh -b -p "/home/runner/mamba-cache/mamba"
         fi
         source "/home/runner/mamba-cache/mamba/etc/profile.d/conda.sh"
-        conda install -y -c conda-forge mamba=1
+        conda install -y -c conda-forge mamba=1.4.2
         mamba --version
         which mamba
 
