@@ -14,6 +14,7 @@ Commonly for a **de novo** run we recommend using bam directory, but if you want
 
 The output directory structure of ChloroScan is as follows:
 (This is a typical example showing only directories)
+
 .. code-block::
 
     chloroscan_output

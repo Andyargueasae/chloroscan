@@ -75,7 +75,7 @@ Corgi 的第一个步骤：contig 分类仅需要您的 ``input-contigs.fasta`` 
 
 如下展示的是一个binny运行的中间结果目录结构：
 
- .. code-block:: text
+ .. code-block::
 
     intermediary
     ├── annotation_CDS_RNA_hmms_checkm.gff

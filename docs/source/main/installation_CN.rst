@@ -10,6 +10,7 @@
 要安装工作流程，请使用 pip。首先创建一个虚拟环境。确保您的计算机严格遵循 Python 版本限制：> 3.9 且 < 4.0。
 
 运行此命令以检查您的 Python 版本是否兼容：
+
 .. code-block:: bash
 
     python3 --version
@@ -48,6 +49,7 @@
     source chloroscan_env/bin/activate
 
 最后确定以上条件达成后，运行以下命令安装 ChloroScan：
+
 .. code-block:: bash
 
     pip3 install chloroscan
@@ -62,6 +64,7 @@
     #!注意!: 系统的默认 Python （/usr/bin/python） 不应该显示在这里，否则将会导致令人头疼的问题。
     pip3 install chloroscan
     pip3 install chloroscan
+    
 除了安装，ChloroScan 还需要几个数据库：一个用于 CAT 的分类学分类，另一个用于通过分箱推断质体 MAG 的质量。
 
 2. CAT 数据库
@@ -83,6 +86,7 @@
 您无需手动下载 binny 的数据库，ChloroScan 会在为每个作业安装 conda 环境后自动加载它。
 
 运行 chloroscan 并添加标志 "``--conda-create-envs-only``" 以设置 conda 环境。
+
 .. code-block:: bash
 
     chloroscan run --conda-create-envs-only
