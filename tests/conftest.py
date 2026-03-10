@@ -214,10 +214,10 @@ def run_workflow(tmpdir: Path):
         CAT_tax = root_dir/"tests"/"test-data"/"CAT_mini"/"tax"
         input_batch_name = "TEST_OUT"
         output_dir = "TEST_OUT"
-        conda_prefix = root_dir/"conda_envs"
+        # conda_prefix = root_dir/"conda_envs"
 
-        if os.path.exists(conda_prefix):
-            shutil.rmtree(conda_prefix)
+        # if os.path.exists(conda_prefix):
+        #     shutil.rmtree(conda_prefix)
 
 
         sp.check_output(
@@ -245,7 +245,7 @@ def run_workflow(tmpdir: Path):
                 "--latency-wait=15", 
                 "--directory={}".format(work_dir),
                 "--keep-target-files",
-                "--conda-prefix={}".format(conda_prefix),
+                # "--conda-prefix={}".format(conda_prefix),
                 *targets,
             ]
         )

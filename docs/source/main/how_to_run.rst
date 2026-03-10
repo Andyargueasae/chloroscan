@@ -7,14 +7,14 @@ ChloroScan is specialized for plastid genome bin recovery, particularly ``photos
 For most cases the default settings will be working well, but you can also configure the parameters for each step. Here we will briefly introduce the inputs and outputs of each step, and the parameters you can configure for each step.
 
 1. Are there any plastids in your data?
-======================================
+=======================================
 
 Photosynthetic algae/protists commonly dwell in environments like ocean waters, freshwater, lichen and humid soils. Anthropogenic environments, underground environments and sediments are less likely to have them in high abundances. So if your data come from these environments, ChloroScan may not recover any plastid MAGs.
 
 Meanwhile, if your data contain too fragmented plastid contigs with low coverage (commonly < 5.0 x), ChloroScan may still miss them. Hopefully our newer versions could resolve these issues. 
 
 2. A common minimal command
-==========================
+============================
 
 You've got your contigs, mapping files in bam and configuration files. You now can run the whole workflow in one command:
 
@@ -46,9 +46,9 @@ The first column is the contig id, and the second column is the average depth of
       --Inputs-batch-name "my_batch" --outputdir Path/to/output --use-conda --cores=12 \
       --cat-database PATH/to/CAT_db/db --cat-taxonomy path/to/CAT_db/tax
 
-For more details about the inputs, please check the :ref:`inputs_and_outputs` section.
+For more details about the inputs, please check the ``inputs_and_outputs`` section.
 
-If you want to run with our test data, you can use the commands shown in :ref:`README` to download the test data:
+If you want to run with our test data, you can use the commands shown in ``README`` to download the test data:
   
 .. code-block:: bash
    
@@ -56,7 +56,7 @@ If you want to run with our test data, you can use the commands shown in :ref:`R
 
 
 3. Explanations to arguments in commands
-========================================
+=========================================
 
 The whole command space of ChloroScan is shown below:
 
@@ -178,6 +178,7 @@ The whole command space of ChloroScan is shown below:
     │                                                                 environment.             │
     │                                                                 [default: kronatools]    │
     ╰──────────────────────────────────────────────────────────────────────────────────────────╯
+
 Below lists those arguments for ChloroScan.
  - ``--Inputs-assembly``: Path to fasta format assembly of contigs from all sorts of organisms.
  - ``--Inputs-depth-txt``: Path to a tab-separated text storing abundance of each contig in the sample. The first column is the contig id, and the second column is the average depth of contig. We also accept this format with the command changed into ``--Inputs-depth-profile``.

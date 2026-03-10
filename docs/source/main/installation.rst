@@ -5,7 +5,7 @@ Installation
 We are still upgrading ChloroScan for better plastid MAG recovery, for the best outcomes, make sure to install latest release.
 
 1. pip and conda/mamba
---------------------
+-----------------------
 
 To install the workflow, use pip. Firstly create a virtual environment. Ensure that your machine strictly follows the python version restrictions: > 3.9 and < 4.0.
 
@@ -71,7 +71,7 @@ command to download:
    figshare download -o CAT_db.tar.gz 27990278
 
 3. Binny database and conda environments
--------------------
+-----------------------------------------
 
 You don't need to download binny's database manually, ChloroScan will load it once you installed the conda environment for each job.
 

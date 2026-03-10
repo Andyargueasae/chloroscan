@@ -4,14 +4,14 @@ Snakemake-相关的指令
 
 除了用于运行宏基因组分析的命令外，ChloroScan 还使用 `Snk <https://snk.wytamma.com/snk-cli/>`_ 创建命令行工具。以下是可用的命令：
 
-* :ref:`main/cli:run` - 运行 ChloroScan 流程。
-* :ref:`main/cli:config` - 显示工作流程配置。
-* :ref:`main/cli:env` - 访问工作流程的 conda 环境。
-* :ref:`main/cli:script` - 访问工作流程脚本。
-* :ref:`main/cli:info` - 显示工作流程信息。
-* :ref:`main/cli:profile` - 访问工作流程配置文件。
-* :ref:`main/cli:github` - 打开 ChloroScan 的 GitHub 页面。
-* :ref:`main/cli:docs` - 打开 ChloroScan 文档。
+* :ref:`main/snk_cli:run` - 运行 ChloroScan 流程。
+* :ref:`main/snk_cli:config` - 显示工作流程配置。
+* :ref:`main/snk_cli:env` - 访问工作流程的 conda 环境。
+* :ref:`main/snk_cli:script` - 访问工作流程脚本。
+* :ref:`main/snk_cli:info` - 显示工作流程信息。
+* :ref:`main/snk_cli:profile` - 访问工作流程配置文件。
+* :ref:`main/snk_cli:github` - 打开 ChloroScan 的 GitHub 页面。
+* :ref:`main/snk_cli:docs` - 打开 ChloroScan 文档。
 
 要了解有关命令的更多信息，请运行：
 
@@ -194,7 +194,7 @@ ChloroScan 的帮助信息分为两个部分。
     ╰──────────────────────────────────────────────────────────────────────────────────────────╯
 
 配置/config
-=========
+============
 
 config指令可以展示工作流程的配置文件内容，您可以使用 ``--pretty``（``-p``）标志以更易读的格式显示配置。
 

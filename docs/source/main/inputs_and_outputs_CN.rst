@@ -58,10 +58,11 @@ Corgi 的第一个步骤：contig 分类仅需要您的 ``input-contigs.fasta`` 
 
 然后输出结果：分类结果 ``corgi-prediction.csv``，以及分离的 ``plastids.fasta`` 文件将生成在 ``output/working/corgi`` 目录中。
 要配置此步骤：
-    - ``--corgi-pthreshold``: 将 contig 分类为五个类别之一的后验概率阈值。默认值为 0.5。
-    - ``--corgi-min-length``: 要考虑的 contig 的最小长度。默认值为 1000bp。
-    - ``--corgi-save-filter``: 运行 corgi 的默认过滤步骤以分离叶绿体 contig。我们不推荐您这么做，因为运行时间较长。
-    - ``--corgi-batch-size``: 推理contig的物种分类时的批次大小，默认值为 1。
+
+ - ``--corgi-pthreshold``: 将 contig 分类为五个类别之一的后验概率阈值。默认值为 0.5。
+ - ``--corgi-min-length``: 要考虑的 contig 的最小长度。默认值为 1000bp。
+ - ``--corgi-save-filter``: 运行 corgi 的默认过滤步骤以分离叶绿体 contig。我们不推荐您这么做，因为运行时间较长。
+ - ``--corgi-batch-size``: 推理contig的物种分类时的批次大小，默认值为 1。
 
 3. binny分箱结果
 ============================
@@ -139,11 +140,13 @@ Corgi 的第一个步骤：contig 分类仅需要您的 ``input-contigs.fasta`` 
 ============================
 
 此步骤用于总结包括 binning 和 CAT 结果在内的元数据。它从之前的作业中获取输入以进行总结：
+
  - contigs 的基本信息，如 GC 含量、长度、每个样本的平均深度。
  - binning 结果：每个 contig 的 bin id。未分配的 contigs 显示为 NaN。
  - CAT 结果：每个 contig 的分类谱系。
  - 原始输入的contigs序列。
-输出 ``summary_table.tsv`` 是一个表格文本文件，存储了每个 contig 的所有上述信息。
+
+输出的 ``summary_table.tsv`` 是一个表格文本文件，存储了每个 contig 的所有上述信息。
 
 5. “润色”模块
 ============================
@@ -156,7 +159,7 @@ Corgi 的第一个步骤：contig 分类仅需要您的 ``input-contigs.fasta`` 
 这个步骤的输入是上一步的 ``summary_table.tsv``。输出目录为 ``output/working/refined_bins``。我们还将信息总结到 ``output/working/refinement_contig_summary.txt`` 中，以报告哪个 bin 中的哪个 contig 具有可疑身份。
 
 6. 预测开放阅读框和基因蛋白序列
-============================
+==============================
 
 对于每个 bin，我们通过 FragGeneScanRs 预测其编码的核苷酸序列和蛋白质序列。
 
