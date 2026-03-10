@@ -3,7 +3,7 @@
 Running ChloroScan
 ======================
 
-ChloroScan is specialized for plastid genome bin recovery, particularly ``photosynthetic microalgae and macroalgae and complex plastids derived from them``. The primary inputs it wants are contigs and their depth profiles.
+ChloroScan is specialized for plastid genome bin recovery, particularly ``photosynthetic microalgae and macroalgae and complex plastids derived from them, such as diatoms and haptophytes``. The primary inputs it wants are contigs and their depth profiles.
 For most cases the default settings will be working well, but you can also configure the parameters for each step. Here we will briefly introduce the inputs and outputs of each step, and the parameters you can configure for each step.
 
 1. Are there any plastids in your data?
