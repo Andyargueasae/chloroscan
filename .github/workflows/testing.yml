@@ -20,7 +20,7 @@ jobs:
         id: cache
         uses: actions/cache@v3
         with:
-          key: ${{ runner.os }}-${{ matrix.python-version }}-miniforge
+          key: ${{ runner.os }}-${{ matrix.python-version }}-miniforge-mamba1
           path: /home/runner/mamba-cache
 
       - name: Install Miniforge
@@ -29,9 +29,13 @@ jobs:
             wget -O Miniforge3.sh "https://github.com/conda-forge/miniforge/releases/latest/download/Miniforge3-$(uname)-$(uname -m).sh"
             bash Miniforge3.sh -b -p "/home/runner/mamba-cache/mamba"
           fi
+
           source "/home/runner/mamba-cache/mamba/etc/profile.d/conda.sh"
           source "/home/runner/mamba-cache/mamba/etc/profile.d/mamba.sh"
-          mamba install -y -c conda-forge mamba"<2"
+          conda activate base
+
+          mamba install -y -c conda-forge 'mamba<2'
+
           mamba --version
           which mamba
 
@@ -56,22 +60,21 @@ jobs:
           fi
 
           cargo install frag_gene_scan_rs
-
-          export PATH="$HOME/.cargo/bin:$PATH"
           echo "$HOME/.cargo/bin" >> "$GITHUB_PATH"
 
       - name: Testing
         run: |
           export CHLOROSCAN_CONDA_PREFIX=/home/runner/mamba-cache/chloroscan
           export PATH=/home/runner/mamba-cache/mamba/condabin:$PATH
+
           source /home/runner/mamba-cache/mamba/etc/profile.d/conda.sh
           source /home/runner/mamba-cache/mamba/etc/profile.d/mamba.sh
+          conda activate base
 
           which mamba
           which conda
           mamba --version
           conda --version
-          conda activate base
 
           conda config --add channels bioconda
           conda config --set channel_priority strict
