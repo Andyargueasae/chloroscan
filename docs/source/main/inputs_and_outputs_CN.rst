@@ -122,7 +122,7 @@ Corgi 的第一个步骤：contig 分类仅需要您的 ``input-contigs.fasta`` 
 
 这个表格看起来如下所示：
 
-.. code-block:: text
+.. code-block::
 
         # contig	classification	reason	lineage	lineage scores
     k141_1000298	no taxid assigned	no hits to database

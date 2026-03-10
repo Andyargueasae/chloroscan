@@ -126,7 +126,7 @@ Overall the only useful information is in ``out.CAT.contig2classification.txt``,
 
 It looks like this:
 
-.. code-block:: text
+.. code-block:: 
 
         # contig	classification	reason	lineage	lineage scores
     k141_1000298	no taxid assigned	no hits to database
