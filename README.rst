@@ -53,6 +53,7 @@ To avoid authentication issues, we recommend using the pyfigshare command-line t
 Before downloading the files, set up your own figshare account and add an api token to the file ~/.figshare/token in your server.
 
 Then run:
+
 .. code-block:: bash
 
     figshare download -o CAT_db.tar.gz 27990278
