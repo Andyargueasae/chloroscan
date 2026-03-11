@@ -93,6 +93,7 @@
 运行 chloroscan 并添加标志 "``--conda-create-envs-only``" 以设置 conda 环境。记得始终添加 "``--use-conda``" 标志以确保工作流程使用 conda 环境。您可以使用 "``--conda-prefix``" 标志指定 conda 环境的前缀，否则环境将创建在默认位置。
 
 先版本有四个参数需要一直添加： ``Inputs-assembly``、 ``Inputs-batch-name``、 ``outputdir`` 和 ``Inputs-alignment``。（您可以使用测试数据（test data）来先进行conda环境配置）
+
 .. code-block:: bash
 
     chloroscan run --use-conda --conda-create-envs-only --conda-prefix="/path/to/your/conda/envs" \

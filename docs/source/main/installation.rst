@@ -86,6 +86,7 @@ You don't need to download binny's database manually, ChloroScan will load it on
 Run chloroscan with the flag "``--conda-create-envs-only``" added to setup the conda environments. Always add the flag "``--use-conda``" to make sure the workflow uses conda environments. You can specify the prefix of conda environments with "``--conda-prefix``" flag, otherwise the environments will be created in default location.
 
 Current version of ChloroScan requires four mandatory parameters: ``Inputs-assembly``, ``Inputs-batch-name``, ``outputdir`` and ``Inputs-alignment``. (You can use test data to first do the conda environment setup)
+
 .. code-block:: bash
 
     chloroscan run --use-conda --conda-create-envs-only --conda-prefix="/path/to/your/conda/envs" \
