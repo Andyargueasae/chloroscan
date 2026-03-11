@@ -192,7 +192,7 @@ Corgi 的第一个步骤：contig 分类仅需要您的 ``input-contigs.fasta`` 
 我们还为输入的宏基因组准备了一个 krona 图，用于可视化群落级别的分类分布，输出文件为指定输出目录下的 ``Krona.html``。它将显示每个推定叶绿体 contig 的 CAT 预测分类。
 
  - 示例：
-    .. image:: ../_static/images/Krona.svg
+    .. image:: ../_static/images/krona.svg
 
 
 8. 总结
