@@ -61,7 +61,7 @@ Corgi 的第一个步骤：contig 分类仅需要您的 ``input-contigs.fasta`` 
 分类结果 ``corgi-prediction.csv`` 是一个表格文本文件，包含每个 contig 的分类结果、每个类别的后验概率以及 contig 的长度。它看起来如下所示：
 
 .. code-block:: csv
-    
+
     file,accession,prediction,probability,original_id,description,Nuclear,Mitochondrion,Plastid,Plasmid,Nuclear/Bacteria,Nuclear/Archaea,Nuclear/Eukaryota,Nuclear/Viruses,Mitochondrion/Eukaryota,Plastid/Eukaryota,Plasmid/Bacteria,Plasmid/Archaea,Plasmid/Eukaryota
     assembly.formatted.fa,k97_110,Nuclear/Bacteria,0.5487518906593323,k97_110,k97_110,0.5688353,0.00050010456,0.016087921,0.41457665,0.5487519,0.0055856705,0.006795563,0.007702232,0.0,0.0,0.41455323,2.3394885e-05,4.0987683e-08
     assembly.formatted.fa,k97_2859999,Nuclear/Bacteria,0.8199571371078491,k97_2859999,k97_2859999,0.8871814,0.001272265,0.07066683,0.040879533,0.81995714,0.0014582742,0.00072807295,0.06503786,0.0,0.0,0.04087944,9.103693e-08,1.9135307e-09
@@ -160,6 +160,7 @@ Corgi 的第一个步骤：contig 分类仅需要您的 ``input-contigs.fasta`` 
 本模块的输出表格就像如下的样子：
 
 .. code-block::
+    
     contig id	GC contents	contig depth	contig length	Taxon per Contig	markers on the contig	Contig2Bin	contig sequence
     contig_1	0.35	10.5	5000	1;131567;2;1224;28211;54526	atpA,atpB	bin1	ATGCGT...
     contig_2	0.40	20.0	3500	1;131567;2;1224;28211;766;1699067;2026788    psaA,psaC,rbcL	bin2	ATGCGT...

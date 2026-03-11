@@ -163,6 +163,7 @@ This step is to summarize the metadata including binning and CAT results. It tak
 The output table looks like: 
 
 .. code-block:: 
+
     contig id	GC contents	contig depth	contig length	Taxon per Contig	markers on the contig	Contig2Bin	contig sequence
     contig_1	0.35	10.5	5000	1;131567;2;1224;28211;54526	atpA,atpB	bin1	ATGCGT...
     contig_2	0.40	20.0	3500	1;131567;2;1224;28211;766;1699067;2026788    psaA,psaC,rbcL	bin2	ATGCGT...
@@ -214,7 +215,7 @@ For each bin, we plot their contig-level taxonomy classification (CAT-predicted)
 We also prepared a krona plot for the input metagenome, visualizing community-level taxonomy distirbution, the output is ``Krona.html`` in the specified output directory. It will show CAT-predicted taxonomy for each putative plastid contig.
 
 - Example:
-    .. image:: ../_static/images/Krona.svg
+    .. image:: ../_static/images/krona.svg
 
 8. Summary.
 ============================
