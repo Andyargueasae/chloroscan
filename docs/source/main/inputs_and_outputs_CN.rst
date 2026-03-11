@@ -42,7 +42,7 @@ ChloroScan 的输出目录结构如下：
 =================
 
 - 宏基因组组装 (.fasta)
-    ChloroScan 接受宏基因组组装，其中包含样品中各种基因组片段，包括细菌、古菌、真核生物和病毒。
+    ChloroScan 接受宏基因组组装的contigs，其中包含样品中各种基因组片段，包括细菌、古菌、真核生物和病毒。
     我们目前测试的组装类型仅限于短读长，您可以使用 megahit 或 metaSPAdes 生成。我们计划在未来测试长读长的结果。 
     在分析时，请确保您的 contigs 具有不重复的 id，并且这些 id 与 bam 文件中的 id 一致。例如，如果您的 fasta 文件中的 contig id 是 "k141_1000298"，则 bam 文件中的对应 contig id 也应为 "k141_1000298"。
     通常，平均 contig 较长的组装会产生更好的结果，但这也取决于组装的质量。
@@ -57,6 +57,16 @@ Corgi 的第一个步骤：contig 分类仅需要您的 ``input-contigs.fasta`` 
 程序首先将每个 contig 分类为五个基于 RefSeq 的类别：叶绿体、线粒体、原核生物、真核生物和未知。
 
 然后输出结果：分类结果 ``corgi-prediction.csv``，以及分离的 ``plastids.fasta`` 文件将生成在 ``output/working/corgi`` 目录中。
+
+分类结果 ``corgi-prediction.csv`` 是一个表格文本文件，包含每个 contig 的分类结果、每个类别的后验概率以及 contig 的长度。它看起来如下所示：
+
+.. code-block:: csv
+    
+    file,accession,prediction,probability,original_id,description,Nuclear,Mitochondrion,Plastid,Plasmid,Nuclear/Bacteria,Nuclear/Archaea,Nuclear/Eukaryota,Nuclear/Viruses,Mitochondrion/Eukaryota,Plastid/Eukaryota,Plasmid/Bacteria,Plasmid/Archaea,Plasmid/Eukaryota
+    assembly.formatted.fa,k97_110,Nuclear/Bacteria,0.5487518906593323,k97_110,k97_110,0.5688353,0.00050010456,0.016087921,0.41457665,0.5487519,0.0055856705,0.006795563,0.007702232,0.0,0.0,0.41455323,2.3394885e-05,4.0987683e-08
+    assembly.formatted.fa,k97_2859999,Nuclear/Bacteria,0.8199571371078491,k97_2859999,k97_2859999,0.8871814,0.001272265,0.07066683,0.040879533,0.81995714,0.0014582742,0.00072807295,0.06503786,0.0,0.0,0.04087944,9.103693e-08,1.9135307e-09
+    assembly.formatted.fa,k97_2451439,Plastid,0.8210093379020691,k97_2451439,k97_2451439,0.11955466,0.037155744,0.82100934,0.022280276,0.04770646,0.0004202699,0.04415435,0.027273588,0.0,0.0,0.022280134,1.3834504e-07,2.588508e-09
+
 要配置此步骤：
 
  - ``--corgi-pthreshold``: 将 contig 分类为五个类别之一的后验概率阈值。默认值为 0.5。
@@ -108,6 +118,7 @@ Corgi 的第一个步骤：contig 分类仅需要您的 ``input-contigs.fasta`` 
 要配置此步骤：
     - ``--binning-clustering-hdbscan-min-sample-range``: 运行 HDBSCAN 聚类时最小样本参数的范围，默认值为 1,5,10.
     - ``--binning-bin-quality-purity``: 保留 bin 的最小纯度阈值，默认值为 90（最大可接受污染程度为10%）。
+    - ``--binning-bin-quality-start-completeness``: 保留 bin 的完整性起始值，默认值为 92.5（最小可接受完整度为92.5%）。
     - ``--binning-bin-quality-min-completeness``: 保留 bin 的最小完整性阈值，默认值为 50（最小可接受完整度为50%）。
     - ``--binning-outputdir``: 存储 binny 结果的输出目录，然后再移动到 ChloroScan 输出，默认值为 ``output/working/binny``。
     - ``--binning-universal-length-cutoff``: 应用于过滤 contigs 以进行标记基因预测和聚类的长度截止值，默认值为 1500bp。
@@ -146,14 +157,23 @@ Corgi 的第一个步骤：contig 分类仅需要您的 ``input-contigs.fasta`` 
  - CAT 结果：每个 contig 的分类谱系。
  - 原始输入的contigs序列。
 
+本模块的输出表格就像如下的样子：
+
+.. code-block::
+    contig id	GC contents	contig depth	contig length	Taxon per Contig	markers on the contig	Contig2Bin	contig sequence
+    contig_1	0.35	10.5	5000	1;131567;2;1224;28211;54526	atpA,atpB	bin1	ATGCGT...
+    contig_2	0.40	20.0	3500	1;131567;2;1224;28211;766;1699067;2026788    psaA,psaC,rbcL	bin2	ATGCGT...
+    contig_3	0.38	15.0	4000	1;131567;2;	rpoC2,rpl4,rpl6	bin3	ATGCGT...
+
+
 输出的 ``summary_table.tsv`` 是一个表格文本文件，存储了每个 contig 的所有上述信息。
 
 5. “润色”模块
 ============================
 
-虽然在 binning 步骤中，binny 已经在保持 bins 纯度方面做了大量工作，但我们仍然发现它容易受到片段化 contigs 的影响，将它们附加到 bins 中。因此，我们在总结模块之后添加了一个“润色”步骤，以帮助用户检查这些 contigs 是否具有可疑的分类身份，并将它们从 bins 中移除。
+虽然在 binning 步骤中，binny 已经在保持 bins 纯度方面做了大量工作，但我们仍然发现它容易受到片段化 contigs 的影响，将污染附加到 bins 中。因此，我们在总结模块之后添加了一个“润色”步骤，以帮助用户检查这些 contigs 是否具有可疑的分类身份，并将它们从 bins 中移除。
 
-为了向用户发出通知，我们在此报告了 binny 未预测标记基因且 CAT 分类不明确的 contigs（即非真核或未分类）。
+为了向用户发出通知，我们在此报告了 binny 未预测标记基因且 CAT 分类不明确的 contigs（即非真核生物的或未被分类的）， 例如“unclassified”、 “cellular organisms”、“bacteria”等。
 
 另一种帮助用户的方法是运行 anvi'o interactive 模式，以查看 contigs 是否在系统发育图中形成均匀的簇。进一步指南：https://astrobiomike.github.io/genomics/metagen_anvio.
 这个步骤的输入是上一步的 ``summary_table.tsv``。输出目录为 ``output/working/refined_bins``。我们还将信息总结到 ``output/working/refinement_contig_summary.txt`` 中，以报告哪个 bin 中的哪个 contig 具有可疑身份。

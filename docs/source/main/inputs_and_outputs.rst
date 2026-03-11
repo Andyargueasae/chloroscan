@@ -61,6 +61,17 @@ The program firstly classifies each contig into five RefSeq-based categories: ch
 
 Then the outputs: classification results: ``corgi-prediction.csv``, and the isolated ``plastids.fasta`` file will be generated in the ``output/working/corgi`` directory.
 
+The table ``corgi-prediction.csv`` contains the contig id, the predicted category, and the posterior probability for each category. The contigs classified as chloroplast with a posterior probability above the specified threshold will be included in the ``plastids.fasta`` file.
+
+The table looks like:
+
+.. code-block:: csv
+    
+    file,accession,prediction,probability,original_id,description,Nuclear,Mitochondrion,Plastid,Plasmid,Nuclear/Bacteria,Nuclear/Archaea,Nuclear/Eukaryota,Nuclear/Viruses,Mitochondrion/Eukaryota,Plastid/Eukaryota,Plasmid/Bacteria,Plasmid/Archaea,Plasmid/Eukaryota
+    assembly.formatted.fa,k97_110,Nuclear/Bacteria,0.5487518906593323,k97_110,k97_110,0.5688353,0.00050010456,0.016087921,0.41457665,0.5487519,0.0055856705,0.006795563,0.007702232,0.0,0.0,0.41455323,2.3394885e-05,4.0987683e-08
+    assembly.formatted.fa,k97_2859999,Nuclear/Bacteria,0.8199571371078491,k97_2859999,k97_2859999,0.8871814,0.001272265,0.07066683,0.040879533,0.81995714,0.0014582742,0.00072807295,0.06503786,0.0,0.0,0.04087944,9.103693e-08,1.9135307e-09
+    assembly.formatted.fa,k97_2451439,Plastid,0.8210093379020691,k97_2451439,k97_2451439,0.11955466,0.037155744,0.82100934,0.022280276,0.04770646,0.0004202699,0.04415435,0.027273588,0.0,0.0,0.022280134,1.3834504e-07,2.588508e-09
+
 To configure this step:
     - ``--corgi-pthreshold``: the posterior probability threshold to classify a contig into one of the five categories. Default is 0.5.
     - ``--corgi-min-length``: minimum length of contigs to be considered. Default is 1000bp.
@@ -148,6 +159,14 @@ This step is to summarize the metadata including binning and CAT results. It tak
  - binning results: bin id for each contigs. Unbinned contigs are given as NaN.
  - CAT results: taxonomic lineage for each contig.
  - raw sequence.
+
+The output table looks like: 
+
+.. code-block:: 
+    contig id	GC contents	contig depth	contig length	Taxon per Contig	markers on the contig	Contig2Bin	contig sequence
+    contig_1	0.35	10.5	5000	1;131567;2;1224;28211;54526	atpA,atpB	bin1	ATGCGT...
+    contig_2	0.40	20.0	3500	1;131567;2;1224;28211;766;1699067;2026788    psaA,psaC,rbcL	bin2	ATGCGT...
+    contig_3	0.38	15.0	4000	1;131567;2;	rpoC2,rpl4,rpl6	bin3	ATGCGT...
 
 The output ``summary_table.tsv`` is a tabular text file storing all the above information for each contig.
 

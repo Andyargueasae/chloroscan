@@ -90,7 +90,7 @@
 
 您无需手动下载 binny 的数据库，ChloroScan 会在为每个作业安装 conda 环境后自动加载它。
 
-运行 chloroscan 并添加标志 "``--conda-create-envs-only``" 以设置 conda 环境。记得始终添加 "``--use-conda``" 标志以确保工作流程使用 conda 环境。您可以使用 "``--conda-prefix``" 标志指定 conda 环境的前缀，否则环境将创建在默认位置。
+运行 chloroscan 并添加标志 "``--conda-create-envs-only``" 以设置 conda 环境。记得始终添加 "``--use-conda``" 标志以确保工作流程使用 conda 环境。您可以使用 "``--conda-prefix``" 标志指定 conda 环境的前缀，否则环境将创建在默认位置。每次运行时，请确保你指定的是同一个conda prefix, 避免重复构建环境。
 
 先版本有四个参数需要一直添加： ``Inputs-assembly``、 ``Inputs-batch-name``、 ``outputdir`` 和 ``Inputs-alignment``。（您可以使用测试数据（test data）来先进行conda环境配置）
 
