@@ -3,11 +3,12 @@ channels:
 dependencies:
   - coreutils
   - python=3.11
-  - pip
+  - pip<24.1
   - click
-  - setuptools<81
   - pip:
-    - bio-corgi==0.5.0a2
+    - bio-corgi==0.4.1
     - pandas
+    - torchapp==0.3.10
     - fastai==2.7.12
+  
   

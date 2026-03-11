@@ -118,7 +118,8 @@ rule corgi_prediction:
         touch {output.plastid_contigs}
         
         echo "new version: corgi --input {input.seqs} --output-csv {output.corgi_out} --batch-size {params.batch_size} --min-length {params.min_length}"
-        corgi --input {input.seqs} --output-csv {output.corgi_out} --batch-size {params.batch_size} --min-length {params.min_length} # &> {log}
+        # corgi --input {input.seqs} --output-csv {output.corgi_out} --batch-size {params.batch_size} --min-length {params.min_length} # &> {log}
+        corgi --file {input.seqs} --csv {output.corgi_out} --batch-size {params.batch_size} --min-length {params.min_length} --no-save-filtered # &> {log}
         ls -lh {output.corgi_out}
 
         head -2 {output.corgi_out}

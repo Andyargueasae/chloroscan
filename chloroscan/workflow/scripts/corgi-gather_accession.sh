@@ -1,4 +1,4 @@
-#!_bin_bash
+#!/bin/bash
 
 # This bash script takes in two steps:
 # 1. takes in a csv file as the input to extract those contig id with a prediction to be plastidial.
@@ -6,7 +6,7 @@
 
 # This script can be transferred to either the inputing-style or snakemake script style.
 
-plastid_key="Plastid"
+plastid_key="plastid"
 bacteria_control=0.10
 
 while getopts c:o:p: flag
@@ -18,13 +18,9 @@ do
     esac
 done
 
-while IFS=, read -r file accession prediction probability original_id description Nuclear Mitochondrion \
-    Plastid Plasmid Nuclear_Bacteria Nuclear_Archaea Nuclear_Eukaryota Nuclear_Viruses Mitochondrion_Eukaryota \
-    Plastid_Eukaryota Plasmid_Bacteria Plasmid_Archaea Plasmid_Eukaryota
-
+while IFS=, read -r file accession archaea bacteria eukaryote mitochondrion plastid prediction eukaryotic prokaryotic organellar
 do 
-    if [ "$prediction" = "$plastid_key" ] || (( $(echo $Plastid $pthreshold | awk '{if ($1 >= $2) print 1;}') )); then
+    if [ "$prediction" = "$plastid_key" ] && (( $(echo $plastid $pthreshold | awk '{if ($1 >= $2) print 1;}') )); then
         echo "$accession"
     fi
 done < <(tail -n +2 $prediction_csv) > $output_path
-

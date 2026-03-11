@@ -172,9 +172,28 @@ Corgi 的第一个步骤：contig 分类仅需要您的 ``input-contigs.fasta`` 
 ============================
 此步骤生成一些可视化图表，供用户快速浏览其数据。
 
-对于样本中的所有 MAG，我们绘制它们的 GC 含量与对数转换后的汇总平均深度的关系。汇总平均深度是指对每个 contig 在每个样本中的深度进行求和。输出位于 ``output/working/visualizations``。文件 ``GC_vs_depth.png`` 是一个散点图，显示了样本中所有 MAG 的分布。
+对于样本中的所有 MAG，我们绘制它们的 GC 含量与对数转换后的汇总平均深度的关系。汇总平均深度是指对每个 contig 在每个样本中的深度进行求和。输出位于 ``output/working/visualizations/Scatter_GCLogDepth.png``。
+
+ - 示例： 
+    .. image:: ../_static/images/Scatter_GCLogDepth.png
+
+为了有效区分深度，我们对汇总平均深度进行了对数转换。正如示例所示，预期的良好 bins 应该具有均匀的深度和较少变化的 GC 含量，因此在图中形成一个紧密的簇。另一方面，具有更变量深度和 GC 含量的 bins 可能表明存在污染或错误分箱，因此在图中形成一个更分散的簇。
+
 我们还生成了一个小提琴图，显示样本中所有 MAG 的汇总平均深度的分布。输出位于 ``output/working/visualizations``。文件 ``depth_distribution.png`` 是一个小提琴图，显示样本中所有 MAG 的汇总平均深度的分布。
-对于每个 bin，我们绘制其 contig 级别的分类组成饼图。文件命名为 ``{Batch_name}_{bin_id}_taxonomy_composition.png``。
+
+ - 示例：
+    .. image:: ../_static/images/LogDepth_Violin.png
+
+对于每个 bin，我们绘制其 contig 级别的分类组成饼图。文件命名为 ``{Batch_name}_{bin_id}_taxonomy_composition.png``。 注意，CAT 可能在一个饼图中有多个分类单元，这些单元大致指向 bin 的一个分类（在这个例子中是 Haptophyte），其中一些 contigs 在更细的水平上被识别，而一些 contigs 在更粗的水平上被识别。未来参考基因组的深度采样的改进可能会有所帮助。
+
+ - 示例：
+    .. image:: ../_static/images/Taxonomy_composition.png
+
+我们还为输入的宏基因组准备了一个 krona 图，用于可视化群落级别的分类分布，输出文件为指定输出目录下的 ``Krona.html``。它将显示每个推定叶绿体 contig 的 CAT 预测分类。
+
+ - 示例：
+    .. image:: ../_static/images/Krona.svg
+
 
 8. 总结
 ============================

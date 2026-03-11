@@ -7,7 +7,7 @@
 1. pip 和 conda/mamba
 ----------------------
 
-要安装工作流程，请使用 pip。首先创建一个虚拟环境。确保您的计算机严格遵循 Python 版本限制：> 3.9 且 < 3.12。
+要安装工作流程，请使用 pip。首先创建一个虚拟环境。确保您的计算机严格遵循 Python 版本限制：> 3.9 且 < 3.12。作为参考，我们用Python 3.10.4 开发了ChloroScan。
 
 运行此命令以检查您的 Python 版本是否兼容：
 
@@ -31,6 +31,11 @@
 可以通过运行以下命令检查 conda 和 mamba 是否完整安装：
 
 .. code-block:: bash
+
+    # 为 bash 初始化 conda 和 mamba。
+    conda init bash
+    mamba init bash
+    source ~/.bashrc
 
     conda --version
     mamba --version
@@ -59,7 +64,7 @@
 .. code-block:: bash
 
     mamba env create -n chloroscan_env python=3.10
-    mamba activate chloroscan_env
+    conda activate chloroscan_env
     which pip; which python; # 检查 pip 和 python 是否来自 conda 环境，这是必须保证的。 
     #!注意!: 系统的默认 Python （/usr/bin/python） 不应该显示在这里，否则将会导致令人头疼的问题。
     pip3 install chloroscan
@@ -85,10 +90,13 @@
 
 您无需手动下载 binny 的数据库，ChloroScan 会在为每个作业安装 conda 环境后自动加载它。
 
-运行 chloroscan 并添加标志 "``--conda-create-envs-only``" 以设置 conda 环境。
+运行 chloroscan 并添加标志 "``--conda-create-envs-only``" 以设置 conda 环境。记得始终添加 "``--use-conda``" 标志以确保工作流程使用 conda 环境。您可以使用 "``--conda-prefix``" 标志指定 conda 环境的前缀，否则环境将创建在默认位置。
 
+先版本有四个参数需要一直添加： ``Inputs-assembly``、 ``Inputs-batch-name``、 ``outputdir`` 和 ``Inputs-alignment``。（您可以使用测试数据（test data）来先进行conda环境配置）
 .. code-block:: bash
 
-    chloroscan run --conda-create-envs-only
+    chloroscan run --use-conda --conda-create-envs-only --conda-prefix="/path/to/your/conda/envs" \
+        --Inputs-assembly "/path/to/your/assembly.fasta" --Inputs-batch-name "sample_name" \
+        --outputdir "/path/to/your/output_dir" --Inputs-alignment "/path/to/your/bams_directory" \
 
 坐到这儿就标志着 ChloroScan 的准备工作已经完成了，您可以开始运行它。 

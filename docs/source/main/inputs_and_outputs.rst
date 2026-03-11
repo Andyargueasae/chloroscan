@@ -176,17 +176,26 @@ We configure FragGeneScanRs with the following parameters:
 ============================
 This step generates some visualizations for users to have a glance at their data.
 
-For all MAGs in the sample, we plot their GC contents against their log-transformed pooled average depths. Pooled means summing up the depths in each sample for each contig. The output is in ``output/working/visualizations``. The file ``GC_vs_depth.png`` is a scatter plot showing the distribution of all MAGs in the sample.
-We also generate a violin plot showing the distribution of pooled average depths for all MAGs in the sample. The output is in ``output/working/visualizations``. The file ``depth_distribution.png`` is a violin plot showing the distribution of pooled average depths for all MAGs in the sample.
-For each bin, we plot their contig-level taxonomy classification in pie charts. The are named as ``{Batch_name}_{bin_id}_taxonomy_composition.png``.
+For all MAGs in the sample, we plot their GC contents against their log-transformed pooled average depths. "Pooled" means summing up the depths in each sample for each contig. The output is ``output/working/visualizations/Scatter_GClogDepth.png``. 
+To differentiate the depths effectively, we applied log transformation to the pooled average depths. As the example shows, the expected good bins should have homogeneous depth and less variable GC contents, thus forming a tight cluster in the plot. On the other hand, bins with more variable depth and GC contents may indicate contamination or misbinning, thus forming a more dispersed cluster in the plot. 
 
-Example:
- - GC x pooled average depths:
+ - Example:
     .. image:: ../_static/images/Scatter_GCLogDepth.png
-    
 
-- Depth distribution:
+We also generate a violin plot showing the distribution of pooled average depths for all MAGs in the sample. The output is in ``output/working/visualizations``. The file ``depth_distribution.png`` is a violin plot showing the distribution of pooled average depths for all MAGs in the sample.
+
+- Example:
     .. image:: ../_static/images/LogDepth_Violin.png
+
+For each bin, we plot their contig-level taxonomy classification (CAT-predicted) in pie charts. The are named as ``{Batch_name}_{bin_id}_taxonomy_composition.png``. Note that CAT may have multiple taxa in a pie chart that roughly points to a taxon of bin (in this case Haptophyte), with some contigs identified at finer level while some were at coarser level. Improved sampling of reference genomes in the future may help.
+
+- Example:
+    .. image:: ../_static/images/Taxonomy_composition.png
+
+We also prepared a krona plot for the input metagenome, visualizing community-level taxonomy distirbution, the output is ``Krona.html`` in the specified output directory. It will show CAT-predicted taxonomy for each putative plastid contig.
+
+- Example:
+    .. image:: ../_static/images/Krona.svg
 
 8. Summary.
 ============================
