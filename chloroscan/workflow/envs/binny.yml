@@ -11,4 +11,3 @@ dependencies:
   - pip:
     - numpy<2
     - nltk
-    - setuptools<81
