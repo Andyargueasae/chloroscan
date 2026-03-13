@@ -7,7 +7,7 @@ dependencies:
   - click
   - setuptools<81
   - pip:
-    - bio-corgi==0.5.0a2
+    - bio-corgi==0.5.2
     - pandas
     - fastai==2.7.12
   
