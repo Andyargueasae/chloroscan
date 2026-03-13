@@ -8,7 +8,7 @@ dependencies:
   - pandas<2.2.2
   - cython
   - pip
-  - setuptools<81
   - pip:
     - numpy<2
     - nltk
+    - setuptools<81

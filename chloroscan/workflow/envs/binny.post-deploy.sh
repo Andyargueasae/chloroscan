@@ -26,13 +26,8 @@ echo "snakemake env: $(which snakemake)"
 # Create the envs for snakemake.
 echo "which mamba: $(which mamba)"
 
-mamba create --prefix $BINNY_DIR/snakemake_env -y snakemake=7.16 unzip python=3.8 -c conda-forge -c bioconda 
+mamba create --prefix $BINNY_DIR/snakemake_env -y snakemake=7.16 unzip python=3.8 "setuptools<81" -c conda-forge -c bioconda 
 
-conda activate $BINNY_DIR/snakemake_env
-
-pip install setuptools<81
-
-conda deactivate
 # Create envs for other binny rules.
 # snakemake --use-conda --conda-create-envs-only --conda-prefix $DEFAULT_BINNY_CONDASOURCE --configfile $default_binny_config_path --snakefile $BINNY_DIR/Snakefile --cores 1 --verbose
 
