@@ -324,7 +324,6 @@ rule mantis_checkm_marker_sets:
     input:
         proteins=os.path.join(OUTPUTDIR, "intermediary/prokka.faa"),
         mantis_cfg=config["mantis_cfg"],
-        # nltk_ready=config["nltk_ready"]
     output:
         os.path.join(OUTPUTDIR, "intermediary/mantis_out/output_annotation.tsv"),
         os.path.join(OUTPUTDIR, "intermediary/mantis_out/integrated_annotation.tsv"),
@@ -347,13 +346,7 @@ rule mantis_checkm_marker_sets:
     message:
         "MANTIS: Running MANTIS with CheckM marker sets."
     shell:
-        r"""
-        set -euxo pipefail
-
-        echo "python: $(which python)" | tee -a {log}
-        echo "mantis: $(which mantis || true)" | tee -a {log}
-
-        export NLTK_DATA={params.nltk_data_dir}
+        """
         mantis setup -mc {params.binny_cfg} --no_taxonomy 2>&1 | tee -a {log}
         mantis check -mc {params.binny_cfg} --no_taxonomy 2>&1 | tee -a {log}
         mantis run -i {input.proteins} \
