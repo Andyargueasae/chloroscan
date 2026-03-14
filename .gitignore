@@ -166,7 +166,6 @@ chloroscan/.snakemake/
 results
 conda
 databases
-binny_Chloroscan
 MGYS*
 SRP*
 DRP*
