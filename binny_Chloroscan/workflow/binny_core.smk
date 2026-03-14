@@ -7,6 +7,7 @@ import sys
 import tarfile
 import urllib.request
 import yaml
+from collections import OrderedDict
 
 
 # default executable for snakmake
@@ -53,9 +54,9 @@ def _process_file(fname, inp, outfilename):
         shutil.copy(inp, outfilename)
 
 # some parameters
-SRCDIR = srcdir("workflow/scripts")
-BINDIR = srcdir("workflow/bin")
-ENVDIR = srcdir("workflow/envs")
+SRCDIR = srcdir("scripts")
+BINDIR = srcdir("bin")
+ENVDIR = srcdir("envs")
 CONDA_DIR = config['conda_source']
 
 if SRCDIR not in sys.path:
@@ -150,30 +151,7 @@ else:
     DBPATH = os.path.expandvars(config['db_path'])
     if not os.path.isabs(DBPATH):
         DBPATH = os.path.join(os.getcwd(), DBPATH)
-# if not os.path.exists(os.path.join(DBPATH, "taxon_marker_sets_lineage_sorted.tsv")):
-#     print("Setting up marker database")
-#     if not os.path.exists(DBPATH):
-#         os.makedirs(DBPATH)
-#     if not os.path.exists(os.path.join(DBPATH, "checkm_data_2015_01_16.tar.gz")):	
-#         urllib.request.urlretrieve("https://data.ace.uq.edu.au/public/CheckM_databases/checkm_data_2015_01_16.tar.gz", os.path.join(DBPATH, "checkm_data_2015_01_16.tar.gz"))
-#     checkm_tar = tarfile.open(os.path.join( DBPATH, "checkm_data_2015_01_16.tar.gz"))
-#     checkm_tar.extract("./taxon_marker_sets.tsv",DBPATH)
-#     checkm_tar.extract("./pfam/tigrfam2pfam.tsv",DBPATH)
-#     checkm_tar.extract("./hmms/checkm.hmm",DBPATH)
-#     markers_df = pd.read_csv(os.path.join(DBPATH, 'taxon_marker_sets.tsv'), sep='\t', skipinitialspace=True, header=None)
-#     markers_df = markers_df.sort_values(markers_df.columns[2])
-#     markers_df.to_csv(os.path.join(DBPATH, "taxon_marker_sets_lineage_sorted.tsv"), header=None, index=None, sep="\t")
-#     prepCheckM.remove_unused_checkm_hmm_profiles(os.path.join(DBPATH, "hmms/checkm.hmm"), os.path.join(DBPATH, 'taxon_marker_sets.tsv'), os.path.join(DBPATH, "pfam/tigrfam2pfam.tsv"), os.path.join(DBPATH, "hmms"))
-#     if os.path.exists(os.path.join(DBPATH, "checkm_data_2015_01_16.tar.gz")):
-#         os.remove(os.path.join(DBPATH, "checkm_data_2015_01_16.tar.gz"))
-#     if os.path.exists(os.path.join(DBPATH, "hmms/checkm.hmm")):
-#         os.remove(os.path.join(DBPATH, "hmms/checkm.hmm"))
-#     if os.path.exists(os.path.join(DBPATH, "taxon_marker_sets.tsv")) and os.path.exists(os.path.join(DBPATH, "taxon_marker_sets_lineage_sorted.tsv")):
-#         os.remove(os.path.join(DBPATH, "taxon_marker_sets.tsv"))
-#     print("Initializing conda environments.")
 
-# temporary directory will be stored inside the OUTPUTDIR directory
-# unless an absolute path is set
 TMPDIR = config['tmp_dir']
 if not os.path.isabs(TMPDIR):
     TMPDIR = os.path.join(OUTPUTDIR, TMPDIR)
@@ -187,8 +165,8 @@ yaml.dump(config, open_output('binny.config.yaml'), allow_unicode=True, default_
 
 rule prepare_input_data:
     input:
-        CONTIGS,
-        CONTIG_DEPTH if CONTIG_DEPTH else MGaln
+        config['raws']['assembly'],
+        config['raws']['contig_depth']
     output:
         os.path.join(OUTPUTDIR, "intermediary/assembly.fa"),
         os.path.join(OUTPUTDIR, "intermediary/assembly.contig_depth.txt") if CONTIG_DEPTH
@@ -308,7 +286,9 @@ rule annotate:
         gff_filt=os.path.join(OUTPUTDIR, "intermediary/annotation.filt.gff"),
         faa=os.path.join(OUTPUTDIR, "intermediary/prokka.faa"),
     params:
-        int_dir=os.path.join(OUTPUTDIR, "intermediary")
+        int_dir=os.path.join(OUTPUTDIR, "intermediary"),
+        tmp_dir=config['tmp_dir'],
+        bin_dir=BINDIR,
     threads:
         getThreads(24)
     resources:
@@ -326,8 +306,8 @@ rule annotate:
         """
         export PERL5LIB=$CONDA_PREFIX/lib/site_perl/5.26.2
         export LC_ALL=en_US.utf-8
-        export TMPDIR={TMPDIR}
-	    {BINDIR}/prokkaP --dbdir $CONDA_PREFIX/db --force --outdir {params.int_dir} --tmpdir {TMPDIR} --prefix prokka \
+        export TMPDIR={params.tmp_dir}
+	    {params.bin_dir}/prokkaP --dbdir $CONDA_PREFIX/db --force --outdir {params.int_dir} --tmpdir {params.tmp_dir} --prefix prokka \
 	                     --noanno --cpus {threads} --metagenome {input.assembly} >> {log} 2>&1
         
 	    # Prokka gives a gff file with a long header and with all the contigs at the bottom.  The command below keeps
@@ -342,19 +322,22 @@ rule annotate:
 # Find markers on contigs
 rule mantis_checkm_marker_sets:
     input:
-        proteins=os.path.join(OUTPUTDIR, "intermediary/prokka.faa")
+        proteins=os.path.join(OUTPUTDIR, "intermediary/prokka.faa"),
+        mantis_cfg=config["mantis_cfg"],
+        nltk_ready=config["nltk_ready"]
     output:
         os.path.join(OUTPUTDIR, "intermediary/mantis_out/output_annotation.tsv"),
         os.path.join(OUTPUTDIR, "intermediary/mantis_out/integrated_annotation.tsv"),
         os.path.join(OUTPUTDIR, "intermediary/mantis_out/consensus_annotation.tsv"),
         out_dir=directory(os.path.join(OUTPUTDIR, "intermediary/mantis_out"))
     params:
-        binny_cfg=srcdir("config/binny_mantis.cfg")
+        binny_cfg=config["mantis_cfg"],
+        nltk_data_dir=config["nltk_data_dir"]
     resources:
         runtime="2d",
         mem=MEMCORE
     conda:
-        MANTIS_ENV if MANTIS_ENV else os.path.join(ENVDIR, "mantis.yaml")
+        os.path.join(ENVDIR, "mantis.yaml")
     threads:
         getThreads(80)
     log:
@@ -369,30 +352,8 @@ rule mantis_checkm_marker_sets:
 
         echo "python: $(which python)" | tee -a {log}
         echo "mantis: $(which mantis || true)" | tee -a {log}
-        python --version 2>&1 | tee -a {log}
 
-        if command -v mantis >/dev/null 2>&1; then
-            head -n 1 "$(which mantis)" | tee -a {log}
-        fi
-
-        python - <<'PY' 2>&1 | tee -a {log}
-import sys, site, importlib.util
-print("sys.executable =", sys.executable)
-print("sys.path =", sys.path)
-print("sitepackages =", site.getsitepackages())
-print("mantis spec =", importlib.util.find_spec("mantis"))
-PY
-
-        python -m pip show mantis_pfa 2>&1 | tee -a {log} || true
-        python -m pip show mantis 2>&1 | tee -a {log} || true
-        python -m pip list 2>&1 | grep -Ei 'mantis|numpy|psutil|requests|nltk' | tee -a {log} || true
-
-        python -c "import mantis; print(mantis.__file__)" 2>&1 | tee -a {log}
-        python -c "from mantis.__main__ import main; print(main)" 2>&1 | tee -a {log}
-
-        rm -rf {output.out_dir}
-        mkdir -p {output.out_dir}
-
+        export NLTK_DATA={params.nltk_data_dir}
         mantis setup -mc {params.binny_cfg} --no_taxonomy 2>&1 | tee -a {log}
         mantis check -mc {params.binny_cfg} --no_taxonomy 2>&1 | tee -a {log}
         mantis run -i {input.proteins} \
