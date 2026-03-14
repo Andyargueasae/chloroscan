@@ -201,3 +201,8 @@ PRJNA*
 MergeDepthTMPDIR/
 conda_env/
 gh-pages/
+test_out*
+lightning_logs
+output_*
+*.slurm
+
