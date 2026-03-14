@@ -338,7 +338,7 @@ rule mantis_checkm_marker_sets:
     conda:
         os.path.join(ENVDIR, "mantis.yaml")
     threads:
-        getThreads(80)
+        getThreads(12)
     log:
         os.path.join(OUTPUTDIR, "logs/analysis_checkm_markers.log")
     benchmark:
