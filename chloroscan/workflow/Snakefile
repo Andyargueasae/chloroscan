@@ -304,25 +304,6 @@ rule prepare_binny_mantis_cfg:
         text = text.replace("checkm_filtered_tf_weight=0.5\n", "")
         pathlib.Path(output.cfg).parent.mkdir(parents=True, exist_ok=True)
         pathlib.Path(output.cfg).write_text(text)
-
-rule prepare_binny_nltk_data:
-    output:
-        touch(BINNY_NLTK_READY)
-    params:
-        nltk_dir=BINNY_NLTK_DIR
-    conda:
-        str(BINNY_DIR / "workflow" / "envs" / "mantis.yaml")
-    shell:
-        r"""
-        set -euo pipefail
-        mkdir -p {params.nltk_dir}
-        export NLTK_DATA={params.nltk_dir}
-        python - <<'PY'
-import nltk
-nltk.download('averaged_perceptron_tagger_eng')
-PY
-        touch {output}
-        """ 
     
 module binny_mod:
     snakefile:

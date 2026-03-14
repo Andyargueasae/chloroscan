@@ -324,7 +324,7 @@ rule mantis_checkm_marker_sets:
     input:
         proteins=os.path.join(OUTPUTDIR, "intermediary/prokka.faa"),
         mantis_cfg=config["mantis_cfg"],
-        nltk_ready=config["nltk_ready"]
+        # nltk_ready=config["nltk_ready"]
     output:
         os.path.join(OUTPUTDIR, "intermediary/mantis_out/output_annotation.tsv"),
         os.path.join(OUTPUTDIR, "intermediary/mantis_out/integrated_annotation.tsv"),
