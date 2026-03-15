@@ -320,8 +320,8 @@ use rule binny from binny_mod as binny_run
 
 rule check_binny_output:
     input:
-        binny_out=rules.binny_run.output
-        binny_bins=Path(OUTPUT_DIR/"working/binny/bins")
+        binny_out=rules.binny_run.output,
+        binny_bins=Path(OUTPUT_DIR/"working/binny/bins"),
     output:
         check_flag=OUTPUT_DIR/"working/binny/binny_output_check.txt"
     log:
