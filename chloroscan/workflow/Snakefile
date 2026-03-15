@@ -315,6 +315,7 @@ module binny_mod:
 use rule prepare_input_data from binny_mod as binny_prepare_input_data
 use rule format_assembly from binny_mod as binny_format_assembly
 use rule annotate from binny_mod as binny_annotate
+use rule prepare_mantis from binny_mod as binny_prepare_mantis
 use rule mantis_checkm_marker_sets from binny_mod as binny_mantis_checkm_marker_sets
 use rule binny from binny_mod as binny_run
 
