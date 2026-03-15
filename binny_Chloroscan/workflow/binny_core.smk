@@ -395,7 +395,7 @@ rule binny:
         assembly=os.path.join(OUTPUTDIR, "intermediary/assembly.formatted.fa"),
         hmm_markers=os.path.join(OUTPUTDIR, "intermediary/mantis_out/consensus_annotation.tsv")
     output:
-        directory(os.path.join(OUTPUTDIR, "binny/bins")),
+        directory(os.path.join(OUTPUTDIR, "bins")),
         os.path.join(OUTPUTDIR, 'binny.done')
     params:
         src_dir=SRCDIR,
