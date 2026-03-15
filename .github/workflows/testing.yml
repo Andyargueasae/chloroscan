@@ -5,59 +5,28 @@ on: [push]
 jobs:
   build:
     runs-on: ubuntu-latest
-    strategy:
-      fail-fast: false
-      matrix:
-        python-version: ["3.10.4"]
 
     steps:
       - uses: actions/checkout@v4
 
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.10.4"
+          cache: poetry
+
       - name: Install poetry
         run: pipx install poetry
 
-      - name: Setup Miniforge with Mamba 1.x
-        uses: conda-incubator/setup-miniconda@v3
-        with:
-          miniforge-version: latest
-          activate-environment: base
-          python-version: "3.10.4"
-          conda-version: "23.3.1"
-          mamba-version: "1.4.2"
-          channels: conda-forge,bioconda
-          channel-priority: strict
+      - name: Install Rust
+        uses: dtolnay/rust-toolchain@stable
 
-      - name: Install dependencies for Python ${{ matrix.python-version }}
-        uses: actions/setup-python@v5
-        with:
-          python-version: ${{ matrix.python-version }}
-          cache: poetry
-
-      - name: Installation
+      - name: Install project
         run: |
-          poetry env use "${{ matrix.python-version }}"
+          poetry env use "3.10.4"
           poetry install
 
       - name: Install FragGeneScanRs
-        run: |
-          if command -v cargo &> /dev/null; then
-            echo "Cargo is already installed."
-          else
-            curl --proto '=https' --tlsv1.2 -sSf https://sh.rustup.rs | sh -s -- -y
-            source "$HOME/.cargo/env"
-          fi
+        run: cargo install frag_gene_scan_rs
 
-          cargo install frag_gene_scan_rs
-          echo "$HOME/.cargo/bin" >> "$GITHUB_PATH"
-
-      - name: Testing
-        shell: bash -el {0}
-        run: |
-          which mamba
-          which conda
-          mamba --version
-          conda --version
-          python --version
-
-          df -H
-          poetry run pytest -v -s -o faulthandler_timeout=60
+      - name: Run tests
+        run: poetry run pytest -v -s -o faulthandler_timeout=60

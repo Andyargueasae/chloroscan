@@ -319,11 +319,33 @@ rule annotate:
         head -n $LN {output.gff} | grep -v "^#" | sort | uniq | grep -v "^==" > {output.gff_filt}
         """
 
+rule prepare_mantis:
+    input:
+        mantis_cfg=config["mantis_cfg"],
+    output:
+        os.path.join(OUTPUTDIR, "intermediary/.mantis_ready")
+    conda:
+        os.path.join(ENVDIR, "mantis.yaml")
+    message:
+        "Preparing Mantis."
+    log:
+        os.path.join(OUTPUTDIR, "logs/prepare_mantis.log")
+    resources:
+        runtime="1h",
+        mem=MEMCORE
+    
+    shell:
+        r"""
+        mantis setup -mc {input.mantis_cfg} --no_taxonomy
+        mantis check -mc {input.mantis_cfg} --no_taxonomy
+        touch {output}
+        """
+        
 # Find markers on contigs
 rule mantis_checkm_marker_sets:
     input:
         proteins=os.path.join(OUTPUTDIR, "intermediary/prokka.faa"),
-        mantis_cfg=config["mantis_cfg"],
+        ready=os.path.join(OUTPUTDIR, "intermediary/.mantis_ready")
     output:
         os.path.join(OUTPUTDIR, "intermediary/mantis_out/output_annotation.tsv"),
         os.path.join(OUTPUTDIR, "intermediary/mantis_out/integrated_annotation.tsv"),
@@ -353,9 +375,6 @@ rule mantis_checkm_marker_sets:
         conda list | grep -i -E 'mantis|cython|nltk' || true
         python -m pip install --no-cache-dir Cython
         python -c "import Cython; print(Cython.__version__, Cython.__file__)"
-        
-        mantis setup -mc {params.binny_cfg} --no_taxonomy 2>&1 | tee -a {log}
-        mantis check -mc {params.binny_cfg} --no_taxonomy 2>&1 | tee -a {log}
         mantis run -i {input.proteins} \
                    -da heuristic \
                    -mc {params.binny_cfg} \
