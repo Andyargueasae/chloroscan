@@ -16,16 +16,16 @@ jobs:
       - name: Install poetry
         run: pipx install poetry
 
-      # - name: Setup Miniforge with Mamba 1.x
-      #   uses: conda-incubator/setup-miniconda@v3
-      #   with:
-      #     miniforge-version: latest
-      #     activate-environment: base
-      #     python-version: "3.10.4"
-      #     conda-version: "23.3.1"
-      #     mamba-version: "1.4.2"
-      #     channels: conda-forge,bioconda
-      #     channel-priority: strict
+      - name: Setup Miniforge with Mamba 1.x
+        uses: conda-incubator/setup-miniconda@v3
+        with:
+          miniforge-version: latest
+          activate-environment: base
+          python-version: "3.10.4"
+          conda-version: "23.3.1"
+          mamba-version: "1.4.2"
+          channels: conda-forge,bioconda
+          channel-priority: strict
 
       - name: Install dependencies for Python ${{ matrix.python-version }}
         uses: actions/setup-python@v5
