@@ -6,4 +6,4 @@ dependencies:
   - pip:
     - numpy<2
     - pandas
-    - biopython=1.81
+    - biopython==1.81
