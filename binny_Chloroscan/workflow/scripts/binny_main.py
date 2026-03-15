@@ -144,12 +144,6 @@ n_dim = 2
 sys.path.append(os.path.dirname(functions))
 from binny_functions import *
 
-if glob.glob(os.path.join(binny_out, "bins/*.fasta")):
-    logging.info(os.listdir(os.path.join(binny_out, "bins/")))
-    logging.error('Bin dir contains fasta files. Move or delete. Exiting.')
-    raise Exception
-
-
 # To achieve reproducible results with HDBSCAN and ensure same seed, because other tools that accept seed arguments,
 # might mess with the global numpy seed
 np.random.seed(0)
@@ -161,6 +155,13 @@ numba_logger = logging.getLogger('numba')
 numba_logger.setLevel(logging.WARNING)
 
 logging.info('Starting Binny run for sample {0}.'.format(sample))
+
+
+# Check if bin dir empty
+if glob.glob(os.path.join(binny_out, "bins/*.fasta")):
+    print(os.listdir(os.path.join(binny_out, "bins/")), file=sys.stderr)
+    print('Bin dir contains fasta files. Move or delete. Exiting.', file=sys.stderr)
+    raise Exception
 
 # Load TIGRFAMs to PFAMs conversion table.
 tigrfam2pfam_data = tigrfam2pfam_dict(tigrfam2pfam_file)
