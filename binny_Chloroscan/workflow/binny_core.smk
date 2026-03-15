@@ -322,6 +322,7 @@ rule annotate:
 rule prepare_mantis:
     input:
         mantis_cfg=config["mantis_cfg"],
+        faa=os.path.join(OUTPUTDIR, "intermediary/prokka.faa"),
     output:
         os.path.join(OUTPUTDIR, "intermediary/.mantis_ready")
     conda:
@@ -340,7 +341,7 @@ rule prepare_mantis:
         mantis check -mc {input.mantis_cfg} --no_taxonomy
         touch {output}
         """
-        
+
 # Find markers on contigs
 rule mantis_checkm_marker_sets:
     input:
