@@ -442,11 +442,6 @@ rule binny:
         r"""
         set -euo pipefail
 
-        echo "CONDA_PREFIX=$CONDA_PREFIX" | tee -a {log}
-        which python | tee -a {log} || true
-        "$CONDA_PREFIX/bin/python" -V 2>&1 | tee -a {log}
-        "$CONDA_PREFIX/bin/python" -c "import sys; print(sys.executable)" 2>&1 | tee -a {log}
-
         "$CONDA_PREFIX/bin/python" {params.src_dir}/binny_main.py \
           --binny-out {params.binny_out} \
           --sample {params.sample} \
