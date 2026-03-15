@@ -159,6 +159,7 @@ logging.info('Starting Binny run for sample {0}.'.format(sample))
 
 # Check if bin dir empty
 if glob.glob(os.path.join(binny_out, "bins/*.fasta")):
+    print(os.listdir(os.path.join(binny_out, "bins/")))
     logging.error('Bin dir contains fasta files. Move or delete. Exiting.')
     raise Exception
 
