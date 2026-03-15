@@ -1,21 +1,26 @@
 #!/usr/bin/env bash
-
-# The binny directory.
-BINNY_DIR=${snakemake_input[binny_dir]}/bins
-
-# assign variables.
-FILE_FLAG=${snakemake_params[gff_file_flag]}
-BATCH_NAME=${snakemake_params[batch_name]}
-# PATH_NAME_BINS=${snakemake_params[path_name_bins]}
-FGSR_OUTPUT=${snakemake_params[path_fraggenescanrs]}
-
-CDS_OUTPUT=${snakemake_output[CDS_EXTRACTION]}
+set -euo pipefail
+# The binny directory. Is from the parental directory of binny.done, which works as the input. 
+while [[ "$#" -gt 0 ]]; do
+    case $1 in
+        --input) BINNY_DONE="$2"; shift ;;
+        --batch_name) BATCH_NAME="$2"; shift ;;
+        --gff_file_flag) FILE_FLAG="$2"; shift ;;
+        --path_fraggenescanrs) FGSR_OUTPUT="$2"; shift ;;
+        --output) CDS_OUTPUT="$2"; shift ;;
+        *) echo "Unknown parameter passed: $1"; exit 1 ;;
+    esac
+    shift
+done
 
 mkdir -p $FGSR_OUTPUT/$FILE_FLAG
 mkdir -p $CDS_OUTPUT/cds
 mkdir -p $CDS_OUTPUT/faa
-echo ${snakemake_output}
+echo ${CDS_OUTPUT}
 
+export PATH=$PATH:$HOME/.cargo/bin
+
+BINNY_DIR=$(dirname $BINNY_DONE)/bins;
 
 for i in $(ls $BINNY_DIR);
 do 

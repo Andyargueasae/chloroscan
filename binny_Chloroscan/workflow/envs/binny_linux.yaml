@@ -1,13 +1,18 @@
 name: binny_linux
 channels:
   - conda-forge
-  - defaults
 dependencies:
-  - networkx=2.6.3
-  - pandas=1.4.1
-  - pyarrow=7.0.0
-  - python=3.8
-  - seaborn=0.11.2
-  - hdbscan=0.8.30
-  - scikit-bio=0.5.6
-  - opentsne=0.6.1
+  - python=3.10
+  - pip
+  - numpy
+  - pandas
+  - matplotlib
+  - seaborn
+  - joblib
+  - scikit-learn
+  - scikit-bio
+  - opentsne
+  - hdbscan
+  - pyarrow
+  - pip:
+    - networkx==2.6.3

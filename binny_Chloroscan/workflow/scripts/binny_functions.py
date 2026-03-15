@@ -2,6 +2,8 @@
 Created on Wed Feb 22 10:50:35 2021
 
 @author: oskar.hickl
+
+modified by Yuhao Tong for fitting into ChloroScan workflow, Mar 15th, 2026.
 """
 import itertools
 import logging
@@ -19,7 +21,13 @@ from joblib import parallel_backend, Parallel, delayed
 from mpl_toolkits.mplot3d import Axes3D
 from openTSNE import TSNEEmbedding, affinity
 from openTSNE import initialization
-from skbio.stats.composition import clr, multiplicative_replacement
+
+from skbio.stats.composition import clr
+try:
+    from skbio.stats.composition import multiplicative_replacement
+except ImportError:
+    from skbio.stats.composition import multi_replace as multiplicative_replacement
+
 from sklearn.decomposition import PCA
 from sklearn.neighbors import KNeighborsClassifier
 

@@ -407,7 +407,7 @@ rule visualize_results:
 
 rule cds_extraction:
     input:
-        binny_dir = Path(OUTPUT_DIR/"working/binny"),
+        binny_done=rules.binny_run.output,
     params:
         batch_name=BATCH_NAME,
         gff_file_flag="GFFs",
@@ -419,8 +419,13 @@ rule cds_extraction:
         "envs/gffread.yml"
     message:
         "Use the fast ORF-predictor FragGeneScan Rust to predict gene contents of the MAGs, then extract the cds via gffread."
-    script:
-        "{params.script_dir}/cds-extraction.sh"
+    shell:
+        r"""
+        bash {params.script_dir}/cds-extraction.sh --input {input.binny_done} \
+        --batch_name {params.batch_name} --gff_file_flag {params.gff_file_flag} \
+        --path_fraggenescanrs {params.path_fraggenescanrs} \
+        --output {output.CDS_EXTRACTION}
+        """
 
 rule krona_taxonomy_plot:
     input: 

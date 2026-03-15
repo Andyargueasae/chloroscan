@@ -346,7 +346,14 @@ rule mantis_checkm_marker_sets:
     message:
         "MANTIS: Running MANTIS with CheckM marker sets."
     shell:
-        """
+        r"""
+        python -V
+        which python
+        python -c "import sys; print(sys.executable)"
+        conda list | grep -i -E 'mantis|cython|nltk' || true
+        python -m pip install --no-cache-dir Cython
+        python -c "import Cython; print(Cython.__version__, Cython.__file__)"
+        
         mantis setup -mc {params.binny_cfg} --no_taxonomy 2>&1 | tee -a {log}
         mantis check -mc {params.binny_cfg} --no_taxonomy 2>&1 | tee -a {log}
         mantis run -i {input.proteins} \
@@ -367,6 +374,7 @@ rule binny:
     output:
         os.path.join(OUTPUTDIR, 'binny.done')
     params:
+        src_dir=SRCDIR,
         binny_out=OUTPUTDIR,
         sample=SAMPLE,
         py_functions=SRCDIR + "/binny_functions.py",
@@ -407,5 +415,50 @@ rule binny:
         os.path.join(OUTPUTDIR, "logs/binning_binny_benchmark.txt")
     message:
             "binny: Running Python Binny."
-    script:
-        os.path.join(SRCDIR, "binny_main.py")
+    shell:
+        r"""
+        set -euo pipefail
+
+        echo "CONDA_PREFIX=$CONDA_PREFIX" | tee -a {log}
+        which python | tee -a {log} || true
+        "$CONDA_PREFIX/bin/python" -V 2>&1 | tee -a {log}
+        "$CONDA_PREFIX/bin/python" -c "import sys; print(sys.executable)" 2>&1 | tee -a {log}
+
+        "$CONDA_PREFIX/bin/python" {params.src_dir}/binny_main.py \
+          --binny-out {params.binny_out} \
+          --sample {params.sample} \
+          --mgdepth {input.mgdepth} \
+          --assembly {input.assembly} \
+          --gff {params.gff} \
+          --raw-gff {input.raw_gff} \
+          --t2p {params.t2p} \
+          --marker-sets {params.marker_sets} \
+          --hmm-markers {input.hmm_markers} \
+          --py-functions {params.py_functions} \
+          --purity {params.purity} \
+          --min-completeness {params.min_completeness} \
+          --start-completeness {params.start_completeness} \
+          --kmers {params.kmers} \
+          --mask-disruptive-sequences {params.mask_disruptive_sequences} \
+          --extract-scmags {params.extract_scmags} \
+          --coassembly-mode {params.coassembly_mode} \
+          --min-cutoff {params.min_cutoff} \
+          --max-cutoff {params.max_cutoff} \
+          --min-cutoff-marker {params.min_cutoff_marker} \
+          --max-cutoff-marker {params.max_cutoff_marker} \
+          --nx-val {params.nx_val} \
+          --max-n-contigs {params.max_n_contigs} \
+          --max-marker-lineage-depth-lvl {params.max_marker_lineage_depth_lvl} \
+          --max-embedding-tries {params.max_embedding_tries} \
+          --include-depth-initial {params.include_depth_initial} \
+          --include-depth-main {params.include_depth_main} \
+          --hdbscan-epsilon-range "{params.hdbscan_epsilon_range}" \
+          --hdbscan-min-samples-range "{params.hdbscan_min_samples_range}" \
+          --distance-metric {params.distance_metric} \
+          --write-contig-data {params.write_contig_data} \
+          --threads {threads} \
+          --log {log}
+
+        touch {output} 
+        ls -lh {output} | tee -a {log}
+        """

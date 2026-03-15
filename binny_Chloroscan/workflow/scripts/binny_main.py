@@ -10,47 +10,138 @@ import logging
 import sys
 import os
 import glob
+import subprocess
+import argparse
 
-binny_out = snakemake.params['binny_out']
-sample = snakemake.params['sample']
-mg_depth_file = snakemake.input['mgdepth']
-assembly = snakemake.input['assembly']
-annot_file = snakemake.params['gff']
-raw_annot = snakemake.input['raw_gff']
-tigrfam2pfam_file = snakemake.params['t2p']
-taxon_marker_set_file = snakemake.params['marker_sets']
-prokka_checkm_marker_hmm_out = snakemake.input['hmm_markers']
-functions = snakemake.params['py_functions']
-min_purity = float(snakemake.params['purity'])
-min_completeness = float(snakemake.params['min_completeness'])
-starting_completeness = float(snakemake.params['start_completeness'])
-kmers = snakemake.params['kmers']
-mask_disruptive_sequences = eval(snakemake.params['mask_disruptive_sequences'])
-extract_scmags = eval(snakemake.params['extract_scmags'])
-coassembly_mode = snakemake.params['coassembly_mode']
-nx_val = int(snakemake.params['nx_val'])
-min_contig_length = int(snakemake.params['min_cutoff'])
-max_contig_length = int(snakemake.params['max_cutoff'])
-min_contig_length_marker = int(snakemake.params['min_cutoff_marker'])
-max_contig_length_marker = int(snakemake.params['max_cutoff_marker'])
-max_contig_threshold = float(snakemake.params['max_n_contigs'])
-max_marker_lineage_depth_lvl = int(snakemake.params['max_marker_lineage_depth_lvl'])
-max_embedding_tries = int(snakemake.params['max_embedding_tries'])
-include_depth_initial = eval(snakemake.params['include_depth_initial'])
-include_depth_main = eval(snakemake.params['include_depth_main'])
-hdbscan_epsilon_range = [float(epsilon) for epsilon in snakemake.params['hdbscan_epsilon_range'].split(',')]
-hdbscan_min_samples_range = [int(min_sample) for min_sample in snakemake.params['hdbscan_min_samples_range'].split(',')]
-dist_metric = snakemake.params['distance_metric']
-write_contig_data = eval(snakemake.params['write_contig_data'])
+print("=== PYTHON EXECUTABLE ===")
+print(sys.executable)
+print("=== PYTHON VERSION ===")
+print(sys.version)
+
+# required_packages = [
+#     "numpy",
+#     "pandas",
+#     "matplotlib",
+#     "networkx",
+#     "seaborn",
+#     "joblib",
+#     "scikit-learn",
+#     "scikit-bio",
+#     "openTSNE",
+#     "hdbscan",
+# ]
+
+# for pkg in required_packages:
+#     subprocess.run(f"python -m pip install --no-cache-dir {pkg}", shell=True, check=True)
+
+# binny_out = snakemake.params['binny_out']
+# sample = snakemake.params['sample']
+# mg_depth_file = snakemake.input['mgdepth']
+# assembly = snakemake.input['assembly']
+# annot_file = snakemake.params['gff']
+# raw_annot = snakemake.input['raw_gff']
+# tigrfam2pfam_file = snakemake.params['t2p']
+# taxon_marker_set_file = snakemake.params['marker_sets']
+# prokka_checkm_marker_hmm_out = snakemake.input['hmm_markers']
+# functions = snakemake.params['py_functions']
+# min_purity = float(snakemake.params['purity'])
+# min_completeness = float(snakemake.params['min_completeness'])
+# starting_completeness = float(snakemake.params['start_completeness'])
+# kmers = snakemake.params['kmers']
+# mask_disruptive_sequences = eval(snakemake.params['mask_disruptive_sequences'])
+# extract_scmags = eval(snakemake.params['extract_scmags'])
+# coassembly_mode = snakemake.params['coassembly_mode']
+# nx_val = int(snakemake.params['nx_val'])
+# min_contig_length = int(snakemake.params['min_cutoff'])
+# max_contig_length = int(snakemake.params['max_cutoff'])
+# min_contig_length_marker = int(snakemake.params['min_cutoff_marker'])
+# max_contig_length_marker = int(snakemake.params['max_cutoff_marker'])
+# max_contig_threshold = float(snakemake.params['max_n_contigs'])
+# max_marker_lineage_depth_lvl = int(snakemake.params['max_marker_lineage_depth_lvl'])
+# max_embedding_tries = int(snakemake.params['max_embedding_tries'])
+# include_depth_initial = eval(snakemake.params['include_depth_initial'])
+# include_depth_main = eval(snakemake.params['include_depth_main'])
+# hdbscan_epsilon_range = [float(epsilon) for epsilon in snakemake.params['hdbscan_epsilon_range'].split(',')]
+# hdbscan_min_samples_range = [int(min_sample) for min_sample in snakemake.params['hdbscan_min_samples_range'].split(',')]
+# dist_metric = snakemake.params['distance_metric']
+# write_contig_data = eval(snakemake.params['write_contig_data'])
+
+parser = argparse.ArgumentParser()
+parser.add_argument("--binny-out", required=True)
+parser.add_argument("--sample", required=True)
+parser.add_argument("--mgdepth", required=True)
+parser.add_argument("--assembly", required=True)
+parser.add_argument("--gff", required=True)
+parser.add_argument("--raw-gff", required=True)
+parser.add_argument("--t2p", required=True)
+parser.add_argument("--marker-sets", required=True)
+parser.add_argument("--hmm-markers", required=True)
+parser.add_argument("--py-functions", required=True)
+parser.add_argument("--purity", required=True)
+parser.add_argument("--min-completeness", required=True)
+parser.add_argument("--start-completeness", required=True)
+parser.add_argument("--kmers", required=True)
+parser.add_argument("--mask-disruptive-sequences", required=True, type=bool)
+parser.add_argument("--extract-scmags", required=True, type=bool)
+parser.add_argument("--coassembly-mode", required=True)
+parser.add_argument("--min-cutoff", required=True)
+parser.add_argument("--max-cutoff", required=True)
+parser.add_argument("--min-cutoff-marker", required=True)
+parser.add_argument("--max-cutoff-marker", required=True)
+parser.add_argument("--nx-val", required=True)
+parser.add_argument("--max-n-contigs", required=True)
+parser.add_argument("--max-marker-lineage-depth-lvl", required=True)
+parser.add_argument("--max-embedding-tries", required=True)
+parser.add_argument("--include-depth-initial", required=True, type=bool)
+parser.add_argument("--include-depth-main", required=True, type=bool)
+parser.add_argument("--hdbscan-epsilon-range", required=True)
+parser.add_argument("--hdbscan-min-samples-range", required=True)
+parser.add_argument("--distance-metric", required=True)
+parser.add_argument("--write-contig-data", required=True, type=bool)
+parser.add_argument("--threads", required=True, type=int)
+parser.add_argument("--log", required=True)
+args = parser.parse_args()
+
+binny_out = args.binny_out
+sample = args.sample
+mg_depth_file = args.mgdepth
+assembly = args.assembly
+annot_file = args.gff
+raw_annot = args.raw_gff
+tigrfam2pfam_file = args.t2p
+taxon_marker_set_file = args.marker_sets
+prokka_checkm_marker_hmm_out = args.hmm_markers
+functions = args.py_functions
+min_purity = float(args.purity)
+min_completeness = float(args.min_completeness)
+starting_completeness = float(args.start_completeness)
+kmers = args.kmers
+mask_disruptive_sequences = args.mask_disruptive_sequences
+extract_scmags = args.extract_scmags
+coassembly_mode = args.coassembly_mode
+nx_val = int(args.nx_val)
+min_contig_length = int(args.min_cutoff)
+max_contig_length = int(args.max_cutoff)
+min_contig_length_marker = int(args.min_cutoff_marker)
+max_contig_length_marker = int(args.max_cutoff_marker)
+max_contig_threshold = float(args.max_n_contigs)
+max_marker_lineage_depth_lvl = int(args.max_marker_lineage_depth_lvl)
+max_embedding_tries = int(args.max_embedding_tries)
+include_depth_initial = args.include_depth_initial
+include_depth_main = args.include_depth_main
+hdbscan_epsilon_range = [float(epsilon) for epsilon in args.hdbscan_epsilon_range.split(',')]
+hdbscan_min_samples_range = [int(min_sample) for min_sample in args.hdbscan_min_samples_range.split(',')]
+dist_metric = args.distance_metric
+write_contig_data = args.write_contig_data
 
 intermediary_file_dir = 'intermediary'
 
-threads = snakemake.threads
-log = snakemake.log[0]
+threads = args.threads
+log = args.log
 
 n_dim = 2
 
-sys.path.append(functions)
+sys.path.append(os.path.dirname(functions))
 from binny_functions import *
 
 # To achieve reproducible results with HDBSCAN and ensure same seed, because other tools that accept seed arguments,
