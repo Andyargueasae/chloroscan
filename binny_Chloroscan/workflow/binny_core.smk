@@ -322,7 +322,7 @@ rule annotate:
 rule prepare_mantis:
     input:
         mantis_cfg=config["mantis_cfg"],
-        faa=os.path.join(OUTPUTDIR, "intermediary/prokka.faa"),
+        faa=rules.annotate.output.faa,
     output:
         os.path.join(OUTPUTDIR, "intermediary/.mantis_ready")
     conda:
@@ -345,8 +345,8 @@ rule prepare_mantis:
 # Find markers on contigs
 rule mantis_checkm_marker_sets:
     input:
-        proteins=os.path.join(OUTPUTDIR, "intermediary/prokka.faa"),
-        ready=os.path.join(OUTPUTDIR, "intermediary/.mantis_ready")
+        proteins=rules.annotate.output.faa,
+        ready=rules.prepare_mantis.output[0]
     output:
         os.path.join(OUTPUTDIR, "intermediary/mantis_out/output_annotation.tsv"),
         os.path.join(OUTPUTDIR, "intermediary/mantis_out/integrated_annotation.tsv"),

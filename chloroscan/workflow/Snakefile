@@ -318,9 +318,30 @@ use rule annotate from binny_mod as binny_annotate
 use rule mantis_checkm_marker_sets from binny_mod as binny_mantis_checkm_marker_sets
 use rule binny from binny_mod as binny_run
 
+rule check_binny_output:
+    input:
+        binny_out=rules.binny_run.output
+        binny_bins=Path(OUTPUT_DIR/"working/binny/bins")
+    output:
+        check_flag=OUTPUT_DIR/"working/binny/binny_output_check.txt"
+    log:
+        OUTPUT_DIR/"logging_info/check_binny_output.log"
+    shell:
+        """
+        set -e
+        if [ -d "{input.binny_bins}" ] && [ "$(ls -A {input.binny_bins})" ]; then
+            echo "Binny produced bins successfully." > {output.check_flag}
+        else
+            echo "Binny did not produce any bins."
+            exit 1
+        fi
+        """
+
 rule CAT_taxonomy_identification_plus_annotation:
     input: 
+        flag=rules.check_binny_output.output.check_flag,
         binny_output=rules.binny_run.output
+        
     params:
         prefix=GLOBAL_PREFIX_contigs,
         path_to_contigs="intermediary/assembly.formatted.fa"
