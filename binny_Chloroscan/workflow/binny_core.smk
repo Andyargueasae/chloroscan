@@ -337,6 +337,12 @@ rule prepare_mantis:
     
     shell:
         r"""
+        python -V
+        which python
+        python -c "import sys; print(sys.executable)"
+        conda list | grep -i -E 'mantis|cython|nltk' || true
+        python -m pip install --no-cache-dir Cython
+        python -c "import Cython; print(Cython.__version__, Cython.__file__)"
         mantis setup -mc {input.mantis_cfg} --no_taxonomy
         mantis check -mc {input.mantis_cfg} --no_taxonomy
         touch {output}
@@ -370,12 +376,6 @@ rule mantis_checkm_marker_sets:
         "MANTIS: Running MANTIS with CheckM marker sets."
     shell:
         r"""
-        python -V
-        which python
-        python -c "import sys; print(sys.executable)"
-        conda list | grep -i -E 'mantis|cython|nltk' || true
-        python -m pip install --no-cache-dir Cython
-        python -c "import Cython; print(Cython.__version__, Cython.__file__)"
         mantis run -i {input.proteins} \
                    -da heuristic \
                    -mc {params.binny_cfg} \
