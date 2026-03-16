@@ -390,10 +390,6 @@ rule documenting_binny_results:
         "Run python script summarize_binny_results.py to record each bin's contig metadata."
     shell:
         """
-        python -V
-        python -c "import sys; print(sys.path)"
-        python -c "import Bio; print(Bio.__version__)"
-        
         $CONDA_PREFIX/bin/python {params.script_dir}/summarize_binny_results.py --assemblyfasta {params.assembly_files} \
             --assemblydepth {params.assembly_depth} --assembly_annot {params.marker_gene_gff} \
             --taxonomy_names {params.names_dump} --contig_level_annotation {input.contig_level_annotation}/{params.ANNOT_FILE} \
