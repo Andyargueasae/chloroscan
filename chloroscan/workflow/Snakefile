@@ -389,7 +389,7 @@ rule documenting_binny_results:
     message:
         "Run python script summarize_binny_results.py to record each bin's contig metadata."
     shell:
-        r"""
+        """
         python -V
         python -c "import sys; print(sys.path)"
         python -c "import Bio; print(Bio.__version__)"
@@ -417,7 +417,7 @@ rule refine_bins:
     log:
         OUTPUT_DIR/"logging_info/refinement.log"
     shell:
-        r"""
+        """
         python {params.script_dir}/refine_bins.py --input_cross_ref {input.cross_ref} \
             --input_original_bins {input.original_bins} \
             --input_CAT_prediction {input.CAT_prediction} \
@@ -440,7 +440,7 @@ rule visualize_results:
     log:
         OUTPUT_DIR/"logging_info/visualizations.log"
     shell:
-        r"""
+        """
         python {params.script_dir}/visualization.py --input_cross_ref {input} \
             --batch_name {params.BATCH_NAME} \
             --refine_bins_dir {params.refine_bins_dir} \
@@ -503,7 +503,7 @@ rule krona_taxonomy_plot:
     message:
         "Ensure that in your env there must have pandas, click and of course, Kronatools."
     shell:
-        r"""
+        """
         set -e
 
         # add if statement: if there are empty out.CAT file, we exit with touched files: Krona.html.
