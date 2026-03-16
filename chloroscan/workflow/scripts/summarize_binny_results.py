@@ -2,12 +2,11 @@ import pandas as pd
 from os import listdir
 import numpy as np
 import sys
-import logging
 from Bio import SeqIO 
-import urllib.request
 import os
 from pathlib import Path
 from summarization_utils import *
+import argparse
 
 
 # set up global variables that could work as input files.
@@ -21,13 +20,26 @@ CONTIG_GC = "GC contents"
 CONTIG_BIN = "Contig2Bin"
 CONTIG_TAXON = "Taxon per Contig"
 CONTIG_marker = "markers on the contig"
-assemblyfasta = snakemake.params['assembly_files']
-assemblydepth = snakemake.params['assembly_depth']
-assembly_annot = snakemake.params['marker_gene_gff']
-assembly_bin_dir = snakemake.params['bins']
-taxonomy_names = snakemake.params['names_dump']
-MMA_SUMMARY=snakemake.params['MMA_summary']
-contig_level_annotation = os.path.join(snakemake.input['contig_level_annotation'], snakemake.params['ANNOT_FILE'])
+
+parser= argparse.ArgumentParser(description="Summarize the binning results from binny and add taxonomic annotation to the contigs.")
+parser.add_argument("--assemblyfasta", help="The assembly fasta file used for binning.")
+parser.add_argument("--assemblydepth", help="The depth file of the assembly used for binning.")
+parser.add_argument("--assembly_annot", help="The marker gene annotation file of the assembly used for binning.")
+parser.add_argument("--assembly_bin_dir", help="The directory containing the bins from binny.")
+parser.add_argument("--taxonomy_names", help="The taxonomic annotation file for the contigs.")
+parser.add_argument("--MMA_SUMMARY", help="The output file for the summary of medium and high quality MAGs.")
+parser.add_argument("--contig_level_annotation", help="The contig level annotation file for the contigs.")
+parser.add_argument("--output", help="The output file for the summarized contig level annotation.")
+args = parser.parse_args()
+
+assemblyfasta = args.assemblyfasta
+assemblydepth = args.assemblydepth
+assembly_annot = args.assembly_annot
+assembly_bin_dir = args.assembly_bin_dir
+taxonomy_names = args.taxonomy_names
+MMA_SUMMARY = args.MMA_SUMMARY
+contig_level_annotation = args.contig_level_annotation
+output = args.output
 
 if ((not Path(contig_level_annotation).exists() or os.stat(contig_level_annotation).st_size == 0) 
     and (not Path(assemblyfasta).exists()) 
@@ -35,7 +47,7 @@ if ((not Path(contig_level_annotation).exists() or os.stat(contig_level_annotati
     and (not Path(assembly_annot).exists())) :
     Path(contig_level_annotation).write_text("")
     print("No files supporting this rule to run were found, exit.\n")
-    Path(snakemake.output[0]).write_text("")
+    Path(output).write_text("")
     sys.exit(0)
 
 
@@ -71,7 +83,7 @@ dataset_bin_df[CONTIG_marker] = marker_per_contig
 dataset_bin_df[CONTIG_BIN] = bin_array
 dataset_bin_df[CONTIG_SEQ] = contig_seq
 
-dataset_bin_df.to_csv(snakemake.output[0], sep="\t")
+dataset_bin_df.to_csv(output, sep="\t")
 
 # Here we want to add some summary to MAGs.
 bin_set=set(bin_array)

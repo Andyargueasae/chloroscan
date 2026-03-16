@@ -1,5 +1,6 @@
 #!/usr/bin/env bash
 set -euo pipefail
+
 # The binny directory. Is from the parental directory of binny.done, which works as the input. 
 while [[ "$#" -gt 0 ]]; do
     case $1 in
@@ -29,3 +30,10 @@ do
     FragGeneScanRs --seq-file-name $BINNY_DIR/$i --training-file illumina_5 --thread-num 1 -g $FGSR_OUTPUT/$FILE_FLAG/$(basename $i .fasta).gff \
      -n $CDS_OUTPUT/cds/$(basename $BATCH_NAME).$(basename $i .fasta).gene.fasta -a $CDS_OUTPUT/faa/$(basename $BATCH_NAME).$(basename $i .fasta).faa -w 0; 
 done
+
+if [ $? -ne 0 ]; then
+    echo "Error: FragGeneScanRs failed to run."
+    exit 1
+else
+    echo "FragGeneScanRs completed successfully."
+fi

@@ -388,8 +388,14 @@ rule documenting_binny_results:
         "envs/documenting_binny.yml"
     message:
         "Run python script summarize_binny_results.py to record each bin's contig information."
-    script:
-        "{params.script_dir}/summarize_binny_results.py"
+    shell:
+        r"""
+        set -eu pipefail
+        python {params.script_dir}/summarize_binny_results.py --assemblyfasta {params.assembly_files} \
+            --assemblydepth {params.assembly_depth} --assembly_annot {params.marker_gene_gff} \
+            --taxonomy_names {params.names_dump} --contig_level_annotation {input.contig_level_annotation}/{params.ANNOT_FILE} \
+            --assembly_bin_dir {params.bins} --MMA_summary {params.MMA_summary} --output {output}
+        """
 
 rule refine_bins:
     input:
@@ -397,7 +403,6 @@ rule refine_bins:
         original_bins = Path(OUTPUT_DIR/"working/binny"),
         CAT_prediction = Path(OUTPUT_DIR/"working/CAT"),
     params:
-        BACTERIA_ID = "2",
         script_dir = SCR_DIR
     output:
         refine_dir = directory(OUTPUT_DIR/"working/refined_bins"),
@@ -408,8 +413,15 @@ rule refine_bins:
         "Identify potential contaminations in each plastid MAG. Users can decide to use the refined or binny-generated bins."
     log:
         OUTPUT_DIR/"logging_info/refinement.log"
-    script:
-        "{params.script_dir}/refine_bins.py"
+    shell:
+        r"""
+        python {params.script_dir}/refine_bins.py --input_cross_ref {input.cross_ref} \
+            --input_original_bins {input.original_bins} \
+            --input_CAT_prediction {input.CAT_prediction} \
+            --output_dir_for_refined_bins {output.refine_dir} \
+            --output_summary_info {output.summary_info} \
+            --log_file {log}
+        """
 
 rule visualize_results:
     input:
@@ -424,8 +436,13 @@ rule visualize_results:
         "envs/visualization.yml"
     log:
         OUTPUT_DIR/"logging_info/visualizations.log"
-    script:
-        "{params.script_dir}/visualization.py"
+    shell:
+        r"""
+        python {params.script_dir}/visualization.py --input_cross_ref {input} \
+            --batch_name {params.BATCH_NAME} \
+            --refine_bins_dir {params.refine_bins_dir} \
+            --output_dir {output} >> {log} 2>&1
+        """
 
 rule cds_extraction:
     input:
@@ -466,7 +483,7 @@ rule krona_taxonomy_plot:
     message:
         "Ensure that in your env there must have pandas, click and of course, Kronatools."
     shell:
-        """
+        r"""
         set -e
 
         # add if statement: if there are empty out.CAT file, we exit with touched files: Krona.html.

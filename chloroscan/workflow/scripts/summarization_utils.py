@@ -6,11 +6,12 @@ def GC_content(sequence):
     return (G_count + C_count)/len(sequence)
 
 def form_bin_array(bin_dir, collected_bins, bin_array, contig_id_list):
-    # bin_dir: bin_directory inside binny;
-    # collected_bins: bin_file name;
-    # bin_array: the empty list containing len(contig_id) elements.
-    # contig_id_list: the list of contigs with their id.
-    
+    """
+    bin_dir: bin_directory inside binny;
+    collected_bins: bin_file name;
+    bin_array: the empty list containing len(contig_id) elements.
+    contig_id_list: the list of contigs with their id.
+    """
     for i in collected_bins:
         bin_path = str(bin_dir) + "/" + i 
         individual_bin = list(SeqIO.parse(bin_path, "fasta"))
@@ -63,6 +64,13 @@ def form_depth_array(empty_depth_array, contig_id, depth_file):
     return empty_depth_array
 
 def store_basic_info(contig_id_array, contig_seq_array, contig_len_array, contig_gc_array, assembly_contigs):
+    """
+    contig_id_array: the empty list containing len(contig_id) elements. To save the contig id.
+    contig_seq_array: the empty list containing len(contig_id) elements. To save the contig sequence.
+    contig_len_array: the empty list containing len(contig_id) elements. To save the contig length.
+    contig_gc_array: the empty list containing len(contig_id) elements. To save the contig GC content.
+    assembly_contigs: the contig dictionary.
+    """
     # simply change all of the files
     for i in assembly_contigs:
         contig_id_array.append(i.id)
@@ -72,6 +80,10 @@ def store_basic_info(contig_id_array, contig_seq_array, contig_len_array, contig
     return
 
 def find_finest_taxon(id_hierarchy, all_organisms):
+    """
+    id_hierarchy: the list of taxid from the finest to the coarsest.
+    all_organisms: the dictionary containing taxid and their corresponding scientific names.
+    """
     i = 0
     length_id_hierarchy = len(id_hierarchy)
     while i < length_id_hierarchy:
@@ -95,6 +107,12 @@ def all_organisms_dict(names_dump):
     return all_organisms
 
 def form_contig_taxa_array(empty_taxon_array, contig_id, names_dump, contig_annotation):
+    """
+    empty_taxon_array: the empty list containing len(contig_id) elements.
+    contig_id: the list of contig id.
+    names_dump: the file containing taxid and their corresponding scientific names.
+    contig_annotation: the file containing contig id and their corresponding taxid.
+    """
     with open(contig_annotation, "r") as contig_f:
         contig_taxonomy_lines = contig_f.readlines()
 
