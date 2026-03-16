@@ -41,6 +41,14 @@ Check whether conda and mamba are intactly installed by running the commands bel
 ``NOTE``: Make sure mamba's version isn't > 2.0, current ChloroScan works well with mamba v1. As a reference, we developed ChloroScan under mamba v1.4.2 and conda v23.3.1.
 Now you can proceed to set up the virtual environment and install the chloroscan.
 
+Cargo and FragGeneScanRs should also be installed, for coding sequence extraction, so we prepared a bash script to do this: https://github.com/Andyargueasae/chloroscan/blob/release_v0.1.7/install_fraggenescanrs.sh.
+
+.. code-block:: bash
+
+    bash install_fraggenescanrs.sh
+
+Simply follow its prompts. Now you are ready to install ChloroScan via pip.
+
 .. code-block:: bash
 
     python3 -m venv chloroscan_env

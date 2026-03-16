@@ -390,14 +390,14 @@ rule documenting_binny_results:
         "Run python script summarize_binny_results.py to record each bin's contig metadata."
     shell:
         r"""
-        set -eu pipefail
         python -V
         python -c "import sys; print(sys.path)"
         python -c "import Bio; print(Bio.__version__)"
+        
         python {params.script_dir}/summarize_binny_results.py --assemblyfasta {params.assembly_files} \
             --assemblydepth {params.assembly_depth} --assembly_annot {params.marker_gene_gff} \
             --taxonomy_names {params.names_dump} --contig_level_annotation {input.contig_level_annotation}/{params.ANNOT_FILE} \
-            --assembly_bin_dir {params.bins} --MMA_summary {params.MMA_summary} --output {output}
+            --assembly_bin_dir {params.bins} --MMA_SUMMARY {params.MMA_summary} --output {output}
         """
 
 rule refine_bins:
@@ -449,7 +449,7 @@ rule visualize_results:
 
 rule cds_extraction:
     input:
-        binny_done=rules.binny_run.output,
+        binny_done=rules.binny_run.output[-1],
     params:
         batch_name=BATCH_NAME,
         gff_file_flag="GFFs",
@@ -457,16 +457,33 @@ rule cds_extraction:
         path_fraggenescan = OUTPUT_DIR/"working/FragGeneScanRs",
     output:
         CDS_EXTRACTION=directory(OUTPUT_DIR/"working/cds-extraction")
-    conda:
-        "envs/fraggenescan.yml"
     message:
         "Use the fast ORF-predictor FragGeneScan Rust to predict gene contents of the MAGs, then extract the cds via gffread."
     shell:
-        r"""
-        bash {params.script_dir}/cds-extraction.sh --input {input.binny_done} \
-            --batch_name {params.batch_name} --gff_file_flag {params.gff_file_flag} \
-            --path_fraggenescanrs {params.path_fraggenescan} \
-            --output {output.CDS_EXTRACTION}
+        """
+        mkdir -p {params.path_fraggenescan}/{params.gff_file_flag}
+        mkdir -p {output}
+        mkdir -p {output}/cds
+        mkdir -p {output}/faa
+        export PATH=$PATH:$HOME/.cargo/bin
+
+        BINNY_DIR=$(dirname {input.binny_done})/bins
+        echo $BINNY_DIR
+        BATCH_NAME={params.batch_name}
+
+        for i in $(ls $BINNY_DIR);
+        do 
+            echo $BINNY_DIR/$i
+            FragGeneScanRs --seq-file-name $BINNY_DIR/$i --training-file illumina_5 --thread-num 1 -g {params.path_fraggenescan}/{params.gff_file_flag}/$(basename $i .fasta).gff \
+            -n {output}/cds/$(basename $BATCH_NAME).$(basename $i .fasta).gene.fasta -a {output}/faa/$(basename $BATCH_NAME).$(basename $i .fasta).faa -w 0; 
+        done
+
+        if [ $? -ne 0 ]; then
+            echo "Error: FragGeneScanRs failed to run."
+            exit 1
+        else
+            echo "FragGeneScanRs completed successfully."
+        fi
         """
 
 rule krona_taxonomy_plot:
