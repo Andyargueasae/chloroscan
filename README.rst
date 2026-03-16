@@ -29,7 +29,7 @@ To install the workflow, use pip3. The background environment will require Pytho
 
 .. code-block:: bash
 
-    pip3 install chloroscan==0.1.5
+    pip3 install chloroscan==0.1.7
 
 Detailed workflow instructions can be found at: https://andyargueasae.github.io/chloroscan/index.html.
 The website also contains Chinese version of the documentation with identical contents.
