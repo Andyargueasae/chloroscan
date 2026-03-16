@@ -394,7 +394,7 @@ rule documenting_binny_results:
         python -c "import sys; print(sys.path)"
         python -c "import Bio; print(Bio.__version__)"
         
-        python {params.script_dir}/summarize_binny_results.py --assemblyfasta {params.assembly_files} \
+        $CONDA_PREFIX/bin/python {params.script_dir}/summarize_binny_results.py --assemblyfasta {params.assembly_files} \
             --assemblydepth {params.assembly_depth} --assembly_annot {params.marker_gene_gff} \
             --taxonomy_names {params.names_dump} --contig_level_annotation {input.contig_level_annotation}/{params.ANNOT_FILE} \
             --assembly_bin_dir {params.bins} --MMA_SUMMARY {params.MMA_summary} --output {output}
@@ -418,7 +418,7 @@ rule refine_bins:
         OUTPUT_DIR/"logging_info/refinement.log"
     shell:
         """
-        python {params.script_dir}/refine_bins.py --input_cross_ref {input.cross_ref} \
+        $CONDA_PREFIX/bin/python {params.script_dir}/refine_bins.py --input_cross_ref {input.cross_ref} \
             --input_original_bins {input.original_bins} \
             --input_CAT_prediction {input.CAT_prediction} \
             --output_dir_for_refined_bins {output.refine_dir} \
@@ -441,7 +441,7 @@ rule visualize_results:
         OUTPUT_DIR/"logging_info/visualizations.log"
     shell:
         """
-        python {params.script_dir}/visualization.py --input_cross_ref {input} \
+        $CONDA_PREFIX/bin/python {params.script_dir}/visualization.py --input_cross_ref {input} \
             --batch_name {params.BATCH_NAME} \
             --refine_bins_dir {params.refine_bins_dir} \
             --output_dir {output} >> {log} 2>&1
