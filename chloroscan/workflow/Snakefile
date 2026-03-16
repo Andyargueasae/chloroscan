@@ -44,7 +44,7 @@ TMP_DIR.mkdir(parents=True, exist_ok=True) # what if we do want to prepare data 
 BINNY_MANTIS_ENV = config['binning']['mantis_env']
 # GLOBAL_CONFIG = "config.ChloroScan.yaml"
 
-BINNY_DIR = WORKFLOW_DIR.parent.parent / "binny_Chloroscan"
+BINNY_DIR = WORKFLOW_DIR.parent / "binny_Chloroscan"
 BINNY_SNAKEFILE = BINNY_DIR / "workflow" / "binny_core.smk"
 BINNY_FINAL_OUTPUT_DIR = OUTPUT_DIR / "working/binny"
 BINNY_DEPTH_INPUT = DEPTH_TEXT_FILE if DEPTH_FILE_EXISTS else str(OUTPUT_DIR / "working/depth_profile.txt")
@@ -387,7 +387,7 @@ rule documenting_binny_results:
     conda:
         "envs/documenting_binny.yml"
     message:
-        "Run python script summarize_binny_results.py to record each bin's contig information."
+        "Run python script summarize_binny_results.py to record each bin's contig metadata."
     shell:
         r"""
         set -eu pipefail

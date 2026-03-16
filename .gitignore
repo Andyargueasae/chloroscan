@@ -162,7 +162,7 @@ cython_debug/
 
 wandb/
 chloroscan/.snakemake/
-./binny_Chloroscan/resources/
+chloroscan/binny_Chloroscan/resources/
 
 .snakemake/*
 results
