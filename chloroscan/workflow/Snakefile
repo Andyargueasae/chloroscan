@@ -426,7 +426,7 @@ rule visualize_results:
     input:
         OUTPUT_DIR/"working/summary/cross_ref.tsv",
     params:
-        BATCH_NAME,
+        batch_name=BATCH_NAME,
         script_dir = SCR_DIR,
         refine_bins_dir=OUTPUT_DIR/"working/binny",
     output:
@@ -438,7 +438,7 @@ rule visualize_results:
     shell:
         """
         $CONDA_PREFIX/bin/python {params.script_dir}/visualization.py --input_cross_ref {input} \
-            --batch_name {params.BATCH_NAME} \
+            --batch_name {params.batch_name} \
             --refine_bins_dir {params.refine_bins_dir} \
             --output_dir {output} >> {log} 2>&1
         """
