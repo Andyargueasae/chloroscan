@@ -454,19 +454,19 @@ rule cds_extraction:
         batch_name=BATCH_NAME,
         gff_file_flag="GFFs",
         script_dir = SCR_DIR,
-        path_fraggenescanrs = OUTPUT_DIR/"working/FragGeneScanRs",
+        path_fraggenescan = OUTPUT_DIR/"working/FragGeneScanRs",
     output:
         CDS_EXTRACTION=directory(OUTPUT_DIR/"working/cds-extraction")
     conda:
-        "envs/gffread.yml"
+        "envs/fraggenescan.yml"
     message:
         "Use the fast ORF-predictor FragGeneScan Rust to predict gene contents of the MAGs, then extract the cds via gffread."
     shell:
         r"""
         bash {params.script_dir}/cds-extraction.sh --input {input.binny_done} \
-        --batch_name {params.batch_name} --gff_file_flag {params.gff_file_flag} \
-        --path_fraggenescanrs {params.path_fraggenescanrs} \
-        --output {output.CDS_EXTRACTION}
+            --batch_name {params.batch_name} --gff_file_flag {params.gff_file_flag} \
+            --path_fraggenescanrs {params.path_fraggenescan} \
+            --output {output.CDS_EXTRACTION}
         """
 
 rule krona_taxonomy_plot:
