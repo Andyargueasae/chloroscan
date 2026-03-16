@@ -49,7 +49,15 @@ jobs:
 
           cargo install frag_gene_scan_rs
           echo "$HOME/.cargo/bin" >> "$GITHUB_PATH"
-
+      - name: Clear Snakemake/conda caches
+        shell: bash -el {0}
+        run: |
+          rm -rf .snakemake/conda || true
+          rm -rf .snakemake/conda-archive || true
+          rm -rf .conda || true
+          echo "After cleanup:"
+          ls -la . || true
+          ls -la .snakemake || true
       - name: Testing
         shell: bash -el {0}
         run: |

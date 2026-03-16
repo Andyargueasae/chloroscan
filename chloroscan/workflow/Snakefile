@@ -391,6 +391,9 @@ rule documenting_binny_results:
     shell:
         r"""
         set -eu pipefail
+        python -V
+        python -c "import sys; print(sys.path)"
+        python -c "import Bio; print(Bio.__version__)"
         python {params.script_dir}/summarize_binny_results.py --assemblyfasta {params.assembly_files} \
             --assemblydepth {params.assembly_depth} --assembly_annot {params.marker_gene_gff} \
             --taxonomy_names {params.names_dump} --contig_level_annotation {input.contig_level_annotation}/{params.ANNOT_FILE} \
