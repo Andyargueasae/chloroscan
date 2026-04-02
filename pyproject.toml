@@ -8,11 +8,11 @@ readme = "README.rst"
 
 [tool.poetry.dependencies]
 python = "^3.9"
-snk-cli = ">0.1.2,<1"
+snk-cli = ">0.1.2,<=0.2.0"
 numpy = ">1.24.4,<2"
 pandas = ">=2.0"
 gitpython = "^3.1.32"
-click = ">=8.1,<9"
+click = "<8"
 setuptools = "<81"
 
 [tool.poetry.group.dev.dependencies]
