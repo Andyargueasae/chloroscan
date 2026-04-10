@@ -5,7 +5,7 @@ channels:
   - defaults
 dependencies:
   - python=3.10
-  - mantis_pfa=1.5.5
+  - mantis_pfa=1.4.7
   - cython
   - nltk
   - pip

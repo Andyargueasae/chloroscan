@@ -322,6 +322,7 @@ use rule binny from binny_mod as binny_run
 rule check_binny_output:
     input:
         binny_out=rules.binny_run.output,
+    params:
         binny_bins=Path(OUTPUT_DIR/"working/binny/bins"),
     output:
         check_flag=OUTPUT_DIR/"working/binny/binny_output_check.txt"
@@ -330,7 +331,7 @@ rule check_binny_output:
     shell:
         """
         set -e
-        if [ -d "{input.binny_bins}" ] && [ "$(ls -A {input.binny_bins})" ]; then
+        if [ -d "{params.binny_bins}" ] && [ "$(ls -A {params.binny_bins})" ]; then
             echo "Binny produced bins successfully." > {output.check_flag}
         else
             echo "Binny did not produce any bins."
