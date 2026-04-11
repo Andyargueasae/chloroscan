@@ -179,13 +179,14 @@ rule corgi_prediction:
         header=1
         raw_plastid_contig_count=$(grep -o ",Plastid," {output.corgi_out} | wc -l)
         plastid_contig_count=$((raw_plastid_contig_count-header))
+        N_SEQ=$(wc -l < {output.corgi_out})
 
         zero=0
         if [ $plastid_contig_count -eq $zero ]; then
             echo "No plastid contigs found, rule exit."
             exit 0
 
-        elif [ $plastid_contig_count -le 100 ]; then
+        elif [ $plastid_contig_count -le 100 ] && [ $plastid_contig_count -ge $((N_SEQ/2)) ]; then
             echo "bash {params.bash_plastid_accession_script} -c {output.corgi_out} -o {params.plastid_contigs_identifier}"
             bash {params.bash_plastid_accession_script} -c {output.corgi_out} -o {params.plastid_contigs_identifier}
             echo "python {params.python_fasta_writer} --assembly {input.seqs} --accession {params.plastid_contigs_identifier} --fasta_file_name {output.plastid_contigs}"
@@ -195,6 +196,19 @@ rule corgi_prediction:
             prediction_lines=$(wc -l <{output.corgi_out})
             contig_total=$((prediction_lines-header))
             ls {params.output_dir}/working/corgi
+            
+            plastid_match=$(grep -o ">" {output.plastid_contigs} | wc -l)
+
+            echo "total classified contigs containing all 5 domains: $contig_total"> {params.output_dir}/corgi.summary.txt
+            echo "total number of plastid contigs: $plastid_match">>{params.output_dir}/corgi.summary.txt
+        elif [ $plastid_contig_count -gt 100 ] && [ $plastid_contig_count -lt $((N_SEQ/2)) ]; then
+            echo "More than 100 plastid contigs found, which may be an overprediction. Please check the {output.corgi_out} file for details. We will apply a more stringent threshold to gather plastid contigs."
+            echo "bash {params.bash_plastid_accession_script} -c {output.corgi_out} -o {params.plastid_contigs_identifier} -p {params.p_threshold}"
+            bash {params.bash_plastid_accession_script} -c {output.corgi_out} -o {params.plastid_contigs_identifier} -p {params.p_threshold}
+            python {params.python_fasta_writer} --assembly {input.seqs} --accession {params.plastid_contigs_identifier} --fasta_file_name {output.plastid_contigs}
+            # Do some calculations here.
+            prediction_lines=$(wc -l <{output.corgi_out})
+            contig_total=$((prediction_lines-header))
             
             plastid_match=$(grep -o ">" {output.plastid_contigs} | wc -l)
 
