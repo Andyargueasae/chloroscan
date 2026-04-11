@@ -12,6 +12,7 @@ ChloroScan: A metagenomic workflow to recover chloroplast genomes
 
 .. |docs badge| image:: https://github.com/Andyargueasae/chloroscan/actions/workflows/docs.yml/badge.svg
     :target: https://Andyargueasae.github.io/chloroscan
+
     
 .. end-badges
 
@@ -25,12 +26,13 @@ Installation
 
 **Before downloading, ensure you have effective mamba and conda working in your server, we recommend the version to be mamba 1.4.2 and conda 23.3.1. Instructions of download is documented here: https://github.com/conda-forge/miniforge.**
 
-To install the workflow, use pip3. The background environment will require Python <3.12, >=3.9 to set up the virtual environment. We recommend Python 3.10.
+To install the workflow, use pip3. The background environment will require Python <3.12, >=3.9 to set up the virtual environment. We recommend Python 3.10. 
 
 .. code-block:: bash
 
-    pip3 install chloroscan==0.1.7
+    pip3 install chloroscan
 
+This will install the latest version of ChloroScan. 
 Detailed workflow instructions can be found at: https://andyargueasae.github.io/chloroscan/index.html.
 The website also contains Chinese version of the documentation with identical contents.
 
