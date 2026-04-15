@@ -341,11 +341,12 @@ rule prepare_mantis:
         which python
         python -c "import sys; print(sys.executable)"
         conda list | grep -i -E 'mantis|cython|nltk' || true
-        python -m pip install --no-cache-dir Cython
+        # python -m pip install --no-cache-dir Cython
         python -c "import Cython; print(Cython.__version__, Cython.__file__)"
         # download nltk data
-        python -m pip install --no-cache-dir nltk
+        # python -m pip install --no-cache-dir nltk
         python -c "import nltk;nltk.download('averaged_perceptron_tagger_eng')"
+        python -c "import mantis;from mantis.multiprocessing import *"
         mantis setup -mc {input.mantis_cfg} --no_taxonomy
         mantis check -mc {input.mantis_cfg} --no_taxonomy
         touch {output}
