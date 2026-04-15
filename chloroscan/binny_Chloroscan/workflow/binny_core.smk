@@ -346,7 +346,6 @@ rule prepare_mantis:
         # download nltk data
         python -m pip install --no-cache-dir nltk
         python -c "import nltk;nltk.download('averaged_perceptron_tagger_eng')"
-        python -c "import mantis;from mantis.multiprocessing import *"
         mantis setup -mc {input.mantis_cfg} --no_taxonomy
         mantis check -mc {input.mantis_cfg} --no_taxonomy
         touch {output}
