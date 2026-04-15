@@ -4,4 +4,7 @@ channels:
   - bioconda
   - defaults
 dependencies:
-  - mantis_pfa=1.4.7
+  - python=3.9
+  - mantis_pfa
+  - cython
+  - nltk
