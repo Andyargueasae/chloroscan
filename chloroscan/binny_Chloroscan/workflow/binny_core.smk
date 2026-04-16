@@ -342,7 +342,6 @@ rule prepare_mantis:
         python -c "import sys; print(sys.executable)"
         python -c "import Cython; print(Cython.__version__)"
         python -c "from Cython.Build import cythonize; print('Cython OK')"
-        python -c "import mantis; print(mantis.__file__)"
         mantis --help
         # download nltk data.
         python -c "import nltk; nltk.download('averaged_perceptron_tagger_eng')"
