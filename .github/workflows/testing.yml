@@ -13,34 +13,46 @@ jobs:
     steps:
       - uses: actions/checkout@v4
 
-      - name: Install poetry
-        run: pipx install poetry
-
       - name: Setup Miniforge with Mamba 1.x
         uses: conda-incubator/setup-miniconda@v3
         with:
           miniforge-version: latest
           activate-environment: base
+          auto-activate-base: true
           python-version: ${{ matrix.python-version }}
           conda-version: "23.3.1"
           mamba-version: "1.4.2"
           channels: conda-forge,bioconda
           channel-priority: strict
+          use-mamba: true
 
-      - name: Install dependencies for Python ${{ matrix.python-version }}
-        uses: actions/setup-python@v5
-        with:
-          python-version: ${{ matrix.python-version }}
-          cache: poetry
-
-      - name: Installation
+      - name: Install Poetry
+        shell: bash -el {0}
         run: |
-          poetry env use "${{ matrix.python-version }}"
-          poetry install
+          python -m pip install --upgrade pip
+          python -m pip install poetry
+
+      - name: Configure Poetry to use current Conda Python
+        shell: bash -el {0}
+        run: |
+          poetry config virtualenvs.create false
+          poetry env info || true
+          which python
+          python --version
+          which conda
+          which mamba
+          conda --version
+          mamba --version
+
+      - name: Install package
+        shell: bash -el {0}
+        run: |
+          poetry install --no-interaction
 
       - name: Install FragGeneScanRs
+        shell: bash -el {0}
         run: |
-          if command -v cargo &> /dev/null; then
+          if command -v cargo >/dev/null 2>&1; then
             echo "Cargo is already installed."
           else
             curl --proto '=https' --tlsv1.2 -sSf https://sh.rustup.rs | sh -s -- -y
@@ -49,23 +61,33 @@ jobs:
 
           cargo install frag_gene_scan_rs
           echo "$HOME/.cargo/bin" >> "$GITHUB_PATH"
-      - name: Clear Snakemake/conda caches
+
+      - name: Clear caches
         shell: bash -el {0}
         run: |
           rm -rf .snakemake/conda || true
           rm -rf .snakemake/conda-archive || true
           rm -rf .conda || true
-          echo "After cleanup:"
-          ls -la . || true
-          ls -la .snakemake || true
-      - name: Testing
+          rm -rf ~/.conda/envs || true
+          rm -rf ~/.conda/pkgs || true
+
+      - name: Debug environment
         shell: bash -el {0}
         run: |
-          which mamba
-          which conda
-          mamba --version
-          conda --version
+          echo "PATH=$PATH"
+          which python
           python --version
-
+          which pip
+          which poetry
+          which conda
+          which mamba
+          conda info
           df -H
+
+      - name: Run tests
+        shell: bash -el {0}
+        env:
+          PYTHONNOUSERSITE: "1"
+          CONDA_PKGS_DIRS: ${{ github.workspace }}/.conda/pkgs
+        run: |
           poetry run pytest -v -s -o faulthandler_timeout=60
