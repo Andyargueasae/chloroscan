@@ -55,8 +55,8 @@ BINNY_NLTK_READY = BINNY_RUNTIME_DIR / "nltk.ready"
 BINNY_NLTK_DIR = BINNY_RUNTIME_DIR / "nltk_data"
 
 BINNY_DB_ROOT = BINNY_DIR / "resources"
-BINNY_DB_DIR = BINNY_DB_ROOT / "A2K_database"
-BINNY_DB_SENTINEL = BINNY_DB_DIR / "hmms" / "checkm_pf" / "checkm_filtered_pf.hmm"
+BINNY_DB_DIR = BINNY_DB_ROOT / "A2K_database" 
+BINNY_DB_SENTINEL = BINNY_DB_DIR / "hmms" / "merged_hmms" / "merged_hmms.hmm"
 
 # Some configs are new for binny, add to snk.yml.
 BINNY_CONFIG = {
@@ -270,30 +270,30 @@ rule ensure_binny_database:
         sentinel=BINNY_DB_SENTINEL
     params:
         db_root=BINNY_DB_ROOT,
-        archive_url="https://codeload.github.com/Andyargueasae/binny_database/tar.gz/refs/heads/main"
+        article_id="31989147",
+        token="~/.figshare/token"
+    conda:
+        "envs/prepare_binny_db.yml"
     log:
         OUTPUT_DIR / "logging_info" / "binny_database_download.log"
     shell:
         r"""
         set -euo pipefail
 
-        mkdir -p {params.db_root}
+        if [ ! -f {params.token} ]; then
+            echo "Figshare token file not found at {params.token}. Please create your own figshare account and create a file containing your Figshare token at this location."
+            exit 1
+        fi
+
+        mkdir -p {params.db_root}/A2K_database
 
         if [ -s {output.sentinel} ]; then
-            echo "Binny database already present at {params.db_root}" >> {log}
+            echo "Binny database already present at {params.db_root}/A2K_database" >> {log}
             exit 0
         fi
 
-        tmpdir="$(mktemp -d)"
-        trap 'rm -rf "$tmpdir"' EXIT
-
-        curl -L "{params.archive_url}" -o "$tmpdir/binny_database.tar.gz" >> {log} 2>&1
-        tar -xzf "$tmpdir/binny_database.tar.gz" -C "$tmpdir" >> {log} 2>&1
-
-        rm -rf {params.db_root}/A2K_database
-        mv "$tmpdir"/binny_database-main/A2K_database {params.db_root}/A2K_database
-
-        test -s {output.sentinel}
+        figshare download {params.article_id} -o {params.db_root}/A2K_database >> {log} 2>&1
+        touch {output.sentinel}
         """
 
 rule prepare_binny_mantis_cfg:
