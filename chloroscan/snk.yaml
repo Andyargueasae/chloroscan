@@ -1,6 +1,7 @@
 logo: "ChloroScan"
 font: "cybermedium"
 tagline: "A state-of-art metagenomic workflow extracting chloroplast genomes from metagenomes."
+version: 0.2.4
 conda: True
 skip_missing: True
 symlink_resources: False
