@@ -4,6 +4,7 @@ tagline: "A state-of-art metagenomic workflow extracting chloroplast genomes fro
 conda: True
 skip_missing: True
 symlink_resources: False
+version: "__about__.py"
 cli:
   Inputs:
     assembly:
@@ -107,21 +108,10 @@ cli:
       help: "P-value threshold for CORGI to determine if the contigs category is authentically plastidial or something else."
       required: False
       default: 0.50
-  cat:
+  mmseqs2:
     database:
         type: Path
         help: "Path to the database of chloroplast genomes."
         required: False
         short: d
-        default: "/home/yuhtong/scratch/andy/uniref90_algaProt/db"
-    taxonomy:
-        type: Path
-        help: "Path to the taxonomy of the database."
-        required: False
-        short: t
-        default: "/home/yuhtong/scratch/andy/uniref90_algaProt/tax"
-  krona_env:
-    type: string
-    help: "Path to the Krona environment."
-    required: False
-    default: "kronatools"
+        default: None

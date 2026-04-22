@@ -1,5 +1,7 @@
 channels:
   - conda-forge
+  - nvidia
+  - pytorch
 dependencies:
   - coreutils
   - python=3.11

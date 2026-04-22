@@ -1,20 +1,8 @@
 from pathlib import Path
 import typer
 from snk_cli import CLI
-from importlib.metadata import version, PackageNotFoundError
 
 chloroscan = CLI(Path(__file__).parent.parent)
-
-def get_version() -> str:
-    try:
-        return version("chloroscan")
-    except PackageNotFoundError:
-        return "unknown"
-
-@chloroscan.app.command()
-def version():
-    """Print the installed ChloroScan version."""
-    print(get_version())
 
 @chloroscan.app.command()
 def github():

@@ -25,11 +25,8 @@ BATCH_NAME = config['Inputs']['batch_name']
 
 WORKFLOW_DIR = Path(workflow.basedir)
 SCR_DIR = WORKFLOW_DIR/"scripts"
-CAT_DB_DIR = config['cat']['database']
-CAT_TAXON_DIR = config['cat']['taxonomy']
-TAXA = os.path.join(CAT_TAXON_DIR, "names.dmp")
-GLOBAL_PREFIX="OUT"
-GLOBAL_PREFIX_contigs="out.CAT"
+MMSEQSDB = config['mmseqs2']['database']
+GLOBAL_PREFIX_contigs="out.mmseqs2"
 OUTPUT_DIR.mkdir(parents=True, exist_ok=True)
 
 # create temporary directory.
@@ -55,8 +52,8 @@ BINNY_NLTK_READY = BINNY_RUNTIME_DIR / "nltk.ready"
 BINNY_NLTK_DIR = BINNY_RUNTIME_DIR / "nltk_data"
 
 BINNY_DB_ROOT = BINNY_DIR / "resources"
-BINNY_DB_DIR = BINNY_DB_ROOT / "A2K_database"
-BINNY_DB_SENTINEL = BINNY_DB_DIR / "hmms" / "checkm_pf" / "checkm_filtered_pf.hmm"
+BINNY_DB_DIR = BINNY_DB_ROOT / "A2K_database" 
+BINNY_DB_SENTINEL = BINNY_DB_DIR / "hmms" / "merged_hmms" / "merged_hmms.hmm"
 
 # Some configs are new for binny, add to snk.yml.
 BINNY_CONFIG = {
@@ -131,7 +128,8 @@ with open(CONFIG_RECORD, "w") as cr:
     cr.write("\tMAG starting completeness: {}\n".format(config['binning']['bin_quality']['starting_completeness']))
     cr.write("\tMAG minimum completeness: {}\n".format(config['binning']['bin_quality']['min_completeness']))
     cr.write("\tMAG purity (1-contamination) cutoff: {}\n".format(config['binning']['bin_quality']['purity']))
-    cr.write("CAT database: {}\n".format(CAT_DB_DIR))
+    cr.write("MMseqs2 database: {}\n".format(config['mmseqs2']['database']))
+
 
 rule all:
     input:
@@ -270,30 +268,30 @@ rule ensure_binny_database:
         sentinel=BINNY_DB_SENTINEL
     params:
         db_root=BINNY_DB_ROOT,
-        archive_url="https://codeload.github.com/Andyargueasae/binny_database/tar.gz/refs/heads/main"
+        article_id="31989147",
+        token="~/.figshare/token"
+    conda:
+        "envs/prepare_binny_db.yml"
     log:
         OUTPUT_DIR / "logging_info" / "binny_database_download.log"
     shell:
         r"""
         set -euo pipefail
 
-        mkdir -p {params.db_root}
+        if [ ! -f {params.token} ]; then
+            echo "Figshare token file not found at {params.token}. Please create your own figshare account and create a file containing your Figshare token at this location."
+            exit 1
+        fi
+
+        mkdir -p {params.db_root}/A2K_database
 
         if [ -s {output.sentinel} ]; then
-            echo "Binny database already present at {params.db_root}" >> {log}
+            echo "Binny database already present at {params.db_root}/A2K_database" >> {log}
             exit 0
         fi
 
-        tmpdir="$(mktemp -d)"
-        trap 'rm -rf "$tmpdir"' EXIT
-
-        curl -L "{params.archive_url}" -o "$tmpdir/binny_database.tar.gz" >> {log} 2>&1
-        tar -xzf "$tmpdir/binny_database.tar.gz" -C "$tmpdir" >> {log} 2>&1
-
-        rm -rf {params.db_root}/A2K_database
-        mv "$tmpdir"/binny_database-main/A2K_database {params.db_root}/A2K_database
-
-        test -s {output.sentinel}
+        figshare download {params.article_id} -o {params.db_root}/A2K_database >> {log} 2>&1
+        touch {output.sentinel}
         """
 
 rule prepare_binny_mantis_cfg:
@@ -353,47 +351,53 @@ rule check_binny_output:
         fi
         """
 
-rule CAT_taxonomy_identification_plus_annotation:
+rule MMseqs2_taxonomy:
     input: 
         flag=rules.check_binny_output.output.check_flag,
         binny_output=rules.binny_run.output
-        
     params:
         prefix=GLOBAL_PREFIX_contigs,
-        path_to_contigs="intermediary/assembly.formatted.fa"
+        path_to_contigs=os.path.join(OUTPUT_DIR, "working", "binny", "intermediary", "assembly.formatted.fa")
     output:
-        CAT_output=directory(OUTPUT_DIR/"working/CAT")
-        # contig_classification=OUTPUT_DIR/"working/CAT/out.CAT.contig2classification.txt"
+        mmseqs2=directory(OUTPUT_DIR/"working/mmseqs2"),
+        krona_report=OUTPUT_DIR/"Krona.html",
     log:
-        OUTPUT_DIR/"logging_info/CAT.log"
+        OUTPUT_DIR/"logging_info/mmseqs2.log"
     benchmark:
-        OUTPUT_DIR/"logging_info/CAT_benchmark.tsv"
+        OUTPUT_DIR/"logging_info/mmseqs2_benchmark.tsv"
     conda:
-        "envs/CAT_env.yml"
+        "envs/mmseqs.yml"
+    threads:
+        os.cpu_count()
+    message:
+        "Run MMseqs2 taxonomy classification for the plastid contigs."
     shell:
         """
         set -e
-        mkdir -p {output}
-
-        # Check to see if the binny directory is empty or not
-        find {OUTPUT_DIR}/working/binny -mindepth 1 -maxdepth 1 >> {log}
-        if [ -f "{OUTPUT_DIR}/working/binny/{params.path_to_contigs}" ] ; then
-            CAT contigs -c {OUTPUT_DIR}/working/binny/{params.path_to_contigs} -d {CAT_DB_DIR} -t {CAT_TAXON_DIR} -o {output}/{params.prefix} --force >> {log} 
-        fi
+        mkdir -p {output.mmseqs2}
+        resource="$(( {threads} * 10 ))G"
+        # first, create contigdb based on the assembly.
+        mmseqs createdb {params.path_to_contigs} {output.mmseqs2}/contigdb
+        # then, run taxonomy classification.
+        mmseqs taxonomy {output.mmseqs2}/contigdb {MMSEQSDB} {output.mmseqs2}/{params.prefix} {output.mmseqs2}/tmp --threads {threads} \
+            --search-type 2 --tax-lineage 2 --split-memory-limit $resource > {log} 2>&1
+        # extract results as tsv.
+        mmseqs createtsv {output.mmseqs2}/contigdb {MMSEQSDB} {output.mmseqs2}/{params.prefix} {output.mmseqs2}/{params.prefix}.tsv >> {log} 2>&1
+        # generate krona report.
+        mmseqs taxonomyreport {MMSEQSDB} {output.mmseqs2}/{params.prefix} {output.krona_report} --threads {threads} --report-mode 1 >> {log} 2>&1
         """
 
 # this is the correct one.
 rule documenting_binny_results:
     input: 
-        contig_level_annotation = OUTPUT_DIR/"working/CAT"
+        contig_level_annotation = OUTPUT_DIR/"working/mmseqs2"
     params: 
         bins = Path(OUTPUT_DIR/"working/binny/bins"),
         assembly_files = OUTPUT_DIR/"working/binny/intermediary/assembly.formatted.fa",
         assembly_depth = OUTPUT_DIR/"working/binny/intermediary/assembly.contig_depth.txt",
         marker_gene_gff = OUTPUT_DIR/"working/binny/intermediary/annotation_CDS_RNA_hmms_checkm.gff",
-        names_dump=TAXA,
         MMA_summary=OUTPUT_DIR/"MMA.summary.txt",
-        ANNOT_FILE="out.CAT.contig2classification.txt",
+        ANNOT_FILE="out.mmseqs2.tsv",
         script_dir = SCR_DIR
     output:
         OUTPUT_DIR/"working/summary/cross_ref.tsv",
@@ -407,7 +411,7 @@ rule documenting_binny_results:
         """
         $CONDA_PREFIX/bin/python {params.script_dir}/summarize_binny_results.py --assemblyfasta {params.assembly_files} \
             --assemblydepth {params.assembly_depth} --assembly_annot {params.marker_gene_gff} \
-            --taxonomy_names {params.names_dump} --contig_level_annotation {input.contig_level_annotation}/{params.ANNOT_FILE} \
+            --contig_level_annotation {input.contig_level_annotation}/{params.ANNOT_FILE} \
             --assembly_bin_dir {params.bins} --MMA_SUMMARY {params.MMA_summary} --output {output}
         """
 
@@ -415,7 +419,7 @@ rule refine_bins:
     input:
         cross_ref = OUTPUT_DIR/"working/summary/cross_ref.tsv",
         original_bins = Path(OUTPUT_DIR/"working/binny"),
-        CAT_prediction = Path(OUTPUT_DIR/"working/CAT"),
+        MMseqs2_prediction = Path(OUTPUT_DIR/"working/mmseqs2"),
     params:
         script_dir = SCR_DIR
     output:
@@ -431,7 +435,7 @@ rule refine_bins:
         """
         $CONDA_PREFIX/bin/python {params.script_dir}/refine_bins.py --input_cross_ref {input.cross_ref} \
             --input_original_bins {input.original_bins} \
-            --input_CAT_prediction {input.CAT_prediction} \
+            --input_MMseqs2_prediction {input.MMseqs2_prediction} \
             --output_dir_for_refined_bins {output.refine_dir} \
             --output_summary_info {output.summary_info} \
             --log_file {log}
@@ -497,44 +501,12 @@ rule cds_extraction:
         fi
         """
 
-rule krona_taxonomy_plot:
-    input: 
-        CAT_pred_whole_data=rules.CAT_taxonomy_identification_plus_annotation.output.CAT_output,
-        # summary_info=rules.documenting_binny_results.output,
-    params:
-        file_to_remodel="out.CAT.contig2classification.txt",
-        file_after_remodel="out.CAT.krona.intake.tsv",
-        intake_krona="out.CAT.krona.intake2.tsv",
-        script_dir = SCR_DIR,
-        batch_name=BATCH_NAME
-    conda:
-        "envs/krona.yml"
-    output:
-        OUTPUT_DIR/"Krona.html"
-    message:
-        "Ensure that in your env there must have pandas, click and of course, Kronatools."
-    shell:
-        """
-        set -e
-
-        # add if statement: if there are empty out.CAT file, we exit with touched files: Krona.html.
-        if [ ! -s {input}/{params.file_to_remodel} ]; then
-            echo "No contig predictions because previous rules did not find any plastid contigs."
-            touch {output}
-            exit 0
-        fi 
-
-        python {params.script_dir}/create_taxonomy_profile.py --cat_prediction_txt {input}/{params.file_to_remodel} --output {input}/{params.file_after_remodel}
-        sed 1d {input}/{params.file_after_remodel} > {input}/{params.intake_krona}
-        ktImportTaxonomy -m 1 -o {output} {input}/{params.intake_krona}
-        """
-
 rule check_done:
     input:
         OUTPUT_DIR/"working/visualizations",
         OUTPUT_DIR/"working/refined_bins",
         OUTPUT_DIR/"working/binny",
-        OUTPUT_DIR/"working/CAT",
+        OUTPUT_DIR/"working/mmseqs2",
         OUTPUT_DIR/"working/cds-extraction",
         OUTPUT_DIR/"working/summary/cross_ref.tsv",
         rules.refine_bins.output.refine_dir,

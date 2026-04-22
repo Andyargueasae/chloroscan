@@ -1,4 +1,6 @@
 from Bio import SeqIO
+import pandas as pd
+import numpy as np
 
 def GC_content(sequence):
     G_count = sequence.count('G')
@@ -38,8 +40,8 @@ def form_marker_array(empty_marker_array, annot_file, contig_id):
             marker_dict[key] = ""
             marker_dict[key] += ORF_split[-1].split("=")[-1]
         elif ("checkm_marker" in ORF_split[-1]) and (key in marker_dict.keys()):
-            marker_dict[key] += ","
             marker_dict[key] += ORF_split[-1].split("=")[-1]
+            marker_dict[key] += ","
         else:
             if key not in marker_dict.keys():
                 marker_dict[key] = ""
@@ -79,64 +81,17 @@ def store_basic_info(contig_id_array, contig_seq_array, contig_len_array, contig
         contig_gc_array.append(GC_content(str(i.seq)))
     return
 
-def find_finest_taxon(id_hierarchy, all_organisms):
-    """
-    id_hierarchy: the list of taxid from the finest to the coarsest.
-    all_organisms: the dictionary containing taxid and their corresponding scientific names.
-    """
-    i = 0
-    length_id_hierarchy = len(id_hierarchy)
-    while i < length_id_hierarchy:
-        try:
-            the_organism = all_organisms[id_hierarchy[i]]
-            i+=1
-        except KeyError:
-            break
-    return all_organisms[id_hierarchy[i-1]]
-
-def all_organisms_dict(names_dump):
-    all_organisms = dict()
-    with open(names_dump, "r") as nd:
-        org_lines = nd.readlines()
-    
-    for i in org_lines:
-        i = i.strip().replace("\t", "")
-        org_line = i.split("|")
-        if "scientific name" in org_line:
-            all_organisms[org_line[0]] = org_line[1]
-    return all_organisms
-
-def form_contig_taxa_array(empty_taxon_array, contig_id, names_dump, contig_annotation):
+def form_contig_taxa_array(empty_taxon_array: list, contig_id: list, contig_annotation: str):
     """
     empty_taxon_array: the empty list containing len(contig_id) elements.
     contig_id: the list of contig id.
-    names_dump: the file containing taxid and their corresponding scientific names.
     contig_annotation: the file containing contig id and their corresponding taxid.
     """
-    with open(contig_annotation, "r") as contig_f:
-        contig_taxonomy_lines = contig_f.readlines()
-
-    info_contig_taxonomy = contig_taxonomy_lines[1:]
-    contig2taxid=dict()
-    for i in info_contig_taxonomy:
-        line_info = i.split("\t")
-        if line_info[1] == "no taxid assigned":
-            contig2taxid[line_info[0]] = "0"
-        else:
-            contig2taxid[line_info[0]] = line_info[-2]
-    
-    all_organisms = all_organisms_dict(names_dump)
-
-    for i in contig2taxid.keys():
-        index_contig = contig_id.index(i)
-        if "*" in contig2taxid[i]:
-            taxon_i = contig2taxid[i].replace("*","")
-        taxon_i = contig2taxid[i]
-        if taxon_i == "0":
-            empty_taxon_array[index_contig] = "not classified"
-        else:
-            taxon_hierarchy = taxon_i.split(";")
-            finest_classification = find_finest_taxon(taxon_hierarchy, all_organisms)
-            empty_taxon_array[index_contig] = finest_classification
-
+    columns = ["contig id", "db_match", "taxonomic_rank", "name", "num_fragments", "num_frag_assigned", "num_agreeing_fragments", "score", "lineage"]
+    mmseqs2_contig_taxonomy = pd.read_csv(contig_annotation, sep="\t", names=columns)
+    # fill in empty_taxon_array in the order of contig_id list.
+    for i in contig_id:
+        taxon_row = mmseqs2_contig_taxonomy.loc[mmseqs2_contig_taxonomy["contig id"] == i]
+        taxon_id = np.array(taxon_row["name"])[0]
+        empty_taxon_array[contig_id.index(i)] = taxon_id
     return
