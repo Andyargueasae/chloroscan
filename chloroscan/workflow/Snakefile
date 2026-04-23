@@ -291,6 +291,8 @@ rule ensure_binny_database:
         fi
 
         figshare download {params.article_id} -o {params.db_root}/A2K_database >> {log} 2>&1
+        mkdir -p {params.db_root}/A2K_database/pfam
+        mv {params.db_root}/A2K_database/tigrfam2pfam.tsv {params.db_root}/A2K_database/pfam/
         touch {output.sentinel}
         """
 
