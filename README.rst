@@ -99,6 +99,9 @@ With Yuhao Tong the primary developer, if you want to contact us, please email t
     
     yuhtong@student.unimelb.edu.au
 
+Citation
+============================
+Tong, Y., V. R.Marcelino, R.Turnbull, and H.Verbruggen. 2026. “ChloroScan: Recovering Plastid Genome Bins From Metagenomic Data.” Molecular Ecology Resources26, no. 3: e70143. https://doi.org/10.1111/1755-0998.70143.
 
 
 下载
@@ -160,6 +163,10 @@ ChloroScan 在运行分箱时包含一个标记基因数据库，您无需做任
 .. code-block:: bash
 
     figshare download -o real_test_samples.tar.gz 30218614
+
+参考文献引用
+============================
+Tong, Y., V. R.Marcelino, R.Turnbull, and H.Verbruggen. 2026. “ChloroScan: Recovering Plastid Genome Bins From Metagenomic Data.” Molecular Ecology Resources26, no. 3: e70143. https://doi.org/10.1111/1755-0998.70143.
 
 联系方式
 ============================
