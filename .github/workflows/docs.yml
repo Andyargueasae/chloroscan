@@ -60,4 +60,8 @@ jobs:
       - name: Deploy to GitHub Pages
         id: deployment
         uses: actions/deploy-pages@v4
+      - name: Verify built site
+        run: |
+          ls -la gh-pages
+          test -f gh-pages/index.html && echo "index.html exists" || (echo "index.html missing" && exit 1)
           
