@@ -52,7 +52,7 @@ BINNY_NLTK_READY = BINNY_RUNTIME_DIR / "nltk.ready"
 BINNY_NLTK_DIR = BINNY_RUNTIME_DIR / "nltk_data"
 
 # BINNY_DB_ROOT = BINNY_DIR / "resources"
-BINNY_DB_DIR = config['binning']['database'] # it must be provided.
+BINNY_DB_DIR = Path(config['binning']['database']) # it must be provided.
 BINNY_DB_SENTINEL = BINNY_DB_DIR / "hmms" / "markers" / "markers.hmm"
 
 # Some configs are new for binny, add to snk.yml.
