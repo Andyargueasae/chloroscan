@@ -31,5 +31,12 @@ def test_run_help():
     # assert "--binning" in result.stdout
     # assert "--corgi" in result.stdout
     # assert "--tmpdir" in result.stdout
-    
-        
+
+
+def test_version():
+    from importlib.metadata import version as package_version
+
+    runner = SnkCliRunner(chloroscan)
+    result = runner.invoke(["version"])
+    assert result.exit_code == 0
+    assert result.stdout.strip() == package_version("chloroscan")
