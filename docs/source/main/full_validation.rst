@@ -33,3 +33,14 @@ Python package. Refer to the output logs when a rule fails.
 In GitHub Actions, the testing workflow provides a manual provision_envs
 option. This tests environment creation only. Run the complete pipeline on a
 suitable workstation or HPC node with the full CAT database available.
+
+Troubleshooting a first run
+---------------------------
+
+* **CLI rejects an input flag:** inspect ``chloroscan run --help``; use ``--Inputs-depth-txt`` for an existing depth table, or ``--Inputs-alignment`` for a BAM directory.
+* **CAT paths are rejected or rules cannot find taxonomy:** inspect the extracted database hierarchy. ``--cat-database`` must point to the CAT ``db`` directory, and ``--cat-taxonomy`` to a directory containing ``names.dmp``.
+* **Conda creation fails:** run with ``--use-conda --conda-frontend conda``; verify channels, disk space, network access and cache permissions. Historic Conda/Mamba downgrades are not required.
+* **CUDA/PyTorch installation fails:** leave ``CHLOROSCAN_INSTALL_CUDA`` unset for the default CPU-compatible installation. Only opt into CUDA 12.4 on compatible hardware.
+* **A biological workflow rule fails:** check ``OUTPUT_DIR/logging_info`` and Snakemake's error text. Ensure contig identifiers match between FASTA and depth/BAM inputs and that the output directory is writable.
+
+A successful environment-provisioning CI run is **not** evidence of a successful end-to-end biological analysis. Validate at least one complete small dataset on a suitable Linux workstation or HPC system before describing the release as fully tested.
