@@ -24,15 +24,15 @@ This workflow is designed to recover chloroplast genomes from metagenomic datase
 Installation
 ============
 
-**Before downloading, ensure you have effective mamba and conda working in your server, we recommend the version to be mamba 1.4.2 and conda 23.3.1. Instructions of download is documented here: https://github.com/conda-forge/miniforge.**
+**Install a working Conda distribution (for example, Miniforge): https://github.com/conda-forge/miniforge. Run Snakemake 7.32 with ``--conda-frontend conda``; downgrading Conda or Mamba to historical versions is not required.**
 
-To install the workflow, use pip3. The background environment will require Python <3.12, >=3.9 to set up the virtual environment. We recommend Python 3.10. 
+To install the workflow, use pip3. The Python package supports Python 3.9 or later; Python 3.10 on Linux x86_64 is recommended for the tested workflow setup. 
 
 .. code-block:: bash
 
     pip3 install chloroscan
 
-This will install the latest version of ChloroScan. 
+This installs the latest published version of ChloroScan. Check the command-line interface with ``chloroscan --help`` and ``chloroscan run --help``. The complete workflow additionally requires Conda rule environments and explicitly supplied CAT database and taxonomy directories (``--cat-database`` and ``--cat-taxonomy``). 
 Detailed workflow instructions can be found at: https://andyargueasae.github.io/chloroscan/index.html.
 The website also contains Chinese version of the documentation with identical contents.
 
@@ -46,7 +46,7 @@ ChloroScan can be installed on servers with hpc clusters and it is recommended t
 Configuration databases
 =======================
 Before running ChloroScan, some packages and datasets need to be installed to run CAT taxonomy prediction properly.
-ChloroScan incorporates a marker gene database while running binning, you don't need to do anything, it will be loaded since you build conda environments.
+ChloroScan downloads its Binny marker gene database into ``OUTPUT_DIR/resources/A2K_database`` during workflow execution. The output directory must be writable and have sufficient free space.
 To download our curated Uniref90-algae plastid protein database, use the link: https://doi.org/10.26188/27990278. 
 
 To avoid authentication issues, we recommend using the pyfigshare command-line tool to download. The information of this tool can be found at: ``https://pypi.org/project/pyfigshare/``. 
@@ -107,13 +107,13 @@ Tong, Y., V. R.Marcelino, R.Turnbull, and H.Verbruggen. 2026. “ChloroScan: Rec
 下载
 ============================
 
-**下载之前，确保您的服务器已经下载好mamba和conda。我们推荐的版本是 mamba 1.4.2 和 conda 23.3.1。关于如何下载请参见：https://github.com/conda-forge/miniforge。**
+**请先安装 Conda（例如 Miniforge：https://github.com/conda-forge/miniforge）。使用 Snakemake 7.32 时指定 ``--conda-frontend conda``，无需降级到旧版 Conda/Mamba。**
 
-要安装工作流，请使用 pip3。背景环境需要 Python <3.12, >=3.9 来设置虚拟环境。我们推荐python 3.10。
+要安装工作流，请使用 pip3。Python 包支持 3.9 及以上版本；目前建议在 Linux x86_64 上使用 Python 3.10。
 
 .. code-block:: bash
 
-    pip3 install chloroscan==0.1.5
+    python -m pip install chloroscan
 
 详细的工作流说明可以在以下链接找到：https://andyargueasae.github.io/chloroscan/index.html。
 该网站还包含中文版本的文档，内容完全相同。
@@ -131,7 +131,7 @@ ChloroScan 可以安装在具有 hpc 集群的服务器上，建议使用 GPU �
 
 在运行 ChloroScan 之前，需要安装一些软件包和数据集以正确运行。
 
-ChloroScan 在运行分箱时包含一个标记基因数据库，您无需做任何事情，它将在您构建 conda 环境时加载。
+运行工作流时，ChloroScan 会将 Binny 标记基因数据库下载到 ``OUTPUT_DIR/resources/A2K_database``，因此输出目录需要足够空间和写入权限。运行命令还必须提供 ``--cat-database`` 和 ``--cat-taxonomy``。
 要下载我们经过整理的 Uniref90-algae plastid 蛋白质数据库，请使用以下链接：https://doi.org/10.26188/27990278。
 
 为了避免认证问题，我们建议使用 pyfigshare 命令行工具进行下载。有关此工具的信息可以在以下链接找到：``https://pypi.org/project/pyfigshare/``。
