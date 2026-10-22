@@ -37,7 +37,7 @@ Check whether conda and mamba are intactly installed by running the commands bel
     which mamba
     which conda
 
-``NOTE``: Use mamba 1.x (not mamba 2.x), current ChloroScan works well with mamba v1. As a reference, we developed ChloroScan under mamba v1.4.2 and conda v23.3.1.
+``NOTE``: For Snakemake 7.32, use the Conda frontend explicitly (``--conda-frontend=conda``). This avoids requiring a downgrade to Mamba 1.x or Conda 23.3.1.
 Now you can proceed to set up the virtual environment and install the chloroscan.
 
 Cargo and FragGeneScanRs should also be installed, for coding sequence extraction, so we prepared a bash script to do this: https://github.com/Andyargueasae/chloroscan/blob/main/install_fraggenescanrs.sh.
@@ -101,10 +101,10 @@ For a typical run, provide ``Inputs-assembly``, ``Inputs-batch-name``, ``outputd
 
 .. code-block:: bash
 
-    chloroscan run --use-conda --conda-create-envs-only --conda-prefix="/path/to/your/conda/envs" \
+    chloroscan run --use-conda --conda-frontend conda --conda-create-envs-only --conda-prefix="/path/to/your/conda/envs" \
         --Inputs-assembly "/path/to/your/assembly.fasta" --Inputs-batch-name "sample_name" \
         --outputdir "/path/to/your/output_dir" --Inputs-alignment "/path/to/your/bams_directory" \
         --cat-database "/path/to/your/CAT_database/db" \
         --cat-taxonomy "/path/to/your/CAT_database/tax"
 
-The example paths are placeholders: check your extracted database layout before running. This command prepares conda environments only; it does not verify a complete end-to-end run. 
+The example paths are placeholders: check your extracted database layout before running. This command prepares conda environments only; it does not verify a complete end-to-end run. See the full installation validation page for an end-to-end procedure. 

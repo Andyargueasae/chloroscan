@@ -54,7 +54,7 @@ BINNY_RUNTIME_MANTIS_CFG = BINNY_RUNTIME_DIR / "binny_mantis.cfg"
 BINNY_NLTK_READY = BINNY_RUNTIME_DIR / "nltk.ready"
 BINNY_NLTK_DIR = BINNY_RUNTIME_DIR / "nltk_data"
 
-BINNY_DB_ROOT = BINNY_DIR / "resources"
+BINNY_DB_ROOT = OUTPUT_DIR / "resources"
 BINNY_DB_DIR = BINNY_DB_ROOT / "A2K_database"
 BINNY_DB_SENTINEL = BINNY_DB_DIR / "hmms" / "checkm_pf" / "checkm_filtered_pf.hmm"
 

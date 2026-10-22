@@ -1,93 +1,67 @@
 name: testing
 
-on: [push]
+on:
+  push:
+  pull_request:
+  workflow_dispatch:
+    inputs:
+      provision_envs:
+        description: "Create all workflow Conda environments (resource intensive)"
+        type: boolean
+        required: false
+        default: false
 
 jobs:
-  build:
+  cli-and-workflow-dag:
     runs-on: ubuntu-latest
-    strategy:
-      fail-fast: false
-      matrix:
-        python-version: ["3.10"]
-
     steps:
       - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.10"
+      - name: Install ChloroScan
+        run: |
+          python -m pip install --upgrade pip
+          python -m pip install . "pytest>=8,<10"
+      - name: Check CLI and full workflow DAG
+        run: |
+          python -m pytest -q tests/test_cli.py tests/test_workflow_dag.py
 
-      - name: Setup Miniforge with Mamba 1.x
+  provision-conda-environments:
+    if: github.event_name == 'workflow_dispatch' && inputs.provision_envs
+    runs-on: ubuntu-latest
+    timeout-minutes: 90
+    steps:
+      - uses: actions/checkout@v4
+      - name: Install Miniforge
         uses: conda-incubator/setup-miniconda@v3
         with:
           miniforge-version: latest
           activate-environment: base
           auto-activate-base: true
-          python-version: ${{ matrix.python-version }}
-          conda-version: "23.3.1"
-          mamba-version: "1.4.2"
           channels: conda-forge,bioconda
           channel-priority: strict
-          use-mamba: true
-
-      - name: Install Poetry
+      - name: Create dedicated CLI environment
         shell: bash -el {0}
         run: |
-          python -m pip install --upgrade pip
-          python -m pip install poetry
-
-      - name: Configure Poetry to use current Conda Python
-        shell: bash -el {0}
-        run: |
-          poetry config virtualenvs.create false
-          poetry env info || true
-          which python
-          python --version
-          which conda
-          which mamba
+          conda create -y -n chloroscan-ci -c conda-forge python=3.10 pip
+          conda activate chloroscan-ci
+          python -m pip install .
           conda --version
-          mamba --version
-
-      - name: Install package
-        shell: bash -el {0}
-        run: |
-          poetry install --no-interaction
-
-      - name: Install FragGeneScanRs
-        shell: bash -el {0}
-        run: |
-          if command -v cargo >/dev/null 2>&1; then
-            echo "Cargo is already installed."
-          else
-            curl --proto '=https' --tlsv1.2 -sSf https://sh.rustup.rs | sh -s -- -y
-            source "$HOME/.cargo/env"
-          fi
-
-          cargo install frag_gene_scan_rs
-          echo "$HOME/.cargo/bin" >> "$GITHUB_PATH"
-
-      - name: Clear caches
-        shell: bash -el {0}
-        run: |
-          rm -rf .snakemake/conda || true
-          rm -rf .snakemake/conda-archive || true
-          rm -rf .conda || true
-          rm -rf ~/.conda/envs || true
-          rm -rf ~/.conda/pkgs || true
-
-      - name: Debug environment
-        shell: bash -el {0}
-        run: |
-          echo "PATH=$PATH"
-          which python
           python --version
-          which pip
-          which poetry
-          which conda
-          which mamba
-          conda info
-          df -H
-
-      - name: Run tests
+          df -h
+      - name: Provision all workflow environments
         shell: bash -el {0}
-        env:
-          PYTHONNOUSERSITE: "1"
-          CONDA_PKGS_DIRS: ${{ github.workspace }}/.conda/pkgs
         run: |
-          poetry run pytest -v -s -o faulthandler_timeout=60
+          conda activate chloroscan-ci
+          chloroscan run \
+            --Inputs-assembly "$GITHUB_WORKSPACE/tests/test-data/test_plastid.fasta" \
+            --Inputs-depth-txt "$GITHUB_WORKSPACE/tests/test-data/contig_depth_test.txt" \
+            --Inputs-batch-name CI_PROVISION \
+            --outputdir "$RUNNER_TEMP/chloroscan-output" \
+            --cat-database "$GITHUB_WORKSPACE/tests/test-data/CAT_mini/db" \
+            --cat-taxonomy "$GITHUB_WORKSPACE/tests/test-data/CAT_mini/tax" \
+            --use-conda --conda-frontend=conda \
+            --conda-create-envs-only \
+            --conda-prefix="$RUNNER_TEMP/chloroscan-conda" \
+            -c 2
