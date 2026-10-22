@@ -6,18 +6,20 @@ After giving a brief command for running ChloroScan, we here explain the inputs 
 
 Overall ChloroScan takes the following inputs:
     - Metagenomic assembly in fasta format (required): configured by ``--Inputs-assembly``
-    - Depth profile in tabular format (required ``tsv``, mutually exclusive with the next): configured by ``--Inputs-depth-profile``
-    - directory storing alignment in sorted bam format (required): configured by ``--Inputs-alignment``
+    - A tabular depth profile (``--Inputs-depth-txt``) **or** a directory of sorted BAM alignments (``--Inputs-alignment``); one of these is needed for abundance information.
     - Batch name (required, just to distinguish different jobs when running in parallel to avoid overwriting): configured by ``--Inputs-batch-name``
 
-Commonly for a **de novo** run we recommend using bam directory, but if you want to rerun your analysis (perhaps adjusting parameters) with present depth profile, you can use it.
+For a **de novo** run we recommend using a BAM directory; if you already have a contig depth table, use ``--Inputs-depth-txt`` instead. Both options need not be supplied. Also provide ``--cat-database`` and ``--cat-taxonomy``.
 
-The output directory structure of ChloroScan is as follows:
+The output directory structure of ChloroScan is approximately as follows (the exact paths depend on completed rules and settings). Binny's A2K marker database is downloaded under ``resources/A2K_database``; the workflow completion marker is ``ChloroScan.done``:
 (This is a typical example showing only directories)
 
 .. code-block::
 
     chloroscan_output
+    ├── ChloroScan.done
+    ├── resources
+    │   └── A2K_database
     ├── logging_info
     └── working
         ├── binny
@@ -59,9 +61,9 @@ The input of the first step: contig classification by Corgi requires your ``inpu
 
 The program firstly classifies each contig into five RefSeq-based categories: chloroplast, mitochondria, prokaryote, eukaryote, and unknown.
 
-Then the outputs: classification results: ``corgi-prediction.csv``, and the isolated ``plastids.fasta`` file will be generated in the ``output/working/corgi`` directory.
+Then the outputs: classification results: ``corgi-prediction.csv``, and the isolated ``plastid.fasta`` file will be generated in the ``output/working/corgi`` directory.
 
-The table ``corgi-prediction.csv`` contains the contig id, the predicted category, and the posterior probability for each category. The contigs classified as chloroplast with a posterior probability above the specified threshold will be included in the ``plastids.fasta`` file.
+The table ``corgi-prediction.csv`` contains the contig id, the predicted category, and the posterior probability for each category. The contigs classified as chloroplast with a posterior probability above the specified threshold will be included in the ``plastid.fasta`` file.
 
 The table looks like:
 
@@ -81,7 +83,7 @@ To configure this step:
 3. binning results
 ============================
 
-The inputs of this step is the ``plastids.fasta`` from Corgi and the tabular depth profile with the first column the contig ids and the rest columns the average depths in each sample.
+The inputs of this step is the ``plastid.fasta`` from Corgi and the tabular depth profile with the first column the contig ids and the rest columns the average depths in each sample.
 
  - ``Note``: if users did not specify the depth table, ChloroScan directly incorporates the code from binny to generate depth profile. It's path is ``output/working/depth_profile.txt``.
 
