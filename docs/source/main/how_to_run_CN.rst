@@ -21,7 +21,7 @@ ChloroScan 专注于叶绿体基因组 MAGs 的恢复，特别是 ``光合微藻
 .. code-block:: bash
 
    chloroscan run --Inputs-assembly input_contigs.fasta --Inputs-alignment PATH/to/bams \
-      --Inputs-batch-name "my_batch" --outputdir Path/to/output --use-conda --cores=12 \
+      --Inputs-batch-name "my_batch" --outputdir Path/to/output --use-conda --conda-frontend conda --cores=12 \
       --cat-database PATH/to/CAT_db/db --cat-taxonomy path/to/CAT_db/tax --conda-prefix PATH/to/conda_envs
 
 有时你可能还希望获得以表格形式表示的深度信息。它看起来像这样：
@@ -42,8 +42,8 @@ ChloroScan 专注于叶绿体基因组 MAGs 的恢复，特别是 ``光合微藻
 .. code-block:: bash
 
    DEPTH_PROFILE=path/to/depth_profile.tsv
-   chloroscan run --Inputs-assembly input_contigs.fasta --Inputs-depth-profile $DEPTH_PROFILE \
-      --Inputs-batch-name "my_batch" --outputdir Path/to/output --use-conda --cores=12 \
+   chloroscan run --Inputs-assembly input_contigs.fasta --Inputs-depth-txt $DEPTH_PROFILE \
+      --Inputs-batch-name "my_batch" --outputdir Path/to/output --use-conda --conda-frontend conda --cores=12 \
       --cat-database PATH/to/CAT_db/db --cat-taxonomy path/to/CAT_db/tax --conda-prefix PATH/to/conda_envs
 
 有关输入的更多详细信息，请查看 ``输入和输出`` 部分。
@@ -53,6 +53,8 @@ ChloroScan 专注于叶绿体基因组 MAGs 的恢复，特别是 ``光合微藻
    
    figshare download -o simulated_metagenomes.tar.gz 28748540
 
+
+当前 CLI 的实际选项及默认值请以 ``chloroscan run --help`` 为准。CAT 数据库和分类目录参数 ``--cat-database``、``--cat-taxonomy`` 为必填参数，不再提供开发者机器上的默认路径。
 
 3. 命令参数说明
 ========================================
@@ -191,13 +193,13 @@ ChloroScan 的完整命令空间如下所示：
  - ``--binning-outputdir``: 分箱的输出目录路径。默认值为 "binny_output"。
  - ``--binning-clustering-epsilon-range``: HDBSCAN 聚类中重要的 epsilon的取值范围。默认值为 "0.250,0.000"。
  - ``--binning-clustering-hdbscan-min-sample-range``: HDBSCAN 聚类中 min_samples 的取值范围，较大的值意味着较大的 MAGs。默认值为 "1,5,10"。
- - ``--binning-bin-quality-purity``: 分箱质量的最小纯度。默认值为 95。
+ - ``--binning-bin-quality-purity``: 分箱质量的最小纯度。默认值为 90。
  - ``--binning-bin-quality-starting-completeness``: 分箱质量的起始完整性。Binny 使用滑动完整性来过滤分箱。默认值为 92.5。
  - ``--binning-bin-quality-min-completeness``: 分箱质量的最小完整性。默认值为 50。
- - ``--corgi-min-length``: CORGI 处理的 contigs 的最小长度。默认值为 500bp。
+ - ``--corgi-min-length``: CORGI 处理的 contigs 的最小长度。默认值为 1000bp。
  - ``--corgi-save-filter``: 保存 CORGI 过滤后的 contigs（注意：可能需要较长运行时间）。默认值为 no-corgi-save-filter。
  - ``--corgi-batch-size``: CORGI 推断 contigs 分类标签的批次大小。默认值为 1。
- - ``--corgi-pthreshold``: CORGI 判断 contigs 类别是否为真正的叶绿体或其他类别的 P 值阈值。默认值为 0.9。
+ - ``--corgi-pthreshold``: CORGI 判断 contigs 类别是否为真正的叶绿体或其他类别的 P 值阈值。默认值为 0.50。
  - ``--cat-database``: CAT 数据库的路径，保存经过 diamond 处理的蛋白质序列。默认值为 "PATH/TO/CAT_db/db"。
  - ``--cat-taxonomy``: CAT 数据库的分类标签路径。默认值为 "PATH/TO/CAT_db/tax"。
  - ``--krona-env``: Krona 环境的路径。默认值为 "kronatools"。 **现在通常不需要设置此项**。
