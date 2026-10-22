@@ -37,7 +37,7 @@ Check whether conda and mamba are intactly installed by running the commands bel
     which mamba
     which conda
 
-``NOTE``: For Snakemake 7.32, use the Conda frontend explicitly (``--conda-frontend conda``). This avoids requiring a downgrade to Mamba 1.x or Conda 23.3.1.
+``NOTE``: For Snakemake 7.32, use the Conda frontend explicitly (``--conda-frontend=conda``). This avoids requiring a downgrade to Mamba 1.x or Conda 23.3.1.
 Now you can proceed to set up the virtual environment and install the chloroscan.
 
 Cargo and FragGeneScanRs should also be installed, for coding sequence extraction, so we prepared a bash script to do this: https://github.com/Andyargueasae/chloroscan/blob/main/install_fraggenescanrs.sh.
