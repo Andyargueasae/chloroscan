@@ -85,6 +85,7 @@ command to download:
 .. code-block:: bash
 
    figshare download -o CAT_db.tar.gz 27990278
+   mkdir -p /path/to/your/CAT_database
    tar -xzf CAT_db.tar.gz -C /path/to/your/CAT_database
 
 Identify the extracted CAT database and taxonomy directories (containing files such as ``names.dmp`` in the taxonomy directory). These must be supplied explicitly as ``--cat-database`` and ``--cat-taxonomy``. ChloroScan no longer assumes database paths belonging to the developer.
