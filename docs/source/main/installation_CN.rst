@@ -54,11 +54,11 @@ ChloroScan 持续更新。建议在 Linux x86_64 系统上使用 Python 3.10，�
 
 .. code-block:: bash
 
-    chloroscan run --Inputs-assembly /data/assembly.fasta \\
-      --Inputs-depth-txt /data/contig_depth.tsv \\
-      --Inputs-batch-name sample_01 --outputdir /data/chloroscan_output \\
-      --cat-database /data/CAT_database/db --cat-taxonomy /data/CAT_database/tax \\
-      --use-conda --conda-frontend conda --conda-create-envs-only \\
+    chloroscan run --Inputs-assembly /data/assembly.fasta \
+      --Inputs-depth-txt /data/contig_depth.tsv \
+      --Inputs-batch-name sample_01 --outputdir /data/chloroscan_output \
+      --cat-database /data/CAT_database/db --cat-taxonomy /data/CAT_database/tax \
+      --use-conda --conda-frontend conda --conda-create-envs-only \
       --conda-prefix /data/chloroscan_conda_envs --cores 8
 
 运行 ChloroScan 时，Binny 标记数据库会下载到 ``OUTPUT_DIR/resources/A2K_database``，不是在创建 Conda 环境时下载。请确保输出目录可写且空间充足。
