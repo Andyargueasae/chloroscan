@@ -35,7 +35,7 @@ exclude_patterns = []
 html_theme_options = {
     "github_url": "https://github.com/Andyargueasae/chloroscan",
     "repository_url": "https://github.com/Andyargueasae/chloroscan",
-    "repository_branch": "release_v0.1.3",
+    "repository_branch": "main",
     "home_page_in_toc": True,
     "path_to_docs": "docs",
     "show_navbar_depth": 2,
