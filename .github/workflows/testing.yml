@@ -28,9 +28,7 @@ jobs:
           python -m pytest -q tests/test_cli.py tests/test_workflow_dag.py
 
   provision-conda-environments:
-    if: >-
-      (github.event_name == 'workflow_dispatch' && inputs.provision_envs) ||
-      (github.event_name == 'push' && github.ref == 'refs/heads/fix/legacy-ci-and-env-validation')
+    if: github.event_name == 'workflow_dispatch' && inputs.provision_envs
     runs-on: ubuntu-latest
     timeout-minutes: 90
     steps:
