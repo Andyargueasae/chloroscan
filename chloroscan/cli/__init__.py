@@ -1,13 +1,13 @@
 from pathlib import Path
 import typer
 from snk_cli import CLI
-from importlib.metadata import version, PackageNotFoundError
+from importlib.metadata import version as package_version, PackageNotFoundError
 
 chloroscan = CLI(Path(__file__).parent.parent)
 
 def get_version() -> str:
     try:
-        return version("chloroscan")
+        return package_version("chloroscan")
     except PackageNotFoundError:
         return "unknown"
 
