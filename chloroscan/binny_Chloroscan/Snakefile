@@ -1,0 +1,15 @@
+configfile: "config/config.default.yaml"
+
+include: "workflow/binny_core.smk"
+
+workdir:
+    config["outputdir"]
+
+localrules: prepare_input_data, ALL
+
+rule ALL:
+    input:
+        os.path.join(config["outputdir"], "binny.done")
+
+onsuccess:
+    shell("mkdir -p job.errs.outs &>> logs/cleanup.log; ( mv binny*stdout job.errs.outs || touch job.errs.outs ) &>> logs/cleanup.log")

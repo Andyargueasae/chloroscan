@@ -7,17 +7,27 @@ import seaborn as sns
 from pathlib import Path
 import sys
 from visualization_utils import *
-from plotnine import ggplot, geom_point, aes, stat_smooth, facet_wrap, geom_boxplot, geom_bar, coord_flip, geom_violin
+from plotnine import ggplot, geom_point, aes, geom_violin
 import plotnine as gg
-import re
+import argparse
 
+# cross_reference_tsv = snakemake.input[0]
+# figure_output_dir = Path(snakemake.output[0])
+# batch_name = snakemake.params[0]
+# refine_bins_dir = snakemake.params['refine_bins_dir']
 
-cross_reference_tsv = snakemake.input[0]
-figure_output_dir = Path(snakemake.output[0])
-batch_name = snakemake.params[0]
-refine_bins_dir = snakemake.params['refine_bins_dir']
+parser = argparse.ArgumentParser(description="Visualize the binning results from binny and the taxonomic annotation of the contigs.")
+parser.add_argument("--input_cross_ref", type=str, help="The cross reference table containing contig id, taxonomic annotation and marker gene information for each contig.")
+parser.add_argument("--batch_name", type=str, help="The name of the batch for labeling the plots.")
+parser.add_argument("--refine_bins_dir", type=str, help="The directory containing the refined bins from binny.")
+parser.add_argument("--output_dir", type=str, help="The output directory for the visualizations.")
 
-batch_name = batch_name.split("/")[-1]
+args = parser.parse_args()
+
+batch_name = args.batch_name.split("/")[-1]
+figure_output_dir = Path(args.output_dir)
+refine_bins_dir = args.refine_bins_dir
+cross_reference_tsv = args.input_cross_ref
 
 figure_output_dir.mkdir(parents=True, exist_ok=True)
 
@@ -30,13 +40,6 @@ if (os.stat(cross_reference_tsv).st_size == 0):
 elif (len(refine_bins_list)==0):
     print("Empty bins directory after binning, process shut down.")
     sys.exit(0)
-
-# Visualization rule will take the spreadsheet created from the last rule, and plot the statistical 
-# graphics. Three graphics will be demonstrated:
-#   1. contig-length distribution (a boxplot, or a histogram), to show how skewed the distribution is.
-#   2. The contig length - marker number scatterplot, to show how markers distribute over this plastid assembly;
-#   3. The taxonomy summarization of the assembly: how many taxa are there?
-#   4. The Bin Purity plot: see how each bin's contig taxonomy homogenity?
 
 summary_dataframe = pd.read_csv(cross_reference_tsv, sep="\t", index_col=0)
 
@@ -96,64 +99,6 @@ Scatter_GC_log_depth=(
                             # Add point scale. 
 
 Scatter_GC_log_depth.savefig(f"{figure_output_dir}/Scatter_GCLogDepth.png", dpi=300)
-
-# # The second plot is the bar chart of the completeness and purity.
-# bins = [i for i in list(set(binned_contigs_per_batch['Contig2Bin']))]
-# # works at the x-label.
-# bins_quality_dict = dict()
-# # works as the legend.
-# bins_quality_dict['Bin Completeness'] = []
-# bins_quality_dict['Bin Purity'] = []
-# bin_xticks = []
-
-# completeness_pattern = re.compile(r'C(\d+)')
-# purity_pattern = re.compile(r'P(\d+)')
-
-# for i in bins:
-#     bin_base_names = i.split("_")
-#     prefix = "bin"
-#     for j in range(len(bin_base_names)):
-#         if "C" in bin_base_names[j]:
-#             try: 
-#                 individual_comp = int(bin_base_names[j].replace("C", ""))
-#                 bins_quality_dict['Bin Completeness'].append(individual_comp)
-#                 identifier = bin_base_names[j-1]
-#             except ValueError:
-#                 continue
-#         if "P" in bin_base_names[j]:
-#             individual_pur = int(bin_base_names[j].replace("P", ""))
-#             bins_quality_dict['Bin Purity'].append(individual_pur)
-#         else:
-#             continue
-#     bin_name = prefix + "." + f"{identifier}_C{individual_comp}_P{individual_pur}"
-#     bin_xticks.append(bin_name)
-
-# width = 0.2
-# x=np.arange(len(bins))
-# multiplier=0
-
-# for attribute, measurement in bins_quality_dict.items():
-#     # Add scatterplot of completeness against purity.
-
-#     offset = width * multiplier
-#     bin_record = axsc[1].bar(x+offset, measurement, width, label=attribute)
-#     axsc[1].bar_label(bin_record, padding=3)
-#     multiplier += 1
-
-# # Add grid to axsc[0].
-# axsc[0].grid(True)
-# axsc[0].scatter(bins_quality_dict["Bin Completeness"], bins_quality_dict["Bin Purity"], color="red", s=120)
-# axsc[0].set_title("Bin Purity vs Completeness")
-# axsc[0].set_xlabel("Bin Completeness (%)")
-# axsc[0].set_ylabel("Bin Purity (%)")
-
-# axsc[1].set_ylabel("percentage")
-# axsc[1].set_xlabel("bin name")
-# axsc[1].set_xticks(x + width, bin_xticks, rotation=30)
-# axsc[1].legend(loc='lower left', ncols=len(bins))
-# axsc[1].set_ylim(50, 100)
-
-# plt.savefig("{}/{}_bins_scatter_bar_chart.png".format(figure_output_dir, batch_name), dpi="figure")
 
 #3. taxonomy pie chart.
 bin_set = set(contig_2_bin)

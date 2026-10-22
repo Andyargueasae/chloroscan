@@ -162,11 +162,12 @@ cython_debug/
 
 wandb/
 chloroscan/.snakemake/
+chloroscan/binny_Chloroscan/resources/
+
 .snakemake/*
 results
 conda
 databases
-binny_Chloroscan
 MGYS*
 SRP*
 DRP*
@@ -200,4 +201,9 @@ PRJNA*
 
 MergeDepthTMPDIR/
 conda_env/
-gh-pages/*
+gh-pages/
+test_out*
+lightning_logs
+output_*
+*.slurm
+

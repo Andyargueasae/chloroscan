@@ -1,7 +1,3 @@
-# !/bin/bash
-
-# Check if FragGeneScanRs is installed and added to the PATH.
-
 check_fraggenescans() {
     if command -v FragGeneScanRs &> /dev/null
     then
@@ -51,8 +47,3 @@ if ! check_fraggenescans; then
 else
     echo "No installation of FragGeneScanRs required."
 fi
-
-
-
-
-

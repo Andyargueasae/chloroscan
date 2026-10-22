@@ -1,25 +1,17 @@
-'''
-Before you run this snakemake workflow, please ensure that:
-0. All in all: you must install snakemake at the base environment in order to run this workflow.
-1. FragGeneScanRs has been in your path, with intact functionality.
-2. Binny snakemake workflow works fine, and the initialization of conda environment and database passed the check pass. 
-3. Set up the CAT database.
-4. figure out what is gonna be your file's name, put a list into it! [either from snakemake itself or by bash script controlling.]
-5. Add CAT's conda environment bin to your path, with intact functionality.
-6. Envrionment name "Kronatools" or a krona.yml in the envs directory.
-'''
-
 import os
 import sys
 import yaml
 import logging
 from pathlib import Path
 
-# min_version("6.0")
+from snakemake.utils import min_version
+min_version("7.32")
 
 shell.executable("bash")
 
-# Some major configuration parameters and inputs.
+################################
+# Global variables and configurations.
+################################
 assembly_path = config['Inputs']['assembly']
 ALIGNMENT_FILES = config['Inputs']['alignment']
 DEPTH_TEXT_FILE = config['Inputs']['depth_txt']
@@ -31,22 +23,11 @@ except TypeError:
 OUTPUT_DIR = Path(config['outputdir'])
 BATCH_NAME = config['Inputs']['batch_name']
 
-BINNY_OUTPUT_DIR = config['binning']['outputdir']    
-BINNY_SNAKEMAKE_ENV = config['binning']['snakemake_env']
-BINNY_MANTIS_ENV = config['binning']['mantis_env']
-# For binny: some global names.
-GLOBAL_CONFIG = "config.ChloroScan.yaml"
-
 WORKFLOW_DIR = Path(workflow.basedir)
-# BINNY_DIR = WORKFLOW_DIR.parent.parent/"binny_Chloroscan" 
-
 SCR_DIR = WORKFLOW_DIR/"scripts"
- 
-# For CAT taxonomy prediction, please provide tax and db directory path.
 CAT_DB_DIR = config['cat']['database']
 CAT_TAXON_DIR = config['cat']['taxonomy']
 TAXA = os.path.join(CAT_TAXON_DIR, "names.dmp")
-
 GLOBAL_PREFIX="OUT"
 GLOBAL_PREFIX_contigs="out.CAT"
 OUTPUT_DIR.mkdir(parents=True, exist_ok=True)
@@ -55,11 +36,83 @@ OUTPUT_DIR.mkdir(parents=True, exist_ok=True)
 TMP_DIR = config['tmpdir']
 if not os.path.isabs(TMP_DIR):
     TMP_DIR = OUTPUT_DIR/TMP_DIR
-
 TMP_DIR.mkdir(parents=True, exist_ok=True) # what if we do want to prepare data and put it here? 
 
-# ANVIO_PREPARE=config['anvio']['prepare']
-# ANVIO_READS=config['anvio']['reads']
+####################################
+# Paths for binny, and some configs for binny.
+####################################
+BINNY_MANTIS_ENV = config['binning']['mantis_env']
+# GLOBAL_CONFIG = "config.ChloroScan.yaml"
+
+BINNY_DIR = WORKFLOW_DIR.parent / "binny_Chloroscan"
+BINNY_SNAKEFILE = BINNY_DIR / "workflow" / "binny_core.smk"
+BINNY_FINAL_OUTPUT_DIR = OUTPUT_DIR / "working/binny"
+BINNY_DEPTH_INPUT = DEPTH_TEXT_FILE if DEPTH_FILE_EXISTS else str(OUTPUT_DIR / "working/depth_profile.txt")
+
+BINNY_RUNTIME_DIR = OUTPUT_DIR / "working/binny_runtime"
+BINNY_RUNTIME_MANTIS_CFG = BINNY_RUNTIME_DIR / "binny_mantis.cfg"
+BINNY_NLTK_READY = BINNY_RUNTIME_DIR / "nltk.ready"
+BINNY_NLTK_DIR = BINNY_RUNTIME_DIR / "nltk_data"
+
+BINNY_DB_ROOT = BINNY_DIR / "resources"
+BINNY_DB_DIR = BINNY_DB_ROOT / "A2K_database"
+BINNY_DB_SENTINEL = BINNY_DB_DIR / "hmms" / "checkm_pf" / "checkm_filtered_pf.hmm"
+
+# Some configs are new for binny, add to snk.yml.
+BINNY_CONFIG = {
+    "mem": {
+        "normal_mem_per_core_gb": 2,
+        "big_mem_per_core_gb": 26,
+        "big_mem_avail": 0,
+    },
+    "tmp_dir": str(TMP_DIR / "binny_tmp"),
+    "raws": {
+        "assembly": str(OUTPUT_DIR / "working/corgi/plastid.fasta"),
+        "contig_depth": str(DEPTH_TEXT_FILE if DEPTH_FILE_EXISTS else OUTPUT_DIR / "working/depth_profile.txt"),
+        "metagenomics_alignment": ""
+    },
+    "sample": BATCH_NAME,
+    "outputdir": str(OUTPUT_DIR / "working/binny"),
+    "db_path": str(BINNY_DB_DIR), # database should be setup intact. Also mantis shall be setup.
+    "snakemake_env": "",
+    "prokka_env": "",
+    "mantis_env": BINNY_MANTIS_ENV,
+    "conda_source": str(BINNY_DIR / ".conda"),
+    "mask_disruptive_sequences": 'True',
+    "extract_scmags": 'True',
+    "coassembly_mode": "auto",
+    "NX_value": 90,
+    "min_cont_length_cutoff": config["binning"]["universal_length_cutoff"],
+    "max_cont_length_cutoff": config["binning"]["universal_length_cutoff"],
+    "min_cont_length_cutoff_marker": config["binning"]["universal_length_cutoff"],
+    "max_cont_length_cutoff_marker": config["binning"]["universal_length_cutoff"],
+    "max_n_contigs": 5e5,
+    "max_marker_lineage_depth_lvl": 4,
+    "distance_metric": "euclidean",
+    "kmers": "2,3,4",
+    "embedding": {
+        "max_iterations": 50
+    },
+    "clustering": {
+        "hdbscan_epsilon_range": config["binning"]["clustering"]["epsilon_range"],
+        "hdbscan_min_samples_range": config["binning"]["clustering"]["hdbscan_min_sample_range"],
+        "include_depth_initial": 'True',
+        "include_depth_main": 'True',
+    },
+    "bin_quality": {
+        "min_completeness": config["binning"]["bin_quality"]["min_completeness"],
+        "start_completeness": config["binning"]["bin_quality"]["starting_completeness"],
+        "purity": config["binning"]["bin_quality"]["purity"],
+    },
+    "write_contig_data": "True",
+    "mantis_cfg": str(BINNY_RUNTIME_MANTIS_CFG),
+    "nltk_ready": str(BINNY_NLTK_READY),
+    "nltk_data_dir": str(BINNY_NLTK_DIR),
+}
+
+########################################
+# Record the config for reproducibility.
+########################################
 
 CONFIG_RECORD=os.path.join(OUTPUT_DIR, "arguments.txt")
 with open(CONFIG_RECORD, "w") as cr:
@@ -79,7 +132,6 @@ with open(CONFIG_RECORD, "w") as cr:
     cr.write("\tMAG minimum completeness: {}\n".format(config['binning']['bin_quality']['min_completeness']))
     cr.write("\tMAG purity (1-contamination) cutoff: {}\n".format(config['binning']['bin_quality']['purity']))
     cr.write("CAT database: {}\n".format(CAT_DB_DIR))
-
 
 rule all:
     input:
@@ -118,19 +170,23 @@ rule corgi_prediction:
         touch {output.plastid_contigs}
         
         echo "new version: corgi --input {input.seqs} --output-csv {output.corgi_out} --batch-size {params.batch_size} --min-length {params.min_length}"
-        corgi --file {input.seqs} --csv {output.corgi_out} --batch-size {params.batch_size} --min-length {params.min_length} --no-save-filtered &> {log}
+        corgi --input {input.seqs} --output-csv {output.corgi_out} --batch-size {params.batch_size} --min-length {params.min_length} &> {log}
+        # old version: corgi --file {input.seqs} --csv {output.corgi_out} --batch-size {params.batch_size} --min-length {params.min_length} --no-save-filtered # &> {log}
         ls -lh {output.corgi_out}
+
+        head -2 {output.corgi_out}
         
         header=1
-        raw_plastid_contig_count=$(grep -o "plastid" {output.corgi_out} | wc -l)
+        raw_plastid_contig_count=$(grep -o ",Plastid," {output.corgi_out} | wc -l)
         plastid_contig_count=$((raw_plastid_contig_count-header))
+        N_SEQ=$(wc -l < {output.corgi_out})
 
         zero=0
         if [ $plastid_contig_count -eq $zero ]; then
             echo "No plastid contigs found, rule exit."
             exit 0
 
-        elif [ $plastid_contig_count -le 100 ]; then
+        elif [ $plastid_contig_count -le 100 ] && [ $plastid_contig_count -ge $((N_SEQ/2)) ]; then
             echo "bash {params.bash_plastid_accession_script} -c {output.corgi_out} -o {params.plastid_contigs_identifier}"
             bash {params.bash_plastid_accession_script} -c {output.corgi_out} -o {params.plastid_contigs_identifier}
             echo "python {params.python_fasta_writer} --assembly {input.seqs} --accession {params.plastid_contigs_identifier} --fasta_file_name {output.plastid_contigs}"
@@ -140,6 +196,19 @@ rule corgi_prediction:
             prediction_lines=$(wc -l <{output.corgi_out})
             contig_total=$((prediction_lines-header))
             ls {params.output_dir}/working/corgi
+            
+            plastid_match=$(grep -o ">" {output.plastid_contigs} | wc -l)
+
+            echo "total classified contigs containing all 5 domains: $contig_total"> {params.output_dir}/corgi.summary.txt
+            echo "total number of plastid contigs: $plastid_match">>{params.output_dir}/corgi.summary.txt
+        elif [ $plastid_contig_count -gt 100 ] && [ $plastid_contig_count -lt $((N_SEQ/2)) ]; then
+            echo "More than 100 plastid contigs found, which may be an overprediction. Please check the {output.corgi_out} file for details. We will apply a more stringent threshold to gather plastid contigs."
+            echo "bash {params.bash_plastid_accession_script} -c {output.corgi_out} -o {params.plastid_contigs_identifier} -p {params.p_threshold}"
+            bash {params.bash_plastid_accession_script} -c {output.corgi_out} -o {params.plastid_contigs_identifier} -p {params.p_threshold}
+            python {params.python_fasta_writer} --assembly {input.seqs} --accession {params.plastid_contigs_identifier} --fasta_file_name {output.plastid_contigs}
+            # Do some calculations here.
+            prediction_lines=$(wc -l <{output.corgi_out})
+            contig_total=$((prediction_lines-header))
             
             plastid_match=$(grep -o ">" {output.plastid_contigs} | wc -l)
 
@@ -195,67 +264,100 @@ if not DEPTH_FILE_EXISTS:
         script:
             "{params.script_dir}/merge_contig_depth.sh"
 
-rule binny_workflow:
-    input:
-        plastid_contigs = rules.corgi_prediction.output.plastid_contigs,
-        depth_text = lambda wildcards: DEPTH_TEXT_FILE if DEPTH_FILE_EXISTS else rules.merge_contig_depth.output # Binny now only takes the depth text profile as input.
-        
-    params:
-        bash_create_yaml = Path(SCR_DIR/"create_yaml.sh"),
-        binny_database = config['binning']['database'], # Path to the database of marker genes for binning.
-        universal_length_cutoff = config['binning']['universal_length_cutoff'],
-        hdbscan_epsilon_range = config['binning']['clustering']['epsilon_range'],
-        hdbscan_min_samples_range = config['binning']['clustering']['hdbscan_min_sample_range'],
-        quality_min_completeness = config['binning']['bin_quality']['min_completeness'],
-        quality_start_completeness = config['binning']['bin_quality']['starting_completeness'],
-        quality_min_purity = config['binning']['bin_quality']['purity'],
-        outputdir_within_binny = config['binning']['outputdir'], # within binny.
-        binny_snakemake_env = BINNY_SNAKEMAKE_ENV,
-        binny_mantis_env = BINNY_MANTIS_ENV
+# declare binny as a module, no longer use separate snakemake anymore.
+rule ensure_binny_database:
     output:
-        dir_binny = directory(OUTPUT_DIR/"working/binny")
-    message:
-        "Use the binning algorithm binny to find all high-coverage bins with completeness>=72.5% and purity>=95%."
-    conda:
-        "envs/binny.yml"
-    threads:
-        workflow.cores
+        sentinel=BINNY_DB_SENTINEL
+    params:
+        db_root=BINNY_DB_ROOT,
+        archive_url="https://codeload.github.com/Andyargueasae/binny_database/tar.gz/refs/heads/main"
+    log:
+        OUTPUT_DIR / "logging_info" / "binny_database_download.log"
+    shell:
+        r"""
+        set -euo pipefail
+
+        mkdir -p {params.db_root}
+
+        if [ -s {output.sentinel} ]; then
+            echo "Binny database already present at {params.db_root}" >> {log}
+            exit 0
+        fi
+
+        tmpdir="$(mktemp -d)"
+        trap 'rm -rf "$tmpdir"' EXIT
+
+        curl -L "{params.archive_url}" -o "$tmpdir/binny_database.tar.gz" >> {log} 2>&1
+        tar -xzf "$tmpdir/binny_database.tar.gz" -C "$tmpdir" >> {log} 2>&1
+
+        rm -rf {params.db_root}/A2K_database
+        mv "$tmpdir"/binny_database-main/A2K_database {params.db_root}/A2K_database
+
+        test -s {output.sentinel}
+        """
+
+rule prepare_binny_mantis_cfg:
+    input:
+        db_ready=BINNY_DB_SENTINEL
+    output:
+        cfg=BINNY_RUNTIME_MANTIS_CFG
+    params:
+        template=BINNY_DIR / "config/binny_mantis.cfg",
+        hmm=BINNY_DB_SENTINEL
+    run:
+        import pathlib
+        text = pathlib.Path(params.template).read_text()
+        text = text.replace(
+            "/mnt/lscratch/users/ohickl/binning/tools/binny_devel/database/hmms/checkm_pf/checkm_filtered_pf.hmm",
+            str(params.hmm),
+        )
+        text = text.replace(
+            "custom_ref=/mnt/lscratch/users/ohickl/binning/tools/binny_devel/database/hmms/checkm_tf/checkm_filtered_tf.hmm\n",
+            "",
+        )
+        text = text.replace("checkm_filtered_tf_weight=0.5\n", "")
+        pathlib.Path(output.cfg).parent.mkdir(parents=True, exist_ok=True)
+        pathlib.Path(output.cfg).write_text(text)
+    
+module binny_mod:
+    snakefile:
+        str(BINNY_SNAKEFILE)
+    config:
+        BINNY_CONFIG
+
+# modularized binny rules.   
+use rule prepare_input_data from binny_mod as binny_prepare_input_data
+use rule format_assembly from binny_mod as binny_format_assembly
+use rule annotate from binny_mod as binny_annotate
+use rule prepare_mantis from binny_mod as binny_prepare_mantis
+use rule mantis_checkm_marker_sets from binny_mod as binny_mantis_checkm_marker_sets
+use rule binny from binny_mod as binny_run
+
+rule check_binny_output:
+    input:
+        binny_out=rules.binny_run.output,
+    params:
+        binny_bins=Path(OUTPUT_DIR/"working/binny/bins"),
+    output:
+        check_flag=OUTPUT_DIR/"working/binny/binny_output_check.txt"
+    log:
+        OUTPUT_DIR/"logging_info/check_binny_output.log"
     shell:
         """
         set -e
-        echo "Running binny with the output binny_output." 
-        # Check if plastids are present.
-        # If so, then run binny workflow.
-        if [ -s {input.plastid_contigs} ]; then
-            [ -n $BINNY_DIR/config/config.default.yaml ] && echo "default config file for binny found."
-            bash {params.bash_create_yaml} -a "{input.plastid_contigs}" -b {params.binny_database} -d "$BINNY_DIR/config/config.default.yaml" -t "{input.depth_text}" -o "{params.outputdir_within_binny}"\
-                -e '{params.hdbscan_epsilon_range}' -m '{params.hdbscan_min_samples_range}' -n {params.binny_snakemake_env} -c {params.quality_min_completeness}\
-                -s {params.quality_start_completeness} -p {params.quality_min_purity} -u {params.universal_length_cutoff}\
-                -y "$BINNY_DIR/config/config.ChloroScan.yaml"
-
-            echo "Configuration done, now run binny snakemake workflow."
-            $BINNY_DIR/binny -l -n "MMA_plastids" -t {threads} -r $BINNY_DIR/config/config.ChloroScan.yaml
-            # fi
-
-            # must remove the config.yaml created at the end, so we need it to be changed with name.
-            # rm $BINNY_DIR/config/config.ChloroScan.yaml # finally you have to remove it, you don't want to cause confusion.
-            echo 'The binny workflow is done, bins are within the binny folder, that may need to move out.'
-            mv {BINNY_OUTPUT_DIR} {output.dir_binny}
-            chmod u+w {output.dir_binny}
-            
-            # make sure to remove the bam files within the intermediary folder.
-            echo "The binny's output has been moved to the default output directory."
+        if [ -d "{params.binny_bins}" ] && [ "$(ls -A {params.binny_bins})" ]; then
+            echo "Binny produced bins successfully." > {output.check_flag}
         else
-            echo "No plastids present. Create an empty directory for output."
-            mkdir -p {output.dir_binny}
+            echo "Binny did not produce any bins."
+            exit 1
         fi
         """
 
-# Add a rule using metabat2 to bin MAGs. 
-
 rule CAT_taxonomy_identification_plus_annotation:
     input: 
-        binny_output=OUTPUT_DIR/"working/binny"
+        flag=rules.check_binny_output.output.check_flag,
+        binny_output=rules.binny_run.output
+        
     params:
         prefix=GLOBAL_PREFIX_contigs,
         path_to_contigs="intermediary/assembly.formatted.fa"
@@ -274,18 +376,15 @@ rule CAT_taxonomy_identification_plus_annotation:
         mkdir -p {output}
 
         # Check to see if the binny directory is empty or not
-        find {input.binny_output} -mindepth 1 -maxdepth 1 >> {log}
-        if [ -f "{input.binny_output}/{params.path_to_contigs}" ] ; then
-            CAT contigs -c {input.binny_output}/{params.path_to_contigs} -d {CAT_DB_DIR} -t {CAT_TAXON_DIR} -o {output}/{params.prefix} --force >> {log} 
-            
-            
+        find {OUTPUT_DIR}/working/binny -mindepth 1 -maxdepth 1 >> {log}
+        if [ -f "{OUTPUT_DIR}/working/binny/{params.path_to_contigs}" ] ; then
+            CAT contigs -c {OUTPUT_DIR}/working/binny/{params.path_to_contigs} -d {CAT_DB_DIR} -t {CAT_TAXON_DIR} -o {output}/{params.prefix} --force >> {log} 
         fi
         """
 
 # this is the correct one.
 rule documenting_binny_results:
     input: 
-        # bins = OUTPUT_DIR/"working/binny"/BINNY_OUTPUT_DIR/"bins",
         contig_level_annotation = OUTPUT_DIR/"working/CAT"
     params: 
         bins = Path(OUTPUT_DIR/"working/binny/bins"),
@@ -303,9 +402,14 @@ rule documenting_binny_results:
     conda:
         "envs/documenting_binny.yml"
     message:
-        "Run python script summarize_binny_results.py to record each bin's contig information."
-    script:
-        "{params.script_dir}/summarize_binny_results.py"
+        "Run python script summarize_binny_results.py to record each bin's contig metadata."
+    shell:
+        """
+        $CONDA_PREFIX/bin/python {params.script_dir}/summarize_binny_results.py --assemblyfasta {params.assembly_files} \
+            --assemblydepth {params.assembly_depth} --assembly_annot {params.marker_gene_gff} \
+            --taxonomy_names {params.names_dump} --contig_level_annotation {input.contig_level_annotation}/{params.ANNOT_FILE} \
+            --assembly_bin_dir {params.bins} --MMA_SUMMARY {params.MMA_summary} --output {output}
+        """
 
 rule refine_bins:
     input:
@@ -313,7 +417,6 @@ rule refine_bins:
         original_bins = Path(OUTPUT_DIR/"working/binny"),
         CAT_prediction = Path(OUTPUT_DIR/"working/CAT"),
     params:
-        BACTERIA_ID = "2",
         script_dir = SCR_DIR
     output:
         refine_dir = directory(OUTPUT_DIR/"working/refined_bins"),
@@ -324,14 +427,21 @@ rule refine_bins:
         "Identify potential contaminations in each plastid MAG. Users can decide to use the refined or binny-generated bins."
     log:
         OUTPUT_DIR/"logging_info/refinement.log"
-    script:
-        "{params.script_dir}/refine_bins.py"
+    shell:
+        """
+        $CONDA_PREFIX/bin/python {params.script_dir}/refine_bins.py --input_cross_ref {input.cross_ref} \
+            --input_original_bins {input.original_bins} \
+            --input_CAT_prediction {input.CAT_prediction} \
+            --output_dir_for_refined_bins {output.refine_dir} \
+            --output_summary_info {output.summary_info} \
+            --log_file {log}
+        """
 
 rule visualize_results:
     input:
         OUTPUT_DIR/"working/summary/cross_ref.tsv",
     params:
-        BATCH_NAME,
+        batch_name=BATCH_NAME,
         script_dir = SCR_DIR,
         refine_bins_dir=OUTPUT_DIR/"working/binny",
     output:
@@ -340,25 +450,52 @@ rule visualize_results:
         "envs/visualization.yml"
     log:
         OUTPUT_DIR/"logging_info/visualizations.log"
-    script:
-        "{params.script_dir}/visualization.py"
+    shell:
+        """
+        $CONDA_PREFIX/bin/python {params.script_dir}/visualization.py --input_cross_ref {input} \
+            --batch_name {params.batch_name} \
+            --refine_bins_dir {params.refine_bins_dir} \
+            --output_dir {output} >> {log} 2>&1
+        """
 
 rule cds_extraction:
     input:
-        binny_dir = Path(OUTPUT_DIR/"working/binny"),
+        binny_done=rules.binny_run.output[-1],
     params:
         batch_name=BATCH_NAME,
         gff_file_flag="GFFs",
         script_dir = SCR_DIR,
-        path_fraggenescanrs = OUTPUT_DIR/"working/FragGeneScanRs",
+        path_fraggenescan = OUTPUT_DIR/"working/FragGeneScanRs",
     output:
         CDS_EXTRACTION=directory(OUTPUT_DIR/"working/cds-extraction")
-    conda:
-        "envs/gffread.yml"
     message:
         "Use the fast ORF-predictor FragGeneScan Rust to predict gene contents of the MAGs, then extract the cds via gffread."
-    script:
-        "{params.script_dir}/cds-extraction.sh"
+    shell:
+        """
+        mkdir -p {params.path_fraggenescan}/{params.gff_file_flag}
+        mkdir -p {output}
+        mkdir -p {output}/cds
+        mkdir -p {output}/faa
+        export PATH=$PATH:$HOME/.cargo/bin
+
+        BINNY_DIR=$(dirname {input.binny_done})/bins
+        echo $BINNY_DIR
+        BATCH_NAME={params.batch_name}
+
+        for i in $(ls $BINNY_DIR);
+        do 
+            echo $BINNY_DIR/$i
+            FragGeneScanRs --seq-file-name $BINNY_DIR/$i --training-file illumina_5 --thread-num 1 -g {params.path_fraggenescan}/{params.gff_file_flag}/$(basename $i .fasta).gff \
+            -n {output}/cds/$(basename $BATCH_NAME).$(basename $i .fasta).gene.fasta -a {output}/faa/$(basename $BATCH_NAME).$(basename $i .fasta).faa -w 0; 
+        done
+
+        if [ $? -ne 0 ]; then
+            echo "Error: FragGeneScanRs failed to run."
+            exit 1
+        else
+            echo "FragGeneScanRs completed successfully."
+        fi
+        """
 
 rule krona_taxonomy_plot:
     input: 
@@ -375,7 +512,7 @@ rule krona_taxonomy_plot:
     output:
         OUTPUT_DIR/"Krona.html"
     message:
-        "essure that in your env there must have pandas, click and of course, Kronatools."
+        "Ensure that in your env there must have pandas, click and of course, Kronatools."
     shell:
         """
         set -e
@@ -391,37 +528,6 @@ rule krona_taxonomy_plot:
         sed 1d {input}/{params.file_after_remodel} > {input}/{params.intake_krona}
         ktImportTaxonomy -m 1 -o {output} {input}/{params.intake_krona}
         """
-
-# if ANVIO_PREPARE:
-#     rule reads_remapping:
-#         input:
-#             assembly = rules.corgi_prediction.output.plastid_contigs,
-#             reads = ANVIO_READS # Directory of reads.
-#         conda:
-#             "envs/prep_anvio.yml"
-#         output:
-#             directory(OUTPUT_DIR/"working/anvio_prepare")
-#         message:
-#             "Remap the reads to filtered assemblies and generate bam files for anvio outputs."
-#         shell:
-#         """
-#         mkdir -p {output}
-#         minimap2 -d {output}/assembly.mmi {input.assembly}
-
-#         # only map paired-end reads.
-#         for f in {input.reads}/*_1.fastq.gz; do
-#             basename=$(basename "$f" _1.fastq.gz)
-#             reads2="{input.reads}/${basename}_2.fastq.gz"
-#             output_sam="{output}/${basename}.sam"
-#             output_bam="{output}/${basename}.bam"
-#             output_sorted_bam="{output}/${basename}.sorted.bam"
-#             minimap2 -ax sr {output}/assembly.mmi $f $reads2 > $output_sam
-#             samtools view -bS $output_sam > $output_bam
-#             samtools sort $output_bam -o $output_sorted_bam --threads 16
-#             rm $output_sam
-#             rm $output_bam
-#         done
-#         """
 
 rule check_done:
     input:

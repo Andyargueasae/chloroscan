@@ -1,4 +1,3 @@
-import Bio
 from Bio import SeqIO
 import os
 from os import listdir
@@ -7,7 +6,11 @@ import numpy as np
 import sys
 import logging
 from pathlib import Path
+import argparse
 
+BACTERIA_ID = "2"
+EUKARYA_ID = "2759"
+ROOT_ID = "1"
 
 def refine_bins_renaming(seqs, cross_ref_df):
     taxonomy_dict = dict()
@@ -27,22 +30,28 @@ def refine_bins_renaming(seqs, cross_ref_df):
     taxon_with_longest_length = sorted_dict_items[-1][0]
     return taxon_with_longest_length
 
-output_dir_for_refined_bins = snakemake.output[0]
-output_summary_info = snakemake.output[1]
+# output_dir_for_refined_bins = snakemake.output[0]
+# output_summary_info = snakemake.output[1]
+# cross_reference_table = snakemake.input['cross_ref']
+# original_bins = snakemake.input['original_bins']+"/bins"
+# CAT_prediction = snakemake.input['CAT_prediction'] + "/out.CAT.contig2classification.txt"
+# log_file = snakemake.log[0]
 
+parser = argparse.ArgumentParser(description="Refine the bins from binny by removing contigs that are likely to be contaminants based on their taxonomic annotation and the presence of marker genes.")
+parser.add_argument("--input_cross_ref", type=str, help="The cross reference table containing contig id, taxonomic annotation and marker gene information for each contig.")
+parser.add_argument("--input_original_bins", type=str, help="The directory containing the original bins from binny.")
+parser.add_argument("--input_CAT_prediction", type=str, help="The CAT prediction file for the contigs.")
+parser.add_argument("--output_dir_for_refined_bins", type=str, help="The output directory for the refined bins.")
+parser.add_argument("--output_summary_info", type=str, help="The output file for the summary information of the refinement process.")
+parser.add_argument("--log_file", type=str, help="The log file for recording the refinement process.")
+args = parser.parse_args()
 
-Path(output_summary_info).touch()
+original_bins = args.input_original_bins + "/bins"
+CAT_prediction = args.input_CAT_prediction + "/out.CAT.contig2classification.txt"
+Path(args.output_summary_info).touch()
 # Inputs and params.
-
-cross_reference_table = snakemake.input['cross_ref']
-original_bins = snakemake.input['original_bins']+"/bins"
-CAT_prediction = snakemake.input['CAT_prediction'] + "/out.CAT.contig2classification.txt"
-BACTERIA_ID = snakemake.params['BACTERIA_ID']
-EUKARYA_ID = "2759"
-ROOT_ID = "1"
-log_file = snakemake.log[0]
 logging.basicConfig(
-    filename=log_file,  # Specify the log file
+    filename=args.log_file,  # Specify the log file
     filemode='a',                # 'a' for append mode, 'w' for write (overwrite)
     format='%(asctime)s - %(name)s - %(levelname)s - %(message)s',  # Log format
     level=logging.INFO           # Set the minimum log level to INFO
@@ -50,13 +59,13 @@ logging.basicConfig(
 
 logger = logging.getLogger(__name__)
 
-os.mkdir(output_dir_for_refined_bins)
+os.mkdir(args.output_dir_for_refined_bins)
 
-if (os.stat(cross_reference_table).st_size == 0):
+if (os.stat(args.input_cross_ref).st_size == 0):
     print("Empty cross reference table, exit.\n")
     sys.exit(0)
 
-cross_ref_refine_df = pd.read_csv(cross_reference_table,sep="\t", index_col=0)
+cross_ref_refine_df = pd.read_csv(args.input_cross_ref, sep="\t", index_col=0)
 bin_list = listdir(original_bins)
 orig_CAT_df = pd.read_csv(CAT_prediction, sep="\t")
 lineages = orig_CAT_df['lineage']
@@ -94,21 +103,21 @@ for i in list_of_seqrec.keys():
                 logging.info("contig id: {} This is a bacterial contamination.".format(elem_id))
                 contig_ids.remove(elem_id)
                 to_be_modified_id.append(elem_id)
-                with open(output_summary_info, "a") as si:
+                with open(args.output_summary_info, "a") as si:
                     si.write(f"MAG {i.split('/')[-1]} has suspicious contamination contig: {elem_id}. Taxonomy: {elem_lineage_hierarchy}.\n")
 
             elif (EUKARYA_ID in elem_lineage_hierarchy) and (pd.isna(np.array(elem_in_crossref['markers on the contig'])[0])):
                 logging.info("Contig id: {}. This is a eukaryotic contig without marker genes on it.".format(elem_id))
                 contig_ids.remove(elem_id)
                 to_be_modified_id.append(elem_id)
-                with open(output_summary_info, "a") as si:
+                with open(args.output_summary_info, "a") as si:
                     si.write(f"MAG {i.split('/')[-1]} has a eukaryotic contig without single-copy marker genes in database: {elem_id}. Taxonomy: {elem_lineage_hierarchy}.\n")
 
             elif (ROOT_ID in elem_lineage_hierarchy) and (pd.isna(np.array(elem_in_crossref['markers on the contig'])[0])):
                 logging.info("Contig id: {}. This is a contig with ambiguous taxonomic classification and without recognizable A2K marker genes in selected lineage, discarded.\n".format(elem_id))
                 contig_ids.remove(elem_id)
                 to_be_modified_id.append(elem_id)
-                with open(output_summary_info, "a") as si:
+                with open(args.output_summary_info, "a") as si:
                     si.write(f"MAG {i.split('/')[-1]} has an unclassified contig: {elem_id}.\n")
 
             else:
@@ -132,7 +141,7 @@ for i in list_of_seqrec.keys():
 
     
 for i in refined_contigs_dict.items():
-    filename = output_dir_for_refined_bins + "/" + "refined_" + i[0].split("/")[-1]    
+    filename = args.output_dir_for_refined_bins + "/" + "refined_" + i[0].split("/")[-1]    
     with open(filename, "w") as refined:
         for j in i[-1]:
             logging.info(j.id)
@@ -143,4 +152,4 @@ for i in refined_contigs_dict.items():
             refined.write("\n")
 
 
-cross_ref_refine_df.to_csv(snakemake.input['cross_ref'], sep="\t")
+cross_ref_refine_df.to_csv(args.input_cross_ref, sep="\t")

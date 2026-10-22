@@ -8,6 +8,7 @@ from typing import List, NewType, Optional, Union
 from appdirs import user_cache_dir
 import pytest
 import typer
+import os
 from os import listdir
 
 TargetsType = NewType("TargetsType", Union[str, Path, List[Union[str, Path]]])
@@ -104,8 +105,14 @@ class WorkflowResult:
                     assert line_count >= min
 
                 if max:
-                    assert line_count <= max                
+                    assert line_count <= max
 
+    def assert_file_glob(self, pattern, result_directory, count=None) -> bool:
+        generated_path = self.work_dir / result_directory
+        found_count = sum(1 for x in generated_path.glob(pattern))
+        if count:
+            assert count == found_count
+        return
 
     def assert_re(self, patterns:Union[str, List[str]], expected_files: Optional[TargetsType] = None,):
         if isinstance(patterns, str):
@@ -207,7 +214,10 @@ def run_workflow(tmpdir: Path):
         CAT_tax = root_dir/"tests"/"test-data"/"CAT_mini"/"tax"
         input_batch_name = "TEST_OUT"
         output_dir = "TEST_OUT"
-        conda_prefix = root_dir/"conda_envs"
+        # conda_prefix = root_dir/"conda_envs"
+
+        # if os.path.exists(conda_prefix):
+        #     shutil.rmtree(conda_prefix)
 
 
         sp.check_output(
@@ -222,6 +232,8 @@ def run_workflow(tmpdir: Path):
                 input_batch_name,
                 "--outputdir",
                 output_dir,
+                "--corgi-min-length=500",
+                "--corgi-pthreshold=0.3",
                 "--cat-database={}".format(CAT_db),
                 "--cat-taxonomy={}".format(CAT_tax),
                 "-c",
@@ -235,7 +247,7 @@ def run_workflow(tmpdir: Path):
                 "--latency-wait=15", 
                 "--directory={}".format(work_dir),
                 "--keep-target-files",
-                "--conda-prefix={}".format(conda_prefix),
+                # "--conda-prefix={}".format(conda_prefix),
                 *targets,
             ]
         )
