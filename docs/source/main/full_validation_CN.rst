@@ -18,8 +18,8 @@ ChloroScan 的快速 CI 测试可以检查 Python 包安装、CLI 和 Snakemake 
 
 .. code-block:: bash
 
-    bash scripts/validate_full_install.sh /data/assembly.fasta \\
-      /data/contig_depth.tsv sample_01 /data/chloroscan_results \\
+    bash scripts/validate_full_install.sh /data/assembly.fasta \
+      /data/contig_depth.tsv sample_01 /data/chloroscan_results \
       /data/CAT_database/db /data/CAT_database/tax 8
 
 脚本将依次执行：检查工作流 DAG、创建所有 Snakemake Conda 规则环境、运行完整流程，并检查输出目录中的 ``ChloroScan.done``。
