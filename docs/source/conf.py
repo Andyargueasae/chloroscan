@@ -33,16 +33,7 @@ templates_path = ['_templates']
 exclude_patterns = []
 
 html_theme_options = {
-    "github_url": "https://github.com/Andyargueasae/chloroscan",
-    "repository_url": "https://github.com/Andyargueasae/chloroscan",
-    "repository_branch": "main",
-    "home_page_in_toc": True,
-    "path_to_docs": "docs",
-    "show_navbar_depth": 2,
-    "use_edit_page_button": True,
-    "use_repository_button": True,
-    "use_download_button": True,
-    "navigation_with_keys": False,
+    "navigation_depth": 2,
 }
 
 autosectionlabel_prefix_document = True  # optionally namespace labels by filename
