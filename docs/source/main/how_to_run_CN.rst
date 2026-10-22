@@ -200,6 +200,6 @@ ChloroScan 的完整命令空间如下所示：
  - ``--corgi-save-filter``: 保存 CORGI 过滤后的 contigs（注意：可能需要较长运行时间）。默认值为 no-corgi-save-filter。
  - ``--corgi-batch-size``: CORGI 推断 contigs 分类标签的批次大小。默认值为 1。
  - ``--corgi-pthreshold``: CORGI 判断 contigs 类别是否为真正的叶绿体或其他类别的 P 值阈值。默认值为 0.50。
- - ``--cat-database``: CAT 数据库的路径，保存经过 diamond 处理的蛋白质序列。默认值为 "PATH/TO/CAT_db/db"。
- - ``--cat-taxonomy``: CAT 数据库的分类标签路径。默认值为 "PATH/TO/CAT_db/tax"。
+ - ``--cat-database``: CAT 数据库的路径，保存经过 diamond 处理的蛋白质序列。这是必填参数，不再提供默认的开发者路径。
+ - ``--cat-taxonomy``: CAT 数据库的分类标签路径。这是必填参数，不再提供默认的开发者路径。
  - ``--krona-env``: Krona 环境的路径。默认值为 "kronatools"。 **现在通常不需要设置此项**。
