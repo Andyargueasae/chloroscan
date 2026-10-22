@@ -32,6 +32,7 @@ Table of contents
    :caption: 目录:
    
    main/installation_CN
+   main/full_validation_CN
    main/how_to_run_CN
    main/inputs_and_outputs_CN
    main/snk_cli_CN
