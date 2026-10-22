@@ -63,7 +63,7 @@ jobs:
             --outputdir "$RUNNER_TEMP/chloroscan-output" \
             --cat-database "$GITHUB_WORKSPACE/tests/test-data/CAT_mini/db" \
             --cat-taxonomy "$GITHUB_WORKSPACE/tests/test-data/CAT_mini/tax" \
-            --use-conda --conda-frontend conda \
+            --use-conda --conda-frontend=conda \
             --conda-create-envs-only \
-            --conda-prefix "$RUNNER_TEMP/chloroscan-conda" \
+            --conda-prefix="$RUNNER_TEMP/chloroscan-conda" \
             -c 2
