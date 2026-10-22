@@ -40,7 +40,7 @@ Check whether conda and mamba are intactly installed by running the commands bel
 ``NOTE``: For Snakemake 7.32, use the Conda frontend explicitly (``--conda-frontend=conda``). This avoids requiring a downgrade to Mamba 1.x or Conda 23.3.1.
 Now you can proceed to set up the virtual environment and install the chloroscan.
 
-Cargo and FragGeneScanRs should also be installed, for coding sequence extraction, so we prepared a bash script to do this: https://github.com/Andyargueasae/chloroscan/blob/main/install_fraggenescanrs.sh.
+Cargo and FragGeneScanRs may be needed for coding-sequence extraction. The repository includes a helper installer (follow its prompts and check its prerequisites): https://github.com/Andyargueasae/chloroscan/blob/main/install_fraggenescanrs.sh.
 
 .. code-block:: bash
 
@@ -93,7 +93,7 @@ Identify the extracted CAT database and taxonomy directories (containing files s
 3. Binny database and conda environments
 -----------------------------------------
 
-You don't need to download binny's database manually, ChloroScan will load it once you installed the conda environment for each job.
+You do not need to download Binny's marker database manually. ChloroScan retrieves it during workflow execution under ``OUTPUT_DIR/resources/A2K_database``, not while initially creating Conda environments. Ensure the output path is writable.
 
 Run chloroscan with the flag "``--conda-create-envs-only``" added to setup the conda environments. Always add the flag "``--use-conda``" to make sure the workflow uses conda environments. You can specify the prefix of conda environments with "``--conda-prefix``" flag, otherwise the environments will be created in default location. You may always specify the prefix each time you run ChloroScan to avoid rebuilding.
 
@@ -107,4 +107,20 @@ For a typical run, provide ``Inputs-assembly``, ``Inputs-batch-name``, ``outputd
         --cat-database "/path/to/your/CAT_database/db" \
         --cat-taxonomy "/path/to/your/CAT_database/tax"
 
-The example paths are placeholders: check your extracted database layout before running. This command prepares conda environments only; it does not verify a complete end-to-end run. See the full installation validation page for an end-to-end procedure. 
+The example paths are placeholders: check your extracted database layout before running. This command prepares conda environments only; it does not verify a complete end-to-end run. See :doc:`full_validation` for an end-to-end procedure.
+
+4. CPU and GPU environments
+---------------------------
+
+The CORGI Conda environment is CPU-compatible by default. For a compatible NVIDIA host requiring CUDA 12.4 acceleration, explicitly opt in **before provisioning the rule environments**:
+
+.. code-block:: bash
+
+    export CHLOROSCAN_INSTALL_CUDA=1
+
+Do not enable this option on hosts without a compatible driver and GPU. This opt-in affects rule-environment setup; it does not change the main ``pip install chloroscan`` step.
+
+5. First-run checklist
+----------------------
+
+After ``chloroscan run --help``, verify that the CAT ``db`` directory exists, the CAT ``tax`` directory contains ``names.dmp``, and the assembly and BAM or depth inputs are nonempty. Use a small dataset for your first run and check for ``OUTPUT_DIR/ChloroScan.done`` at completion. See :doc:`full_validation` for the validated command sequence and troubleshooting. 
