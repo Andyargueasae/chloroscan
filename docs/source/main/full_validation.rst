@@ -1,6 +1,6 @@
-========================
+============================
 Full installation validation
-========================
+============================
 
 The fast CI smoke test verifies that ChloroScan installs and that Snakemake
 constructs the complete DAG. It does not download the large databases, install
