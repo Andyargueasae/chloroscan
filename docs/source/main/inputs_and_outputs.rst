@@ -65,7 +65,7 @@ The table ``corgi-prediction.csv`` contains the contig id, the predicted categor
 
 The table looks like:
 
-.. code-block:: csv
+.. code-block:: text
     
     file,accession,prediction,probability,original_id,description,Nuclear,Mitochondrion,Plastid,Plasmid,Nuclear/Bacteria,Nuclear/Archaea,Nuclear/Eukaryota,Nuclear/Viruses,Mitochondrion/Eukaryota,Plastid/Eukaryota,Plasmid/Bacteria,Plasmid/Archaea,Plasmid/Eukaryota
     assembly.formatted.fa,k97_110,Nuclear/Bacteria,0.5487518906593323,k97_110,k97_110,0.5688353,0.00050010456,0.016087921,0.41457665,0.5487519,0.0055856705,0.006795563,0.007702232,0.0,0.0,0.41455323,2.3394885e-05,4.0987683e-08
