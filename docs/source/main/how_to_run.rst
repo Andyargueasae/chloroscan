@@ -21,7 +21,7 @@ You've got your contigs, mapping files in bam and configuration files. You now c
 .. code-block:: bash
 
    chloroscan run --Inputs-assembly input_contigs.fasta --Inputs-alignment PATH/to/bams \
-      --Inputs-batch-name "my_batch" --outputdir Path/to/output --use-conda --cores=12 \
+      --Inputs-batch-name "my_batch" --outputdir Path/to/output --use-conda --conda-frontend conda --cores=12 \
       --cat-database PATH/to/CAT_db/db --cat-taxonomy path/to/CAT_db/tax --conda-prefix PATH/to/conda_envs
 
 Sometimes you may also wish to get a tabular represented depth profile. It looks like:
@@ -42,8 +42,8 @@ The first column is the contig id, and the second column is the average depth of
 .. code-block:: bash
 
    DEPTH_PROFILE=path/to/depth_profile.tsv
-   chloroscan run --Inputs-assembly input_contigs.fasta --Inputs-depth-profile $DEPTH_PROFILE \
-      --Inputs-batch-name "my_batch" --outputdir Path/to/output --use-conda --cores=12 \
+   chloroscan run --Inputs-assembly input_contigs.fasta --Inputs-depth-txt $DEPTH_PROFILE \
+      --Inputs-batch-name "my_batch" --outputdir Path/to/output --use-conda --conda-frontend conda --cores=12 \
       --cat-database PATH/to/CAT_db/db --cat-taxonomy path/to/CAT_db/tax
 
 For more details about the inputs, please check the ``inputs_and_outputs`` section.
@@ -179,7 +179,7 @@ The whole command space of ChloroScan is shown below:
     │                                                                 [default: kronatools]    │
     ╰──────────────────────────────────────────────────────────────────────────────────────────╯
 
-Below lists those arguments for ChloroScan.
+Below lists those arguments for ChloroScan. The command-line help excerpt above is illustrative; use ``chloroscan run --help`` for the installed version's authoritative options and defaults.
  - ``--Inputs-assembly``: Path to fasta format assembly of contigs from all sorts of organisms.
  - ``--Inputs-depth-txt``: Path to a tab-separated text storing abundance of each contig in the sample. The first column is the contig id, and the second column is the average depth of contig.
  - ``--Inputs-alignment``: Path to the folder containing bam alignment files of the contigs. The alignment files should be in bam format, and named as "sample_name.bam". The sample name will be extracted from the bam file name by removing the ".bam" suffix. The sample name will be used in the downstream analysis and output files.
@@ -192,13 +192,13 @@ Below lists those arguments for ChloroScan.
  - ``--binning-outputdir``: Path to the output directory of the binning. The default value is "binny_output".
  - ``--binning-clustering-epsilon-range``: Range of epsilon values for HDBSCAN clustering. The default value is "0.250,0.000".
  - ``--binning-clustering-hdbscan-min-sample-range``: Range of min_samples values for HDBSCAN clustering, larger value means larger MAGs. The default value is "1,5,10".
- - ``--binning-bin-quality-purity``: Minimum purity for bin quality. The default value is 95.
+ - ``--binning-bin-quality-purity``: Minimum purity for bin quality. The default value is 90.
  - ``--binning-bin-quality-starting-completeness``: Starting completeness for bin quality. Binny uses a sliding completeness to filter bins. The default value is 92.5.
  - ``--binning-bin-quality-min-completeness``: Minimum completeness for bin quality. The default value is 50.
- - ``--corgi-min-length``: Minimum length of contigs to be processed by CORGI. The default value is 500bp.
+ - ``--corgi-min-length``: Minimum length of contigs to be processed by CORGI. The default value is 1000bp.
  - ``--corgi-save-filter``: Save the filtered contigs by CORGI (Note: may take long time). The default value is no-corgi-save-filter.
  - ``--corgi-batch-size``: Batch size for CORGI to infer contigs' taxonomic labels. The default value is 1.
- - ``--corgi-pthreshold``: P-value threshold for CORGI to determine if the contigs category is authentically plastidial or something else. The default value is 0.9.
- - ``--cat-database``: Path to the database of CAT saving diamond-processed protein sequences. The default value is "PATH/TO/CAT_db/db".
- - ``--cat-taxonomy``: Path to the taxonomy labels of the CAT database. The default value is "PATH/TO/CAT_db/tax".
+ - ``--corgi-pthreshold``: P-value threshold for CORGI to determine if the contigs category is authentically plastidial or something else. The default value is 0.50.
+ - ``--cat-database``: Path to the database of CAT saving diamond-processed protein sequences. This argument is required; there is no built-in default database path.
+ - ``--cat-taxonomy``: Path to the taxonomy labels of the CAT database. This argument is required; there is no built-in default taxonomy path.
  - ``--krona-env``: Path to the Krona environment. The default value is "kronatools". **Now commonly we don't need to set up this**.
