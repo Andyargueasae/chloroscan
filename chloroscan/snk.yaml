@@ -112,15 +112,13 @@ cli:
     database:
         type: Path
         help: "Path to the database of chloroplast genomes."
-        required: False
+        required: True
         short: d
-        default: "/home/yuhtong/scratch/andy/uniref90_algaProt/db"
     taxonomy:
         type: Path
         help: "Path to the taxonomy of the database."
-        required: False
+        required: True
         short: t
-        default: "/home/yuhtong/scratch/andy/uniref90_algaProt/tax"
   krona_env:
     type: string
     help: "Path to the Krona environment."
