@@ -6,8 +6,8 @@
 
 总体而言，ChloroScan 接受以下输入：
     - 以 fasta 格式的宏基因组组装（必需）：通过 ``--Inputs-assembly`` 参数配置。
-    - 测序深度表格（必需 ``tsv``，与下一个选项互斥）：通过 ``--Inputs-depth-profile`` 参数配置。
-    - 存储排序后的 bam 文件的目录（必需）：通过 ``--Inputs-alignment`` 参数配置。
+    - 测序深度表格（TSV 格式，与下一个选项二选一）：通过 ``--Inputs-depth-txt`` 参数配置。
+    - 存储排序后的 bam 文件的目录（与深度表二选一）：通过 ``--Inputs-alignment`` 参数配置。
     - 批次名称（必需，仅用于在并行运行时区分不同作业以避免覆盖）：通过 ``--Inputs-batch-name`` 参数配置。
 
 通常对于那些第一次进行分析的数据（ **de novo assembly** ），我们建议使用 bam 目录，但如果您想使用现有的深度谱重新运行分析（可能调整参数），也可以使用它。
@@ -17,6 +17,9 @@ ChloroScan 的输出目录结构如下：
 .. code-block::
 
     chloroscan_output
+    ├── ChloroScan.done
+    ├── resources
+    │   └── A2K_database
     ├── logging_info
     └── working
         ├── binny
@@ -56,7 +59,7 @@ Corgi 的第一个步骤：contig 分类仅需要您的 ``input-contigs.fasta`` 
 
 程序首先将每个 contig 分类为五个基于 RefSeq 的类别：叶绿体、线粒体、原核生物、真核生物和未知。
 
-然后输出结果：分类结果 ``corgi-prediction.csv``，以及分离的 ``plastids.fasta`` 文件将生成在 ``output/working/corgi`` 目录中。
+然后输出结果：分类结果 ``corgi-prediction.csv``，以及分离的 ``plastid.fasta`` 文件将生成在 ``output/working/corgi`` 目录中。
 
 分类结果 ``corgi-prediction.csv`` 是一个表格文本文件，包含每个 contig 的分类结果、每个类别的后验概率以及 contig 的长度。它看起来如下所示：
 
@@ -77,7 +80,7 @@ Corgi 的第一个步骤：contig 分类仅需要您的 ``input-contigs.fasta`` 
 3. binny分箱结果
 ============================
 
-此步骤的输入是来自 Corgi 的 ``plastids.fasta`` 文件和以表格形式表示的测序平均深度，第一列是 contig id，其余列是每个样品的平均深度。
+此步骤的输入是来自 Corgi 的 ``plastid.fasta`` 文件和以表格形式表示的测序平均深度，第一列是 contig id，其余列是每个样品的平均深度。
 
  - ``注意``: 如果用户未指定测序深度表格，ChloroScan 会直接使用 binny 的代码生成深度谱。其路径为 ``output/working/depth_profile.txt``。
 
