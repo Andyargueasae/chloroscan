@@ -35,8 +35,8 @@ args=(
   --cat-database "$cat_db"
   --cat-taxonomy "$cat_tax"
   --use-conda
-  --conda-frontend conda
-  --conda-prefix "$conda_prefix"
+  --conda-frontend=conda
+  --conda-prefix="$conda_prefix"
   -c "$threads"
 )
 
