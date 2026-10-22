@@ -18,6 +18,7 @@ Table of contents
    :caption: Contents:
 
    main/installation
+   main/full_validation
    main/how_to_run
    main/inputs_and_outputs
    main/snk_cli
