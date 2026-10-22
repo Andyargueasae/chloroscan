@@ -1,103 +1,82 @@
 ============
-下载
+安装 ChloroScan
 ============
 
-我们仍在升级 ChloroScan 以更好地还原环境中的叶绿体基因组MAG，为了获得最佳效果，请确保安装最新版本。
+ChloroScan 持续更新。建议在 Linux x86_64 系统上使用 Python 3.10，并先通过小型测试数据验证安装。Python 包元数据允许 Python 3.9 及以上版本，但完整工作流尚未覆盖所有 Python 版本和操作系统。
 
-1. pip 和 conda/mamba
-----------------------
+1. 安装 Python 和 Conda
+-----------------------
 
-要安装工作流程，请使用 pip。首先创建一个虚拟环境。确保您的计算机严格遵循 Python 版本限制：> 3.9 且 < 3.12。作为参考，我们用Python 3.10.4 开发了ChloroScan。
-
-运行此命令以检查您的 Python 版本是否兼容：
+推荐安装 Miniforge：https://github.com/conda-forge/miniforge/releases/ 。下载适合您系统的安装文件（例如 ``Miniforge3-Linux-x86_64.sh``），然后执行：
 
 .. code-block:: bash
 
-    python3 --version
-
-另一个关键的包是mamba，它是您能够安装ChloroScan工作流中每一个步骤的虚拟环境的关键。您可以通过从以下链接下载 miniforge 来安装 mamba：
-
-.. code-block:: bash
-
-    wget https://github.com/conda-forge/miniforge/releases/latest/download/Miniforge3-Linux-x86_64.sh
-
-
-下载完成后，运行以下命令安装 mamba（将 {OPERATING_SYSTEM} 和 {ARCHITECTURE} 替换为您自己的系统信息，例如 Miniforge3-Linux-x86_64.sh）：
-
-.. code-block:: bash
-
-    bash Miniforge3-{OPERATING_SYSTEM}-{ARCHITECTURE}.sh
-
-可以通过运行以下命令检查 conda 和 mamba 是否完整安装：
-
-.. code-block:: bash
-
-    # 为 bash 初始化 conda 和 mamba。
+    bash Miniforge3-Linux-x86_64.sh
     conda init bash
-    mamba init bash
     source ~/.bashrc
-
     conda --version
-    mamba --version
 
-    # 查询 mamba 和 conda 的安装路径
-    which mamba
-    which conda
+对于 Snakemake 7.32，指定 ``--conda-frontend conda``；无需降级到 Conda 23.3.1 或 Mamba 1.4.2。
 
-``注意``: Mamba 和 conda 的版本会直接影响安装，作为参考，我们在开发ChloroScan的时候用的是conda=23.3.1和mamba=1.4.2。
-
-运行以下命令以设置虚拟环境并安装 ChloroScan。
+创建独立的 Python 环境并安装最新发行版：
 
 .. code-block:: bash
 
-    python3 -m venv chloroscan_env
-    source chloroscan_env/bin/activate
-
-最后确定以上条件达成后，运行以下命令安装 ChloroScan：
-
-.. code-block:: bash
-
-    pip3 install chloroscan
-
-或者，您可以创建一个具有兼容 Python 版本的 conda 环境，并在其中安装 chloroscan：
-
-.. code-block:: bash
-
-    mamba env create -n chloroscan_env python=3.10
+    conda create -n chloroscan_env python=3.10 -y
     conda activate chloroscan_env
-    which pip; which python; # 检查 pip 和 python 是否来自 conda 环境，这是必须保证的。 
-    #!注意!: 系统的默认 Python （/usr/bin/python） 不应该显示在这里，否则将会导致令人头疼的问题。
-    pip3 install chloroscan
-    pip3 install chloroscan
-    
-除了安装，ChloroScan 还需要几个数据库：一个用于 CAT 的分类学分类，另一个用于通过分箱推断质体 MAG 的质量。
+    python -m pip install chloroscan
+    chloroscan --help
+    chloroscan run --help
+
+亦可使用 ``python3.10 -m venv chloroscan_env`` 和 ``source chloroscan_env/bin/activate`` 创建虚拟环境，前提是 Conda 仍可用于 Snakemake 每个规则的环境。
+
+对于编码序列提取，项目提供了 FragGeneScanRs 安装辅助脚本，请从项目仓库下载并检查其先决条件：``install_fraggenescanrs.sh``。
 
 2. CAT 数据库
--------------------
+--------------
 
-您的选择可以是使用包含 NCBI nr 数据库中所有蛋白质的 CAT 预处理数据库。然而，在运行 CAT 时，它占用大量内存且耗时，并且需要约 300GB 的磁盘空间。
-
-为了评估叶绿体 contig 的物种分类，我们建议下载我们精心策划的蛋白质数据库，该数据库包含来自 NCBI 的所有叶绿体基因组编码蛋白质和来自 UniRef90 的蛋白质（解压后大小约为 85GB）。
-
-下载命令：
+运行时必须明确提供 CAT 的数据库目录 ``--cat-database`` 和分类目录 ``--cat-taxonomy``。推荐使用项目整理的质体蛋白数据库：https://doi.org/10.26188/27990278 。
 
 .. code-block:: bash
 
-   figshare download -o CAT_db.tar.gz 27990278
+    figshare download -o CAT_db.tar.gz 27990278
+    mkdir -p /path/to/CAT_database
+    tar -xzf CAT_db.tar.gz -C /path/to/CAT_database
 
-3. Binny 数据库和 conda 环境
-------------------------------
+解压后请检查数据库文件的实际目录层级；``tax`` 目录应包含 ``names.dmp``。数据库压缩包约 47 GB，解压后约 85 GB，应预留足够磁盘空间。
 
-您无需手动下载 binny 的数据库，ChloroScan 会在为每个作业安装 conda 环境后自动加载它。
+3. 配置 Snakemake 环境
+-----------------------
 
-运行 chloroscan 并添加标志 "``--conda-create-envs-only``" 以设置 conda 环境。记得始终添加 "``--use-conda``" 标志以确保工作流程使用 conda 环境。您可以使用 "``--conda-prefix``" 标志指定 conda 环境的前缀，否则环境将创建在默认位置。每次运行时，请确保你指定的是同一个conda prefix, 避免重复构建环境。
+如已有排序的 BAM 比对文件目录，可使用 ``--Inputs-alignment``。如果已经生成了 contig 测序深度 TSV 文件，则改用 ``--Inputs-depth-txt``；无需同时提供两者。
 
-先版本有四个参数需要一直添加： ``Inputs-assembly``、 ``Inputs-batch-name``、 ``outputdir`` 和 ``Inputs-alignment``。（您可以使用测试数据（test data）来先进行conda环境配置）
+以下示例只创建规则环境，不运行完整分析：
 
 .. code-block:: bash
 
-    chloroscan run --use-conda --conda-create-envs-only --conda-prefix="/path/to/your/conda/envs" \
-        --Inputs-assembly "/path/to/your/assembly.fasta" --Inputs-batch-name "sample_name" \
-        --outputdir "/path/to/your/output_dir" --Inputs-alignment "/path/to/your/bams_directory" \
+    chloroscan run --Inputs-assembly /data/assembly.fasta \\
+      --Inputs-depth-txt /data/contig_depth.tsv \\
+      --Inputs-batch-name sample_01 --outputdir /data/chloroscan_output \\
+      --cat-database /data/CAT_database/db --cat-taxonomy /data/CAT_database/tax \\
+      --use-conda --conda-frontend conda --conda-create-envs-only \\
+      --conda-prefix /data/chloroscan_conda_envs --cores 8
 
-坐到这儿就标志着 ChloroScan 的准备工作已经完成了，您可以开始运行它。 
+运行 ChloroScan 时，Binny 标记数据库会下载到 ``OUTPUT_DIR/resources/A2K_database``，不是在创建 Conda 环境时下载。请确保输出目录可写且空间充足。
+
+4. CPU/GPU 选择
+----------------
+
+CORGI 默认使用 CPU 兼容环境。仅在具有兼容 NVIDIA 驱动和 GPU 的设备上，如确实需要 CUDA 12.4 加速，可在创建规则环境**之前**设置：
+
+.. code-block:: bash
+
+    export CHLOROSCAN_INSTALL_CUDA=1
+
+不具备兼容 GPU 时不要设置该变量。
+
+5. 完整测试和排错
+-----------------
+
+使用 ``chloroscan run --help`` 检查当前安装版本的真实选项。请确认输入文件非空、CAT 路径有效、``tax/names.dmp`` 存在且磁盘空间足够。完整执行后检查 ``OUTPUT_DIR/ChloroScan.done``。
+
+请阅读 :doc:`full_validation_CN`，了解首次运行的测试脚本、数据准备和常见故障。
