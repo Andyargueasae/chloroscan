@@ -86,7 +86,7 @@ ChloroScan is developed by:
 
 .. start-credits
 
-- Yuhao Tong 童禹皓 (University of Melbourne)
+- `PhD candidate Yuhao Tong <https://www.linkedin.com/in/yuhao-tong-2a015825b/>`_ 
 - `Dr Robert Turnbull <https://findanexpert.unimelb.edu.au/profile/877006-robert-turnbull>`_ 
 - `Dr Vanessa Rossetto Marcelino <https://findanexpert.unimelb.edu.au/profile/532755-vanessa-rossetto-marcelino>`_ 
 - `A/Prof Heroen Verbruggen <https://hverbruggen.github.io/>`_
