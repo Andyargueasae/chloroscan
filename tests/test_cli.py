@@ -1,4 +1,4 @@
-# Next step: test those rules.
+from click import unstyle
 from snk_cli.testing import SnkCliRunner
 from chloroscan.cli import chloroscan
 
@@ -25,7 +25,7 @@ def test_run_help():
     # assert "--Inputs-alignment" in result.stdout
     # assert "--Inputs-batch-name" in result.stdout
     # assert "--outputdir" in result.stdout
-    assert "--use-cat" in result.stdout
+    assert "--use-cat" in unstyle(result.stdout)
     # assert "--cat-database" in result.stdout
     # assert "--cat-taxonomy" in result.stdout
     # assert "--krona-env" in result.stdout
