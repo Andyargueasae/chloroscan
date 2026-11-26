@@ -25,6 +25,7 @@ def test_run_help():
     # assert "--Inputs-alignment" in result.stdout
     # assert "--Inputs-batch-name" in result.stdout
     # assert "--outputdir" in result.stdout
+    assert "--use-cat" in result.stdout
     # assert "--cat-database" in result.stdout
     # assert "--cat-taxonomy" in result.stdout
     # assert "--krona-env" in result.stdout

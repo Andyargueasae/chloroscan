@@ -59,6 +59,7 @@ jobs:
             --Inputs-depth-txt "$GITHUB_WORKSPACE/tests/test-data/contig_depth_test.txt" \
             --Inputs-batch-name CI_PROVISION \
             --outputdir "$RUNNER_TEMP/chloroscan-output" \
+            --use-cat \
             --cat-database "$GITHUB_WORKSPACE/tests/test-data/CAT_mini/db" \
             --cat-taxonomy "$GITHUB_WORKSPACE/tests/test-data/CAT_mini/tax" \
             --use-conda --conda-frontend=conda \

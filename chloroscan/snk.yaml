@@ -108,16 +108,20 @@ cli:
       help: "P-value threshold for CORGI to determine if the contigs category is authentically plastidial or something else."
       required: False
       default: 0.50
+  use_cat:
+    type: Boolean
+    help: "Run CAT/BAT taxonomic classification, bin refinement, and taxonomy reports."
+    default: False
   cat:
     database:
         type: Path
-        help: "Path to the database of chloroplast genomes."
-        required: True
+        help: "Path to the CAT database directory. Required with --use-cat."
+        required: False
         short: d
     taxonomy:
         type: Path
-        help: "Path to the taxonomy of the database."
-        required: True
+        help: "Path to the CAT taxonomy directory. Required with --use-cat."
+        required: False
         short: t
   krona_env:
     type: string

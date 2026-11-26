@@ -71,7 +71,7 @@ Alternatively, you can create a conda environment with compatible python version
     chloroscan --help
     chloroscan run --help
 
-Besides installation, ChloroScan requires several databases: one for taxonomy classification by CAT and another for inferring plastid MAG qualities by binning.
+ChloroScan uses the Binny marker database to assess plastid MAG quality. CAT/BAT classification is optional and uses a separate database.
 
 2. CAT database
 -------------------
@@ -88,7 +88,7 @@ command to download:
    mkdir -p /path/to/your/CAT_database
    tar -xzf CAT_db.tar.gz -C /path/to/your/CAT_database
 
-Identify the extracted CAT database and taxonomy directories (containing files such as ``names.dmp`` in the taxonomy directory). These must be supplied explicitly as ``--cat-database`` and ``--cat-taxonomy``. ChloroScan no longer assumes database paths belonging to the developer.
+Identify the extracted CAT database and taxonomy directories (containing files such as ``names.dmp`` in the taxonomy directory). When using ``--use-cat``, supply these directories with ``--cat-database`` and ``--cat-taxonomy``.
 
 3. Binny database and conda environments
 -----------------------------------------
@@ -97,14 +97,14 @@ You do not need to download Binny's marker database manually. ChloroScan retriev
 
 Run chloroscan with the flag "``--conda-create-envs-only``" added to setup the conda environments. Always add the flag "``--use-conda``" to make sure the workflow uses conda environments. You can specify the prefix of conda environments with "``--conda-prefix``" flag, otherwise the environments will be created in default location. You may always specify the prefix each time you run ChloroScan to avoid rebuilding.
 
-For a typical run, provide ``Inputs-assembly``, ``Inputs-batch-name``, ``outputdir`` and ``Inputs-alignment`` (or a depth file), plus the two required CAT paths ``cat-database`` and ``cat-taxonomy``. (You can use test data to first do the conda environment setup)
+For a typical run, provide ``Inputs-assembly``, ``Inputs-batch-name``, ``outputdir`` and ``Inputs-alignment`` (or a depth file), using test data if needed. The example adds ``--use-cat`` and its two paths to provision the taxonomy environments as well.
 
 .. code-block:: bash
 
     chloroscan run --use-conda --conda-frontend conda --conda-create-envs-only --conda-prefix="/path/to/your/conda/envs" \
         --Inputs-assembly "/path/to/your/assembly.fasta" --Inputs-batch-name "sample_name" \
         --outputdir "/path/to/your/output_dir" --Inputs-alignment "/path/to/your/bams_directory" \
-        --cat-database "/path/to/your/CAT_database/db" \
+        --use-cat --cat-database "/path/to/your/CAT_database/db" \
         --cat-taxonomy "/path/to/your/CAT_database/tax"
 
 The example paths are placeholders: check your extracted database layout before running. This command prepares conda environments only; it does not verify a complete end-to-end run. See :doc:`full_validation` for an end-to-end procedure.

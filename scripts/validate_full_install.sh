@@ -32,6 +32,7 @@ args=(
   --Inputs-depth-txt "$depth"
   --Inputs-batch-name "$batch"
   --outputdir "$out"
+  --use-cat
   --cat-database "$cat_db"
   --cat-taxonomy "$cat_tax"
   --use-conda

@@ -32,7 +32,7 @@ To install the workflow, use pip3. The Python package supports Python 3.9 or lat
 
     pip3 install chloroscan
 
-This installs the latest published version of ChloroScan. Check the command-line interface with ``chloroscan --help`` and ``chloroscan run --help``. The complete workflow additionally requires Conda rule environments and explicitly supplied CAT database and taxonomy directories (``--cat-database`` and ``--cat-taxonomy``). 
+This installs the latest published version of ChloroScan. Check the command-line interface with ``chloroscan --help`` and ``chloroscan run --help``. By default, ChloroScan runs CORGI, prepares coverage when needed, recovers plastid MAGs with Binny, and predicts CDS and protein sequences. Add ``--use-cat --cat-database PATH/to/db --cat-taxonomy PATH/to/tax`` to run CAT/BAT classification, taxonomy-based refinement, and reporting.
 Detailed workflow instructions can be found at: https://andyargueasae.github.io/chloroscan/index.html.
 The website also contains Chinese version of the documentation with identical contents.
 
@@ -45,7 +45,7 @@ ChloroScan can be installed on servers with hpc clusters and it is recommended t
 
 Configuration databases
 =======================
-Before running ChloroScan, some packages and datasets need to be installed to run CAT taxonomy prediction properly.
+The CAT database setup below applies to runs with ``--use-cat``.
 ChloroScan downloads its Binny marker gene database into ``OUTPUT_DIR/resources/A2K_database`` during workflow execution. The output directory must be writable and have sufficient free space.
 To download our curated Uniref90-algae plastid protein database, use the link: https://doi.org/10.26188/27990278. 
 
@@ -131,7 +131,7 @@ ChloroScan 可以安装在具有 hpc 集群的服务器上，建议使用 GPU �
 
 在运行 ChloroScan 之前，需要安装一些软件包和数据集以正确运行。
 
-运行工作流时，ChloroScan 会将 Binny 标记基因数据库下载到 ``OUTPUT_DIR/resources/A2K_database``，因此输出目录需要足够空间和写入权限。运行命令还必须提供 ``--cat-database`` 和 ``--cat-taxonomy``。
+运行工作流时，ChloroScan 会将 Binny 标记基因数据库下载到 ``OUTPUT_DIR/resources/A2K_database``，因此输出目录需要足够空间和写入权限。默认运行 CORGI、按需计算覆盖度、运行 Binny 分箱，并预测 CDS 和蛋白质序列。启用 CAT/BAT 分类、分类精修和报告时，请在运行命令中加入 ``--use-cat``、``--cat-database`` 和 ``--cat-taxonomy``。
 要下载我们经过整理的 Uniref90-algae plastid 蛋白质数据库，请使用以下链接：https://doi.org/10.26188/27990278。
 
 为了避免认证问题，我们建议使用 pyfigshare 命令行工具进行下载。有关此工具的信息可以在以下链接找到：``https://pypi.org/project/pyfigshare/``。

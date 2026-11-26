@@ -12,7 +12,7 @@
 
 通常对于那些第一次进行分析的数据（ **de novo assembly** ），我们建议使用 bam 目录，但如果您想使用现有的深度谱重新运行分析（可能调整参数），也可以使用它。
 
-ChloroScan 的输出目录结构如下：
+以下目录结构包含使用 ``--use-cat`` 时生成的分类结果。默认运行的 MAG FASTA 位于 ``working/binny/bins``，预测序列分别位于 ``working/cds-extraction/cds`` 和 ``working/cds-extraction/faa``。
 
 .. code-block::
 

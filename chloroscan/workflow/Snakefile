@@ -4,6 +4,7 @@ import yaml
 import logging
 from pathlib import Path
 
+from snakemake.exceptions import WorkflowError
 from snakemake.utils import min_version
 min_version("7.32")
 
@@ -25,11 +26,14 @@ BATCH_NAME = config['Inputs']['batch_name']
 
 WORKFLOW_DIR = Path(workflow.basedir)
 SCR_DIR = WORKFLOW_DIR/"scripts"
-CAT_DB_DIR = config['cat']['database']
-CAT_TAXON_DIR = config['cat']['taxonomy']
-TAXA = os.path.join(CAT_TAXON_DIR, "names.dmp")
-GLOBAL_PREFIX="OUT"
-GLOBAL_PREFIX_contigs="out.CAT"
+USE_CAT = config.get("use_cat", False)
+if USE_CAT:
+    cat_config = config.get("cat") or {}
+    CAT_DB_DIR = cat_config.get("database")
+    CAT_TAXON_DIR = cat_config.get("taxonomy")
+    if not CAT_DB_DIR or not CAT_TAXON_DIR:
+        raise WorkflowError("--use-cat requires both --cat-database and --cat-taxonomy.")
+    TAXA = Path(CAT_TAXON_DIR) / "names.dmp"
 OUTPUT_DIR.mkdir(parents=True, exist_ok=True)
 
 # create temporary directory.
@@ -131,7 +135,10 @@ with open(CONFIG_RECORD, "w") as cr:
     cr.write("\tMAG starting completeness: {}\n".format(config['binning']['bin_quality']['starting_completeness']))
     cr.write("\tMAG minimum completeness: {}\n".format(config['binning']['bin_quality']['min_completeness']))
     cr.write("\tMAG purity (1-contamination) cutoff: {}\n".format(config['binning']['bin_quality']['purity']))
-    cr.write("CAT database: {}\n".format(CAT_DB_DIR))
+    cr.write("CAT/BAT enabled: {}\n".format(USE_CAT))
+    if USE_CAT:
+        cr.write("CAT database: {}\n".format(CAT_DB_DIR))
+        cr.write("CAT taxonomy: {}\n".format(CAT_TAXON_DIR))
 
 rule all:
     input:
@@ -353,111 +360,6 @@ rule check_binny_output:
         fi
         """
 
-rule CAT_taxonomy_identification_plus_annotation:
-    input: 
-        flag=rules.check_binny_output.output.check_flag,
-        binny_output=rules.binny_run.output
-        
-    params:
-        prefix=GLOBAL_PREFIX_contigs,
-        path_to_contigs="intermediary/assembly.formatted.fa"
-    output:
-        CAT_output=directory(OUTPUT_DIR/"working/CAT")
-        # contig_classification=OUTPUT_DIR/"working/CAT/out.CAT.contig2classification.txt"
-    log:
-        OUTPUT_DIR/"logging_info/CAT.log"
-    benchmark:
-        OUTPUT_DIR/"logging_info/CAT_benchmark.tsv"
-    conda:
-        "envs/CAT_env.yml"
-    shell:
-        """
-        set -e
-        mkdir -p {output}
-
-        # Check to see if the binny directory is empty or not
-        find {OUTPUT_DIR}/working/binny -mindepth 1 -maxdepth 1 >> {log}
-        if [ -f "{OUTPUT_DIR}/working/binny/{params.path_to_contigs}" ] ; then
-            CAT contigs -c {OUTPUT_DIR}/working/binny/{params.path_to_contigs} -d {CAT_DB_DIR} -t {CAT_TAXON_DIR} -o {output}/{params.prefix} --force >> {log} 
-        fi
-        """
-
-# this is the correct one.
-rule documenting_binny_results:
-    input: 
-        contig_level_annotation = OUTPUT_DIR/"working/CAT"
-    params: 
-        bins = Path(OUTPUT_DIR/"working/binny/bins"),
-        assembly_files = OUTPUT_DIR/"working/binny/intermediary/assembly.formatted.fa",
-        assembly_depth = OUTPUT_DIR/"working/binny/intermediary/assembly.contig_depth.txt",
-        marker_gene_gff = OUTPUT_DIR/"working/binny/intermediary/annotation_CDS_RNA_hmms_checkm.gff",
-        names_dump=TAXA,
-        MMA_summary=OUTPUT_DIR/"MMA.summary.txt",
-        ANNOT_FILE="out.CAT.contig2classification.txt",
-        script_dir = SCR_DIR
-    output:
-        OUTPUT_DIR/"working/summary/cross_ref.tsv",
-    benchmark:
-        OUTPUT_DIR/"logging_info/summarize_binny.tsv"
-    conda:
-        "envs/documenting_binny.yml"
-    message:
-        "Run python script summarize_binny_results.py to record each bin's contig metadata."
-    shell:
-        """
-        $CONDA_PREFIX/bin/python {params.script_dir}/summarize_binny_results.py --assemblyfasta {params.assembly_files} \
-            --assemblydepth {params.assembly_depth} --assembly_annot {params.marker_gene_gff} \
-            --taxonomy_names {params.names_dump} --contig_level_annotation {input.contig_level_annotation}/{params.ANNOT_FILE} \
-            --assembly_bin_dir {params.bins} --MMA_SUMMARY {params.MMA_summary} --output {output}
-        """
-
-rule refine_bins:
-    input:
-        cross_ref = OUTPUT_DIR/"working/summary/cross_ref.tsv",
-        original_bins = Path(OUTPUT_DIR/"working/binny"),
-        CAT_prediction = Path(OUTPUT_DIR/"working/CAT"),
-    params:
-        script_dir = SCR_DIR
-    output:
-        refine_dir = directory(OUTPUT_DIR/"working/refined_bins"),
-        summary_info = OUTPUT_DIR/"working/refinement_contig_summary.txt"
-    conda:
-        "envs/refinement.yml"
-    message:
-        "Identify potential contaminations in each plastid MAG. Users can decide to use the refined or binny-generated bins."
-    log:
-        OUTPUT_DIR/"logging_info/refinement.log"
-    shell:
-        """
-        $CONDA_PREFIX/bin/python {params.script_dir}/refine_bins.py --input_cross_ref {input.cross_ref} \
-            --input_original_bins {input.original_bins} \
-            --input_CAT_prediction {input.CAT_prediction} \
-            --output_dir_for_refined_bins {output.refine_dir} \
-            --output_summary_info {output.summary_info} \
-            --log_file {log}
-        """
-
-rule visualize_results:
-    input:
-        OUTPUT_DIR/"working/summary/cross_ref.tsv",
-    params:
-        batch_name=BATCH_NAME,
-        script_dir = SCR_DIR,
-        refine_bins_dir=OUTPUT_DIR/"working/binny",
-    output:
-        directory(OUTPUT_DIR/"working/visualizations")
-    conda:
-        "envs/visualization.yml"
-    log:
-        OUTPUT_DIR/"logging_info/visualizations.log"
-    shell:
-        """
-        $CONDA_PREFIX/bin/python {params.script_dir}/visualization.py --input_cross_ref {input} \
-            --batch_name {params.batch_name} \
-            --refine_bins_dir {params.refine_bins_dir} \
-            --output_dir {output} >> {log} 2>&1
-        """
-
 rule cds_extraction:
     input:
         binny_done=rules.binny_run.output[-1],
@@ -497,49 +399,22 @@ rule cds_extraction:
         fi
         """
 
-rule krona_taxonomy_plot:
-    input: 
-        CAT_pred_whole_data=rules.CAT_taxonomy_identification_plus_annotation.output.CAT_output,
-        # summary_info=rules.documenting_binny_results.output,
-    params:
-        file_to_remodel="out.CAT.contig2classification.txt",
-        file_after_remodel="out.CAT.krona.intake.tsv",
-        intake_krona="out.CAT.krona.intake2.tsv",
-        script_dir = SCR_DIR,
-        batch_name=BATCH_NAME
-    conda:
-        "envs/krona.yml"
-    output:
-        OUTPUT_DIR/"Krona.html"
-    message:
-        "Ensure that in your env there must have pandas, click and of course, Kronatools."
-    shell:
-        """
-        set -e
-
-        # add if statement: if there are empty out.CAT file, we exit with touched files: Krona.html.
-        if [ ! -s {input}/{params.file_to_remodel} ]; then
-            echo "No contig predictions because previous rules did not find any plastid contigs."
-            touch {output}
-            exit 0
-        fi 
-
-        python {params.script_dir}/create_taxonomy_profile.py --cat_prediction_txt {input}/{params.file_to_remodel} --output {input}/{params.file_after_remodel}
-        sed 1d {input}/{params.file_after_remodel} > {input}/{params.intake_krona}
-        ktImportTaxonomy -m 1 -o {output} {input}/{params.intake_krona}
-        """
+CAT_OUTPUTS = []
+if USE_CAT:
+    include: "taxonomy.smk"
+    CAT_OUTPUTS = [
+        rules.CAT_taxonomy_identification_plus_annotation.output.CAT_output,
+        rules.documenting_binny_results.output,
+        rules.refine_bins.output.refine_dir,
+        rules.visualize_results.output,
+        rules.krona_taxonomy_plot.output,
+    ]
 
 rule check_done:
     input:
-        OUTPUT_DIR/"working/visualizations",
-        OUTPUT_DIR/"working/refined_bins",
-        OUTPUT_DIR/"working/binny",
-        OUTPUT_DIR/"working/CAT",
-        OUTPUT_DIR/"working/cds-extraction",
-        OUTPUT_DIR/"working/summary/cross_ref.tsv",
-        rules.refine_bins.output.refine_dir,
-        OUTPUT_DIR/"Krona.html",
-        # anvio_flag = ANVIO_PREPARE
+        rules.check_binny_output.output.check_flag,
+        rules.cds_extraction.output,
+        CAT_OUTPUTS
     log:
         OUTPUT_DIR/"logging_info/check_done.log"
     output:
@@ -548,8 +423,8 @@ rule check_done:
         """
         # check if all files are present, if yes, then touch the done file.
         flag=0
-        for f in {input}; do
-            if [ ! -s $f ]; then
+        for f in {input:q}; do
+            if [ ! -s "$f" ]; then
                 flag=1
                 break
             fi
@@ -558,6 +433,6 @@ rule check_done:
         echo "Flag is $flag" >> {log}
 
         if [ $flag -eq 0 ]; then
-            touch {output}
+            touch {output:q}
         fi
         """
