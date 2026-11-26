@@ -179,14 +179,9 @@ ChloroScan 的帮助信息分为两个部分。
     │                                                                 authentically plastidial │
     │                                                                 or something else.       │
     │                                                                 [default: 0.9]           │
-    │ --cat-database           -d                            PATH     Path to the database of  │
-    │                                                                 chloroplast genomes.     │
-    │                                                                 [default:                │
-    │                                                                 /home/yuhtong/scratch/a… │
-    │ --cat-taxonomy           -t                            PATH     Path to the taxonomy of  │
-    │                                                                 the database.            │
-    │                                                                 [default:                │
-    │                                                                 /home/yuhtong/scratch/a… │
+    │ --use-cat                    --no-use-cat                      Enable CAT/BAT.           │
+    │ --cat-database                                         PATH     CAT database directory.   │
+    │ --cat-taxonomy                                         PATH     CAT taxonomy directory.   │
     │ --krona-env                                            TEXT     Path to the Krona        │
     │                                                                 environment.             │
     │                                                                 [default: kronatools]    │

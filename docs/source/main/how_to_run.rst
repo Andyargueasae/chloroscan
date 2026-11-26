@@ -22,7 +22,7 @@ You've got your contigs, mapping files in bam and configuration files. You now c
 
    chloroscan run --Inputs-assembly input_contigs.fasta --Inputs-alignment PATH/to/bams \
       --Inputs-batch-name "my_batch" --outputdir Path/to/output --use-conda --conda-frontend conda --cores=12 \
-      --cat-database PATH/to/CAT_db/db --cat-taxonomy path/to/CAT_db/tax --conda-prefix PATH/to/conda_envs
+      --conda-prefix PATH/to/conda_envs
 
 Sometimes you may also wish to get a tabular represented depth profile. It looks like:
 
@@ -43,8 +43,13 @@ The first column is the contig id, and the second column is the average depth of
 
    DEPTH_PROFILE=path/to/depth_profile.tsv
    chloroscan run --Inputs-assembly input_contigs.fasta --Inputs-depth-txt $DEPTH_PROFILE \
-      --Inputs-batch-name "my_batch" --outputdir Path/to/output --use-conda --conda-frontend conda --cores=12 \
-      --cat-database PATH/to/CAT_db/db --cat-taxonomy path/to/CAT_db/tax
+      --Inputs-batch-name "my_batch" --outputdir Path/to/output --use-conda --conda-frontend conda --cores=12
+
+The default run uses CORGI, prepares coverage as needed, runs Binny, and predicts CDS and proteins. Append these flags to either command to enable CAT/BAT classification, the cross-reference table, taxonomy-based refinement, and visualization including Krona.
+
+.. code-block:: bash
+
+   --use-cat --cat-database PATH/to/CAT_db/db --cat-taxonomy PATH/to/CAT_db/tax
 
 For more details about the inputs, please check the ``inputs_and_outputs`` section.
 
@@ -166,14 +171,9 @@ The whole command space of ChloroScan is shown below:
     │                                                                 authentically plastidial │
     │                                                                 or something else.       │
     │                                                                 [default: 0.9]           │
-    │ --cat-database           -d                            PATH     Path to the database of  │
-    │                                                                 chloroplast genomes.     │
-    │                                                                 [default:                │
-    │                                                                 /home/yuhtong/scratch/a… │
-    │ --cat-taxonomy           -t                            PATH     Path to the taxonomy of  │
-    │                                                                 the database.            │
-    │                                                                 [default:                │
-    │                                                                 /home/yuhtong/scratch/a… │
+    │ --use-cat                    --no-use-cat                      Enable CAT/BAT.           │
+    │ --cat-database                                         PATH     CAT database directory.   │
+    │ --cat-taxonomy                                         PATH     CAT taxonomy directory.   │
     │ --krona-env                                            TEXT     Path to the Krona        │
     │                                                                 environment.             │
     │                                                                 [default: kronatools]    │
@@ -199,6 +199,7 @@ Below lists those arguments for ChloroScan. The command-line help excerpt above 
  - ``--corgi-save-filter``: Save the filtered contigs by CORGI (Note: may take long time). The default value is no-corgi-save-filter.
  - ``--corgi-batch-size``: Batch size for CORGI to infer contigs' taxonomic labels. The default value is 1.
  - ``--corgi-pthreshold``: P-value threshold for CORGI to determine if the contigs category is authentically plastidial or something else. The default value is 0.50.
- - ``--cat-database``: Path to the database of CAT saving diamond-processed protein sequences. This argument is required; there is no built-in default database path.
- - ``--cat-taxonomy``: Path to the taxonomy labels of the CAT database. This argument is required; there is no built-in default taxonomy path.
+ - ``--use-cat`` enables CAT/BAT classification and the downstream taxonomy rules.
+ - ``--cat-database`` points to the CAT database directory and is required with ``--use-cat``.
+ - ``--cat-taxonomy`` points to the CAT taxonomy directory and is required with ``--use-cat``.
  - ``--krona-env``: Path to the Krona environment. The default value is "kronatools". **Now commonly we don't need to set up this**.

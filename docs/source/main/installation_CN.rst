@@ -35,7 +35,7 @@ ChloroScan 持续更新。建议在 Linux x86_64 系统上使用 Python 3.10，�
 2. CAT 数据库
 --------------
 
-运行时必须明确提供 CAT 的数据库目录 ``--cat-database`` 和分类目录 ``--cat-taxonomy``。推荐使用项目整理的质体蛋白数据库：https://doi.org/10.26188/27990278 。
+使用 ``--use-cat`` 时，必须明确提供 CAT 的数据库目录 ``--cat-database`` 和分类目录 ``--cat-taxonomy``。推荐使用项目整理的质体蛋白数据库：https://doi.org/10.26188/27990278 。
 
 .. code-block:: bash
 
@@ -50,14 +50,14 @@ ChloroScan 持续更新。建议在 Linux x86_64 系统上使用 Python 3.10，�
 
 如已有排序的 BAM 比对文件目录，可使用 ``--Inputs-alignment``。如果已经生成了 contig 测序深度 TSV 文件，则改用 ``--Inputs-depth-txt``；无需同时提供两者。
 
-以下示例只创建规则环境，不运行完整分析：
+以下示例创建规则环境（包括 CAT/BAT 及下游步骤所用的环境）：
 
 .. code-block:: bash
 
     chloroscan run --Inputs-assembly /data/assembly.fasta \
       --Inputs-depth-txt /data/contig_depth.tsv \
       --Inputs-batch-name sample_01 --outputdir /data/chloroscan_output \
-      --cat-database /data/CAT_database/db --cat-taxonomy /data/CAT_database/tax \
+      --use-cat --cat-database /data/CAT_database/db --cat-taxonomy /data/CAT_database/tax \
       --use-conda --conda-frontend conda --conda-create-envs-only \
       --conda-prefix /data/chloroscan_conda_envs --cores 8
 

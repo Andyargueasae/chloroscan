@@ -22,7 +22,7 @@ ChloroScan 专注于叶绿体基因组 MAGs 的恢复，特别是 ``光合微藻
 
    chloroscan run --Inputs-assembly input_contigs.fasta --Inputs-alignment PATH/to/bams \
       --Inputs-batch-name "my_batch" --outputdir Path/to/output --use-conda --conda-frontend conda --cores=12 \
-      --cat-database PATH/to/CAT_db/db --cat-taxonomy path/to/CAT_db/tax --conda-prefix PATH/to/conda_envs
+      --conda-prefix PATH/to/conda_envs
 
 有时你可能还希望获得以表格形式表示的深度信息。它看起来像这样：
 
@@ -44,7 +44,13 @@ ChloroScan 专注于叶绿体基因组 MAGs 的恢复，特别是 ``光合微藻
    DEPTH_PROFILE=path/to/depth_profile.tsv
    chloroscan run --Inputs-assembly input_contigs.fasta --Inputs-depth-txt $DEPTH_PROFILE \
       --Inputs-batch-name "my_batch" --outputdir Path/to/output --use-conda --conda-frontend conda --cores=12 \
-      --cat-database PATH/to/CAT_db/db --cat-taxonomy path/to/CAT_db/tax --conda-prefix PATH/to/conda_envs
+      --conda-prefix PATH/to/conda_envs
+
+默认运行 CORGI、按需计算覆盖度、运行 Binny 分箱，并预测 CDS 和蛋白质序列。可在上述任一命令后加入以下选项，启用 CAT/BAT 分类、交叉引用表、分类精修和可视化（包括 Krona）：
+
+.. code-block:: bash
+
+   --use-cat --cat-database PATH/to/CAT_db/db --cat-taxonomy PATH/to/CAT_db/tax
 
 有关输入的更多详细信息，请查看 ``输入和输出`` 部分。
 如果你想使用我们的测试数据，可以使用 ``README`` 中显示的命令下载测试数据：
@@ -54,7 +60,7 @@ ChloroScan 专注于叶绿体基因组 MAGs 的恢复，特别是 ``光合微藻
    figshare download -o simulated_metagenomes.tar.gz 28748540
 
 
-当前 CLI 的实际选项及默认值请以 ``chloroscan run --help`` 为准。CAT 数据库和分类目录参数 ``--cat-database``、``--cat-taxonomy`` 为必填参数，不再提供开发者机器上的默认路径。
+当前 CLI 的实际选项及默认值请以 ``chloroscan run --help`` 为准。使用 ``--use-cat`` 时，必须同时提供 CAT 数据库和分类目录参数 ``--cat-database``、``--cat-taxonomy``。
 
 3. 命令参数说明
 ========================================
@@ -167,14 +173,9 @@ ChloroScan 的完整命令空间如下所示：
     │                                                                 authentically plastidial │
     │                                                                 or something else.       │
     │                                                                 [default: 0.9]           │
-    │ --cat-database           -d                            PATH     Path to the database of  │
-    │                                                                 chloroplast genomes.     │
-    │                                                                 [default:                │
-    │                                                                 /home/yuhtong/scratch/a… │
-    │ --cat-taxonomy           -t                            PATH     Path to the taxonomy of  │
-    │                                                                 the database.            │
-    │                                                                 [default:                │
-    │                                                                 /home/yuhtong/scratch/a… │
+    │ --use-cat                    --no-use-cat                      Enable CAT/BAT.           │
+    │ --cat-database                                         PATH     CAT database directory.   │
+    │ --cat-taxonomy                                         PATH     CAT taxonomy directory.   │
     │ --krona-env                                            TEXT     Path to the Krona        │
     │                                                                 environment.             │
     │                                                                 [default: kronatools]    │
@@ -200,6 +201,7 @@ ChloroScan 的完整命令空间如下所示：
  - ``--corgi-save-filter``: 保存 CORGI 过滤后的 contigs（注意：可能需要较长运行时间）。默认值为 no-corgi-save-filter。
  - ``--corgi-batch-size``: CORGI 推断 contigs 分类标签的批次大小。默认值为 1。
  - ``--corgi-pthreshold``: CORGI 判断 contigs 类别是否为真正的叶绿体或其他类别的 P 值阈值。默认值为 0.50。
- - ``--cat-database``: CAT 数据库的路径，保存经过 diamond 处理的蛋白质序列。这是必填参数，不再提供默认的开发者路径。
- - ``--cat-taxonomy``: CAT 数据库的分类标签路径。这是必填参数，不再提供默认的开发者路径。
+ - ``--use-cat`` 启用 CAT/BAT 及依赖分类结果的步骤。
+ - ``--cat-database``: CAT 数据库的路径，保存经过 diamond 处理的蛋白质序列。使用 ``--use-cat`` 时必填。
+ - ``--cat-taxonomy``: CAT 数据库的分类标签路径。使用 ``--use-cat`` 时必填。
  - ``--krona-env``: Krona 环境的路径。默认值为 "kronatools"。 **现在通常不需要设置此项**。

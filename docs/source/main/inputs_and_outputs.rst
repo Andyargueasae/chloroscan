@@ -9,10 +9,10 @@ Overall ChloroScan takes the following inputs:
     - A tabular depth profile (``--Inputs-depth-txt``) **or** a directory of sorted BAM alignments (``--Inputs-alignment``); one of these is needed for abundance information.
     - Batch name (required, just to distinguish different jobs when running in parallel to avoid overwriting): configured by ``--Inputs-batch-name``
 
-For a **de novo** run we recommend using a BAM directory; if you already have a contig depth table, use ``--Inputs-depth-txt`` instead. Both options need not be supplied. Also provide ``--cat-database`` and ``--cat-taxonomy``.
+For a **de novo** run we recommend using a BAM directory; if you already have a contig depth table, use ``--Inputs-depth-txt`` instead. For taxonomy classification, add ``--use-cat`` with ``--cat-database`` and ``--cat-taxonomy``.
 
 The output directory structure of ChloroScan is approximately as follows (the exact paths depend on completed rules and settings). Binny's A2K marker database is downloaded under ``resources/A2K_database``; the workflow completion marker is ``ChloroScan.done``:
-(This is a typical example showing only directories)
+This example includes taxonomy outputs from a run with ``--use-cat``. The default run produces MAG FASTAs in ``working/binny/bins`` and predicted sequences in ``working/cds-extraction/cds`` and ``working/cds-extraction/faa``.
 
 .. code-block::
 
